@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>七牛上传图片js脚本</title>
+  <meta name="author" content="pwxcoo">
+  <meta name="description" content="为什么停下来选择大头">
+  
+  
+  <meta property="og:title" content="七牛上传图片js脚本"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="PWXCOO"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.png">
+</head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="behind">
+      <a href="/" class="back black-color">
+        <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M2 30 L30 2 M30 30 L2 2"></path>
+        </svg>
+      </a>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        七牛上传图片js脚本
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2017-12-29T15:49:45.000Z">
+<svg class="i-calendar" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2017-12-29
+</time>
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/奇巧淫技/">奇巧淫技</a>
+
+
+
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>之前写makedown的时候，用了七牛云的图床，用的时候就在七牛的控制台里传图片，之前对图床的使用并不频繁，所以这样非常反人类的传图片方式也是也没注意，最近对图床使用极其频繁，所以用了几次之后感觉想吃一个至珍全虾堡冷静一下。</p>
+<p>然后去看了一下七牛的<a href="https://developer.qiniu.com/kodo/sdk/1289/nodejs" target="_blank" rel="noopener">开发者文档</a>，写了一个node的传图片脚本，来冷静一下自己。</p>
+<p>文档是中文的，写的也算详细。写了一个很简单的脚本。因为想以后通用这个脚本，所以对官方推荐稍微做了一点修改。</p>
+<p>我把配置全部放在一个json里，这样以后再用别的Bucket的也通用这个脚本，重新配置一个config.json就ojbk了。<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"accessKey"</span>: <span class="string">"账号密钥"</span>,</span><br><span class="line">    <span class="attr">"secretKey"</span>: <span class="string">"密码密钥"</span>,</span><br><span class="line">    <span class="attr">"bucket"</span>: <span class="string">"存储空间"</span>,</span><br><span class="line">    <span class="attr">"returnLink"</span>: <span class="string">"外链默认域名"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>读取config.json的脚本<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> config = &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadConfig</span>(<span class="params">filename</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> data = fs.readFileSync(filename, <span class="string">'utf-8'</span>);</span><br><span class="line">		config = <span class="built_in">JSON</span>.parse(data);</span><br><span class="line">		<span class="comment">//console.log("Loaded config '" + filename + "'");</span></span><br><span class="line">	&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(e);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> configFilename = <span class="string">'./config.json'</span>;</span><br><span class="line">loadConfig(configFilename);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = config</span><br></pre></td></tr></table></figure></p>
+<p>上传图片的脚本。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> qiniu = <span class="built_in">require</span>(<span class="string">"qiniu"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> qiniuConfig = <span class="built_in">require</span>(<span class="string">'./config.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// localFile.split(/[\\/]/);</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getToken</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> mac = <span class="keyword">new</span> qiniu.auth.digest.Mac(qiniuConfig.accessKey, qiniuConfig.secretKey);</span><br><span class="line">    <span class="keyword">var</span> putPolicy = <span class="keyword">new</span> qiniu.rs.PutPolicy(&#123;</span><br><span class="line">        scope: qiniuConfig.bucket + <span class="string">":"</span> + key,</span><br><span class="line">        returnBody: <span class="string">'&#123;"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"&#125;'</span></span><br><span class="line">      &#125;);</span><br><span class="line">    <span class="keyword">return</span> putPolicy.uploadToken(mac);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">upload</span>(<span class="params">key</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> config = <span class="keyword">new</span> qiniu.conf.Config();</span><br><span class="line">    <span class="comment">// 空间对应的机房</span></span><br><span class="line">    config.zone = qiniu.zone.Zone_z0;</span><br><span class="line">    <span class="keyword">var</span> localFile = process.argv[<span class="number">2</span>].trim(); </span><br><span class="line">    <span class="keyword">var</span> key = path.basename(localFile);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span>(localFile) == <span class="string">"undefined"</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'please select file!'</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> formUploader = <span class="keyword">new</span> qiniu.form_up.FormUploader(config);</span><br><span class="line">    <span class="keyword">var</span> putExtra = <span class="keyword">new</span> qiniu.form_up.PutExtra();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 文件上传</span></span><br><span class="line">    formUploader.putFile(getToken(key), key, localFile, putExtra, <span class="function"><span class="keyword">function</span>(<span class="params">respErr,</span></span></span><br><span class="line"><span class="function"><span class="params">      respBody, respInfo</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (respErr) &#123;</span><br><span class="line">        <span class="keyword">throw</span> respErr;</span><br><span class="line">      &#125;</span><br><span class="line">    </span><br><span class="line">      <span class="keyword">if</span> (respInfo.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="comment">//console.log(respBody);</span></span><br><span class="line">        <span class="built_in">console</span>.log(qiniuConfig.returnLink + key);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(respInfo.statusCode);</span><br><span class="line">        <span class="built_in">console</span>.log(respBody);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">upload();</span><br></pre></td></tr></table></figure></p>
+<p>用了<code>path</code>的依赖是为了让这个脚本在linux和window下都能通用，如果用的不是华东区，对应的机房也要更改。</p>
+<p><img src="http://p1pws2aca.bkt.clouddn.com/qiniu.png" alt="七牛脚本测试"><br>调用脚本，图片只要拉到shell窗口里就好了。然后可以直接返回图片的外链，复制粘贴就能用了。为了方便，生成的外链是根据图片的名字定的，所以要注意图片文件的命名规范了。</p>
+<p>比我之前打开网页端登录，进控制台，传图片爽了些许。七牛上还有一些别的很秀的api，我暂时用不到，用到的时候再说吧。</p>
+
+
+  </article>
+  </script>
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = 'http://yoursite.com/2017/12/29/七牛上传图片js脚本/index.html';
+this.page.identifier = ;
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//你所不知道的吴献策之内部整修.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © PWXC 2017
+    </div>
+    <div class="secondrow">
+        <a href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
