@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>浅谈计算机编码</title>
+  <meta name="author" content="pwxcoo">
+  <meta name="description" content="为什么停下来选择大头">
+  
+  
+  <meta property="og:title" content="浅谈计算机编码"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="PWXCOO"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.png">
+</head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="behind">
+      <a href="/" class="back black-color">
+        <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M2 30 L30 2 M30 30 L2 2"></path>
+        </svg>
+      </a>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        浅谈计算机编码
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-01-03T11:16:08.000Z">
+<svg class="i-calendar" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2018-01-03
+</time>
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/技术/">技术</a>
+
+
+
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>其实一直想做一个关于计算机字符编码的总结，但是自从把这件事加入到TODO中，就开始无限期地搁置。TODO就是一个诅咒。</p>
+<h2 id="为什么要编码"><a href="#为什么要编码" class="headerlink" title="为什么要编码"></a>为什么要编码</h2><p>我之前看过一本讲编码的书，太久了，我记得名字叫《编码：隐匿在计算机软硬件背后的语言》，内容非常深入浅出。从摩斯密码来传送信息开始，一直讲到计算机的编码规则。摩斯密码就是二进制的，计算机就是用电来模拟二进制传输和储存消息。</p>
+<p>如果编码不统一的话，就跟语言不不通一样，难道两个计算机用屁股交流吗？所以计算机发明后，为了统一规则，于是了一个<code>ASCII</code>的编码规则，<code>ASCII</code>是美国人制定，<code>ASCII</code> 码一共规定了128个字符的编码，比如空格SPACE是32（二进制00100000），大写的字母A是65（二进制01000001）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的一位统一规定为0。<br><img src="http://p1pws2aca.bkt.clouddn.com/ascii.png" alt="ascii码表"></p>
+<p>后来计算机普及到全世界，128个符号完全不够用，所以就用了各个国家就开始用最高位那个闲置的位数来编码，而一些字很多国家，比如中国，就用两个字节编码，两个字节2^16位。常见的中文编码就是<code>GB2312</code>了，我学校的教务系统的网页就用的是这个编码格式。很多古老的中文系统和应用都是<code>GB2312</code>。在<code>powershell</code>窗口里可以看见自己电脑的编码是<code>GBK</code>,<code>GBK</code>是对<code>GB2312</code>的补充，而且<code>GBK</code>向下兼容<code>GB2312</code>,这很关键。再后来就是<code>Unicode</code>一统天下了。</p>
+<h2 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h2><p>单字节的编码规则。<code>ASCII</code>规定了128个字符，最高位位0。</p>
+<h2 id="ISO-8859-1-Latin-1"><a href="#ISO-8859-1-Latin-1" class="headerlink" title="ISO-8859-1 / Latin-1"></a>ISO-8859-1 / Latin-1</h2><p>单字节的编码规则。这套编码规则由ISO组织制定。是在<code>ASCII</code> 码基础上又制定了一些标准用来扩展<code>ASCII</code>编码，即 00000000（0） ~ 01111111（127） 与<code>ASCII</code>的编码一样，对 10000000（128） ~ 11111111（255）这一段进行了编码，如将字符§编码成10100111（167）。<code>ISO-8859-1</code>编码也是单字节编码，最多能够表示256个字符。Latin1是ISO-8859-1的别名，有些环境下写作<code>Latin-1</code>。之前我暑期实践的时候，老师给过我一个很久以前<code>NASA</code>的数据,大概是上个世纪八九十年代的，就是<code>Latin-1</code>编码的，现在我感觉应该没什么人用这个了。</p>
+<h2 id="GB2312"><a href="#GB2312" class="headerlink" title="GB2312"></a>GB2312</h2><p>两个字节的编码规则。这个是简体中文的编码，涉及到区位码，因为中文编码有一套自己的规则，我不细写了。</p>
+<h2 id="GBK"><a href="#GBK" class="headerlink" title="GBK"></a>GBK</h2><p>两个字节的编码规则。<code>GB2312</code>的补充，完全兼容<code>GB2312</code>的，而且还加了繁体。就是一套更好的中文编码。</p>
+<h2 id="BIG5"><a href="#BIG5" class="headerlink" title="BIG5"></a>BIG5</h2><p>两个字节的编码规则。繁体中文的编码，是台湾的一套编码规则，但是和<code>GBK</code>是不兼容，就是说台湾要是用<code>BIG5</code>，大陆用<code>GBK</code>是会出现乱码的。</p>
+<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p><code>Unicode</code>并不是一种编码，而是一个标准。window下记事本说保存为<code>Unicode</code>其实是保存<code>UTF-16</code>。地球上所有字符都可以在<code>Unicode</code>表中找到对应的唯一码点。包括<code>emoji</code>也是一个字符。<code>Unicode</code>只是规定了符号集，并没有规定怎么储存。所以有了各种<code>Unicode</code>的实现。</p>
+<h2 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h2><p><code>UTF-8</code>是一种变长编码方式，使用1-4个字节进行编码。<code>UTF-8</code>是<code>Unicode</code>一种具体的编码实现。终于到了这个现在几乎是国际间标准的编码了。现在基本流行的网页，应用，文件都是<code>utf-8</code>。<code>utf-8</code>完全兼容<code>ASCII</code>。别的符号，比如中文通常是3个字节来储存的。<code>Unicode</code>码点如何转化为UTF-8编码，可以参照如下规则：</p>
+<blockquote>
+<p>“对于单字节的符号，字节的第一位设为0，后面7位为这个符号的<code>unicode</code>码。因此对于英语字母，<code>UTF-8</code>编码和<code>ASCII</code>码是相同的。 ”<br>“对于n字节的符号（n&gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的<code>unicode</code>码。”</p>
+</blockquote>
+<p>总结的编码规则如下：<br><img src="http://p1pws2aca.bkt.clouddn.com/utf-8rule.png" alt="utf-8编码规则"></p>
+<p>说明：字符’A’的<code>Unicode</code>码点为65（十进制），根据上表，在第一行范围，则字符’A’的<code>UTF-8</code>编码为01000001，中文字符’李’的<code>Unicode</code>码点为26446（十进制），二进制为01100111 01001110，十六进制为674E。根据上表，在第三行范围，则将’李’二进制代码从低位到高位依次填入x中，不足的填入0。得到<code>UTF-8</code>编码为11100110 10011101 10001110，即E69D8E（十六进制）。</p>
+<h2 id="UTF-16-UTF-32"><a href="#UTF-16-UTF-32" class="headerlink" title="UTF-16 / UTF-32"></a>UTF-16 / UTF-32</h2><p><code>UTF-16</code>使用2或4个字节编码。<code>UTF-32</code>对每个字符都使用4字节。</p>
+<h2 id="BOM机制"><a href="#BOM机制" class="headerlink" title="BOM机制"></a>BOM机制</h2><p>因为<code>utf-8</code>第一个字节就储存了这个字符的长度信息，所以<code>utf-8</code>理论上是不需要BOM机制，但是在window上的记事本程序中，会在保存<code>utf-8</code>时会在开头加上<code>EF BB BF</code>表示这是utf-8编码的。但是在linux上和平时用的别的代码编辑器上是没有这个BOM。虽然<code>Unicode</code>官方说<code>utf-8</code>是需要加上这个头的，但是主流就是不加这个头的，而理论上也不需要这个头。<code>utf-8</code>不加BOM头似乎才是事实上的国际标准。微软遵守了这个标准似乎成了异类。</p>
+<p><code>utf-16</code>是两个字节或四个字节编码的。字符’A’的<code>Unicode</code>码点为65（十进制），十六进制表示为41，。根据规则，<code>UTF-16</code>采用2个字节进行编码。那么问题又来了，知道了采用两个字节编码，并且我们也知道计算机是以字节为单位进行存储，这两个字节应该表示为00 41(十六进制)？或者是41 00（十六进制）呢？计算机不知道这个到底是2个或者4个，所以需要加上一个BOM头来告诉计算机。表示为00 41意味着采用了大端序（Big endian），而表示为41 00意味着采用了小端序。</p>
+<p>所以BOM机制就是在文件头加入一些控制信息，具体是采用大端序，则在文件前加入<code>FE FF</code>，采用小端序，则在文件前加入<code>FF FE</code>。这样，当计算开始读取时发现前两个字节为FE FF，就表示之后的信息采用的是小端序，反之，则是大端序。这样计算机就知道怎么读取这个字符了。</p>
+<h2 id="ANSI"><a href="#ANSI" class="headerlink" title="ANSI"></a>ANSI</h2><p>window上的记事本还有一个就是<code>ANSI</code>的储存，这个其实就是用计算机默认的编码来存储的，像我的电脑系统是<code>GBK</code>,储存就是用<code>GBK</code>储存。</p>
+<p>既然<code>Unicode</code>这么秀，为什么不都用<code>Unicode</code>呢，还是速度和空间的问题，<code>GBK</code>的中文两个字符，<code>utf-8</code>中文通常是三个字符，这个差距就在中文很多的系统中就很明显的。</p>
+<p>虽然说我的电脑系统是<code>GBK</code>编码，并不是全都是<code>GBK</code>，网上有人做过实现，改了系统的编码，有些的系统的东西并未显示乱码，是因为系统中一些东西是<code>Unicode</code>编码和解码的。</p>
+<h2 id="utf8mb4"><a href="#utf8mb4" class="headerlink" title="utf8mb4"></a>utf8mb4</h2><p>其实也是<code>utf-8</code>,但是有些软件对utf8的编码只支持到3个字节，所以<code>emoji</code>表情储存不了。例子就是<code>mysql</code>,将编码改成utf8mb4就可以了。</p>
+<h2 id="url编码"><a href="#url编码" class="headerlink" title="url编码"></a>url编码</h2><p>url编码并不是新的编码标准，而是一个规定。</p>
+<p>网络标准RFC1738做了规定：</p>
+<blockquote>
+<p>“只有字母和数字[0-9a-zA-Z]、一些特殊符号”$-_.+!*’(),”[不包括双引号]、以及某些保留字，才可以不经过编码直接用于URL。”</p>
+</blockquote>
+<p>别的符号都是经过编码，所以地址栏中没有出现中文和一些很奇怪的符号，那这些东西是怎么编码的呢。RFC文档是建议用<code>utf-8</code>编码的，如”中文”使用UTF-8字符集得到的字节为0xE4 0xB8 0xAD 0xE6 0x96 0x87，经过Url编码之后得到”%E4%B8%AD%E6%96%87”。一般情况下网页的head中都会加一句：</p>
+<p><code>&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</code></p>
+<p>会让浏览器用utf-8去渲染此文档。但是如果你改成<code>gb2312</code>，提交表单的时候就会用<code>gb2312</code>编码，但是可能会出现一些问题，因为现在几乎所有的国际web都是用<code>utf-8</code>为标准的，要是硬要调皮的话，可能会撞到墙上。</p>
+<h2 id="unicode编码"><a href="#unicode编码" class="headerlink" title="unicode编码"></a>unicode编码</h2><p>有时候经常遇到一些奇怪的字符，比如<code>\u6e05\u534e\u5927\u5b66</code>这种，其实<code>\u</code>表示这是<code>unicode</code>，后面的6e05就是表示在<code>unicode</code>的码点，只要用<code>unicode</code>标准下的编码规则都可以解析的，<code>\u6e05\u534e\u5927\u5b66</code>解析就是清华大学。很多编程语言都可以直接解析。</p>
+<h2 id="Base64编码"><a href="#Base64编码" class="headerlink" title="Base64编码"></a>Base64编码</h2><p><code>Base64</code>是一种任意二进制到文本字符串的编码方法，常用于在URL、Cookie、网页中传输少量二进制数据。有时候上传头像什么的就会用到<code>base64</code>。<code>base64</code>当然可以做简单的加解密。</p>
+<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><ul>
+<li><a href="https://leesf.github.io/technique/2017/08/19/understand-character-encoding/#" target="_blank" rel="noopener">https://leesf.github.io/technique/2017/08/19/understand-character-encoding/#</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html</a></li>
+<li><a href="https://baike.baidu.com/item/%E7%BC%96%E7%A0%81/80092" target="_blank" rel="noopener">https://baike.baidu.com/item/%E7%BC%96%E7%A0%81/80092</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2010/02/url_encoding.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2010/02/url_encoding.html</a></li>
+<li><a href="http://blog.csdn.net/zmx729618/article/details/51381655" target="_blank" rel="noopener">http://blog.csdn.net/zmx729618/article/details/51381655</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001399413803339f4bbda5c01fc479cbea98b1387390748000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001399413803339f4bbda5c01fc479cbea98b1387390748000</a></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>学校每次只有晚上8、9点才有热水，每次这个时间点我都在干别的事。所以今年还没洗过澡。明天一定要洗澡。</p>
+
+
+  </article>
+  </script>
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = 'http://yoursite.com/2018/01/03/浅谈计算机编码/index.html';
+this.page.identifier = ;
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//你所不知道的吴献策之内部整修.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © PWXC 2017
+    </div>
+    <div class="secondrow">
+        <a href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
