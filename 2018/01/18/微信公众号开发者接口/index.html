@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>微信公众号开发者接口</title>
+  <meta name="author" content="pwxcoo">
+  <meta name="description" content="为什么停下来选择大头">
+  
+  
+  <meta property="og:title" content="微信公众号开发者接口"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="PWXCOO"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.png">
+</head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="behind">
+      <a href="/" class="back black-color">
+        <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M2 30 L30 2 M30 30 L2 2"></path>
+        </svg>
+      </a>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        微信公众号开发者接口
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-01-18T12:23:59.000Z">
+<svg class="i-calendar" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2018-01-18
+</time>
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/技术/">技术</a>
+
+
+
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>事情是这样的。去年末的时候撸了一个下载instagram图片视频的接口，放在微信公众号上，然后挂在李超超的服务上。那时候是用python写的。</p>
+<p>这几天用node重写了一下。写的过程中其实是很难受的。github上有一个微信公众号开发的python框架，其实我可以用现成的的框架直接搞。但是因为想试一下node，就还是自己搞了。</p>
+<p>写的过程中比较难受是node的天生异步机制。我感觉异步的思维真的有点反人类。。尤其是写惯了同步的代码后。。所以踩了很多坑点。</p>
+<h2 id="坑点记录"><a href="#坑点记录" class="headerlink" title="坑点记录"></a>坑点记录</h2><h3 id="坑点1：xml解析"><a href="#坑点1：xml解析" class="headerlink" title="坑点1：xml解析"></a>坑点1：xml解析</h3><p>可能是微信开发的时候还比较早吧，数据包是xml格式的（现在遍地JSON，当然现在微信新的接口也都是JSON），所以原理上要用<code>http</code>模块监听，然后在回调函数里再用<code>xml2js</code>解析，然后再在回调函数里处理数据包。疯狂回调，所以写成promise的形式比较合理。。然后我又撸promise。。谁能想到！这个轮子别人早就造好了。我真是操了。。我用的是<code>koa</code>框架，所以用了<code>koa-xml-body</code>。</p>
+<h3 id="坑点2：request异步"><a href="#坑点2：request异步" class="headerlink" title="坑点2：request异步"></a>坑点2：request异步</h3><p>其实跟上一个是一样的道理。。。我搞了半天，才发现轮子别人已经造好了。<code>request-promise</code>依赖，完成我的梦想。</p>
+<h3 id="坑点3：log4js"><a href="#坑点3：log4js" class="headerlink" title="坑点3：log4js"></a>坑点3：log4js</h3><p>我加了一个日志模块。配置里面type设为<code>datefile</code>，本机运行环境没报错，但是服务器端报错了。。看了官方文档之后才发现是<code>dateFile</code>。。可是为什么本地运行环境没关系呢。。奇怪。。</p>
+<h3 id="坑点4：公众号接口权限"><a href="#坑点4：公众号接口权限" class="headerlink" title="坑点4：公众号接口权限"></a>坑点4：公众号接口权限</h3><p>我本来感觉可以加很多东西在这个公众号接口里。但是微信官方对未认证的公众号开放的权限实在有限（个人用户不能认证）。所以能做的事还是比较有限的。我连主动给别人发消息都不行。。只能被动回复。</p>
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p>整个开发过程大概就是：</p>
+<ul>
+<li>看官方文档</li>
+<li>用natapp内网渗透工具搞一个测试接口号来，验证一下，接入接口号</li>
+<li>看官方文档，看node官方文档，看各种官方文档</li>
+<li>开发完成，部署</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>微信公众号开发者接口好玩还是挺好玩的。</li>
+<li>感觉还是没有感受到node的精髓。</li>
+</ul>
+
+
+  </article>
+  </script>
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = 'http://yoursite.com/2018/01/18/微信公众号开发者接口/index.html';
+this.page.identifier = ;
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//你所不知道的吴献策之内部整修.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © PWXC 2017
+    </div>
+    <div class="secondrow">
+        <a href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
