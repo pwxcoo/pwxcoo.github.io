@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="之前一直觉得《汇编语言》很秀。Assembly Language 阿。本来下个学期选修想选那门“微机接口和汇编语言”。但这个学期以为要挂的选修课，老师还是给了面子。所以学分讲道理是够了。斟酌了一下，决定自己看书爽一爽《汇编》。 果断选择了王爽的《汇编语言（第三版）》。 因为是有习题的，所以把习题就顺便记录了下来。 前面 11 章的答案我都 debug 验证过了，网上的答案有很多错误。从 12 章开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《汇编语言》笔记">
+<meta property="og:url" content="http://yoursite.com/2018/01/25/《汇编语言》笔记/index.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="之前一直觉得《汇编语言》很秀。Assembly Language 阿。本来下个学期选修想选那门“微机接口和汇编语言”。但这个学期以为要挂的选修课，老师还是给了面子。所以学分讲道理是够了。斟酌了一下，决定自己看书爽一爽《汇编》。 果断选择了王爽的《汇编语言（第三版）》。 因为是有习题的，所以把习题就顺便记录了下来。 前面 11 章的答案我都 debug 验证过了，网上的答案有很多错误。从 12 章开">
+<meta property="og:image" content="http://p1pws2aca.bkt.clouddn.com/assembly3.6.png">
+<meta property="og:updated_time" content="2018-01-29T13:53:44.594Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《汇编语言》笔记">
+<meta name="twitter:description" content="之前一直觉得《汇编语言》很秀。Assembly Language 阿。本来下个学期选修想选那门“微机接口和汇编语言”。但这个学期以为要挂的选修课，老师还是给了面子。所以学分讲道理是够了。斟酌了一下，决定自己看书爽一爽《汇编》。 果断选择了王爽的《汇编语言（第三版）》。 因为是有习题的，所以把习题就顺便记录了下来。 前面 11 章的答案我都 debug 验证过了，网上的答案有很多错误。从 12 章开">
+<meta name="twitter:image" content="http://p1pws2aca.bkt.clouddn.com/assembly3.6.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>《汇编语言》笔记</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/pwxcoo">Projects</a></li>
+         
+          <li><a href="http://pwxcoo.com/">Sandbox</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/01/29/读《汇编语言（第三版）》/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/01/18/微信公众号开发者接口/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/25/《汇编语言》笔记/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&text=《汇编语言》笔记"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&title=《汇编语言》笔记"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&is_video=false&description=《汇编语言》笔记"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=《汇编语言》笔记&body=Check out this article: http://yoursite.com/2018/01/25/《汇编语言》笔记/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&title=《汇编语言》笔记"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&title=《汇编语言》笔记"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&title=《汇编语言》笔记"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&title=《汇编语言》笔记"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&name=《汇编语言》笔记&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点1-1"><span class="toc-number">1.</span> <span class="toc-text">检测点1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点2-1"><span class="toc-number">2.</span> <span class="toc-text">检测点2.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点2-2"><span class="toc-number">3.</span> <span class="toc-text">检测点2.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点2-3"><span class="toc-number">4.</span> <span class="toc-text">检测点2.3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点3-1"><span class="toc-number">5.</span> <span class="toc-text">检测点3.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点3-2"><span class="toc-number">6.</span> <span class="toc-text">检测点3.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点6-1"><span class="toc-number">7.</span> <span class="toc-text">检测点6.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验5"><span class="toc-number">8.</span> <span class="toc-text">实验5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点9-1"><span class="toc-number">9.</span> <span class="toc-text">检测点9.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点9-2"><span class="toc-number">10.</span> <span class="toc-text">检测点9.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点9-3"><span class="toc-number">11.</span> <span class="toc-text">检测点9.3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点10-1"><span class="toc-number">12.</span> <span class="toc-text">检测点10.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点10-2"><span class="toc-number">13.</span> <span class="toc-text">检测点10.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点10-3"><span class="toc-number">14.</span> <span class="toc-text">检测点10.3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点10-4"><span class="toc-number">15.</span> <span class="toc-text">检测点10.4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点10-5"><span class="toc-number">16.</span> <span class="toc-text">检测点10.5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点11-1"><span class="toc-number">17.</span> <span class="toc-text">检测点11.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点11-2"><span class="toc-number">18.</span> <span class="toc-text">检测点11.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点11-3"><span class="toc-number">19.</span> <span class="toc-text">检测点11.3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点11-4"><span class="toc-number">20.</span> <span class="toc-text">检测点11.4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点12-1"><span class="toc-number">21.</span> <span class="toc-text">检测点12.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点13-1"><span class="toc-number">22.</span> <span class="toc-text">检测点13.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点13-2"><span class="toc-number">23.</span> <span class="toc-text">检测点13.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点14-1"><span class="toc-number">24.</span> <span class="toc-text">检测点14.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点14-2"><span class="toc-number">25.</span> <span class="toc-text">检测点14.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点15-1"><span class="toc-number">26.</span> <span class="toc-text">检测点15.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点16-1"><span class="toc-number">27.</span> <span class="toc-text">检测点16.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点16-2"><span class="toc-number">28.</span> <span class="toc-text">检测点16.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点17-1"><span class="toc-number">29.</span> <span class="toc-text">检测点17.1</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        《汇编语言》笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PWXCOO</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-01-25T10:22:03.000Z" itemprop="datePublished">2018-01-25</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>之前一直觉得《汇编语言》很秀。Assembly Language 阿。本来下个学期选修想选那门“微机接口和汇编语言”。但这个学期以为要挂的选修课，老师还是给了面子。所以学分讲道理是够了。斟酌了一下，决定自己看书爽一爽《汇编》。</p>
+<p>果断选择了王爽的《汇编语言（第三版）》。</p>
+<p>因为是有习题的，所以把习题就顺便记录了下来。</p>
+<p>前面 11 章的答案我都 debug 验证过了，网上的答案有很多错误。从 12 章开始，我开始瞎屁股浏览了。主要是因为前面 11 章的内容让我比较喜欢，后面的较多的理论元素和一些指令完善，我就粗略的学习了。</p>
+<h2 id="检测点1-1"><a href="#检测点1-1" class="headerlink" title="检测点1.1"></a>检测点1.1</h2><ol>
+<li>1个 CPU 的寻址能力为 8KB，那么它的地址总线的宽度为 <code>13</code>。 （8KB = 8 * 1024 = 2 ^ 13。 1字节为一个存储单元）</li>
+<li>1KB 的存储器有 <code>1024</code>个存储单元。存储单元的编号从 <code>0</code> 到 <code>1023</code>。</li>
+<li>1KB 的存储器可以存储 <code>2^13</code>个bit，个 <code>1024</code>Byte。</li>
+<li>1GB, 1MB, 1KB 分别是 <code>2^30</code>, <code>2^20</code>, <code>2^10</code>Byte。</li>
+<li>8080，8088，80286，80386 的地址总线宽度分别为 16 根， 20 根， 24 根， 32 根，则它们的寻址能力分别为： <code>2^6</code>（KB）, <code>1</code>(MB), <code>16</code>(MB), <code>4</code>(GB)。</li>
+<li>8080， 8088， 8086， 80286， 80386 的数据总线宽度分别为 8 根， 8 根， 16 根， 16 根， 32 根。则它们一次可以传送的数据为： <code>1</code>（B), <code>1</code>(B), <code>2</code>(B), <code>2</code>(B), <code>4</code>(B)。</li>
+<li>从内存中读取 1024 字节的数据， 8086 至少要读 <code>512</code> 次， 80386至少要读 <code>256</code> 次。</li>
+<li>在存储器中， 数据和程序以 <code>二进制</code>形式存放。</li>
+</ol>
+<h2 id="检测点2-1"><a href="#检测点2-1" class="headerlink" title="检测点2.1"></a>检测点2.1</h2><ol>
+<li><p>写出每条汇编指令执行后相关寄存器中的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mov ax,62627        ; AX = `F4A3H`</span><br><span class="line">mov ah,31H          ; AX = `31A3H`</span><br><span class="line">mov al,23H          ; AX = `3123H`</span><br><span class="line">add ax,ax           ; AX = `6246H`</span><br><span class="line">mov bx,826CH        ; BX = `826CH`</span><br><span class="line">mov cx,ax           ; CX = `6246H`</span><br><span class="line">mov ax,bx           ; AX = `826CH`</span><br><span class="line">add ax,bx           ; AX = `04D8H`</span><br><span class="line">mov al,bh           ; AX = `0482H`</span><br><span class="line">mov ah,bl           ; AX = `6C82H`</span><br><span class="line">add ah,ah           ; AX = `D882H`</span><br><span class="line">add al,6            ; AX = `D888H`</span><br><span class="line">add al,al           ; Ax = `D810H`</span><br><span class="line">mov ax,cx           ; AX = `6246H`</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用目前学过的汇编指令，最多使用 4 条指令，编程计算 2 的 4 次方。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov ax,2</span><br><span class="line">add ax,ax</span><br><span class="line">add ax,ax</span><br><span class="line">add ax,ax</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="检测点2-2"><a href="#检测点2-2" class="headerlink" title="检测点2.2"></a>检测点2.2</h2><ol>
+<li>给定段地址为 0001H, 仅通过变化偏移地址寻址，CPU 的寻址范围为 <code>00010H</code>到 <code>1000FH</code>。</li>
+<li>有一数据存放在内存 20000H 单元中，现给定段地址为 SA，若想用偏移地址寻到此单元。则 SA应满足的条件是：最小为 <code>1001H</code>，最大为 <code>20000H</code>。</li>
+</ol>
+<h2 id="检测点2-3"><a href="#检测点2-3" class="headerlink" title="检测点2.3"></a>检测点2.3</h2><p>下面的三条指令执行后，CPU几次修改IP？都是在什么时候？最后IP中的值是多少？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ax,bx</span><br><span class="line">sub ax,ax</span><br><span class="line">jmp ax</span><br></pre></td></tr></table></figure></p>
+<p><code>4次。每条执行完都修改一次加上一次 jmp 的修改。0。</code></p>
+<h2 id="检测点3-1"><a href="#检测点3-1" class="headerlink" title="检测点3.1"></a>检测点3.1</h2><ol>
+<li>在Debug中， 用“d 0:0 1f” 查看内存，结果如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0000:0000   70 80 F0 30 EF 60 30 E2-00 80 80 12 66 20 22 60</span><br><span class="line">0000:0010   62 26 E6 D6 CC 2E 3C 3B-AB BA 00 00 26 06 66 88</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>下面的程序执行前，AX=0,BX=0,写出每条汇编指令执行完后相关寄存器中的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mov ax,1          </span><br><span class="line">mov ds,ax         ; 将段地址ds设置为0001</span><br><span class="line">mov ax,[0000]     ; AX=`2662H`</span><br><span class="line">mov bx,[0001]     ; BX=`E626H`</span><br><span class="line">mov ax,bx         ; AX=`E626H`</span><br><span class="line">mov ax,[0000]     ; AX=`2662H`</span><br><span class="line">mov bx,[0002]     ; BX=`D6E6H`   </span><br><span class="line">add ax,bx         ; AX=`FD48H`</span><br><span class="line">add ax,[0004]     ; AX=`2C14H`</span><br><span class="line">mov ax,0          ; AX=`0000H`</span><br><span class="line">mov al,[0002]     ; AX=`00E6H`</span><br><span class="line">mov bx,0          ; BX=`0000H`</span><br><span class="line">mov bl,[000C]     ; BX=`0026H`</span><br><span class="line">add al,bl         ; AX=`000CH`</span><br></pre></td></tr></table></figure>
+<ol>
+<li>内存中的情况如图3.6所示。<br>各寄存器的初始值：CS=2000H， IP=0, DS=1000H, AX=0, BX=0;<br><img src="http://p1pws2aca.bkt.clouddn.com/assembly3.6.png" alt="图3.6"></li>
+</ol>
+<ul>
+<li>写出CPU执行的指令序列（用汇编指令写出）</li>
+<li><p>写出CPU执行每条指令后，CS，IP和相关寄存器中的数值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mov ax,6622H    ; CS=2000H, IP=0003H, DS=1000H, AX=6622H, BX=0000H</span><br><span class="line">jmp 0ff0:0100   ; CS=0FF0H, IP=0100H, DS=1000H, Ax=6622H, BX=0000H</span><br><span class="line">mov ax,2000H    ; CS=0FF0H, IP=0103H, DS=1000H, AX=2000H, BX=0000H</span><br><span class="line">mov ds,ax       ; CS=0FF0H, IP=0105H, DS=2000H, Ax=2000H, BX=0000H</span><br><span class="line">mov ax,[0008]   ; CS=0FF0H, IP=0108H, DS=2000H, AX=C389H, BX=0000H</span><br><span class="line">mov ax,[0002]   ; CS=0FF0H, IP=010BH, Ds=2000H, Ax=EA66H, BX=0000H</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再次体会：数据和程序有区别吗？如何确定内存中的信息哪些是数据，哪些是程序?</p>
+</li>
+</ul>
+<p><code>没有区别。存储在数据段中就是数据，存储在程序段中就是程序。</code></p>
+<h2 id="检测点3-2"><a href="#检测点3-2" class="headerlink" title="检测点3.2"></a>检测点3.2</h2><ol>
+<li><p>补全下面的程序，使其可以将 10000H~1000FH 中的八个字，逆序复制到 20000H~2000FH 中。逆序复制的含义如图3.17所示（图中内存里的数据均为假设）。（图我就不贴了。不重要）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mov ax,1000H</span><br><span class="line">mov ds,ax</span><br><span class="line"></span><br><span class="line">mov ax,2000H</span><br><span class="line">mov ss,ax</span><br><span class="line">mov sp,0</span><br><span class="line"></span><br><span class="line">push [0]</span><br><span class="line">push [2]</span><br><span class="line">push [4]</span><br><span class="line">push [6]</span><br><span class="line">push [8]</span><br><span class="line">push [A]</span><br><span class="line">push [C]</span><br><span class="line">push [E]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>补全下面的程序，使其可以将 10000H~1000FH 中的 8 个字，逆序复制到20000H~2000FH中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mov ax,2000H</span><br><span class="line">mov ds,ax</span><br><span class="line"></span><br><span class="line">mov ax,1000H</span><br><span class="line">mov ss,ax</span><br><span class="line">mov sp,0</span><br><span class="line"></span><br><span class="line">pop [E]</span><br><span class="line">pop [C]</span><br><span class="line">pop [A]</span><br><span class="line">pop [8]</span><br><span class="line">pop [6]</span><br><span class="line">pop [4]</span><br><span class="line">pop [2]</span><br><span class="line">pop [0]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="检测点6-1"><a href="#检测点6-1" class="headerlink" title="检测点6.1"></a>检测点6.1</h2><ol>
+<li>下面的程序实现依次用内存 0:0~0:15 单元中的内容改写程序中数据，完成程序：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line"></span><br><span class="line">codesg segment</span><br><span class="line">    dw 0123h, 0456h, 0789h, 0abch, 0defh, 0fedh, 0cbah, 0987h</span><br><span class="line"></span><br><span class="line">start:  mov ax,0</span><br><span class="line">        mov ds,ax</span><br><span class="line">        mov bx,0</span><br><span class="line"></span><br><span class="line">        mov cx,8</span><br><span class="line">    s:  mov ax,[bx]</span><br><span class="line"></span><br><span class="line">        mov cs:[bx],ax</span><br><span class="line"></span><br><span class="line">        add bx,2</span><br><span class="line">        loop s</span><br><span class="line"></span><br><span class="line">        mov ax,4c00h</span><br><span class="line">        int 21h</span><br><span class="line">codesg ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+<ol>
+<li>下面的程序实现依次用内存 0:0~0:15 单元中的内容改写程序中数据，数据的传送用栈来进行。栈空间设置在程序内。完成程序：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line"></span><br><span class="line">codesg segment</span><br><span class="line">    dw 0123h, 0456h, 0789h, 0abch, 0defh, 0fedh, 0cbah, 0987h</span><br><span class="line">    dw 0,0,0,0,0,0,0,0,0,0              ;10个字单元用作栈空间</span><br><span class="line"></span><br><span class="line">start:  mov ax,cs</span><br><span class="line">        mov ss,ax</span><br><span class="line">        mov sp,36   ; (网上的答案不是36，虽然跑起来没问题，但36才是最好的)</span><br><span class="line"></span><br><span class="line">        mov ax,0</span><br><span class="line">        mov ds,ax</span><br><span class="line">        mov bx,0</span><br><span class="line">        mov cx,8</span><br><span class="line">    s:  push [bx]</span><br><span class="line"></span><br><span class="line">        pop cs:[bx]</span><br><span class="line"></span><br><span class="line">        add bx,2</span><br><span class="line">        loop s</span><br><span class="line"></span><br><span class="line">        mov ax,4c00h</span><br><span class="line">        int 21h</span><br><span class="line">codesg ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+<p><code>ps:我调试的时候发现一件很骚的事情，就是调试的时候，栈空间的值会发生改变。主要是因为中断机制，中断的时候某些关键值要存在内存里。。就用了程序的栈空间。我还纳闷了半天。。</code></p>
+<h2 id="实验5"><a href="#实验5" class="headerlink" title="实验5"></a>实验5</h2><p>这个实验做完主要有两点总结：</p>
+<ul>
+<li><p>第二题的第4小道： <code>16 * (N / 16 + 1)</code>。关于内存的问题。在16位机器上，不足16字节的数据按16字节存储，意思就是17个字节，在程序中其实占的是32字节。其它机器应该可以递推。</p>
+</li>
+<li><p>编译器编译汇编文件，从上往下编译。同理，数据段要是写在代码段后面，执行加载到内存中时，在内存中的位置也在代码段的后面。</p>
+</li>
+</ul>
+<h2 id="检测点9-1"><a href="#检测点9-1" class="headerlink" title="检测点9.1"></a>检测点9.1</h2><ol>
+<li>程序如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line"></span><br><span class="line">data segment</span><br><span class="line">    db 8 dup(0)</span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line">    start:  mov ax,data</span><br><span class="line">            mov ds,ax</span><br><span class="line">            mov bx,0</span><br><span class="line">            jmp word ptr [bx + 1]</span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>若要使程序中的 jmp 指令执行后， CS:IP 指向程序的第一条指令，在 data 段中应该定义哪些数据？<br>``</p>
+<ol>
+<li>程序如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line"></span><br><span class="line">data segment</span><br><span class="line">    dd 12345678H</span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line"></span><br><span class="line">    start:  mov ax,data</span><br><span class="line">            mov ds,ax</span><br><span class="line">            mov bx,0</span><br><span class="line">            mov [bx],offset start</span><br><span class="line">            mov [bx+2],cs</span><br><span class="line">            jmp dword ptr ds:[0]</span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>补全程序，使 jmp 指令执行后，CS：IP 指向程序的第一条指令。</p>
+<ol>
+<li>用 Debug 查看内存，结果如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2000:1000 BE 00 06 00 00 00 ...</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>则此时，CPU 执行指令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ax,2000H</span><br><span class="line">mov es,ax</span><br><span class="line">jmp dword ptr es:[1000H]</span><br></pre></td></tr></table></figure></p>
+<p>后，（CS）= <code>0060h</code>，（IP）= <code>00BE</code></p>
+<h2 id="检测点9-2"><a href="#检测点9-2" class="headerlink" title="检测点9.2"></a>检测点9.2</h2><p>补全程序，利用 jcxz 指令，实现在内存 2000H 段中查找第一个值为 0 的字节，找到后，将它的偏移地址存储在 dx 中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line">code segment</span><br><span class="line">    start:  mov ax,2000H</span><br><span class="line">            mov ds,ax   </span><br><span class="line">            mov bx,0</span><br><span class="line"></span><br><span class="line">        s:  mov cl,[bx]</span><br><span class="line">            mov ch,0    ; 注意寻找的是字节</span><br><span class="line">            jcxz short ok</span><br><span class="line">            inc bx</span><br><span class="line"></span><br><span class="line">            jmp short s</span><br><span class="line">        ok: mov dx,bx</span><br><span class="line">            mov ax,4c00h</span><br><span class="line">            int 21h</span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
+<h2 id="检测点9-3"><a href="#检测点9-3" class="headerlink" title="检测点9.3"></a>检测点9.3</h2><p>补全编程，利用 loop 指令，实现在内存 2000H 段中查找第一个值为 0 的字节， 找到后，将它的偏移地址存储在 dx 中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line">code segment</span><br><span class="line">    start:  mov ax,2000H</span><br><span class="line">            mov ds,ax</span><br><span class="line">            mov bx,0</span><br><span class="line">        s:  mov cl,[bx]</span><br><span class="line">            mov ch,0</span><br><span class="line"></span><br><span class="line">            inc cx  ; loop指令，将 cx 加一在判定是否为0</span><br><span class="line"></span><br><span class="line">            inc bx</span><br><span class="line">            loop s</span><br><span class="line">        ok: dec bx</span><br><span class="line">            mov dx,bx</span><br><span class="line">            mov ax,4c00h</span><br><span class="line">            int 21h</span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
+<h2 id="检测点10-1"><a href="#检测点10-1" class="headerlink" title="检测点10.1"></a>检测点10.1</h2><p>补全程序，实现从内存 1000:0000 处开始执行指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line"></span><br><span class="line">stack segment</span><br><span class="line">    db 16 dup(0)</span><br><span class="line">stack ends</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line">start:  mov ax,stack</span><br><span class="line">        mov ss,ax</span><br><span class="line">        mov sp,16</span><br><span class="line">        mov ax,1000</span><br><span class="line">        push ax</span><br><span class="line">        mov ax,0000</span><br><span class="line">        push ax</span><br><span class="line">        retf</span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
+<h2 id="检测点10-2"><a href="#检测点10-2" class="headerlink" title="检测点10.2"></a>检测点10.2</h2><p>下面的程序执行后，ax 中的数值为多少？<br>内存地址 | 机器码   | 汇编指令<br>—|—|—<br>1000:0 | b8 00 00 |   mov ax,0<br>1000:3 | e8 01 00 |   call s<br>1000:6 | 40       |   inc ax<br>1000:8 | 58       | s:pop ax</p>
+<p><code>0006h</code></p>
+<h2 id="检测点10-3"><a href="#检测点10-3" class="headerlink" title="检测点10.3"></a>检测点10.3</h2><p>下面的程序执行后，ax 中的数值为多少？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">内存地址 | 机器码   | 汇编指令</span><br><span class="line">---|---|---</span><br><span class="line">1000:0 | b8 00 00       |   mov ax,0</span><br><span class="line">1000:3 | 9A 09 00 00 10 |   call far ptr s</span><br><span class="line">1000:8 | 40             |   inc ax</span><br><span class="line">1000:9 | 58             | s:pop ax</span><br><span class="line">                            add ax,ax</span><br><span class="line">                            pop bx</span><br><span class="line">                            add ax,bx</span><br></pre></td></tr></table></figure></p>
+<p><code>1010h</code></p>
+<h2 id="检测点10-4"><a href="#检测点10-4" class="headerlink" title="检测点10.4"></a>检测点10.4</h2><p>下面的程序执行后，ax 中的数值为多少？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">内存地址 | 机器码   | 汇编指令</span><br><span class="line">---|---|---</span><br><span class="line">1000:0 | b8 06 00       |   mov ax,6</span><br><span class="line">1000:3 | ff d0          |   call ax</span><br><span class="line">1000:5 | 40             |   inc ax</span><br><span class="line">1000:6 |                |   mov bp,sp</span><br><span class="line">                            add ax,[bp]</span><br></pre></td></tr></table></figure></p>
+<p><code>000Bh</code></p>
+<h2 id="检测点10-5"><a href="#检测点10-5" class="headerlink" title="检测点10.5"></a>检测点10.5</h2><ol>
+<li>下面的程序执行后，ax 中的数值为多少？（注意：用 call 指令的原理来分析，不要在 Debug 中单步跟踪来验证你的结论。对于此程序，在Debug中单步跟踪的结果，不能代表 CPU 的实际执行结果。）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line">stack segment</span><br><span class="line">    dw 8 dup(0)</span><br><span class="line">stack segment</span><br><span class="line">code segment</span><br><span class="line">    start:  mov ax,stack</span><br><span class="line">            mov ss,ax</span><br><span class="line">            mov sp,16</span><br><span class="line">            mov ds,ax</span><br><span class="line">            mov ax,0</span><br><span class="line">            call word ptr ds:[0EH]</span><br><span class="line">            inc ax</span><br><span class="line">            inc ax</span><br><span class="line">            inc ax</span><br><span class="line">            mov ax,4c00h</span><br><span class="line">            int 21h</span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>0003h</code></p>
+<ol>
+<li>下面的程序执行后，ax 和 bx 中的数值为多少？<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line">data segment</span><br><span class="line">    dw 8 dup(0)</span><br><span class="line">data ends</span><br><span class="line">code segment</span><br><span class="line">    start:  mov ax,data</span><br><span class="line">            mov ss,ax</span><br><span class="line">            mov sp,16</span><br><span class="line">            mov word ptr ss:[0],offset s</span><br><span class="line">            mov ss:[2],cs</span><br><span class="line">            call dword ptr ss:[0]</span><br><span class="line">            nop</span><br><span class="line">        s:  mov ax,offset s</span><br><span class="line">            sub ax,ss:[0cH]</span><br><span class="line">            mov bx,cs</span><br><span class="line">            sub bx,ss:[0eH]</span><br><span class="line">            mov ax,4c00h</span><br><span class="line">            int 21h</span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>ax = <code>0001h</code>, bx = <code>0000h</code></p>
+<h2 id="检测点11-1"><a href="#检测点11-1" class="headerlink" title="检测点11.1"></a>检测点11.1</h2><p>写出下面每条指令执行后，ZF，PF，SF等标志位的值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sub al,al           ; ZF= 1 ,PF= 1  ,SF= 0</span><br><span class="line">mov al,1            ; ZF= 1 ,PF= 1  ,SF= 0</span><br><span class="line">push ax             ; ZF= 1 ,PF= 1  ,SF= 0</span><br><span class="line">pop bx              ; ZF= 1 ,PF= 1  ,SF= 0</span><br><span class="line">add al,bl           ; ZF= 0 ,PF= 0  ,SF= 0</span><br><span class="line">add al,10           ; ZF= 0 ,PF= 1  ,SF= 0</span><br><span class="line">mul al              ; ZF= 0 ,PF= 1  ,SF= 0</span><br></pre></td></tr></table></figure></p>
+<h2 id="检测点11-2"><a href="#检测点11-2" class="headerlink" title="检测点11.2"></a>检测点11.2</h2><p>写出下面每条指令执行后，ZF，PF，SF，CF，OF等标志位的值。</p>
+<table>
+<thead>
+<tr>
+<th>汇编代码</th>
+<th>CF</th>
+<th>OF</th>
+<th>SF</th>
+<th>ZF</th>
+<th>PF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sub al,al</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>mov al,10H</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>add al,90H</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>mov al,80H</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>add al,80H</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>mov al,0FCH</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>add al,05H</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>mov al,7DH</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>add al,0BH</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="检测点11-3"><a href="#检测点11-3" class="headerlink" title="检测点11.3"></a>检测点11.3</h2><ol>
+<li><p>补全下面的程序，统计 F:000:0 处 32 个字节中，大小在[32,128]的数据的个数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mov ax,0f000h</span><br><span class="line">mov ds,ax</span><br><span class="line"></span><br><span class="line">mov bx,0</span><br><span class="line">mov dx,0</span><br><span class="line">mov cx,32</span><br><span class="line">s:  mov al,[bx]</span><br><span class="line">    cmp al,32</span><br><span class="line">    jb s0</span><br><span class="line">    cmp al,128</span><br><span class="line">    ja s0</span><br><span class="line">    inc dx</span><br><span class="line">s0: inc bx</span><br><span class="line">    loop s</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>补全下面程序中，统计 F:000:0 处 32 个字节中，大小在（32,128）的数据的个数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mov ax,0f000h</span><br><span class="line">mov ds,ax</span><br><span class="line">mov bx,0</span><br><span class="line">mov dx,0</span><br><span class="line">mov cx,32</span><br><span class="line">s:  mov al,[bx]</span><br><span class="line">    cmp al,32</span><br><span class="line">    jna s0</span><br><span class="line">    cmp al,128</span><br><span class="line">    jnb s0</span><br><span class="line">    inc dx</span><br><span class="line">s0: inc bx</span><br><span class="line">    loop s</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="检测点11-4"><a href="#检测点11-4" class="headerlink" title="检测点11.4"></a>检测点11.4</h2><p>下面的程序执行后：（ax）=？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mov ax,0</span><br><span class="line">push ax</span><br><span class="line">popf</span><br><span class="line">mov ax,0fff0h</span><br><span class="line">add ax,0010h</span><br><span class="line">pushf</span><br><span class="line">pop ax</span><br><span class="line">and al,11000101B</span><br><span class="line">and ah,00001000B</span><br></pre></td></tr></table></figure></p>
+<p><code>0045h</code></p>
+<h2 id="检测点12-1"><a href="#检测点12-1" class="headerlink" title="检测点12.1"></a>检测点12.1</h2><ol>
+<li>用 Debug 查看内存，情况如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0000:0000 68 10 A7 00 8B 01 70 00-16 00 9D 03 8B 01 70 00</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>则 3 号中断源对应的中断处理程序的入口地址为：<code>0070h:018Bh</code></p>
+<ol>
+<li>存储 N 号中断源对应的中断处理程序入口的偏移地址的内存单元的地址为：<code>[4N]</code>。<br>存储 N 号中断源对应的中断处理程序入口的段地址的内存单元的地址为：<code>[4N+2]</code>。</li>
+</ol>
+<h2 id="检测点13-1"><a href="#检测点13-1" class="headerlink" title="检测点13.1"></a>检测点13.1</h2><ol>
+<li><p>在上面的内容中，我们用 7ch 中断例程实现 loop 的功能，则上面的 7ch 中断例程所能进行的最大转移位移是多少？<br><code>-128~127</code></p>
+</li>
+<li><p>用 7ch 中断例程完成 jmp near ptr s 指令的功能，用 bx 向中断例程传送转移位移。<br>应用举例：在屏幕的第 12 行，显示 data 段中以 0 结尾的字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code,ds:data</span><br><span class="line">    data segment</span><br><span class="line">        db &apos;conversation&apos;,0</span><br><span class="line">    data ends</span><br><span class="line"></span><br><span class="line">    code segment</span><br><span class="line">start:    mov ax,cs</span><br><span class="line">    mov ds,ax</span><br><span class="line">    mov si,offset show</span><br><span class="line">    mov ax,0</span><br><span class="line">    mov es,ax</span><br><span class="line">    mov di,200h</span><br><span class="line">    mov cx,offset showend-offset show</span><br><span class="line">    cld</span><br><span class="line">    rep movsb</span><br><span class="line"></span><br><span class="line">    mov ax,0</span><br><span class="line">    mov es,ax</span><br><span class="line">    mov word ptr es:[7ch*4],200h</span><br><span class="line">    mov word ptr es:[7ch*4+2],0</span><br><span class="line">    </span><br><span class="line">    mov ax,data</span><br><span class="line">    mov ds,ax</span><br><span class="line">    mov si,0</span><br><span class="line">    mov ax,0b800h</span><br><span class="line">    mov es,ax</span><br><span class="line">    mov di,12*160</span><br><span class="line">    </span><br><span class="line">s:    cmp byte ptr [si],0</span><br><span class="line">    je ok</span><br><span class="line">    mov al,[si]</span><br><span class="line">    mov es:[di],al</span><br><span class="line">    mov al,2</span><br><span class="line">    mov es:[di+1],al</span><br><span class="line">    inc si</span><br><span class="line">    add di,2</span><br><span class="line">    mov bx,offset s-offset ok</span><br><span class="line">    int 7ch</span><br><span class="line">    </span><br><span class="line">ok:    mov ax,4c00h</span><br><span class="line">    int 21h</span><br><span class="line">show:    push bp</span><br><span class="line">    mov bp,sp</span><br><span class="line">    add [bp+2],bx</span><br><span class="line">    pop bp</span><br><span class="line">    iret</span><br><span class="line">showend:nop</span><br><span class="line">    code ends</span><br><span class="line">    end start</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="检测点13-2"><a href="#检测点13-2" class="headerlink" title="检测点13.2"></a>检测点13.2</h2><ol>
+<li><code>错误，BIOS在ROM中（READ ONLY），不能被更改</code></li>
+<li><code>错误，19h中断，操作系统还未被引导。</code></li>
+</ol>
+<h2 id="检测点14-1"><a href="#检测点14-1" class="headerlink" title="检测点14.1"></a>检测点14.1</h2><ol>
+<li><p>编程，读取 CMOS RAM 的 2 号单元的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov al,2</span><br><span class="line">out 70h,al</span><br><span class="line">in al,71h</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编程，向 CMOS RAM 的 2 号单元写入 0。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov al,0</span><br><span class="line">out 71h,al</span><br><span class="line">mov al,2</span><br><span class="line">in 70h,al</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="检测点14-2"><a href="#检测点14-2" class="headerlink" title="检测点14.2"></a>检测点14.2</h2><p>编程，用加法和移位指令计算（ax）=（ax）<em> 10。（提示，（ax）</em>10=（ax)<em>2+(ax)</em>8）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mov ax,2</span><br><span class="line">shl ax,1</span><br><span class="line">mov bx,ax</span><br><span class="line">shl ax,1</span><br><span class="line">shl ax,1</span><br><span class="line">add ax,bx</span><br></pre></td></tr></table></figure></p>
+<h2 id="检测点15-1"><a href="#检测点15-1" class="headerlink" title="检测点15.1"></a>检测点15.1</h2><ol>
+<li><p>精简</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pushf</span><br><span class="line">call dword ptr ds:[0]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>在中断向量表中设置新的int9中断入口地址的时候不让其发生中断。</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cli</span><br><span class="line">mov word ptr es:[9*4],offset int9</span><br><span class="line">mov word ptr es:[9*4+2],cs</span><br><span class="line">sti</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>恢复中断向量表int9的源地址时同理：</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cli</span><br><span class="line">push ds:[0]</span><br><span class="line">pop es:[9*4]</span><br><span class="line">push ds:[2]</span><br><span class="line">pop es:[9*4+2]</span><br><span class="line">sti</span><br></pre></td></tr></table></figure></p>
+<h2 id="检测点16-1"><a href="#检测点16-1" class="headerlink" title="检测点16.1"></a>检测点16.1</h2><p>下面的程序将 code 段中 a 处的 8 个数据累加，结果存储到 b 处的双字中，补全程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line">code segment</span><br><span class="line">    a dw 1,2,3,4,5,6,7,8</span><br><span class="line">    b dd 0</span><br><span class="line"></span><br><span class="line">    start:  mov si,0</span><br><span class="line">            mov cx,8</span><br><span class="line">        s:  mov ax,a[si]</span><br><span class="line">            add b,ax</span><br><span class="line">            abc b,0</span><br><span class="line">            add si,1</span><br><span class="line">            loop s</span><br><span class="line"></span><br><span class="line">            mov ax,4c00h</span><br><span class="line">            int 21h</span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
+<h2 id="检测点16-2"><a href="#检测点16-2" class="headerlink" title="检测点16.2"></a>检测点16.2</h2><p>下面的程序将 data 段中 a 处的 8 个数据累加，结果存储到 b 处的双字中，补全程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code,es:data</span><br><span class="line"></span><br><span class="line">data segment</span><br><span class="line">    a db 1,2,3,4,5,6,7,8</span><br><span class="line">    b dw 0</span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line">start:  mov ax,data</span><br><span class="line">        mov es,ax</span><br><span class="line">        mov si,0</span><br><span class="line">        mov cx,8</span><br><span class="line">    s:  mov al,a[si]</span><br><span class="line">        mov ah,0</span><br><span class="line">        add b,ax</span><br><span class="line">        inc si</span><br><span class="line">        loop s</span><br><span class="line"></span><br><span class="line">        mov ax,4c00h</span><br><span class="line">        int 21h</span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
+<h2 id="检测点17-1"><a href="#检测点17-1" class="headerlink" title="检测点17.1"></a>检测点17.1</h2><p><code>当执行int16中断时是从缓冲区中读出字符，若缓冲区为空，则int16应该可以响应int9的中断，故IF不一定为1</code></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/pwxcoo">Projects</a></li>
+         
+          <li><a href="http://pwxcoo.com/">Sandbox</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点1-1"><span class="toc-number">1.</span> <span class="toc-text">检测点1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点2-1"><span class="toc-number">2.</span> <span class="toc-text">检测点2.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点2-2"><span class="toc-number">3.</span> <span class="toc-text">检测点2.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点2-3"><span class="toc-number">4.</span> <span class="toc-text">检测点2.3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点3-1"><span class="toc-number">5.</span> <span class="toc-text">检测点3.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点3-2"><span class="toc-number">6.</span> <span class="toc-text">检测点3.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点6-1"><span class="toc-number">7.</span> <span class="toc-text">检测点6.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验5"><span class="toc-number">8.</span> <span class="toc-text">实验5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点9-1"><span class="toc-number">9.</span> <span class="toc-text">检测点9.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点9-2"><span class="toc-number">10.</span> <span class="toc-text">检测点9.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点9-3"><span class="toc-number">11.</span> <span class="toc-text">检测点9.3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点10-1"><span class="toc-number">12.</span> <span class="toc-text">检测点10.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点10-2"><span class="toc-number">13.</span> <span class="toc-text">检测点10.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点10-3"><span class="toc-number">14.</span> <span class="toc-text">检测点10.3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点10-4"><span class="toc-number">15.</span> <span class="toc-text">检测点10.4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点10-5"><span class="toc-number">16.</span> <span class="toc-text">检测点10.5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点11-1"><span class="toc-number">17.</span> <span class="toc-text">检测点11.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点11-2"><span class="toc-number">18.</span> <span class="toc-text">检测点11.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点11-3"><span class="toc-number">19.</span> <span class="toc-text">检测点11.3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点11-4"><span class="toc-number">20.</span> <span class="toc-text">检测点11.4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点12-1"><span class="toc-number">21.</span> <span class="toc-text">检测点12.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点13-1"><span class="toc-number">22.</span> <span class="toc-text">检测点13.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点13-2"><span class="toc-number">23.</span> <span class="toc-text">检测点13.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点14-1"><span class="toc-number">24.</span> <span class="toc-text">检测点14.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点14-2"><span class="toc-number">25.</span> <span class="toc-text">检测点14.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点15-1"><span class="toc-number">26.</span> <span class="toc-text">检测点15.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点16-1"><span class="toc-number">27.</span> <span class="toc-text">检测点16.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点16-2"><span class="toc-number">28.</span> <span class="toc-text">检测点16.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测点17-1"><span class="toc-number">29.</span> <span class="toc-text">检测点17.1</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/25/《汇编语言》笔记/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&text=《汇编语言》笔记"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&title=《汇编语言》笔记"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&is_video=false&description=《汇编语言》笔记"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=《汇编语言》笔记&body=Check out this article: http://yoursite.com/2018/01/25/《汇编语言》笔记/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&title=《汇编语言》笔记"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&title=《汇编语言》笔记"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&title=《汇编语言》笔记"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&title=《汇编语言》笔记"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/25/《汇编语言》笔记/&name=《汇编语言》笔记&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/pwxcoo">Projects</a></li>
+         
+          <li><a href="http://pwxcoo.com/">Sandbox</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="事情是这样的。去年末的时候撸了一个下载instagram图片视频的接口，放在微信公众号上，然后挂在李超超的服务上。那时候是用python写的。 这几天用node重写了一下。写的过程中其实是很难受的。github上有一个微信公众号开发的python框架，其实我可以用现成的的框架直接搞。但是因为想试一下node，就还是自己搞了。 写的过程中比较难受是node的天生异步机制。我感觉异步的思维真的有点反人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信公众号开发者接口">
+<meta property="og:url" content="http://yoursite.com/2018/01/18/微信公众号开发者接口/index.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="事情是这样的。去年末的时候撸了一个下载instagram图片视频的接口，放在微信公众号上，然后挂在李超超的服务上。那时候是用python写的。 这几天用node重写了一下。写的过程中其实是很难受的。github上有一个微信公众号开发的python框架，其实我可以用现成的的框架直接搞。但是因为想试一下node，就还是自己搞了。 写的过程中比较难受是node的天生异步机制。我感觉异步的思维真的有点反人">
+<meta property="og:updated_time" content="2018-01-29T13:18:41.853Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信公众号开发者接口">
+<meta name="twitter:description" content="事情是这样的。去年末的时候撸了一个下载instagram图片视频的接口，放在微信公众号上，然后挂在李超超的服务上。那时候是用python写的。 这几天用node重写了一下。写的过程中其实是很难受的。github上有一个微信公众号开发的python框架，其实我可以用现成的的框架直接搞。但是因为想试一下node，就还是自己搞了。 写的过程中比较难受是node的天生异步机制。我感觉异步的思维真的有点反人">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>微信公众号开发者接口</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/pwxcoo">Projects</a></li>
+         
+          <li><a href="http://pwxcoo.com/">Sandbox</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/01/25/《汇编语言》笔记/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/01/04/ubuntu配置日志/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/18/微信公众号开发者接口/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&text=微信公众号开发者接口"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&title=微信公众号开发者接口"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&is_video=false&description=微信公众号开发者接口"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=微信公众号开发者接口&body=Check out this article: http://yoursite.com/2018/01/18/微信公众号开发者接口/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&title=微信公众号开发者接口"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&title=微信公众号开发者接口"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&title=微信公众号开发者接口"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&title=微信公众号开发者接口"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&name=微信公众号开发者接口&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#坑点记录"><span class="toc-number">1.</span> <span class="toc-text">坑点记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#坑点1：xml解析"><span class="toc-number">1.1.</span> <span class="toc-text">坑点1：xml解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#坑点2：request异步"><span class="toc-number">1.2.</span> <span class="toc-text">坑点2：request异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#坑点3：log4js"><span class="toc-number">1.3.</span> <span class="toc-text">坑点3：log4js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#坑点4：公众号接口权限"><span class="toc-number">1.4.</span> <span class="toc-text">坑点4：公众号接口权限</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#日志"><span class="toc-number">2.</span> <span class="toc-text">日志</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        微信公众号开发者接口
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PWXCOO</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-01-18T10:22:00.000Z" itemprop="datePublished">2018-01-18</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>事情是这样的。去年末的时候撸了一个下载instagram图片视频的接口，放在微信公众号上，然后挂在李超超的服务上。那时候是用python写的。</p>
+<p>这几天用node重写了一下。写的过程中其实是很难受的。github上有一个微信公众号开发的python框架，其实我可以用现成的的框架直接搞。但是因为想试一下node，就还是自己搞了。</p>
+<p>写的过程中比较难受是node的天生异步机制。我感觉异步的思维真的有点反人类。。尤其是写惯了同步的代码后。。所以踩了很多坑点。</p>
+<h1 id="坑点记录"><a href="#坑点记录" class="headerlink" title="坑点记录"></a>坑点记录</h1><h2 id="坑点1：xml解析"><a href="#坑点1：xml解析" class="headerlink" title="坑点1：xml解析"></a>坑点1：xml解析</h2><p>可能是微信开发的时候还比较早吧，数据包是 xml 格式的（现在遍地 JSON ，当然现在微信新的接口也都是 JSON ），所以原理上要用 http 模块监听，然后在回调函数里再用 xml2js 解析，然后再在回调函数里处理数据包。疯狂回调，所以写成 promise 的形式比较合理。。然后我又撸 promise 。。谁能想到！这个轮子别人早就造好了。我真是操了。。我用的是 koa 框架，所以用了 koa-xml-body。</p>
+<h2 id="坑点2：request异步"><a href="#坑点2：request异步" class="headerlink" title="坑点2：request异步"></a>坑点2：request异步</h2><p>其实跟上一个是一样的道理。。。我搞了半天，才发现轮子别人已经造好了。request-promise 依赖，完成我的梦想。</p>
+<h2 id="坑点3：log4js"><a href="#坑点3：log4js" class="headerlink" title="坑点3：log4js"></a>坑点3：log4js</h2><p>我加了一个日志模块。配置里面 type 设为 datefile ，本机运行环境没报错，但是服务器端报错了。。看了官方文档之后才发现是 dateFile 。。可是为什么本地运行环境没关系呢。。奇怪。。</p>
+<h2 id="坑点4：公众号接口权限"><a href="#坑点4：公众号接口权限" class="headerlink" title="坑点4：公众号接口权限"></a>坑点4：公众号接口权限</h2><p>我本来感觉可以加很多东西在这个公众号接口里。但是微信官方对未认证的公众号开放的权限实在有限（个人用户不能认证）。所以能做的事还是比较有限的。我连主动给别人发消息都不行。。只能被动回复。</p>
+<h1 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h1><p>整个开发过程大概就是：</p>
+<ul>
+<li>看官方文档</li>
+<li>用natapp内网渗透工具搞一个测试接口号来，验证一下，接入接口号</li>
+<li>看官方文档，看node官方文档，看各种官方文档</li>
+<li>开发完成，部署</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>微信公众号开发者接口好玩还是挺好玩的。</li>
+<li>感觉还是没有感受到node的精髓。</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/pwxcoo">Projects</a></li>
+         
+          <li><a href="http://pwxcoo.com/">Sandbox</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#坑点记录"><span class="toc-number">1.</span> <span class="toc-text">坑点记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#坑点1：xml解析"><span class="toc-number">1.1.</span> <span class="toc-text">坑点1：xml解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#坑点2：request异步"><span class="toc-number">1.2.</span> <span class="toc-text">坑点2：request异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#坑点3：log4js"><span class="toc-number">1.3.</span> <span class="toc-text">坑点3：log4js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#坑点4：公众号接口权限"><span class="toc-number">1.4.</span> <span class="toc-text">坑点4：公众号接口权限</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#日志"><span class="toc-number">2.</span> <span class="toc-text">日志</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/18/微信公众号开发者接口/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&text=微信公众号开发者接口"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&title=微信公众号开发者接口"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&is_video=false&description=微信公众号开发者接口"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=微信公众号开发者接口&body=Check out this article: http://yoursite.com/2018/01/18/微信公众号开发者接口/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&title=微信公众号开发者接口"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&title=微信公众号开发者接口"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&title=微信公众号开发者接口"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&title=微信公众号开发者接口"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/18/微信公众号开发者接口/&name=微信公众号开发者接口&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/pwxcoo">Projects</a></li>
+         
+          <li><a href="http://pwxcoo.com/">Sandbox</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+

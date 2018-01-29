@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="之前写 makedown 的时候，用了七牛云的图床，用的时候就在七牛的控制台里传图片，之前对图床的使用并不频繁，所以这样非常反人类的传图片方式也是也没注意，最近对图床使用极其频繁，所以用了几次之后感觉想吃一个至珍全虾堡冷静一下。 然后去看了一下七牛的开发者文档，写了一个 node 的传图片脚本，来冷静一下自己。 文档是中文的，写的也算详细。写了一个很简单的脚本。因为想以后通用这个脚本，所以对官方推">
+<meta property="og:type" content="article">
+<meta property="og:title" content="七牛上传图片js脚本">
+<meta property="og:url" content="http://yoursite.com/2017/12/29/七牛上传图片js脚本/index.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="之前写 makedown 的时候，用了七牛云的图床，用的时候就在七牛的控制台里传图片，之前对图床的使用并不频繁，所以这样非常反人类的传图片方式也是也没注意，最近对图床使用极其频繁，所以用了几次之后感觉想吃一个至珍全虾堡冷静一下。 然后去看了一下七牛的开发者文档，写了一个 node 的传图片脚本，来冷静一下自己。 文档是中文的，写的也算详细。写了一个很简单的脚本。因为想以后通用这个脚本，所以对官方推">
+<meta property="og:image" content="http://p1pws2aca.bkt.clouddn.com/qiniu.png">
+<meta property="og:updated_time" content="2018-01-29T13:38:59.349Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="七牛上传图片js脚本">
+<meta name="twitter:description" content="之前写 makedown 的时候，用了七牛云的图床，用的时候就在七牛的控制台里传图片，之前对图床的使用并不频繁，所以这样非常反人类的传图片方式也是也没注意，最近对图床使用极其频繁，所以用了几次之后感觉想吃一个至珍全虾堡冷静一下。 然后去看了一下七牛的开发者文档，写了一个 node 的传图片脚本，来冷静一下自己。 文档是中文的，写的也算详细。写了一个很简单的脚本。因为想以后通用这个脚本，所以对官方推">
+<meta name="twitter:image" content="http://p1pws2aca.bkt.clouddn.com/qiniu.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>七牛上传图片js脚本</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/pwxcoo">Projects</a></li>
+         
+          <li><a href="http://pwxcoo.com/">Sandbox</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/01/03/浅谈计算机编码/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/12/24/Spring Boot Security下的注册登录/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/12/29/七牛上传图片js脚本/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&text=七牛上传图片js脚本"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&title=七牛上传图片js脚本"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&is_video=false&description=七牛上传图片js脚本"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=七牛上传图片js脚本&body=Check out this article: http://yoursite.com/2017/12/29/七牛上传图片js脚本/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&title=七牛上传图片js脚本"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&title=七牛上传图片js脚本"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&title=七牛上传图片js脚本"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&title=七牛上传图片js脚本"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&name=七牛上传图片js脚本&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        七牛上传图片js脚本
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PWXCOO</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-12-29T10:22:00.000Z" itemprop="datePublished">2017-12-29</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>之前写 makedown 的时候，用了七牛云的图床，用的时候就在七牛的控制台里传图片，之前对图床的使用并不频繁，所以这样非常反人类的传图片方式也是也没注意，最近对图床使用极其频繁，所以用了几次之后感觉想吃一个至珍全虾堡冷静一下。</p>
+<p>然后去看了一下七牛的<a href="https://developer.qiniu.com/kodo/sdk/1289/nodejs" target="_blank" rel="noopener">开发者文档</a>，写了一个 node 的传图片脚本，来冷静一下自己。</p>
+<p>文档是中文的，写的也算详细。写了一个很简单的脚本。因为想以后通用这个脚本，所以对官方推荐稍微做了一点修改。</p>
+<p>我把配置全部放在一个 json 里，这样以后再用别的 Bucket 的也通用这个脚本，重新配置一个 config.json 就 ojbk 了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"accessKey"</span>: <span class="string">"账号密钥"</span>,</span><br><span class="line">    <span class="string">"secretKey"</span>: <span class="string">"密码密钥"</span>,</span><br><span class="line">    <span class="string">"bucket"</span>: <span class="string">"存储空间"</span>,</span><br><span class="line">    <span class="string">"returnLink"</span>: <span class="string">"外链默认域名"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>读取config.json的脚本</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> config = &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadConfig</span>(<span class="params">filename</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> data = fs.readFileSync(filename, <span class="string">'utf-8'</span>);</span><br><span class="line">		config = <span class="built_in">JSON</span>.parse(data);</span><br><span class="line">		<span class="comment">//console.log("Loaded config '" + filename + "'");</span></span><br><span class="line">	&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(e);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> configFilename = <span class="string">'./config.json'</span>;</span><br><span class="line">loadConfig(configFilename);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = config</span><br></pre></td></tr></table></figure>
+<p>上传图片的脚本。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> qiniu = <span class="built_in">require</span>(<span class="string">"qiniu"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> qiniuConfig = <span class="built_in">require</span>(<span class="string">'./config.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// localFile.split(/[\\/]/);</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getToken</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> mac = <span class="keyword">new</span> qiniu.auth.digest.Mac(qiniuConfig.accessKey, qiniuConfig.secretKey);</span><br><span class="line">    <span class="keyword">var</span> putPolicy = <span class="keyword">new</span> qiniu.rs.PutPolicy(&#123;</span><br><span class="line">        scope: qiniuConfig.bucket + <span class="string">":"</span> + key,</span><br><span class="line">        returnBody: <span class="string">'&#123;"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"&#125;'</span></span><br><span class="line">      &#125;);</span><br><span class="line">    <span class="keyword">return</span> putPolicy.uploadToken(mac);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">upload</span>(<span class="params">key</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> config = <span class="keyword">new</span> qiniu.conf.Config();</span><br><span class="line">    <span class="comment">// 空间对应的机房</span></span><br><span class="line">    config.zone = qiniu.zone.Zone_z0;</span><br><span class="line">    <span class="keyword">var</span> localFile = process.argv[<span class="number">2</span>].trim(); </span><br><span class="line">    <span class="keyword">var</span> key = path.basename(localFile);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span>(localFile) == <span class="string">"undefined"</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'please select file!'</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> formUploader = <span class="keyword">new</span> qiniu.form_up.FormUploader(config);</span><br><span class="line">    <span class="keyword">var</span> putExtra = <span class="keyword">new</span> qiniu.form_up.PutExtra();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 文件上传</span></span><br><span class="line">    formUploader.putFile(getToken(key), key, localFile, putExtra, <span class="function"><span class="keyword">function</span>(<span class="params">respErr,</span></span></span><br><span class="line"><span class="function"><span class="params">      respBody, respInfo</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (respErr) &#123;</span><br><span class="line">        <span class="keyword">throw</span> respErr;</span><br><span class="line">      &#125;</span><br><span class="line">    </span><br><span class="line">      <span class="keyword">if</span> (respInfo.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="comment">//console.log(respBody);</span></span><br><span class="line">        <span class="built_in">console</span>.log(qiniuConfig.returnLink + key);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(respInfo.statusCode);</span><br><span class="line">        <span class="built_in">console</span>.log(respBody);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">upload();</span><br></pre></td></tr></table></figure>
+<p>用了 path 的依赖是为了让这个脚本在 linux 和 window 下都能通用，如果用的不是华东区，对应的机房也要更改。</p>
+<p><img src="http://p1pws2aca.bkt.clouddn.com/qiniu.png" alt="七牛脚本测试"></p>
+<p>调用脚本，图片只要拉到 shell 窗口里就好了。然后可以直接返回图片的外链，复制粘贴就能用了。为了方便，生成的外链是根据图片的名字定的，所以要注意图片文件的命名规范了。</p>
+<p>比我之前打开网页端登录，进控制台，传图片爽了些许。七牛上还有一些别的很秀的api，我暂时用不到，用到的时候再说吧。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/pwxcoo">Projects</a></li>
+         
+          <li><a href="http://pwxcoo.com/">Sandbox</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/12/29/七牛上传图片js脚本/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&text=七牛上传图片js脚本"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&title=七牛上传图片js脚本"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&is_video=false&description=七牛上传图片js脚本"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=七牛上传图片js脚本&body=Check out this article: http://yoursite.com/2017/12/29/七牛上传图片js脚本/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&title=七牛上传图片js脚本"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&title=七牛上传图片js脚本"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&title=七牛上传图片js脚本"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&title=七牛上传图片js脚本"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/12/29/七牛上传图片js脚本/&name=七牛上传图片js脚本&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/pwxcoo">Projects</a></li>
+         
+          <li><a href="http://pwxcoo.com/">Sandbox</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
