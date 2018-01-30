@@ -8,7 +8,7 @@ categories: nuisance
 
 我窃以为写博客是一件很帅的事情，跟日记是一个道理，好多时间后回过头来看，看看当时的自己有多呆，可真是让人忍俊不禁，前仰后合。
 
-```c++
+```c
 #include<stdio.h>
 
 int main()
