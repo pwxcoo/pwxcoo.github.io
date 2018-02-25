@@ -6,7 +6,7 @@ categories: 备忘
 
 
 ## 安装
-用u盘重新一遍ubuntu。安装了ubuntu16.04版本的。
+用u盘重新一遍 ubuntu 。安装了 ubuntu16.04 版本的。
 
 ## firefox
 - `sudo apt-get update`
