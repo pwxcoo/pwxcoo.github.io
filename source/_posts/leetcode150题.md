@@ -3,6 +3,8 @@ title: leetcode150题
 date: 2018-02-25 22:15:39
 categories: 备忘
 tags:
+- 算法
+- leetcode
 ---
 
 刷了 10 多天，刷了 leetcode 上前面 150 题。

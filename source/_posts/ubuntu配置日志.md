@@ -2,6 +2,8 @@
 title: ubuntu配置日志
 date: 2018-01-04 18:22:00
 categories: 备忘
+tags: 
+- linux
 ---
 
 
