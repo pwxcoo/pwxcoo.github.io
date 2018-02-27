@@ -8,7 +8,7 @@ date: 2018-01-30 11:52:51
 
 # Contact
 - 性别：男
-- 邮箱：prowanxiao@126.com
+- 邮箱：[prowanxiao@126.com](mailto:prowanxiao@126.com)
 
 # Site
 - 主题：[hexo-theme-cactus](https://github.com/probberechts/hexo-theme-cactus)
