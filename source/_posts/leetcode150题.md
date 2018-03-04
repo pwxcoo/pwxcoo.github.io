@@ -352,3 +352,6 @@ class LRUCache {
 
 ## 总结
 这几道是真的很秀。我这几天的代码全在[这里](https://github.com/pwxcoo/ac-game)了。
+
+放一张图片。
+![leetcode](http://p1pws2aca.bkt.clouddn.com/leetcode.png)
