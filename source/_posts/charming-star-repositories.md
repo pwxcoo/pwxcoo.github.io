@@ -10,7 +10,7 @@ tags:
 
 而且我感觉查看自己 star 的 page 做的太不人性化了，为什么不把所有的 records 都放在一页里呢。。分页功能能减轻数据库查找的压力(?)，但是给用户带来的体验并不是特别好，放在一页里，直接 `ctrl + f` 就可以快乐地查找了，分页了之后就让我感觉有点糟糕。
 
-于是开一篇文章，来 record 自己 star 的操作，然后人肉维护。。
+于是开一篇文章，来 record 自己 star 的操作，然后用人肉维护。。
 
 ## learning
 - [N-ZOO/everycode](https://github.com/N-ZOO/everycode): 前端每日一练。作者每天在 issue 里发布题目。
@@ -31,13 +31,13 @@ tags:
 - [interagent/http-api-design](https://github.com/interagent/http-api-design): HTTP API design guide
 - [atomiks/30-seconds-of-css](https://github.com/atomiks/30-seconds-of-css): 30 分钟爽 css
 - [Chalarangelo/30-seconds-of-code](https://github.com/Chalarangelo/30-seconds-of-code): 30 分钟爽 JavaScript
-- [tuguangquan/mybatis](https://github.com/tuguangquan/mybatis): mybatis源码中文注释
-- [jaywcjlove/mysql-tutorial](https://github.com/jaywcjlove/mysql-tutorial): MySQL入门教程
-- [CarpenterLee/JCFInternals](https://github.com/CarpenterLee/JCFInternals): 深入理解Java集合框架
+- [tuguangquan/mybatis](https://github.com/tuguangquan/mybatis): mybatis 源码中文注释
+- [jaywcjlove/mysql-tutorial](https://github.com/jaywcjlove/mysql-tutorial): MySQL 入门教程
+- [CarpenterLee/JCFInternals](https://github.com/CarpenterLee/JCFInternals): 深入理解 Java 集合框架
 - [sindresorhus/awesome-nodejs](https://github.com/sindresorhus/awesome-nodejs): awesome node.js
 - [vuejs/awesome-vue](https://github.com/vuejs/awesome-vue): awesome vue 
 - [vinta/awesome-python](https://github.com/vinta/awesome-python): awesome python
-- [seaswalker/Spring](https://github.com/seaswalker/Spring): Spring源码阅读
+- [seaswalker/Spring](https://github.com/seaswalker/Spring): Spring 源码阅读
 - [sindresorhus/awesome](https://github.com/sindresorhus/awesome): awesome 项目
 - [zhanglei-workspace/shopping-management-system](https://github.com/zhanglei-workspace/shopping-management-system): Java 项目
 
@@ -76,7 +76,7 @@ tags:
 - [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn): 区块链资源
 
 ## tools
-- [tomnomnom/gron](https://github.com/tomnomnom/gron): Make JSON greppable!
+- [tomnomnom/gron](https://github.com/tomnomnom/gron): Make JSON greppable
 - [tabler/tabler](https://github.com/tabler/tabler): 用 bootstrap4 做的仪表盘
 - [tangrela/ojbk_jiexi](https://github.com/tangrela/ojbk_jiexi): 视频解析
 - [xinyu198736/sketch-to-html](https://github.com/xinyu198736/sketch-to-html): sketch 转化成 html
