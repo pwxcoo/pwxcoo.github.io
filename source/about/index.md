@@ -6,8 +6,11 @@ date: 2018-01-30 11:52:51
 # Nuisance
 没什么屁股好写的。以后有空再写。
 
-# Link
+# Friends
 - [李超众的根据地](https://www.licz.site/)
+
+# Link
+- [我的star](/2018/05/01/charming-star-repositories/)
 - [一个什么东西都放的网站](http://pwxcoo.com/)
 - [数据结构算法可视化](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
 

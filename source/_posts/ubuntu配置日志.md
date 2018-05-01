@@ -4,6 +4,7 @@ date: 2018-01-04 18:22:00
 categories: 备忘
 tags: 
 - linux
+- 备忘
 ---
 
 
