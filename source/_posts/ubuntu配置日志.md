@@ -60,7 +60,7 @@ set autoindent  //自动缩进
 ## java(服务器端下载jdk8)
 一件很奇怪的事情，就是不知道为什么我用apt的ppa源下载，一直连不上oracle官网。。一直404失败。所以就徒手配置了。
 - `apt-get -u dist-upgrade`强制升级一下版本
-- `sudo apt-get remove --purge openjdk* `伤处openjdk
+- `sudo apt-get remove --purge openjdk* `删除openjdk
 - `sudo mkdir /usr/local/java` 创建安装目录 `cd /usr/local/java` 进入安装目录
 - 因为服务器连不上oracle官网。。所以我用了rz把本地的jdk传上去了。。
 - `tar -zxvf jdk-8u161-linux-x64.tar.gz` 解压

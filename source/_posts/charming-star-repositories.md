@@ -54,6 +54,7 @@ tags:
 - [recore/refast](https://github.com/recore/refast): react 的组件管理教程
 - [vuejs/vue](vuejs/vue): vue
 - [jquery/jquery](https://github.com/jquery/jquery): jQuery JavaScript Library
+- [nodemailer/nodemailer](https://github.com/nodemailer/nodemailer): 用 node 来发邮件
 
 
 ## TypeScrit
@@ -95,6 +96,7 @@ tags:
 - [dunovank/jupyter-themes](https://github.com/dunovank/jupyter-themes): Jupyter Notebook Themes
 - [d3/d3](https://github.com/d3/d3): d3.js 可视化库
 - [github/gitignore](https://github.com/github/gitignore): 项目 gitignore 文件  
+- [naptha/tesseract.js](https://github.com/naptha/tesseract.js): tesseract.js OCR 识别库
 
 ## funny
 - [skygragon/leetcode-cli](https://github.com/skygragon/leetcode-cli): 命令行里刷 leetcode。感觉很好玩。
