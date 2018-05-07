@@ -40,6 +40,9 @@ tags:
 - [seaswalker/Spring](https://github.com/seaswalker/Spring): Spring 源码阅读
 - [sindresorhus/awesome](https://github.com/sindresorhus/awesome): awesome 项目
 - [zhanglei-workspace/shopping-management-system](https://github.com/zhanglei-workspace/shopping-management-system): Java 项目
+- [justjavac/the-front-end-knowledge-you-may-not-know](https://github.com/justjavac/the-front-end-knowledge-you-may-not-know): 你可能不知道的前端知识点
+- [xingshaocheng/architect-awesome](https://github.com/xingshaocheng/architect-awesome): 后端架构师技术图谱
+- [davideuler/architecture.of.internet-product](https://github.com/davideuler/architecture.of.internet-product): 互联网公司技术架构
 
 ## wechat develope
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
@@ -55,6 +58,8 @@ tags:
 - [vuejs/vue](vuejs/vue): vue
 - [jquery/jquery](https://github.com/jquery/jquery): jQuery JavaScript Library
 - [nodemailer/nodemailer](https://github.com/nodemailer/nodemailer): 用 node 来发邮件
+- [brix/crypto-js](https://github.com/brix/crypto-js): js 加密库
+- [eggjs/egg](https://github.com/eggjs/egg): 企业级框架和应用 by node + koa
 
 
 ## TypeScrit
@@ -97,6 +102,7 @@ tags:
 - [d3/d3](https://github.com/d3/d3): d3.js 可视化库
 - [github/gitignore](https://github.com/github/gitignore): 项目 gitignore 文件  
 - [naptha/tesseract.js](https://github.com/naptha/tesseract.js): tesseract.js OCR 识别库
+- [ClassicOldSong/typinyin.js](https://github.com/ClassicOldSong/typinyin.js): 用拼音自动输入中文特效的前端js插件
 
 ## funny
 - [skygragon/leetcode-cli](https://github.com/skygragon/leetcode-cli): 命令行里刷 leetcode。感觉很好玩。

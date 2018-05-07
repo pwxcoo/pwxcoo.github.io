@@ -20,5 +20,6 @@ date: 2018-01-30 11:52:51
 
 # Site
 - 主题：[hexo-theme-cactus](https://github.com/probberechts/hexo-theme-cactus)
-- 评论：评论系统太难搞，Disque 被墙，我还没找到好用的评论系统。
+- 图床：[SM.MS图床](https://sm.ms/)
+- 评论：评论系统太难搞，Disque 被墙，我还没找到好用的评论系统。（你会科学上网可以评论）
 
