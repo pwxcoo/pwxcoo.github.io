@@ -65,9 +65,19 @@ PS：云服务器上的安全组规则里记得把 443 端口开了。
 
 ![migrate](https://i.loli.net/2018/05/07/5af057358135a.png)
 
+## 通配符匹配域名
+上面这样是匹配单独域名，如果想要 `*.pwxcoo.com` 这样通配符匹配域名的话，需要另外一种设置。
+
+好像也是 lets encrypt 去年刚出的功能。配置流程稍微复杂一点。
+
+具体操作如下可以看这篇博文。[获取 Let's Encrypt 免费通配符证书实现Https](https://www.cnblogs.com/stulzq/p/8628163.html)。
+
+完成之后在 nginx 里可以设置一下 `pwxcoo.com` 301 跳转到 `www.pwxcoo.com`。因为 `*.pwxcoo.com` 的设置不包括 `pwxcoo.com`。
+
 
 ## 参考资料
 - [用 Certbot 一键升级你的网站为 Https](https://www.v2ex.com/t/383032)
 - [Certbot](https://github.com/certbot/certbot)
 - [SM.MS图床](https://sm.ms/)
 - [pwxcoo.com](https://www.pwxcoo.com/)
+- [获取 Let's Encrypt 免费通配符证书实现Https](https://www.cnblogs.com/stulzq/p/8628163.html)
