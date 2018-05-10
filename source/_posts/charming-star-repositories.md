@@ -103,6 +103,8 @@ tags:
 - [github/gitignore](https://github.com/github/gitignore): 项目 gitignore 文件  
 - [naptha/tesseract.js](https://github.com/naptha/tesseract.js): tesseract.js OCR 识别库
 - [ClassicOldSong/typinyin.js](https://github.com/ClassicOldSong/typinyin.js): 用拼音自动输入中文特效的前端js插件
+- [dzhongyi/crack-geetest](https://github.com/dzhongyi/crack-geetest): 滑动验证码破解
+- [node-schedule/node-schedule](https://github.com/node-schedule/node-schedule): A cron-like and not-cron-like job scheduler for Node.Node 的定时程序库
 
 ## funny
 - [skygragon/leetcode-cli](https://github.com/skygragon/leetcode-cli): 命令行里刷 leetcode。感觉很好玩。
