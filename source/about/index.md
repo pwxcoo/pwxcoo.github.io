@@ -8,6 +8,7 @@ date: 2018-01-30 11:52:51
 
 # Friends
 - [李超众的根据地](https://www.licz.site/)
+- [Fighting Heart](http://www.cnblogs.com/zufezzt/)
 
 # Link
 - [我的star](/2018/05/01/charming-star-repositories/)

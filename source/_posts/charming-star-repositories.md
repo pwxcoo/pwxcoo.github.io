@@ -43,6 +43,7 @@ tags:
 - [justjavac/the-front-end-knowledge-you-may-not-know](https://github.com/justjavac/the-front-end-knowledge-you-may-not-know): 你可能不知道的前端知识点
 - [xingshaocheng/architect-awesome](https://github.com/xingshaocheng/architect-awesome): 后端架构师技术图谱
 - [davideuler/architecture.of.internet-product](https://github.com/davideuler/architecture.of.internet-product): 互联网公司技术架构
+- [answershuto/learnVue](https://github.com/answershuto/learnVue): Vue.js 源码解析
 
 ## wechat develope
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
@@ -60,6 +61,7 @@ tags:
 - [nodemailer/nodemailer](https://github.com/nodemailer/nodemailer): 用 node 来发邮件
 - [brix/crypto-js](https://github.com/brix/crypto-js): js 加密库
 - [eggjs/egg](https://github.com/eggjs/egg): 企业级框架和应用 by node + koa
+- [i18next/i18next](https://github.com/i18next/i18next): 支持国际化的 JavaScript 框架
 
 
 ## TypeScrit
