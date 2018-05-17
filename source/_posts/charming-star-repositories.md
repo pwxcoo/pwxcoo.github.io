@@ -107,6 +107,9 @@ tags:
 - [ClassicOldSong/typinyin.js](https://github.com/ClassicOldSong/typinyin.js): 用拼音自动输入中文特效的前端js插件
 - [dzhongyi/crack-geetest](https://github.com/dzhongyi/crack-geetest): 滑动验证码破解
 - [node-schedule/node-schedule](https://github.com/node-schedule/node-schedule): A cron-like and not-cron-like job scheduler for Node.Node 的定时程序库
+- [Hentioe/sorry-generator](https://github.com/Hentioe/sorry-generator): 王境泽/偷车贼/为所欲为等字幕梗生成器 for Golang
+- [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub): 使用 RSS 连接全世界 [https://rsshub.js.org](https://rsshub.js.org)
+- [maxchehab/CSS-Keylogging](https://github.com/maxchehab/CSS-Keylogging): Chrome extension and Express server that exploits keylogging abilities of CSS.
 
 ## funny
 - [skygragon/leetcode-cli](https://github.com/skygragon/leetcode-cli): 命令行里刷 leetcode。感觉很好玩。
