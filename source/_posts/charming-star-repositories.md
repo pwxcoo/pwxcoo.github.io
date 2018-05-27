@@ -44,6 +44,7 @@ tags:
 - [xingshaocheng/architect-awesome](https://github.com/xingshaocheng/architect-awesome): 后端架构师技术图谱
 - [davideuler/architecture.of.internet-product](https://github.com/davideuler/architecture.of.internet-product): 互联网公司技术架构
 - [answershuto/learnVue](https://github.com/answershuto/learnVue): Vue.js 源码解析
+- [EZLippi/Tinyhttpd](https://github.com/EZLippi/Tinyhttpd): Tinyhttpd 是J. David Blackstone在1999年写的一个不到 500 行的超轻量型 Http Server，用来学习非常不错，可以帮助我们真正理解服务器程序的本质。官网:http://tinyhttpd.sourceforge.net
 
 ## wechat develope
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
@@ -62,6 +63,7 @@ tags:
 - [brix/crypto-js](https://github.com/brix/crypto-js): js 加密库
 - [eggjs/egg](https://github.com/eggjs/egg): 企业级框架和应用 by node + koa
 - [i18next/i18next](https://github.com/i18next/i18next): 支持国际化的 JavaScript 框架
+- [mrdoob/three.js](https://github.com/mrdoob/three.js): JavaScript 3D library. [https://threejs.org/](https://threejs.org/)
 
 
 ## TypeScrit
@@ -110,6 +112,7 @@ tags:
 - [Hentioe/sorry-generator](https://github.com/Hentioe/sorry-generator): 王境泽/偷车贼/为所欲为等字幕梗生成器 for Golang
 - [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub): 使用 RSS 连接全世界 [https://rsshub.js.org](https://rsshub.js.org)
 - [maxchehab/CSS-Keylogging](https://github.com/maxchehab/CSS-Keylogging): Chrome extension and Express server that exploits keylogging abilities of CSS.
+- [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf): 给变量起名的事情上，为你生命省 3s
 
 ## funny
 - [skygragon/leetcode-cli](https://github.com/skygragon/leetcode-cli): 命令行里刷 leetcode。感觉很好玩。
