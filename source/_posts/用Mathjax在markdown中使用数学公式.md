@@ -17,7 +17,7 @@ tags:
 
 用 [Mathjax](https://docs.mathjax.org/en/latest/start.html) 来显示数学公式的。其实有一个 [hexo-math](https://github.com/hexojs/hexo-math) 的插件，是集成了 Mathjax 的，但是不知道为什么我这里安装总是出问题。。下次再试试好了。。所以我直接引用 Mathjax 了。
 
-## 引入
+## Import
 
 直接用 cdn 来导入 Mathjax。
 

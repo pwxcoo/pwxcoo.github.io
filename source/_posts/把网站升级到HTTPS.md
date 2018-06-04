@@ -23,11 +23,11 @@ tags:
 Certbot 真的很舒服，不用去 Let ’ s Encrypt 注册账号（它会自动帮你注册），不用手动修改配置服务器配置，一行命令搞定。
 
 ```
-$ sudo apt-get update
-$ sudo apt-get install software-properties-common
+$ sudo apt update
+$ sudo apt install software-properties-common
 $ sudo add-apt-repository ppa:certbot/certbot
-$ sudo apt-get update
-$ sudo apt-get install python-certbot-nginx 
+$ sudo apt update
+$ sudo apt install python-certbot-nginx 
 ```
 
 安装好之后

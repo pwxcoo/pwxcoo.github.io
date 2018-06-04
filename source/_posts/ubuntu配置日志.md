@@ -12,17 +12,17 @@ tags:
 用u盘重新一遍 ubuntu 。安装了 ubuntu16.04 版本的。
 
 ## firefox
-- `sudo apt-get update`
-- `sudo apt-get install firefox`
+- `sudo apt update`
+- `sudo apt install firefox`
 
 ## chrome
 - 添加软件源 `sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/`
 - 导入谷歌软件公钥 `wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -`
-- `sudo apt-get update`
+- `sudo apt update`
 - `/usr/bin/google-chrome-stable`
 
 ## vim
-- `sudo apt-get install vim`
+- `sudo apt install vim`
 - `sudo vim /etc/vim/vimrc`
 - 取消`syntax on`的注释
 - 最后一行配置：
@@ -37,7 +37,7 @@ set autoindent  //自动缩进
 ```
 
 ## git
-- `sudo apt-get install git`
+- `sudo apt install git`
 - `git config --global user.name "your name"`
 - `git config --globa user.email "your email.com"`
 - `ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`
@@ -46,8 +46,8 @@ set autoindent  //自动缩进
 
 ## vscode
 - `sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make`
-- `sudo apt-get update`
-- `sudo apt-get install ubuntu-make`
+- `sudo apt update`
+- `sudo apt install ubuntu-make`
 - `sudo umake web visual-studio-code`
 
 ## anaconda(python)
@@ -59,8 +59,8 @@ set autoindent  //自动缩进
 
 ## java(服务器端下载jdk8)
 一件很奇怪的事情，就是不知道为什么我用apt的ppa源下载，一直连不上oracle官网。。一直404失败。所以就徒手配置了。
-- `apt-get -u dist-upgrade`强制升级一下版本
-- `sudo apt-get remove --purge openjdk* `删除openjdk
+- `apt -u dist-upgrade`强制升级一下版本
+- `sudo apt remove --purge openjdk* `删除openjdk
 - `sudo mkdir /usr/local/java` 创建安装目录 `cd /usr/local/java` 进入安装目录
 - 因为服务器连不上oracle官网。。所以我用了rz把本地的jdk传上去了。。
 - `tar -zxvf jdk-8u161-linux-x64.tar.gz` 解压
@@ -83,11 +83,11 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 ## codeblocks
 - `sudo add-apt-repository ppa:damien-moore/codeblocks-stable` 添加ppa源
-- `sudo apt-get update` 更新
-- `sudo apt-get install codeblocks` 下载安装
+- `sudo apt update` 更新
+- `sudo apt install codeblocks` 下载安装
 
 
-## coursera 添加hosts解析
+## coursera 添加 hosts 解析
 - `ping coursera.org` 得到ip
 - 浏览器里看network，未正常响应的都添加到hosts里。
 - `vim /etc/hosts` 修改
@@ -98,13 +98,38 @@ export PATH=$JAVA_HOME/bin:$PATH
 - `apt install shutter` 
 
 ## 电脑主题
-- `sudo  apt-get  install unity-tweak-tool` 下载 unity-tweak-tool
+- `sudo  apt  install unity-tweak-tool` 下载 unity-tweak-tool
 - `sudo add-apt-repository ppa:noobslab/themes` 添加源
-- `sudo apt-get update` 更新
-- `sudo apt-get install flatabulous-theme` 下载 flatabulous-themes
-- `sudo apt-get install ultra-flat-icons` 下载 ultra-flat的图标
+- `sudo apt update` 更新
+- `sudo apt install flatabulous-theme` 下载 flatabulous-themes
+- `sudo apt install ultra-flat-icons` 下载 ultra-flat的图标
 
 ## zsh终端
-- `sudo apt-get install zsh` 下载
+- `sudo apt install zsh` 下载
 - `chsh -s $(which zsh)` 设置
 - 重启计算机生效
+
+## shadowsocks
+- `sudo apt install python-pip` 下载 pip
+- `sudo pip install shadowsocks` 下载 shadowsocks
+- `sudo vim  /etc/shadowsocks.json` 修改配置文件
+```config
+{  
+"server":"ip地址",  
+"server_port":服务器端口,  
+"local_address": "127.0.0.1",  
+"local_port":1080,  
+"password":"密码",  
+"timeout":300,  
+"method":"使用的方法",  
+"fast_open": false,  
+"workers": 1  
+}  
+```
+- `sudo sslocal -c /etc/shadowsocks.json` 开中断启动 ss
+- 更改系统设置 -> 网络 -> 网络代理 -> Socks主机： 127.0.0.1 -> port: 1080
+- 给 chrome 下一个插件 SwitchyOmega，选择 `autoProxy`，规则列表网址：
+```
+https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
+```
+- 别的浏览器 firefox 的代理都关了，不然不开 ss 上不了网，需要 FQ 的时候再用终端开个 ss 。

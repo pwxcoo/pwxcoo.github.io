@@ -45,6 +45,10 @@ tags:
 - [davideuler/architecture.of.internet-product](https://github.com/davideuler/architecture.of.internet-product): 互联网公司技术架构
 - [answershuto/learnVue](https://github.com/answershuto/learnVue): Vue.js 源码解析
 - [EZLippi/Tinyhttpd](https://github.com/EZLippi/Tinyhttpd): Tinyhttpd 是J. David Blackstone在1999年写的一个不到 500 行的超轻量型 Http Server，用来学习非常不错，可以帮助我们真正理解服务器程序的本质。官网:http://tinyhttpd.sourceforge.net
+- [chyingp/nodejs-learning-guide](https://github.com/chyingp/nodejs-learning-guide): Nodejs学习笔记以及经验总结
+- [fex-team/styleguide](https://github.com/fex-team/styleguide): 文档与源码编写风格
+- *[EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books):
+ Freely available programming books
 
 ## wechat develope
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
