@@ -21,7 +21,7 @@ tags:
 
 直接用 cdn 来导入 Mathjax。
 
-```
+```html
 <script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
    MathJax.Hub.Config({
     tex2jax: {

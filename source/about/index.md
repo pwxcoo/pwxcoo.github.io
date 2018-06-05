@@ -31,5 +31,5 @@ date: 2018-01-30 11:52:51
 
 # Contact
 - 性别：男
-- 邮箱：[[pwxcoo@gmail.com](mailto:pwxcoo@gmail.com)(**Recommand**),[wxc188888888@163.com](mailto:wxc188888888@163.com)]
+- 邮箱：[[pwxcoo@gmail.com](mailto:pwxcoo@gmail.com)(**Recommand**), [wxc188888888@163.com](mailto:wxc188888888@163.com)]
 

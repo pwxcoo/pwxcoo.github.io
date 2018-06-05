@@ -113,23 +113,23 @@ export PATH=$JAVA_HOME/bin:$PATH
 - `sudo apt install python-pip` 下载 pip
 - `sudo pip install shadowsocks` 下载 shadowsocks
 - `sudo vim  /etc/shadowsocks.json` 修改配置文件
-```config
+```json
 {  
-"server":"ip地址",  
-"server_port":服务器端口,  
-"local_address": "127.0.0.1",  
-"local_port":1080,  
-"password":"密码",  
-"timeout":300,  
-"method":"使用的方法",  
-"fast_open": false,  
-"workers": 1  
+    "server":"ip地址",  
+    "server_port":服务器端口,  
+    "local_address": "127.0.0.1",  
+    "local_port":1080,  
+    "password":"密码",  
+    "timeout":300,  
+    "method":"使用的方法",  
+    "fast_open": false,  
+    "workers": 1  
 }  
 ```
 - `sudo sslocal -c /etc/shadowsocks.json` 开中断启动 ss
 - 更改系统设置 -> 网络 -> 网络代理 -> Socks主机： 127.0.0.1 -> port: 1080
 - 给 chrome 下一个插件 SwitchyOmega，选择 `autoProxy`，规则列表网址：
-```
+```html
 https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
 ```
 - 别的浏览器 firefox 的代理都关了，不然不开 ss 上不了网，需要 FQ 的时候再用终端开个 ss 。
