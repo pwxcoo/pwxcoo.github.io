@@ -12,12 +12,6 @@ tags:
 
 正好趁这次机会好好看了一下 socket 和网络编程相关的一些东西，跟之前比起来有了很多新的体会和认识。
 
-## Todo
-- [ ] 了解第一眼没认出来的协议
-- [ ] [网络协议图](http://www.colasoft.com.cn/download/network-protocol-map-2017.pdf)
-- [ ] 详谈Socket
-- [ ] 关于HTTP的番外篇
-
 
 ## 计算机网络协议分层
 物，数，网，传，会，表，应！
@@ -100,17 +94,41 @@ Socket 有两种类型：
 ### WebSocket
 如果要问 WebSocket 和 Socket 有什么关系的，就像卡巴斯基和巴基斯坦的关系 —— 有基巴关系。。貌似当初命名者跟那个 JavaScript 蹭 Java 热点一点，蹭了一波 Socket 的热点。。
 
+说是没什么关系，但是其实还是有一点联系，可以理解为 WebSocket 是 Socket 的上层实现，WebSocket 是有当初设计 Socket 的通信理念在里头的，Socket 是传输层的 API，而 WebSocket 是应用层的协议。
+
 WebSocket 跟 HTTP 一样，是应用层的协议，可以实现浏览器与服务器的全双工通信，我之前做过一个网页的社交聊天的应用，用的就是 WebSocket 技术，具体在这里就不展开讨论了。很多语言已经已经对 WebSocket 做了封装，提供了很好的 library，可以直接拿来用。
 
+
 ## 详谈Socket
+### TCP/UDP
 因为是 Socket 是对 TCP 和 UDP 的封装，所以看一下 TCP 和 UDP 的报文格式。
 
 ![tcpandudp](https://i.loli.net/2018/06/05/5b16b06f295d2.jpeg)
 
+通讯过程:
+
+![tcpProcess](https://i.loli.net/2018/06/07/5b18919f2343f.png)
+
+
+### Socket 的通讯过程
+服务器端：
+
+1. 申请一个socket
+2. 绑定到一个IP地址和一个端口上
+3. 开启侦听，等待接收连接
+
+ 客户端：
+
+1. 申请一个socket
+2. 连接服务器(指明IP地址和端口号)
+
+服务器端接收到连接请求后，产生一个新的socket(端口大于1024)与客户端建立连接并进行通信，原监听socket继续监听。
+
+
 ## 关于HTTP的番外篇
+HTTP 的 Header 里有一个 Connection 的 key，里面的参数通常为 keep-alive，这个值并不是表示为长连接的 HTTP，只是表示这个 TCP 多保存一会，让多个 HTTP 连接复用同一个 TCP，以减少握手挥手所造成的损失。
 
-
-
+还有一些 HTTP 头部信息的文档可以看 [HTTP —— MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Connection)。
 
 
 ## References
@@ -119,3 +137,5 @@ WebSocket 跟 HTTP 一样，是应用层的协议，可以实现浏览器与服�
 - [C# Socket网络编程精华篇 —— 微冷的雨(cnblog)](http://www.cnblogs.com/weilengdeyu/archive/2013/03/08/2949101.html)
 - [TCP/IP、Http、Socket的区别 —— pk_zsq(CSDN)](https://blog.csdn.net/Pk_zsq/article/details/6087367)
 - [HTTP协议头部与Keep-Alive模式详解 —— zfrong（CSND)](https://blog.csdn.net/zfrong/article/details/6070608)
+- [HTTP —— MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Connection)
+- [网络协议图](http://www.colasoft.com.cn/download/network-protocol-map-2017.pdf) ：一个很大很全的关于网络协议的 PDF
