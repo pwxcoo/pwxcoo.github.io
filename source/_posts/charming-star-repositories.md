@@ -47,8 +47,9 @@ tags:
 - [EZLippi/Tinyhttpd](https://github.com/EZLippi/Tinyhttpd): Tinyhttpd 是J. David Blackstone在1999年写的一个不到 500 行的超轻量型 Http Server，用来学习非常不错，可以帮助我们真正理解服务器程序的本质。官网:http://tinyhttpd.sourceforge.net
 - [chyingp/nodejs-learning-guide](https://github.com/chyingp/nodejs-learning-guide): Nodejs学习笔记以及经验总结
 - [fex-team/styleguide](https://github.com/fex-team/styleguide): 文档与源码编写风格
-- *[EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books):
+- [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books):
  Freely available programming books
+- *[fengdu78 / Coursera-ML-AndrewNg-Notes](吴恩达老师的机器学习课程个人笔记)
 
 ## wechat develope
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
@@ -68,6 +69,7 @@ tags:
 - [eggjs/egg](https://github.com/eggjs/egg): 企业级框架和应用 by node + koa
 - [i18next/i18next](https://github.com/i18next/i18next): 支持国际化的 JavaScript 框架
 - [mrdoob/three.js](https://github.com/mrdoob/three.js): JavaScript 3D library. [https://threejs.org/](https://threejs.org/)
+- [nswbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
 
 
 ## TypeScrit
@@ -117,6 +119,7 @@ tags:
 - [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub): 使用 RSS 连接全世界 [https://rsshub.js.org](https://rsshub.js.org)
 - [maxchehab/CSS-Keylogging](https://github.com/maxchehab/CSS-Keylogging): Chrome extension and Express server that exploits keylogging abilities of CSS.
 - [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf): 给变量起名的事情上，为你生命省 3s
+- [grpc/grpc](https://github.com/grpc/grpc): The C based gRPC (C++, Python, Ruby, Objective-C, PHP, C#) 
 
 ## funny
 - [skygragon/leetcode-cli](https://github.com/skygragon/leetcode-cli): 命令行里刷 leetcode。感觉很好玩。

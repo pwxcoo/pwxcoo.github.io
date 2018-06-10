@@ -39,7 +39,7 @@ inlineMath 表示内置的数学表达式， displayMath 表示行间的数学�
 行内置的数学表达式 $J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^n (h_\theta(x_i)-y_i)$ 。写法如下：
 
 ```
-$J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^n (h_\theta(x_i)-y_i)$
+$J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^n (h_\theta(x_i)-y_i)^2$
 ```
 
 ## display math

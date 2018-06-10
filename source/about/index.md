@@ -20,6 +20,7 @@ date: 2018-01-30 11:52:51
 - [Fighting Heart](http://www.cnblogs.com/zufezzt/)
 
 # Link
+- [我的Gist](https://gist.github.com/pwxcoo)
 - [我的star](/2018/05/01/charming-star-repositories/)
 - [一个什么东西都放的网站](https://www.pwxcoo.com/)
 - [数据结构算法可视化](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
