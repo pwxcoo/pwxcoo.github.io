@@ -54,6 +54,7 @@ $$\theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\thet
 ```
 
 ## References
+- [online editor of latex](http://latex.codecogs.com/eqneditor/editor.php)
 - [MathJax basic tutorial and quick reference](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference/5044)
 - [MathJax基本的使用方式](https://blog.csdn.net/u010945683/article/details/46757757)
 - [Hexo下mathjax的转义问题](https://segmentfault.com/a/1190000007261752)

@@ -49,7 +49,8 @@ tags:
 - [fex-team/styleguide](https://github.com/fex-team/styleguide): 文档与源码编写风格
 - [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books):
  Freely available programming books
-- *[fengdu78 / Coursera-ML-AndrewNg-Notes](吴恩达老师的机器学习课程个人笔记)
+- [fengdu78 / Coursera-ML-AndrewNg-Notes](吴恩达老师的机器学习课程个人笔记)
+- [fastai/numerical-linear-algebra](https://github.com/fastai/numerical-linear-algebra): Free online textbook of Jupyter notebooks for [fast.ai](http://www.fast.ai/) Computational Linear Algebra course [http://www.fast.ai/2017/07/17/num-lin…](http://www.fast.ai/2017/07/17/num-lin-alg/)
 
 ## wechat develope
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
@@ -76,6 +77,7 @@ tags:
 - [zhongsp/TypeScript](https://github.com/zhongsp/TypeScript): TypeScript 教程
 - [shinima/battle-city](https://github.com/shinima/battle-city): ts 编写的坦克大战
 - [nhnent/tui.chart](https://github.com/nhnent/tui.chart): 一个可视化库
+- [Microsoft/TypeScript-Handbook](https://github.com/Microsoft/TypeScript-Handbook): TyepScirpt Handbook
 
 ## markdown
 - [tylingsoft/markdown-plus](https://github.com/tylingsoft/markdown-plus): 增强的 markdown
@@ -87,6 +89,7 @@ tags:
 - [kennethreitz/requests-html](https://github.com/kennethreitz/requests-html): requests 作者写的终极升级版 HTML-parsing 库
 - [offu/WeRoBot](https://github.com/offu/WeRoBot): 微信公众号开发框架
 - [soimort/you-get](https://github.com/soimort/you-get): python 的下载库 
+- [pyenv/pyenv](https://github.com/pyenv/pyenv): 一个简单的 python 版本管理器
 
 ## blockchain
 - [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn): 区块链资源
@@ -120,6 +123,12 @@ tags:
 - [maxchehab/CSS-Keylogging](https://github.com/maxchehab/CSS-Keylogging): Chrome extension and Express server that exploits keylogging abilities of CSS.
 - [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf): 给变量起名的事情上，为你生命省 3s
 - [grpc/grpc](https://github.com/grpc/grpc): The C based gRPC (C++, Python, Ruby, Objective-C, PHP, C#) 
+- [google/protobuf](https://github.com/google/protobuf): Google 开源的一种数据交换格式
+- [grpc-ecosystem/grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway): generates a reverse-proxy server which translates a RESTful JSON API into gRPC
+- *[Microsoft/VoTT](https://github.com/Microsoft/VoTT): Visual Object Tagging Tool
+
+## Csharp
+- [ServiceStack/ServiceStack](https://github.com/ServiceStack/ServiceStack): Web framework for csharp
 
 ## funny
 - [skygragon/leetcode-cli](https://github.com/skygragon/leetcode-cli): 命令行里刷 leetcode。感觉很好玩。
@@ -127,3 +136,4 @@ tags:
 - [posquit0/Awesome-CV](https://github.com/posquit0/Awesome-CV): 用 latex 写简历。可惜对中文的解析是硬伤
 - [ypwhs/captcha_break](https://github.com/interagent/http-api-design): 用深度学习识别验证码
 - [Ovilia/lipstick](https://github.com/Ovilia/lipstick): 口红颜色可视化
+- [tuna/blogroll](https://github.com/tuna/blogroll): 好多人的博客。。
