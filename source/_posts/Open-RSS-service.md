@@ -62,6 +62,18 @@ And I want to recommend a repository [DIYgod/RSSHub](https://github.com/DIYgod/R
 
 And I open RSS service today...
 
+```yml
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content: true
+  content_limit: 140
+  content_limit_delim: ' '
+```
+
+
 ## Others
 I cannot buy the high-speed train ticket to go back Suzhou... So I bought bus ticket... Otherwise I cannot go back...
 
