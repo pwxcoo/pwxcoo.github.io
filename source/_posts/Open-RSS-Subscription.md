@@ -1,5 +1,5 @@
 ---
-title: Open RSS service
+title: Open RSS Subscription
 date: 2018-06-18 16:37:22
 categories: record
 tags:
@@ -60,7 +60,9 @@ There is no things to say. Just download a RSS reader, and input the website you
 
 And I want to recommend a repository [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub). It can help us subscribe much information that traditional RSS cannot via its filter function.
 
-And I open RSS service today...
+And I open RSS subscription today...
+
+Add code below to `_config.yml`:
 
 ```yml
 feed:
@@ -69,13 +71,13 @@ feed:
   limit: 20
   hub:
   content: true
-  content_limit: 140
+  content_limit: 
   content_limit_delim: ' '
 ```
 
 
 ## Others
-I cannot buy the high-speed train ticket to go back Suzhou... So I bought bus ticket... Otherwise I cannot go back...
+I cannot buy a high-speed train ticket to go back Suzhou... So I bought bus ticket... Otherwise I cannot go back...
 
 ## References
 - [XML —— Wikipedia](https://en.wikipedia.org/wiki/XML)
