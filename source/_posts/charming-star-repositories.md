@@ -51,6 +51,7 @@ tags:
  Freely available programming books
 - [fengdu78 / Coursera-ML-AndrewNg-Notes](吴恩达老师的机器学习课程个人笔记)
 - [fastai/numerical-linear-algebra](https://github.com/fastai/numerical-linear-algebra): Free online textbook of Jupyter notebooks for [fast.ai](http://www.fast.ai/) Computational Linear Algebra course [http://www.fast.ai/2017/07/17/num-lin…](http://www.fast.ai/2017/07/17/num-lin-alg/)
+- [crossoverJie/Java-Interview](https://github.com/crossoverJie/Java-Interview): java 面试
 
 ## wechat develope
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
@@ -71,6 +72,8 @@ tags:
 - [i18next/i18next](https://github.com/i18next/i18next): 支持国际化的 JavaScript 框架
 - [mrdoob/three.js](https://github.com/mrdoob/three.js): JavaScript 3D library. [https://threejs.org/](https://threejs.org/)
 - [nswbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
+- [ruanyf/jstutorial](https://github.com/ruanyf/jstutorial): Javascript tutorial book [http://javascript.ruanyifeng.com](http://javascript.ruanyifeng.com)
+- [webkul/vivid](https://github.com/webkul/vivid): a JavaScript library which is built to easily customize and use the SVG Icons with a blaze. [https://webkul.github.io/vivid](https://webkul.github.io/vivid)
 
 
 ## TypeScrit
@@ -78,6 +81,8 @@ tags:
 - [shinima/battle-city](https://github.com/shinima/battle-city): ts 编写的坦克大战
 - [nhnent/tui.chart](https://github.com/nhnent/tui.chart): 一个可视化库
 - [Microsoft/TypeScript-Handbook](https://github.com/Microsoft/TypeScript-Handbook): TyepScirpt Handbook
+- [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter): A starter template for TypeScript and Node with a detailed README describing how to use the two together.
+- [Microsoft/TypeScriptSamples](https://github.com/Microsoft/TypeScriptSamples): Samples for TypeScript
 
 ## markdown
 - [tylingsoft/markdown-plus](https://github.com/tylingsoft/markdown-plus): 增强的 markdown
@@ -90,6 +95,7 @@ tags:
 - [offu/WeRoBot](https://github.com/offu/WeRoBot): 微信公众号开发框架
 - [soimort/you-get](https://github.com/soimort/you-get): python 的下载库 
 - [pyenv/pyenv](https://github.com/pyenv/pyenv): 一个简单的 python 版本管理器
+- [home-assistant/home-assistant](https://github.com/home-assistant/home-assistant): Open-source home automation platform running on Python 3 [https://home-assistant.io](ttps://home-assistant.io)。开源的 loT 平台
 
 ## blockchain
 - [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn): 区块链资源
@@ -125,10 +131,15 @@ tags:
 - [grpc/grpc](https://github.com/grpc/grpc): The C based gRPC (C++, Python, Ruby, Objective-C, PHP, C#) 
 - [google/protobuf](https://github.com/google/protobuf): Google 开源的一种数据交换格式
 - [grpc-ecosystem/grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway): generates a reverse-proxy server which translates a RESTful JSON API into gRPC
-- *[Microsoft/VoTT](https://github.com/Microsoft/VoTT): Visual Object Tagging Tool
+- [Microsoft/VoTT](https://github.com/Microsoft/VoTT): Visual Object Tagging Tool
+- [pedronauck/docz](https://github.com/pedronauck/docz): 写文档的一个工具，[https://docz.site](https://docz.site)
 
 ## Csharp
 - [ServiceStack/ServiceStack](https://github.com/ServiceStack/ServiceStack): Web framework for csharp
+
+## machine learning
+- [candlewill/Dialog_Corpus](https://github.com/candlewill/Dialog_Corpus): 用于训练中英文对话系统的语料库 Datasets for Training Chatbot System
+- [vipstone/faceai](https://github.com/vipstone/faceai): 一款入门级的人脸、视频、文字检测以及识别的项目.
 
 ## funny
 - [skygragon/leetcode-cli](https://github.com/skygragon/leetcode-cli): 命令行里刷 leetcode。感觉很好玩。
