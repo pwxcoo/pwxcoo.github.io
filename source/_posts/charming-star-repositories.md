@@ -31,6 +31,8 @@ tags:
 - [interagent/http-api-design](https://github.com/interagent/http-api-design): HTTP API design guide
 - [atomiks/30-seconds-of-css](https://github.com/atomiks/30-seconds-of-css): 30 分钟爽 css
 - [Chalarangelo/30-seconds-of-code](https://github.com/Chalarangelo/30-seconds-of-code): 30 分钟爽 JavaScript
+- [kriadmin/30-seconds-of-python-code(https://github.com/kriadmin/30-seconds-of-python-code): 30 分钟爽python
+- [fejes713/30-seconds-of-interviews](https://github.com/fejes713/30-seconds-of-interviews): 30 分钟爽前端面试
 - [tuguangquan/mybatis](https://github.com/tuguangquan/mybatis): mybatis 源码中文注释
 - [jaywcjlove/mysql-tutorial](https://github.com/jaywcjlove/mysql-tutorial): MySQL 入门教程
 - [CarpenterLee/JCFInternals](https://github.com/CarpenterLee/JCFInternals): 深入理解 Java 集合框架
@@ -44,7 +46,8 @@ tags:
 - [xingshaocheng/architect-awesome](https://github.com/xingshaocheng/architect-awesome): 后端架构师技术图谱
 - [davideuler/architecture.of.internet-product](https://github.com/davideuler/architecture.of.internet-product): 互联网公司技术架构
 - [answershuto/learnVue](https://github.com/answershuto/learnVue): Vue.js 源码解析
-- [EZLippi/Tinyhttpd](https://github.com/EZLippi/Tinyhttpd): Tinyhttpd 是J. David Blackstone在1999年写的一个不到 500 行的超轻量型 Http Server，用来学习非常不错，可以帮助我们真正理解服务器程序的本质。官网:http://tinyhttpd.sourceforge.net
+- [EZLippi/Tinyhttpd](https://github.com/EZLippi/Tinyhttpd): Tinyhttpd 是J. David Blackstone在1999年写的一个不到 500 行的超轻量型 Http Server，用来学习非常不错，可以帮助我们真正理解服务器程序的本质。
+- *[linw7/TKeed](https://github.com/linw7/TKeed): HTTP WebServer
 - [chyingp/nodejs-learning-guide](https://github.com/chyingp/nodejs-learning-guide): Nodejs学习笔记以及经验总结
 - [fex-team/styleguide](https://github.com/fex-team/styleguide): 文档与源码编写风格
 - [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books):
@@ -52,6 +55,8 @@ tags:
 - [fengdu78 / Coursera-ML-AndrewNg-Notes](吴恩达老师的机器学习课程个人笔记)
 - [fastai/numerical-linear-algebra](https://github.com/fastai/numerical-linear-algebra): Free online textbook of Jupyter notebooks for [fast.ai](http://www.fast.ai/) Computational Linear Algebra course [http://www.fast.ai/2017/07/17/num-lin…](http://www.fast.ai/2017/07/17/num-lin-alg/)
 - [crossoverJie/Java-Interview](https://github.com/crossoverJie/Java-Interview): java 面试
+- [lishuhuakai/CS](https://github.com/lishuhuakai/CS): 上过的公开课的作业，源代码的注释版本，一个大杂烩。
+- [linw7/Skill-Tree](https://github.com/linw7/Skill-Tree): C/C++ 后台开发技能树
 
 ## wechat develope
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
@@ -96,6 +101,7 @@ tags:
 - [soimort/you-get](https://github.com/soimort/you-get): python 的下载库 
 - [pyenv/pyenv](https://github.com/pyenv/pyenv): 一个简单的 python 版本管理器
 - [home-assistant/home-assistant](https://github.com/home-assistant/home-assistant): Open-source home automation platform running on Python 3 [https://home-assistant.io](ttps://home-assistant.io)。开源的 loT 平台
+- [networkx/networkx](https://github.com/networkx/networkx): Software for complex networks with Python.
 
 ## blockchain
 - [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn): 区块链资源
@@ -138,7 +144,11 @@ Graphs for Everyone [http://neo4j.com](http://neo4j.com)
 - [chjj/tty.js](https://github.com/chjj/tty.js): A terminal for your browser, using node/express/socket.io
 - [zenozeng/fonts.css](https://github.com/zenozeng/fonts.css): 跨平台 CSS 中文字体解决方案
 - [kitze/sizzy](https://github.com/kitze/sizzy): A tool for testing responsive websites crazy-fast [https://sizzy.co/](https://sizzy.co/)
-- *[wintercn/dog-fucked-zhihu](https://github.com/wintercn/dog-fucked-zhihu): 退出知乎好帮手——狗日的知乎，备份自己的答案，取消所有点赞，批量替换所有答案
+- [wintercn/dog-fucked-zhihu](https://github.com/wintercn/dog-fucked-zhihu): 退出知乎好帮手——狗日的知乎，备份自己的答案，取消所有点赞，批量替换所有答案
+- [hiroppy/fusuma](https://github.com/hiroppy/fusuma): Easily make slides with markdown. 
+- [vimagick/dockerfiles](https://github.com/vimagick/dockerfiles): A collection of delicious docker recipes 
+- [Natoto/WeChatPlugin](https://github.com/Natoto/WeChatPlugin): Plugin For Mac WeChat. 浏览朋友圈，消息防撤回，微信多开，自动回复
+- [EZLippi/WebBench](https://github.com/EZLippi/WebBench): linux下使用的非常简单的网站压测工具
 
 ## Csharp
 - [ServiceStack/ServiceStack](https://github.com/ServiceStack/ServiceStack): Web framework for csharp
