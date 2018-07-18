@@ -54,7 +54,7 @@ PreferredAuthentications publickey
 IdentityFile ~/.ssh/id_rsa
 ```
 
-### Debug
+## Debug
 用 `ssh` 连一下就知道有没有成功了
 ```bash
 $ ssh -T git@github.com

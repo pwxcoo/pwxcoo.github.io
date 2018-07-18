@@ -47,7 +47,7 @@ tags:
 - [davideuler/architecture.of.internet-product](https://github.com/davideuler/architecture.of.internet-product): 互联网公司技术架构
 - [answershuto/learnVue](https://github.com/answershuto/learnVue): Vue.js 源码解析
 - [EZLippi/Tinyhttpd](https://github.com/EZLippi/Tinyhttpd): Tinyhttpd 是J. David Blackstone在1999年写的一个不到 500 行的超轻量型 Http Server，用来学习非常不错，可以帮助我们真正理解服务器程序的本质。
-- *[linw7/TKeed](https://github.com/linw7/TKeed): HTTP WebServer
+- [linw7/TKeed](https://github.com/linw7/TKeed): HTTP WebServer
 - [chyingp/nodejs-learning-guide](https://github.com/chyingp/nodejs-learning-guide): Nodejs学习笔记以及经验总结
 - [fex-team/styleguide](https://github.com/fex-team/styleguide): 文档与源码编写风格
 - [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books):
@@ -57,6 +57,7 @@ tags:
 - [crossoverJie/Java-Interview](https://github.com/crossoverJie/Java-Interview): java 面试
 - [lishuhuakai/CS](https://github.com/lishuhuakai/CS): 上过的公开课的作业，源代码的注释版本，一个大杂烩。
 - [linw7/Skill-Tree](https://github.com/linw7/Skill-Tree): C/C++ 后台开发技能树
+- [ty4z2008/Qix](https://github.com/ty4z2008/Qix): Machine Learning、Deep Learning、PostgreSQL、Distributed System、Node.Js、Golang 翻译
 
 ## wechat develope
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
@@ -79,7 +80,7 @@ tags:
 - [nswbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
 - [ruanyf/jstutorial](https://github.com/ruanyf/jstutorial): Javascript tutorial book [http://javascript.ruanyifeng.com](http://javascript.ruanyifeng.com)
 - [webkul/vivid](https://github.com/webkul/vivid): a JavaScript library which is built to easily customize and use the SVG Icons with a blaze. [https://webkul.github.io/vivid](https://webkul.github.io/vivid)
-
+- [dankogai/js-base64](https://github.com/dankogai/js-base64): Base64 implementation for JavaScript
 
 ## TypeScrit
 - [zhongsp/TypeScript](https://github.com/zhongsp/TypeScript): TypeScript 教程
@@ -88,6 +89,7 @@ tags:
 - [Microsoft/TypeScript-Handbook](https://github.com/Microsoft/TypeScript-Handbook): TyepScirpt Handbook
 - [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter): A starter template for TypeScript and Node with a detailed README describing how to use the two together.
 - [Microsoft/TypeScriptSamples](https://github.com/Microsoft/TypeScriptSamples): Samples for TypeScript
+- [Microsoft/tsdoc](https://github.com/Microsoft/tsdoc): A doc comment standard for the TypeScript language
 
 ## markdown
 - [tylingsoft/markdown-plus](https://github.com/tylingsoft/markdown-plus): 增强的 markdown
@@ -102,9 +104,15 @@ tags:
 - [pyenv/pyenv](https://github.com/pyenv/pyenv): 一个简单的 python 版本管理器
 - [home-assistant/home-assistant](https://github.com/home-assistant/home-assistant): Open-source home automation platform running on Python 3 [https://home-assistant.io](ttps://home-assistant.io)。开源的 loT 平台
 - [networkx/networkx](https://github.com/networkx/networkx): Software for complex networks with Python.
+- [lisniuse/numpy-cn](https://github.com/lisniuse/numpy-cn): The Chinese version of numpy's official document.中文版 numpy 文档。
+- [GoogleCloudPlatform/python-docs-samples](https://github.com/GoogleCloudPlatform/python-docs-samples): Code samples used on cloud.google.com
 
 ## blockchain
 - [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn): 区块链资源
+
+## C++
+- [google/googletest](https://github.com/google/googletest): google 的 c++ 测试框架
+- [rigtorp/awesome-modern-cpp](https://github.com/rigtorp/awesome-modern-cpp): A collection of resources on modern C++。现代 c++ 集合。
 
 ## tools
 - [tomnomnom/gron](https://github.com/tomnomnom/gron): Make JSON greppable
@@ -149,6 +157,10 @@ Graphs for Everyone [http://neo4j.com](http://neo4j.com)
 - [vimagick/dockerfiles](https://github.com/vimagick/dockerfiles): A collection of delicious docker recipes 
 - [Natoto/WeChatPlugin](https://github.com/Natoto/WeChatPlugin): Plugin For Mac WeChat. 浏览朋友圈，消息防撤回，微信多开，自动回复
 - [EZLippi/WebBench](https://github.com/EZLippi/WebBench): linux下使用的非常简单的网站压测工具
+- [cameronhunter/local-ssl-proxy](https://github.com/cameronhunter/local-ssl-proxy): 
+Simple SSL HTTP proxy using a self-signed certificate. Intended for local development only.本地的 SSL，localhost 的 https。
+- [longXboy/lunnel](https://github.com/longXboy/lunnel): lunnel 是一款简单易用的内网NAT穿越、反向代理软件，支持 HTTP, HTTPS, UDP, TCP、Unix socket 协议。
+- *[amix/vimrc](https://github.com/amix/vimrc): The ultimate Vim configuration: vimrc。vimrc 配置。
 
 ## Csharp
 - [ServiceStack/ServiceStack](https://github.com/ServiceStack/ServiceStack): Web framework for csharp

@@ -108,6 +108,9 @@ export PATH=$JAVA_HOME/bin:$PATH
 - `sudo apt install zsh` 下载
 - `chsh -s $(which zsh)` 设置
 - 重启计算机生效
+- `$ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`
+- `git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions`
+- 改动 `~/.zshrc` 的 `plugins=(git)` 为 `plugins=(git zsh-autosuggestions)`
 
 ## shadowsocks
 - `sudo apt install python-pip` 下载 pip
@@ -118,12 +121,12 @@ export PATH=$JAVA_HOME/bin:$PATH
     "server":"ip地址",  
     "server_port":服务器端口,  
     "local_address": "127.0.0.1",  
-    "local_port":1080,  
-    "password":"密码",  
-    "timeout":300,  
-    "method":"使用的方法",  
-    "fast_open": false,  
-    "workers": 1  
+    "local_port":1080, 
+    "password":"密码",
+    "timeout":300,
+    "method":"使用的方法",
+    "fast_open": false,
+    "workers": 1
 }  
 ```
 - `sudo sslocal -c /etc/shadowsocks.json` 开中断启动 ss
