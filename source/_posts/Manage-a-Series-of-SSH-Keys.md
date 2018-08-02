@@ -1,5 +1,5 @@
 ---
-title: Manage A Series Of SSH Keys
+title: Manage a Series of SSH Keys
 date: 2018-07-15 22:18:47
 categories: record
 tags:
