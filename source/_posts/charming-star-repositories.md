@@ -58,11 +58,17 @@ tags:
 - [lishuhuakai/CS](https://github.com/lishuhuakai/CS): 上过的公开课的作业，源代码的注释版本，一个大杂烩。
 - [linw7/Skill-Tree](https://github.com/linw7/Skill-Tree): C/C++ 后台开发技能树
 - [ty4z2008/Qix](https://github.com/ty4z2008/Qix): Machine Learning、Deep Learning、PostgreSQL、Distributed System、Node.Js、Golang 翻译
+- [ckcz123/codejam](https://github.com/ckcz123/codejam): Codejam, apac, kickstart, I/O for Women... 2017, 2016, 2015, 2014... All solutions here!
+- [nailperry-zd/The-Economist](https://github.com/nailperry-zd/The-Economist): The Economist 经济学人，持续更新
+- [ityouknow/spring-boot-examples](https://github.com/ityouknow/spring-boot-examples): about learning Spring Boot via examples. Spring Boot 技术栈示例代码，快速简单上手教程。 [http://www.ityouknow.com/](http://www.ityouknow.com/)
+- [https://github.com/chrislgarry/Apollo-11](https://github.com/chrislgarry/Apollo-11): Original Apollo 11 Guidance Computer (AGC) source code for the command and lunar modules. 阿波罗 11 号代码。
+- [kdn251/interviews](https://github.com/kdn251/interviews): Everything you need to know to get the job.
 
 ## wechat develope
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
 - [Tencent/wepy](https://github.com/Tencent/wepy): 官方的小程序组件化开发框架
 - [Meituan-Dianping/mpvue](https://github.com/Meituan-Dianping/mpvue): 美团的小程序开发框架
+- [chemzqm/wept](https://github.com/chemzqm/wept): 微信小程序 web 端实时运行工具
 
 ## JavaScript
 - [nhnent/tui.calendar](https://github.com/nhnent/tui.calendar): A JavaScript calendar 
@@ -81,6 +87,9 @@ tags:
 - [ruanyf/jstutorial](https://github.com/ruanyf/jstutorial): Javascript tutorial book [http://javascript.ruanyifeng.com](http://javascript.ruanyifeng.com)
 - [webkul/vivid](https://github.com/webkul/vivid): a JavaScript library which is built to easily customize and use the SVG Icons with a blaze. [https://webkul.github.io/vivid](https://webkul.github.io/vivid)
 - [dankogai/js-base64](https://github.com/dankogai/js-base64): Base64 implementation for JavaScript
+- [botui/botui](https://github.com/botui/botui): A JavaScript framework to create conversational UIs, [https://botui.org
+](https://botui.org)
+- [imbrn/v8n](https://github.com/imbrn/v8n): JavaScript fluent validation library
 
 ## TypeScrit
 - [zhongsp/TypeScript](https://github.com/zhongsp/TypeScript): TypeScript 教程
@@ -95,6 +104,9 @@ tags:
 - [tylingsoft/markdown-plus](https://github.com/tylingsoft/markdown-plus): 增强的 markdown
 - [marktext/marktext](https://github.com/marktext/marktext): markdown editor。能实时更新 markdown 的 preview，而不是在另一个窗口表示。用了一次感觉不是很好。。可能 markdown 已经在心中格式化(?)
 
+## C
+- [hnes/libaco](https://github.com/hnes/libaco): A blazing fast and lightweight C asymmetric coroutine library
+
 ## Python
 - [google/python-cli](https://github.com/google/python-fire): google 的。一个能给 python 对下行自动生成命令行接口的库
 - [dingdang-robot/dingdang-robot](https://github.com/dingdang-robot/dingdang-robot): 中文语音对话机器人/智能音箱项目
@@ -106,13 +118,27 @@ tags:
 - [networkx/networkx](https://github.com/networkx/networkx): Software for complex networks with Python.
 - [lisniuse/numpy-cn](https://github.com/lisniuse/numpy-cn): The Chinese version of numpy's official document.中文版 numpy 文档。
 - [GoogleCloudPlatform/python-docs-samples](https://github.com/GoogleCloudPlatform/python-docs-samples): Code samples used on cloud.google.com
+- [dbader/schedule](https://github.com/dbader/schedule): Python job scheduling for humans.
 
 ## blockchain
 - [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn): 区块链资源
 
+## PowerShell
+- [PowerShell/PowerShell](https://github.com/PowerShell/PowerShell): PowerShell for every system! [https://microsoft.com/powershell](https://microsoft.com/powershell)
+- [techstay/powershell-study](https://github.com/techstay/powershell-study): Powershell学习笔记
+
 ## C++
 - [google/googletest](https://github.com/google/googletest): google 的 c++ 测试框架
 - [rigtorp/awesome-modern-cpp](https://github.com/rigtorp/awesome-modern-cpp): A collection of resources on modern C++。现代 c++ 集合。
+
+## Go
+- [golang/go](https://github.com/golang/go): The Go programming language [https://golang.org](https://golang.org)
+
+## Csharp
+- [ServiceStack/ServiceStack](https://github.com/ServiceStack/ServiceStack): Web framework for csharp
+
+## Assembly
+- [nemasu/asmttpd](https://github.com/nemasu/asmttpd): Web server for Linux written in amd64 assembly.
 
 ## tools
 - [tomnomnom/gron](https://github.com/tomnomnom/gron): Make JSON greppable
@@ -160,14 +186,27 @@ Graphs for Everyone [http://neo4j.com](http://neo4j.com)
 - [cameronhunter/local-ssl-proxy](https://github.com/cameronhunter/local-ssl-proxy): 
 Simple SSL HTTP proxy using a self-signed certificate. Intended for local development only.本地的 SSL，localhost 的 https。
 - [longXboy/lunnel](https://github.com/longXboy/lunnel): lunnel 是一款简单易用的内网NAT穿越、反向代理软件，支持 HTTP, HTTPS, UDP, TCP、Unix socket 协议。
-- *[amix/vimrc](https://github.com/amix/vimrc): The ultimate Vim configuration: vimrc。vimrc 配置。
+- [amix/vimrc](https://github.com/amix/vimrc): The ultimate Vim configuration: vimrc。vimrc 配置。
+- [chubin/cheat.sh](https://github.com/chubin/cheat.sh): the only cheat sheet you need [https://cheat.sh/](https://cheat.sh/)
+- [toddmotto/public-apis](https://github.com/toddmotto/public-apis): A collective list of public JSON APIs for use in web development. [https://toddmotto.com](https://toddmotto.com)
+- [lionsoul2014/ip2region](https://github.com/lionsoul2014/ip2region): 准确率99.9%的ip地址定位库，0.0x毫秒级查询，数据库文件大小只有1.5M，提供了java,php,c,python,nodejs,golang,c#查询绑定和Binary,B树,内存三种查询算法，妈妈再也不用担心我的ip地址定位！ [http://gitee.com/lionsoul/ip2region](http://gitee.com/lionsoul/ip2region)
+- [google/data-transfer-project](https://github.com/google/data-transfer-project): Data Transfer. [http://datatransferproject.dev](http://datatransferproject.dev)
+- [nonoroazoro/vscode-syncing](https://github.com/nonoroazoro/vscode-syncing): VSCode Extension - Sync all of your VSCode settings across multiple devices. 
+- [nhnent/tui.image-editor](https://github.com/nhnent/tui.image-editor):  image editor using HTML5 Canvas. 可以在线编辑图像。
+- [harc/moonchild](https://github.com/harc/moonchild): A toolkit for experimenting with new kinds of programming interfaces.
+- [yeasy/docker_practice](https://github.com/yeasy/docker_practice): Learn and understand Docker technologies, with real DevOps practice!
+- [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets): My cheatsheets 
+- [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet): A list of cool features of Git and GitHub. 
+- [wsargent/docker-cheat-sheet](https://github.com/wsargent/docker-cheat-sheet): Docker Cheat Sheet
 
-## Csharp
-- [ServiceStack/ServiceStack](https://github.com/ServiceStack/ServiceStack): Web framework for csharp
+## computer-graphics
+- [karimnaaji/3d-quickhull](https://github.com/karimnaaji/3d-quickhull): Header only 3d quickhull in c99
 
 ## machine learning
 - [candlewill/Dialog_Corpus](https://github.com/candlewill/Dialog_Corpus): 用于训练中英文对话系统的语料库 Datasets for Training Chatbot System
 - [vipstone/faceai](https://github.com/vipstone/faceai): 一款入门级的人脸、视频、文字检测以及识别的项目.
+- [MorvanZhou/tutorials](https://github.com/MorvanZhou/tutorials): 机器学习相关教程
+- [kailashahirwar/cheatsheets-ai](https://github.com/kailashahirwar/cheatsheets-ai): Essential Cheat Sheets for deep learning and machine learning researchers 
 
 ## funny
 - [skygragon/leetcode-cli](https://github.com/skygragon/leetcode-cli): 命令行里刷 leetcode。感觉很好玩。
