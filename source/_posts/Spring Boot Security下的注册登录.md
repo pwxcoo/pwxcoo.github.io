@@ -1,10 +1,10 @@
 ---
 title: Spring Boot Security下的注册登录
 date: 2017-12-24 18:22:03
-categories: 技术
+categories: tech
 tags: 
-- Spring
-- Java
+- spring
+- java
 ---
 
 最近想用 JAVA 做一个 Web 应用。想爽一下这个目前”最流行”的语言。于是选择了 Spring Boot 作为项目框架做开发。感觉到Spring 确实是很成熟的框架了。

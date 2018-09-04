@@ -1,9 +1,9 @@
 ---
 title: charming star repositories
 date: 2018-05-01 20:49:24
-categories: 备忘
+categories: memo
 tags:
-- 备忘
+- memo
 ---
 
 每次在 github 上看到好玩的 repository 都会 star 一下，心里想着下次有机会试一下，然后。。

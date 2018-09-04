@@ -1,9 +1,9 @@
 ---
 title: 把网站升级到HTTPS
 date: 2018-05-03 20:46:02
-categories: 备忘
+categories: memo
 tags:
-- 备忘
+- memo
 ---
 
 ## 起因

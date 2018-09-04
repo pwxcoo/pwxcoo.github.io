@@ -1,9 +1,9 @@
 ---
 title: leetcode150题
 date: 2018-02-25 22:15:39
-categories: 备忘
+categories: memo
 tags:
-- 算法
+- algorithm
 - leetcode
 ---
 

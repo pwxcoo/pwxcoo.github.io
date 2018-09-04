@@ -1,10 +1,10 @@
 ---
 title: ubuntu配置日志
 date: 2018-01-04 18:22:00
-categories: 备忘
+categories: memo
 tags: 
 - linux
-- 备忘
+- memo
 ---
 
 

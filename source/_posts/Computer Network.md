@@ -1,10 +1,9 @@
 ---
 title: Computer Network
 date: 2018-06-24 23:54:55
-categories: 计算机基础
+categories: base
 tags:
-- 计算机网络
-- 基础
+- computer network
 ---
 
 # 概述

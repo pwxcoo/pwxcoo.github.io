@@ -3,7 +3,7 @@ title: Open RSS Subscription
 date: 2018-06-18 16:37:22
 categories: record
 tags:
-- RSS
+- rss
 ---
 
 You may not believe it that I have never used RSS service. Before now if I wanted to browse others' blog, I will open anyone's blog directly... In other words, I need to find someone first and then browse his blog... Sounds silly...

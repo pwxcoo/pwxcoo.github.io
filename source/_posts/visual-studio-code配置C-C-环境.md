@@ -1,10 +1,11 @@
 ---
 title: visual studio code配置C/C++环境
 date: 2018-08-28 22:51:56
-categories: 备忘
+categories: mome
 tags:
 - visual studio code
-- C/C++
+- c++
+- c
 ---
 
 目的是构建了简单 C/C++ 环境，用于小项目（比如算法题）。

@@ -1,10 +1,10 @@
 ---
 title: 浅谈HashMap和ConcurrentHashMap
 date: 2018-08-31 19:50:50
-categories: 面试
+categories: tech
 tags:
-- Java
-- 数据结构
+- java
+- data structure
 ---
 
 本篇的源码基于我自己电脑上的 **jdk1.8.0_161** 。
@@ -166,7 +166,7 @@ tags:
 - threshold，resize 的大小，等于 （capacity * load factor），达到 threshold 的时候就会扩容（会 rehash，复制数据等操作，比较消耗性能）
 - loadFactor，负载因子
 
-### putVal()
+### put()
 
 ```java
 final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
@@ -335,7 +335,7 @@ final Node<K,V> getNode(int hash, Object key) {
         - 解锁
 - ConcurrentHashMap 在 jdk1.8 中加了红黑树并且做了一点结构上的调整，抛弃了 Segment 分段锁，采用了 CAS(Compare And Swap) + synchronized 来保证并发的安全性。
 
-### putVal()
+### put()
 
 ```java
 /** Implementation for put and putIfAbsent */

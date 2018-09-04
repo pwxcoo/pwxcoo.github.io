@@ -1,7 +1,7 @@
 ---
 title: 用Mathjax在markdown中使用数学公式
 date: 2018-06-03 18:11:17
-categories: 备忘
+categories: memo
 tags:
 - markdown
 ---

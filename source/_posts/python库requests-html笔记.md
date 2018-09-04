@@ -1,7 +1,7 @@
 ---
 title: python库requests-html笔记
 date: 2018-03-13 10:08:43
-categories: 技术
+categories: tech
 tags:
 - python
 ---

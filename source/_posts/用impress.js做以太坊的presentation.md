@@ -1,10 +1,10 @@
 ---
 title: 用impress.js做以太坊的presentation
 date: 2018-03-24 16:50:02
-categories: 技术
+categories: tech
 tags: 
-- JavaScript
-- 区块链
+- javascript
+- block chain
 ---
 
 今天弄了一个关于以太坊的 presentation ，用来下次课上讲。。之前没看过以太坊，所以今天加上看看以太坊资料和做一下 presentation 就做了一个下午。。

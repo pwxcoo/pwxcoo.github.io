@@ -1,11 +1,11 @@
 ---
 title: 浅谈socket和http
 date: 2018-06-05 22:24:24
-categories: 计算机基础
+categories: base
 tags:
 - socket
-- 网络编程
-- 计算机网络
+- network programming
+- computer network
 ---
 
 今天试了 socket 和网络编程相关的东西。计算机网络是上个学期的课，忘了好多的说。。太久不用果然是学一点新的东西，旧的都忘了。。还有一部分原因也是自己当初学得仅仅停留在老师的期末考范围里，考纲以外的东西基本没做太多了解。。网络的知识点太多了。。

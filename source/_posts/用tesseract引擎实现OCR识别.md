@@ -1,10 +1,10 @@
 ---
 title: 用tesseract引擎实现OCR识别
 date: 2018-05-07 21:38:17
-categories: 技术
+categories: tech
 tags:
-- OCR
-- JavaScript
+- ocr
+- javascript
 ---
 
 因为需要一个 OCR 图像识别功能，网上所提供的大部分 API 都是收费的，看到一个 Google 的一个开源项目 [tesseract](https://github.com/tesseract-ocr/tesseract)，很强大。不过是一个开源项目，没有现成的 API 接口可以直接用，干脆就自己直接上手配置撸了。

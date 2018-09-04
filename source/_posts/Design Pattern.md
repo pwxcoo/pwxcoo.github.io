@@ -1,9 +1,10 @@
 ---
 title: Design Pattern
 date: 2018-06-23 16:25:24
-categories: 计算机基础
+categories: base
 tags:
-- 基础
+- base
+- design pattern
 ---
 
 # 创建型

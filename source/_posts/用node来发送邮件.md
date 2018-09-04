@@ -1,9 +1,10 @@
 ---
 title: 用node来发送邮件
 date: 2018-05-12 21:08:41
-categories: 技术
+categories: tech
 tags: 
-- JavaScript
+- javascript
+- node
 ---
 
 之前想做给 [pwxcoo.com](https://github.com/pwxcoo/BlackMagic) 做一个管理员的界面，看看网站日常是什么样的。初步是要做一个账号，然后管理员能看，然后巴拉巴拉，感觉有点麻烦，就一直搁置了。

@@ -1,11 +1,11 @@
 ---
 title: 面试reviews
 date: 2018-02-27 22:16:36
-categories: 备忘
+categories: memo
 tags:
-- 基础
-- Java
-- 计算机网络
+- base
+- java
+- computer network
 ---
 
 记录一下自己为了 18 年春招面试特地复习的一些知识点。因为想投的是研发实习，一般都是 Java 的，所以内容基本就是 Java 的研发知识点。

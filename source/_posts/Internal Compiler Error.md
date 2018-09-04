@@ -3,7 +3,7 @@ title: Internal Compiler Error
 date: 2018-07-10 22:11:04
 categories: nuisance
 tags:
-- 杂谈
+- essay
 ---
 
 There is nothing to say here.
