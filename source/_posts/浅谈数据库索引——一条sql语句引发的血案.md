@@ -7,15 +7,6 @@ tags:
 - database
 ---
 
-<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
-   MathJax.Hub.Config({
-    tex2jax: {
-    inlineMath: [['$','$'],["\\(","\\)"]],
-    displayMath: [['\\[','\\]'], ['$$','$$']],
-    },
- });
-</script>
-
 ## 起因
 
 今天搞 [news-boom](https://github.com/pwxcoo/news-boom) 的时候，一条很奇怪的 sql 语句一直报错。

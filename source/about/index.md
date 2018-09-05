@@ -7,7 +7,7 @@ date: 2018-01-30 11:52:51
 **Designer & Developer**
 
 # Contact
-- Email：[[pwxcoo@gmail.com](mailto:pwxcoo@gmail.com)(**Recommand**), [wxc188888888@163.com](mailto:wxc188888888@163.com)]
+- Email：[pwxcoo@gmail.com](mailto:pwxcoo@gmail.com)
 
 # Site
 

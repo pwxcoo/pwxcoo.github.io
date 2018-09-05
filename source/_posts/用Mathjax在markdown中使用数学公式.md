@@ -6,20 +6,12 @@ tags:
 - markdown
 ---
 
-<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
-   MathJax.Hub.Config({
-    tex2jax: {
-    inlineMath: [['$','$'],["\\(","\\)"]],
-    displayMath: [['\\[','\\]'], ['$$','$$']],
-    },
- });
-</script>
 
 用 [Mathjax](https://docs.mathjax.org/en/latest/start.html) 来显示数学公式的。其实有一个 [hexo-math](https://github.com/hexojs/hexo-math) 的插件，是集成了 Mathjax 的，但是不知道为什么我这里安装总是出问题。。下次再试试好了。。所以我直接引用 Mathjax 了。
 
 ## Import
 
-直接用 cdn 来导入 Mathjax。
+直接用 cdn 来导入 Mathjax。（我直接放在 hexo 的 theme 里了）
 
 ```html
 <script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
