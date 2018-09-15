@@ -14,9 +14,11 @@ tags:
 **Java 中的线程概念是操作系统线程概念的一个 wrapper。**
 
 - 操作系统中线程状态
+    - New
     - Ready
     - Blocked
     - Running
+    - Terminated
 - Java中的线程状态（Java 中的线程是对操作系统线程的再次封装）
     - New 
     - Runnable (Thread.start())
