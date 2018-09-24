@@ -44,7 +44,7 @@ $ git clone git@gitserver:/srv/git/project.git
 
 到这里差不多基本的功能都 ok 了。
 
-## Step3: 
+## Step3: authority management
 
 然后要设置一下 git 用户的权限，不能让 git 用户用 ssh 登录 shell，让 git 用户默认用 git-shell 登录。
 
@@ -74,14 +74,11 @@ $ sudo chown yourusername:yourusername /home/yourusername/ -R
 $ sudo chmod o-rwx /home/yourusername/ -R
 ```
 
-### authority management
+### stricter authority management?
 
 权限管理这里有人做过了工具，可以去找一下，我之后可能要用到。
 
 
-------
-
-下次把这个写一个 shell 脚本。
 
 ## References
 
