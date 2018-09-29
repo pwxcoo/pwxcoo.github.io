@@ -6,7 +6,7 @@ tags:
 - git
 ---
 
-因为平时用 `git add *` 习惯了。。往往在第一次 commit 之后，发现有几个文件不应该 untrack 的，但是这个时候添加到 .gitignore 已经失效了。。
+因为平时用 `git add *` 习惯了。。往往在第一次 commit 之后，发现有几个文件应该 untrack 的，但是这个时候添加到 .gitignore 已经失效了。。
 
 这个时候应该要 rm 掉，重新 commit 。
 
@@ -26,7 +26,7 @@ $ git rm -r --cached .
 $ git add .
 ```
 
-### Step3: Commit
+## Step3: Commit
 
 ```bash
 $ git commit -m "fix: .gitignore"
