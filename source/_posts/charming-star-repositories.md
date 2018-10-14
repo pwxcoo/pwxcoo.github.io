@@ -31,7 +31,7 @@ tags:
 - [interagent/http-api-design](https://github.com/interagent/http-api-design): HTTP API design guide
 - [atomiks/30-seconds-of-css](https://github.com/atomiks/30-seconds-of-css): 30 分钟爽 css
 - [Chalarangelo/30-seconds-of-code](https://github.com/Chalarangelo/30-seconds-of-code): 30 分钟爽 JavaScript
-- [kriadmin/30-seconds-of-python-code(https://github.com/kriadmin/30-seconds-of-python-code): 30 分钟爽python
+- [kriadmin/30-seconds-of-python-code](https://github.com/kriadmin/30-seconds-of-python-code): 30 分钟爽python
 - [fejes713/30-seconds-of-interviews](https://github.com/fejes713/30-seconds-of-interviews): 30 分钟爽前端面试
 - [tuguangquan/mybatis](https://github.com/tuguangquan/mybatis): mybatis 源码中文注释
 - [jaywcjlove/mysql-tutorial](https://github.com/jaywcjlove/mysql-tutorial): MySQL 入门教程
@@ -63,6 +63,10 @@ tags:
 - [ityouknow/spring-boot-examples](https://github.com/ityouknow/spring-boot-examples): about learning Spring Boot via examples. Spring Boot 技术栈示例代码，快速简单上手教程。 [http://www.ityouknow.com/](http://www.ityouknow.com/)
 - [https://github.com/chrislgarry/Apollo-11](https://github.com/chrislgarry/Apollo-11): Original Apollo 11 Guidance Computer (AGC) source code for the command and lunar modules. 阿波罗 11 号代码。
 - [kdn251/interviews](https://github.com/kdn251/interviews): Everything you need to know to get the job.
+- [amusi/daily-paper-computer-vision](https://github.com/amusi/daily-paper-computer-vision): 记录每天整理的计算机视觉/深度学习/机器学习相关方向的论文
+- [QSCTech/zju-icicles](https://github.com/QSCTech/zju-icicles): 浙江大学课程攻略共享计划
+- [imhuay/Algorithm_Interview_Notes-Chinese](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese): 2018/2019/校招/春招/秋招/算法/机器学习(Machine Learning)/深度学习(Deep Learning)/自然语言处理(NLP)/C/C++/Python/
+- [alibaba/dubbo-spring-boot-starter](https://github.com/alibaba/dubbo-spring-boot-starter): Dubbo Spring Boot Starter
 
 ## wechat develope
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
@@ -90,6 +94,8 @@ tags:
 - [botui/botui](https://github.com/botui/botui): A JavaScript framework to create conversational UIs, [https://botui.org
 ](https://botui.org)
 - [imbrn/v8n](https://github.com/imbrn/v8n): JavaScript fluent validation library
+- [hack-chat/main](https://github.com/hack-chat/main): a minimal, distraction-free chat application 
+- [hotoo/pinyin](https://github.com/hotoo/pinyin):  汉字拼音 ➜ hàn zì pīn yīn
 
 ## TypeScrit
 - [zhongsp/TypeScript](https://github.com/zhongsp/TypeScript): TypeScript 教程
@@ -99,6 +105,19 @@ tags:
 - [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter): A starter template for TypeScript and Node with a detailed README describing how to use the two together.
 - [Microsoft/TypeScriptSamples](https://github.com/Microsoft/TypeScriptSamples): Samples for TypeScript
 - [Microsoft/tsdoc](https://github.com/Microsoft/tsdoc): A doc comment standard for the TypeScript language
+- [electron/fiddle](https://github.com/electron/fiddle):  The easiest way to get started with Electron
+
+## Julia
+
+- [JuliaLang/julia](https://github.com/JuliaLang/julia):The Julia Language: A fresh approach to technical computing. 
+- [JuliaPlots/Plots.jl](https://github.com/JuliaPlots/Plots.jl): Powerful convenience for Julia visualizations and data analysis 
+
+## Java
+
+- [CrowHawk/JavaLearning](https://github.com/CrowHawk/JavaLearning): 本仓库记录了我的Java学习进阶之路,涵盖了Java基础、JDK源码、JVM中的重要知识，附有代码和博客讲解，旨在提供一个Java在线共享学习平台,帮助更多的Java学习者入门进阶。
+- [spring-projects/spring-boot](https://github.com/spring-projects/spring-boot): Spring Boot
+- [alibaba/arthas](https://github.com/alibaba/arthas): Alibaba Java Diagnostic Tool Arthas/Alibaba Java诊断利器Arthas
+- [Snailclimb/JavaGuide](https://github.com/Snailclimb/JavaGuide): 【Java学习+面试指南】 一份涵盖大部分Java程序员所需要掌握的核心知识。
 
 ## markdown
 - [tylingsoft/markdown-plus](https://github.com/tylingsoft/markdown-plus): 增强的 markdown
@@ -106,6 +125,13 @@ tags:
 
 ## C
 - [hnes/libaco](https://github.com/hnes/libaco): A blazing fast and lightweight C asymmetric coroutine library
+- [curl/curl](https://github.com/curl/curl): A command line tool and library for transferring data with URL syntax
+- [cxong/tinydir](https://github.com/cxong/tinydir): Lightweight, portable and easy to integrate C directory and file reader
+- [cfenollosa/os-tutorial](https://github.com/cfenollosa/os-tutorial): How to create an OS from scratch
+
+## Golang
+
+- [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):Go语言高级编程》开源图书，涵盖CGO、Go汇编语言、RPC实现、Protobuf插件实现、Web框架实现、分布式系统等高阶主题
 
 ## Python
 - [google/python-cli](https://github.com/google/python-fire): google 的。一个能给 python 对下行自动生成命令行接口的库
@@ -119,6 +145,8 @@ tags:
 - [lisniuse/numpy-cn](https://github.com/lisniuse/numpy-cn): The Chinese version of numpy's official document.中文版 numpy 文档。
 - [GoogleCloudPlatform/python-docs-samples](https://github.com/GoogleCloudPlatform/python-docs-samples): Code samples used on cloud.google.com
 - [dbader/schedule](https://github.com/dbader/schedule): Python job scheduling for humans.
+- [huge-success/sanic](https://github.com/huge-success/sanic): Async Python 3.5+ web server that's written to go fast 
+- [jaystone776/python-data-science-cheatsheet](https://github.com/jaystone776/python-data-science-cheatsheet): Python数据科学速查表
 
 ## blockchain
 - [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn): 区块链资源
@@ -126,13 +154,23 @@ tags:
 ## PowerShell
 - [PowerShell/PowerShell](https://github.com/PowerShell/PowerShell): PowerShell for every system! [https://microsoft.com/powershell](https://microsoft.com/powershell)
 - [techstay/powershell-study](https://github.com/techstay/powershell-study): Powershell学习笔记
+- [GeeLaw/PowerShellThingies](https://github.com/GeeLaw/PowerShellThingies): My PowerShell thingies.
 
 ## C++
 - [google/googletest](https://github.com/google/googletest): google 的 c++ 测试框架
 - [rigtorp/awesome-modern-cpp](https://github.com/rigtorp/awesome-modern-cpp): A collection of resources on modern C++。现代 c++ 集合。
+- [huihut/interview](https://github.com/huihut/interview):  C/C++面试知识总结
+- [intel/hyperscan](https://github.com/intel/hyperscan): High-performance regular expression matching library
+- [chenshuo/muduo](https://github.com/chenshuo/muduo): A C++ non-blocking network library for multi-threaded server in Linux
 
 ## Go
 - [golang/go](https://github.com/golang/go): The Go programming language [https://golang.org](https://golang.org)
+- [gopherdata/gophernotes](https://github.com/gopherdata/gophernotes): The Go kernel for Jupyter notebooks and nteract.
+- [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN): 《The Way to Go》中文译本，中文正式名《Go 入门指南》
+
+## Rust
+
+- [rust-lang/rust](https://github.com/rust-lang/rust): A safe, concurrent, practical language.
 
 ## Csharp
 - [ServiceStack/ServiceStack](https://github.com/ServiceStack/ServiceStack): Web framework for csharp
@@ -198,6 +236,33 @@ Simple SSL HTTP proxy using a self-signed certificate. Intended for local develo
 - [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets): My cheatsheets 
 - [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet): A list of cool features of Git and GitHub. 
 - [wsargent/docker-cheat-sheet](https://github.com/wsargent/docker-cheat-sheet): Docker Cheat Sheet
+- [Maximus5/ConEmu](https://github.com/Maximus5/ConEmu): Customizable Windows terminal with tabs, splits, quake-style, hotkeys and more
+- [git/git](https://github.com/git/git): Git Source Code Mirror 
+- [unshiftio/url-parse](https://github.com/unshiftio/url-parse): Small footprint URL parser that works seamlessly across Node.js and browser environments. 
+- [521xueweihan/git-tips](https://github.com/521xueweihan/git-tips): Git的奇技淫巧
+- [syncsynchalt/illustrated-tls](https://github.com/syncsynchalt/illustrated-tls): The Illustrated TLS Connection: Every byte explained
+- [wcoder/highlightjs-line-numbers.js](https://github.com/wcoder/highlightjs-line-numbers.js): Line numbering plugin for Highlight.js 
+- [gabrie-allaigre/avatar-generator](https://github.com/gabrie-allaigre/avatar-generator): Avatar generator in Java
+- [googleapis/googleapis](https://github.com/googleapis/googleapis): Public interface definitions of Google APIs.
+- [centic9/jgit-cookbook](https://github.com/centic9/jgit-cookbook): Provides examples and code snippets for the JGit Java Git implementation
+- [res0nat0r/gitosis](https://github.com/res0nat0r/gitosis): Manage git repositories, provide access to them over SSH, with tight access control and not needing shell accounts. 
+- [so-fancy/diff-so-fancy](https://github.com/so-fancy/diff-so-fancy): Good-lookin' diffs. Actually… nah… The best-lookin' diffs. 
+- [apache/incubator-dubbo](https://github.com/apache/incubator-dubbo): Apache Dubbo (incubating) is a high-performance, java based, open source RPC framework. 
+- [sallar/github-contributions-chart](https://github.com/sallar/github-contributions-chart): Generate an image of all your Github contributions 
+- [antirez/redis](https://github.com/antirez/redis): Redis is an in-memory database that persists on disk. 
+- [neilpa/cmd-colors-solarized](https://github.com/neilpa/cmd-colors-solarized): Solarized color settings for Windows command prompt
+- [TheNetAdmin/Makefile-Templates](https://github.com/TheNetAdmin/Makefile-Templates): Some makefile templates for different size of projects
+- [honza/vim-snippets](https://github.com/honza/vim-snippets): vim-snipmate default snippets
+- [felixrieseberg/windows95](https://github.com/felixrieseberg/windows95):  Windows 95 in Electron. Runs on macOS, Linux, and Windows.
+
+## Algorithm
+
+- [24OI/OI-wiki](https://github.com/24OI/OI-wiki): Wiki for OI / ACM-ICPC. （某大型游戏线上攻略，内含炫酷算术魔法）
+
+## Database
+
+- [tikv/tikv](https://github.com/tikv/tikv): Distributed transactional key-value database, originally created to complement TiDB 
+- [pingcap/tidb](https://github.com/pingcap/tidb): TiDB is a distributed HTAP database compatible with the MySQL protocol
 
 ## computer-graphics
 - [karimnaaji/3d-quickhull](https://github.com/karimnaaji/3d-quickhull): Header only 3d quickhull in c99
@@ -215,3 +280,5 @@ Simple SSL HTTP proxy using a self-signed certificate. Intended for local develo
 - [ypwhs/captcha_break](https://github.com/interagent/http-api-design): 用深度学习识别验证码
 - [Ovilia/lipstick](https://github.com/Ovilia/lipstick): 口红颜色可视化
 - [tuna/blogroll](https://github.com/tuna/blogroll): 好多人的博客。。
+- [imyelo/pokequest-wiki](https://github.com/imyelo/pokequest-wiki): Pokémon Quest Dex designed for Web / 方可梦图鉴
+- [wuzhiyi/guide-to-the-douban](https://github.com/wuzhiyi/guide-to-the-douban): 豆瓣漫游指南
