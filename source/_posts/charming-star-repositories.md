@@ -67,6 +67,10 @@ tags:
 - [QSCTech/zju-icicles](https://github.com/QSCTech/zju-icicles): 浙江大学课程攻略共享计划
 - [imhuay/Algorithm_Interview_Notes-Chinese](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese): 2018/2019/校招/春招/秋招/算法/机器学习(Machine Learning)/深度学习(Deep Learning)/自然语言处理(NLP)/C/C++/Python/
 - [alibaba/dubbo-spring-boot-starter](https://github.com/alibaba/dubbo-spring-boot-starter): Dubbo Spring Boot Starter
+- [godruoyi/restful-api-specification](https://github.com/godruoyi/restful-api-specification): RESTful API 设计规范
+- [ruanyf/weekly](https://github.com/ruanyf/weekly): 技术分享周刊，每周五发布
+- [leereilly/games](https://github.com/leereilly/games): A list of popular/awesome videos games, add-ons, maps, etc. hosted on GitHub. Any genre. Any platform. Any engine.
+- [guobinhit/intellij-idea-tutorial](https://github.com/guobinhit/intellij-idea-tutorial): This is a tutorial of IntelliJ IDEA, you can know how to use IntelliJ IDEA better and better.
 
 ## wechat develope
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
@@ -254,6 +258,7 @@ Simple SSL HTTP proxy using a self-signed certificate. Intended for local develo
 - [TheNetAdmin/Makefile-Templates](https://github.com/TheNetAdmin/Makefile-Templates): Some makefile templates for different size of projects
 - [honza/vim-snippets](https://github.com/honza/vim-snippets): vim-snipmate default snippets
 - [felixrieseberg/windows95](https://github.com/felixrieseberg/windows95):  Windows 95 in Electron. Runs on macOS, Linux, and Windows.
+- [google/tink](https://github.com/google/tink): Tink is a multi-language, cross-platform library that provides cryptographic APIs that are secure, easy to use correctly, and hard(er) to misuse.
 
 ## Algorithm
 
