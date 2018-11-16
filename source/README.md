@@ -1,5 +1,5 @@
 # Introduction
-a personal [blog](http://blog.pwxcoo.com/) for me.
+a personal [blog](http://blog.pwxcoo.com/) for me. 用的是 [hexo-theme-cactus](https://github.com/probberechts/hexo-theme-cactus) 主题。
 
 # RECORD
 ## 20180304
