@@ -48,7 +48,9 @@ set autoindent  //自动缩进
 - `sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make`
 - `sudo apt update`
 - `sudo apt install ubuntu-make`
-- `sudo umake web visual-studio-code`
+- `sudo umake ide visual-studio-code`
+
+**20181123 update: `sudo umake web visual-studio-code`，在新版本中 vscode 移动到 ide 分类中**
 
 ## anaconda(python)
 - 官网下载
