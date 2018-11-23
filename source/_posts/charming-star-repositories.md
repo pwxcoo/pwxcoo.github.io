@@ -135,7 +135,10 @@ tags:
 
 ## Golang
 
-- [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):Go语言高级编程》开源图书，涵盖CGO、Go汇编语言、RPC实现、Protobuf插件实现、Web框架实现、分布式系统等高阶主题
+- [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):《Go语言高级编程》开源图书，涵盖CGO、Go汇编语言、RPC实现、Protobuf插件实现、Web框架实现、分布式系统等高阶主题
+- [golang/go](https://github.com/golang/go): The Go programming language [https://golang.org](https://golang.org)
+- [gopherdata/gophernotes](https://github.com/gopherdata/gophernotes): The Go kernel for Jupyter notebooks and nteract.
+- [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN): 《The Way to Go》中文译本，中文正式名《Go 入门指南》
 
 ## Python
 - [google/python-cli](https://github.com/google/python-fire): google 的。一个能给 python 对下行自动生成命令行接口的库
@@ -166,11 +169,6 @@ tags:
 - [huihut/interview](https://github.com/huihut/interview):  C/C++面试知识总结
 - [intel/hyperscan](https://github.com/intel/hyperscan): High-performance regular expression matching library
 - [chenshuo/muduo](https://github.com/chenshuo/muduo): A C++ non-blocking network library for multi-threaded server in Linux
-
-## Go
-- [golang/go](https://github.com/golang/go): The Go programming language [https://golang.org](https://golang.org)
-- [gopherdata/gophernotes](https://github.com/gopherdata/gophernotes): The Go kernel for Jupyter notebooks and nteract.
-- [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN): 《The Way to Go》中文译本，中文正式名《Go 入门指南》
 
 ## Rust
 
