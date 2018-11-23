@@ -52,6 +52,8 @@ set autoindent  //自动缩进
 
 **20181123 update: `sudo umake web visual-studio-code`，在新版本中 vscode 移动到 ide 分类中**
 
+**PS: ubuntu 下的推荐字体 `font-family="'Ubuntu Mono', monospace"**
+
 ## anaconda(python)
 - 官网下载
 - `sudo bash Anaconda3-5.0.1-Linux-x86_64.sh` 然后选yes
