@@ -135,6 +135,12 @@ export PATH=$JAVA_HOME/bin:$PATH
 - `sudo apt install flatabulous-theme` 下载 flatabulous-themes
 - `sudo apt install ultra-flat-icons` 下载 ultra-flat的图标
 
+-----
+
+**Ubuntu18.04 用了 gnome，更改主题 [Ubuntu18.04美化主题](https://blog.csdn.net/lishanleilixin/article/details/80453565)**
+
+- [Gnome-LOOK](https://www.gnome-look.org/)
+
 ## zsh终端
 
 - `sudo apt install zsh` 下载
