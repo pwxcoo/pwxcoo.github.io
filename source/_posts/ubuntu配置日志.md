@@ -9,19 +9,26 @@ tags:
 
 
 ## 安装
-用u盘重新一遍 ubuntu 。安装了 ubuntu16.04 版本的。
 
-## firefox
+~~用u盘重新一遍 ubuntu 。安装了 ubuntu16.04 版本的。~~
+
+20181128: 安装了 ubuntu18.04 版本。
+
+## 
+
 - `sudo apt update`
 - `sudo apt install firefox`
 
 ## chrome
+
 - 添加软件源 `sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/`
 - 导入谷歌软件公钥 `wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -`
 - `sudo apt update`
+- `sudo apt-get install google-chrome-stable`
 - `/usr/bin/google-chrome-stable`
 
 ## vim
+
 - `sudo apt install vim`
 - `sudo vim /etc/vim/vimrc`
 - 取消`syntax on`的注释
@@ -37,6 +44,7 @@ set autoindent  //自动缩进
 ```
 
 ## git
+
 - `sudo apt install git`
 - `git config --global user.name "your name"`
 - `git config --globa user.email "your email.com"`
@@ -45,16 +53,29 @@ set autoindent  //自动缩进
 
 
 ## vscode
+
+### 用 ubuntu-make 安装
+
 - `sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make`
 - `sudo apt update`
 - `sudo apt install ubuntu-make`
 - `sudo umake ide visual-studio-code`
+
+### [apt 安装](https://linuxize.com/post/how-to-install-visual-studio-code-on-ubuntu-18-04/)
+
+- `sudo apt update`
+- `sudo apt install software-properties-common apt-transport-https wget`
+- `wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -`
+- `sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"`
+- `sudo apt install code`
+
 
 **20181123 update: `sudo umake web visual-studio-code`，在新版本中 vscode 移动到 ide 分类中**
 
 **PS: ubuntu 下的推荐字体 `font-family="'Ubuntu Mono', monospace"**
 
 ## anaconda(python)
+
 - 官网下载
 - `sudo bash Anaconda3-5.0.1-Linux-x86_64.sh` 然后选yes
 - 添加环境路径
@@ -62,6 +83,7 @@ set autoindent  //自动缩进
 - jupyter的皮肤配置: jupyterthemes配置 `jt -t gruvboxd -f ubuntu -fs 12 -tfs 12 -ofs 11`, 我发现ubuntu的字体已经比window好太多，所以就没配置。
 
 ## java(服务器端下载jdk8)
+
 一件很奇怪的事情，就是不知道为什么我用apt的ppa源下载，一直连不上oracle官网。。一直404失败。所以就徒手配置了。
 - `apt -u dist-upgrade`强制升级一下版本
 - `sudo apt remove --purge openjdk* `删除openjdk
@@ -79,6 +101,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 
 ## node
+
 - `sudo apt install nodejs-legacy nodejs` 直接下载
 - `sudo apt install npm` 安装npm
 - `sudo npm install -g n` 下载node版本控制库
@@ -86,12 +109,14 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 
 ## codeblocks
+
 - `sudo add-apt-repository ppa:damien-moore/codeblocks-stable` 添加ppa源
 - `sudo apt update` 更新
 - `sudo apt install codeblocks` 下载安装
 
 
 ## coursera 添加 hosts 解析
+
 - `ping coursera.org` 得到ip
 - 浏览器里看network，未正常响应的都添加到hosts里。
 - `vim /etc/hosts` 修改
@@ -99,9 +124,11 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 
 ## 截图软件 / shutter
+
 - `apt install shutter` 
 
 ## 电脑主题
+
 - `sudo  apt  install unity-tweak-tool` 下载 unity-tweak-tool
 - `sudo add-apt-repository ppa:noobslab/themes` 添加源
 - `sudo apt update` 更新
@@ -109,14 +136,16 @@ export PATH=$JAVA_HOME/bin:$PATH
 - `sudo apt install ultra-flat-icons` 下载 ultra-flat的图标
 
 ## zsh终端
+
 - `sudo apt install zsh` 下载
 - `chsh -s $(which zsh)` 设置
 - 重启计算机生效
-- `$ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`
+- `sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`
 - `git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions`
 - 改动 `~/.zshrc` 的 `plugins=(git)` 为 `plugins=(git zsh-autosuggestions)`
 
 ## shadowsocks
+
 - `sudo apt install python-pip` 下载 pip
 - `sudo pip install shadowsocks` 下载 shadowsocks
 - `sudo vim  /etc/shadowsocks.json` 修改配置文件
@@ -135,8 +164,27 @@ export PATH=$JAVA_HOME/bin:$PATH
 ```
 - `sudo sslocal -c /etc/shadowsocks.json` 开中断启动 ss
 - 更改系统设置 -> 网络 -> 网络代理 -> Socks主机： 127.0.0.1 -> port: 1080
-- 给 chrome 下一个插件 SwitchyOmega，选择 `autoProxy`，规则列表网址：
+- 给 chrome 下一个插件 SwitchyOmega([SwitchyOmega 配置](https://www.sundabao.com/ubuntu%E4%BD%BF%E7%94%A8shadowsocks/))，选择 `autoProxy`，规则列表网址：
 ```html
 https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
 ```
 - 别的浏览器 firefox 的代理都关了，不然不开 ss 上不了网，需要 FQ 的时候再用终端开个 ss 。
+
+### 开机启动
+
+- `sudo vim /etc/systemd/system/shadowsocks.service`
+- 把 `/home/xx/Software/ShadowsocksConfig/shadowsocks.json` 修改为自己的 `shadowsocks.json` 路径
+    ```
+    [Unit]
+    Description=Shadowsocks Client Service
+    After=network.target
+
+    [Service]
+    Type=simple
+    User=root
+    ExecStart=/usr/bin/sslocal -c /home/xx/Software/ShadowsocksConfig/shadowsocks.json
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+- `systemctl enable /etc/systemd/system/shadowsocks.service` 重启生效
