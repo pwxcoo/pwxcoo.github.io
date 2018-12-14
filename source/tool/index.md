@@ -12,5 +12,6 @@ date: 2018-09-04 13:52:00
 - [Complete list of github markdown emoji markup](https://gist.github.com/rxaviers/7360908): a list of github markdown emoji markup
 - **[Awesome Repositories](/2018/05/01/charming-star-repositories/): Awesome repositories in GitHub, maintenanced by myself**
 - [ubuntu memo](/2018/01/04/ubuntu%E9%85%8D%E7%BD%AE%E6%97%A5%E5%BF%97/): ubuntu 配置日志
+- [vim memo](/2018/12/14/a-collection-of-common-operations-in-vim/): vim memo
 - [regex](https://regexr.com/): online regular expression helper
 - [dummy image](https://dummyimage.com/): generate specified size image online
