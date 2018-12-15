@@ -12,12 +12,12 @@ tags:
 
 于是开一篇文章，来 record 自己 star 的操作，然后用人肉维护。。
 
-## learning
+
+## resource
+
 - [N-ZOO/everycode](https://github.com/N-ZOO/everycode): 前端每日一练。作者每天在 issue 里发布题目。
 - [dt-fe/weekly](https://github.com/dt-fe/weekly): 前端精读周刊
 - [1c7/chinese-independent-developer](https://github.com/1c7/chinese-independent-developer): 中国独立开发者项目列表
-
-## resource
 - [jwasham/coding-interview-university](https://github.com/jwasham/coding-interview-university):  to-do list of study
 - [helloqingfeng/Awsome-Front-End-learning-resource](https://github.com/helloqingfeng/Awsome-Front-End-learning-resource): resource of Front-End
 - [smyhvae/Web](https://github.com/smyhvae/Web): 前端入门和进阶学习笔记
@@ -71,14 +71,18 @@ tags:
 - [ruanyf/weekly](https://github.com/ruanyf/weekly): 技术分享周刊，每周五发布
 - [leereilly/games](https://github.com/leereilly/games): A list of popular/awesome videos games, add-ons, maps, etc. hosted on GitHub. Any genre. Any platform. Any engine.
 - [guobinhit/intellij-idea-tutorial](https://github.com/guobinhit/intellij-idea-tutorial): This is a tutorial of IntelliJ IDEA, you can know how to use IntelliJ IDEA better and better.
+- [laylalaisy/TOEFL_laylalaisy](https://github.com/laylalaisy/TOEFL_laylalaisy): 备考托福的一丢丢经验+资料
+- [sxei/vscode-plugin-demo](https://github.com/sxei/vscode-plugin-demo): VSCode插件开发全攻略配套demo
 
 ## wechat develope
+
 - [xiaobei666/weixin-xiaochengxu666-info](https://github.com/xiaobei666/weixin-xiaochengxu666-info): 小程序开发资源
 - [Tencent/wepy](https://github.com/Tencent/wepy): 官方的小程序组件化开发框架
 - [Meituan-Dianping/mpvue](https://github.com/Meituan-Dianping/mpvue): 美团的小程序开发框架
 - [chemzqm/wept](https://github.com/chemzqm/wept): 微信小程序 web 端实时运行工具
 
 ## JavaScript
+
 - [nhnent/tui.calendar](https://github.com/nhnent/tui.calendar): A JavaScript calendar 
 - [xx45/dayjs](https://github.com/xx45/dayjs):  JavaScript library of date
 - [vuejs/vuepress](https://github.com/vuejs/vuepress): 轻量的 vue 静态站点生成器
@@ -100,8 +104,10 @@ tags:
 - [imbrn/v8n](https://github.com/imbrn/v8n): JavaScript fluent validation library
 - [hack-chat/main](https://github.com/hack-chat/main): a minimal, distraction-free chat application 
 - [hotoo/pinyin](https://github.com/hotoo/pinyin):  汉字拼音 ➜ hàn zì pīn yīn
+- [stephentian/33-js-concepts](https://github.com/stephentian/33-js-concepts): 每个 JavaScript 工程师都应懂的33个概念
 
 ## TypeScrit
+
 - [zhongsp/TypeScript](https://github.com/zhongsp/TypeScript): TypeScript 教程
 - [shinima/battle-city](https://github.com/shinima/battle-city): ts 编写的坦克大战
 - [nhnent/tui.chart](https://github.com/nhnent/tui.chart): 一个可视化库
@@ -110,6 +116,7 @@ tags:
 - [Microsoft/TypeScriptSamples](https://github.com/Microsoft/TypeScriptSamples): Samples for TypeScript
 - [Microsoft/tsdoc](https://github.com/Microsoft/tsdoc): A doc comment standard for the TypeScript language
 - [electron/fiddle](https://github.com/electron/fiddle):  The easiest way to get started with Electron
+- [basarat/typescript-book](https://github.com/basarat/typescript-book): The definitive guide to TypeScript and possibly the best TypeScript book 
 
 ## Julia
 
@@ -124,6 +131,7 @@ tags:
 - [Snailclimb/JavaGuide](https://github.com/Snailclimb/JavaGuide): 【Java学习+面试指南】 一份涵盖大部分Java程序员所需要掌握的核心知识。
 
 ## markdown
+
 - [tylingsoft/markdown-plus](https://github.com/tylingsoft/markdown-plus): 增强的 markdown
 - [marktext/marktext](https://github.com/marktext/marktext): markdown editor。能实时更新 markdown 的 preview，而不是在另一个窗口表示。用了一次感觉不是很好。。可能 markdown 已经在心中格式化(?)
 
@@ -141,6 +149,7 @@ tags:
 - [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN): 《The Way to Go》中文译本，中文正式名《Go 入门指南》
 
 ## Python
+
 - [google/python-cli](https://github.com/google/python-fire): google 的。一个能给 python 对下行自动生成命令行接口的库
 - [dingdang-robot/dingdang-robot](https://github.com/dingdang-robot/dingdang-robot): 中文语音对话机器人/智能音箱项目
 - [kennethreitz/requests-html](https://github.com/kennethreitz/requests-html): requests 作者写的终极升级版 HTML-parsing 库
@@ -169,18 +178,22 @@ tags:
 - [huihut/interview](https://github.com/huihut/interview):  C/C++面试知识总结
 - [intel/hyperscan](https://github.com/intel/hyperscan): High-performance regular expression matching library
 - [chenshuo/muduo](https://github.com/chenshuo/muduo): A C++ non-blocking network library for multi-threaded server in Linux
+- [linyacool/WebServer](https://github.com/linyacool/WebServer): A C++ High Performance Web Server
 
 ## Rust
 
 - [rust-lang/rust](https://github.com/rust-lang/rust): A safe, concurrent, practical language.
 
 ## Csharp
+
 - [ServiceStack/ServiceStack](https://github.com/ServiceStack/ServiceStack): Web framework for csharp
 
 ## Assembly
+
 - [nemasu/asmttpd](https://github.com/nemasu/asmttpd): Web server for Linux written in amd64 assembly.
 
 ## tools
+
 - [tomnomnom/gron](https://github.com/tomnomnom/gron): Make JSON greppable
 - [tabler/tabler](https://github.com/tabler/tabler): 用 bootstrap4 做的仪表盘
 - [tangrela/ojbk_jiexi](https://github.com/tangrela/ojbk_jiexi): 视频解析
@@ -257,10 +270,15 @@ Simple SSL HTTP proxy using a self-signed certificate. Intended for local develo
 - [honza/vim-snippets](https://github.com/honza/vim-snippets): vim-snipmate default snippets
 - [felixrieseberg/windows95](https://github.com/felixrieseberg/windows95):  Windows 95 in Electron. Runs on macOS, Linux, and Windows.
 - [google/tink](https://github.com/google/tink): Tink is a multi-language, cross-platform library that provides cryptographic APIs that are secure, easy to use correctly, and hard(er) to misuse.
+- [fuh/vimrc](https://github.com/fuh/vimrc): minimal .vimrc for c/c++ developers
+- [liuchengxu/git-commit-emoji-cn](https://github.com/liuchengxu/git-commit-emoji-cn): git commit message emoji 使用指南
+- [zh-google-styleguide/zh-google-styleguide](https://github.com/zh-google-styleguide/zh-google-styleguide): Google 开源项目风格指南 (中文版)
+- [jawil/GayHub](https://github.com/jawil/GayHub): An awesome chrome extension for github
 
 ## Algorithm
 
-- [24OI/OI-wiki](https://github.com/24OI/OI-wiki): Wiki for OI / ACM-ICPC. （某大型游戏线上攻略，内含炫酷算术魔法）
+- [24OI/OI-wiki](https://github.com/24OI/OI-wiki): Wiki for OI / ACM-ICPC.  (某大型游戏线上攻略，内含炫酷算术魔法) 
+- [fuliucansheng/hihocoder](https://github.com/fuliucansheng/hihocoder): hihocoder AC code
 
 ## Database
 
@@ -268,15 +286,20 @@ Simple SSL HTTP proxy using a self-signed certificate. Intended for local develo
 - [pingcap/tidb](https://github.com/pingcap/tidb): TiDB is a distributed HTAP database compatible with the MySQL protocol
 
 ## computer-graphics
+
 - [karimnaaji/3d-quickhull](https://github.com/karimnaaji/3d-quickhull): Header only 3d quickhull in c99
 
 ## machine learning
+
 - [candlewill/Dialog_Corpus](https://github.com/candlewill/Dialog_Corpus): 用于训练中英文对话系统的语料库 Datasets for Training Chatbot System
 - [vipstone/faceai](https://github.com/vipstone/faceai): 一款入门级的人脸、视频、文字检测以及识别的项目.
 - [MorvanZhou/tutorials](https://github.com/MorvanZhou/tutorials): 机器学习相关教程
 - [kailashahirwar/cheatsheets-ai](https://github.com/kailashahirwar/cheatsheets-ai): Essential Cheat Sheets for deep learning and machine learning researchers 
+- [scutan90/DeepLearning-500-questions](https://github.com/scutan90/DeepLearning-500-questions): 深度学习500问
+- *[junyanz/CycleGAN](https://github.com/junyanz/CycleGAN): Software that can generate photos from paintings, turn horses into zebras, perform style transfer, and more.
 
 ## funny
+
 - [skygragon/leetcode-cli](https://github.com/skygragon/leetcode-cli): 命令行里刷 leetcode。感觉很好玩。
 - [jsonresume/resume-cli](https://github.com/jsonresume/resume-cli): 用 json 写简历。可惜不支持中文(当时我还以为发现宝了)。。以后写英文 resume 可能用得到
 - [posquit0/Awesome-CV](https://github.com/posquit0/Awesome-CV): 用 latex 写简历。可惜对中文的解析是硬伤
@@ -285,3 +308,28 @@ Simple SSL HTTP proxy using a self-signed certificate. Intended for local develo
 - [tuna/blogroll](https://github.com/tuna/blogroll): 好多人的博客。。
 - [imyelo/pokequest-wiki](https://github.com/imyelo/pokequest-wiki): Pokémon Quest Dex designed for Web / 方可梦图鉴
 - [wuzhiyi/guide-to-the-douban](https://github.com/wuzhiyi/guide-to-the-douban): 豆瓣漫游指南
+- [MicrosoftEdge/MSEdge](https://github.com/MicrosoftEdge/MSEdge): Microsoft Edge
+
+## Dart
+
+- [OpenFlutter/Flutter-Notebook](https://github.com/OpenFlutter/Flutter-Notebook): 日更的FlutterDemo合集
+
+## Linux
+
+- [wting/autojump](https://github.com/wting/autojump): A cd command that learns - easily navigate directories from the command line
+
+## Lua
+
+- [lua/lua](https://github.com/lua/lua): The Lua repo, as seen by the Lua team
+
+## Chrome Extension
+
+- [bluecaret/carettab](https://github.com/bluecaret/carettab): CaretTab - New Tab Page Replacement
+- [sxei/chrome-plugin-demo](https://github.com/sxei/chrome-plugin-demo): 《Chrome插件开发全攻略》配套完整Demo
+
+## Compiler
+
+- [rui314/9cc](https://github.com/rui314/9cc): A Small C Compiler
+- [lotabout/write-a-C-interpreter](https://github.com/lotabout/write-a-C-interpreter): Write a simple interpreter of C. Inspired by c4 and largely based on it.
+- [miloyip/json-tutorial](https://github.com/miloyip/json-tutorial): 从零开始的 JSON 库教程
+- [txyyss/Lambda-Calculus](https://github.com/txyyss/Lambda-Calculus): n introduction to lambda calculus in Chinese, including an interpreter in Haskell.

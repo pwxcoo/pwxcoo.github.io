@@ -17,7 +17,7 @@ tags:
 ### 下载
 从 github 上下载对应的版本。可以选择源代码版本或者编译完成可执行文件。我当然是选择可执行文件。[github上下载地址](https://github.com/tesseract-ocr/tesseract/wiki)。(噢对，github上下载release文件都是要科学上网的)。
 
-### 环境变量（仅windows)
+### 环境变量 (仅windows)
 ubuntu 用 apt 直接会配置好环境变量的。
 
 1. PATH 增加  tesseract 安装目录
@@ -36,7 +36,7 @@ ubuntu 用 apt 直接会配置好环境变量的。
 ### 部署到自己的 node + koa 应用上
 主要需要两个功能，需要 OCR 识别本地图片和网络图片。
 
-除了 [desmondmorris/node-tesseract](https://github.com/desmondmorris/node-tesseract) 这个库，还用到了 koa-multer（上传图片），superagent（下载网络图片）这两个库。
+除了 [desmondmorris/node-tesseract](https://github.com/desmondmorris/node-tesseract) 这个库，还用到了 koa-multer (上传图片) ，superagent (下载网络图片) 这两个库。
 
 具体可以看我 ["[ADD]添加OCR识别功能" 这次 commit](https://github.com/pwxcoo/BlackMagic/commit/31500a2adaa9b6015e56480050e4d2ca5f5cff24)。
 

@@ -8,7 +8,7 @@ tags:
 - c
 ---
 
-目的是构建了简单 C/C++ 环境，用于小项目（比如算法题）。
+目的是构建了简单 C/C++ 环境，用于小项目 (比如算法题) 。
 
 ## 为什么用 visual studio code 写 C/C++
 
@@ -29,9 +29,9 @@ tags:
 下面所有的 vscode 命令用 `Ctrl + Alt + P` 打开 vscode 的工具窗口输入。
 
 - `C/CPP: Edit Configuration` => 生成一个 `c_cpp_properities.json` 。
-- `Task: Configure Task Runner` => 选择 Other （当然如果要用 MSBuild 也可以，不过我自己用的是 g++，所以选了 Other => 生成 `task.json`。
+- `Task: Configure Task Runner` => 选择 Other  (当然如果要用 MSBuild 也可以，不过我自己用的是 g++，所以选了 Other => 生成 `task.json`。
     
-    这里的 `task.json` 需要自己配置一下，我直接用的 vscode 的 snippet 功能的，贴一下我的 snippet（我的 json.json）：
+    这里的 `task.json` 需要自己配置一下，我直接用的 vscode 的 snippet 功能的，贴一下我的 snippet (我的 json.json) : 
 
     ```json
     {
@@ -70,7 +70,7 @@ tags:
     }
     ```
 
-    用的 snippet 就减少重复的工作量了，直接输入 `cpptask` 就能生成一个 customize 的 snippet。然后自己写一下需要编译的 cpp 文件名就可以了，最后生成的 task.json 大概是这样的：
+    用的 snippet 就减少重复的工作量了，直接输入 `cpptask` 就能生成一个 customize 的 snippet。然后自己写一下需要编译的 cpp 文件名就可以了，最后生成的 task.json 大概是这样的: 
 
     ```json
     {
@@ -108,11 +108,11 @@ tags:
     }
     ```
 - 然后就可以编译了，输入 `Tasks: Run Tasks` => `build` 然后编译完成，看到目标文件，执行就好了。
-- 调试的功能（因为可视化的调试比终端里调试舒服多了，这也是我不想用 vim 的理由。。）
+- 调试的功能 (因为可视化的调试比终端里调试舒服多了，这也是我不想用 vim 的理由。。) 
     - `Ctrl + Shift + D` 然后点那个齿轮，就自动生成了一个 `launch.json` 文件 
     - 修改 `program` 里文件名
     - 加上一个 `preLaunchTask` 的字段，值为 `build-debug`，表示调试前先编译。
-    - 最后的 `launch.json` 文件大概是这样的：
+    - 最后的 `launch.json` 文件大概是这样的: 
     ```json
     {
         "version": "0.2.0",

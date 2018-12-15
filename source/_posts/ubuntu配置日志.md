@@ -32,7 +32,7 @@ tags:
 - `sudo apt install vim`
 - `sudo vim /etc/vim/vimrc`
 - 取消`syntax on`的注释
-- 最后一行配置：
+- 最后一行配置: 
 
 ```
 set nu          //在左侧显示行号码
@@ -169,8 +169,8 @@ export PATH=$JAVA_HOME/bin:$PATH
 }  
 ```
 - `sudo sslocal -c /etc/shadowsocks.json` 开中断启动 ss
-- 更改系统设置 -> 网络 -> 网络代理 -> Socks主机： 127.0.0.1 -> port: 1080
-- 给 chrome 下一个插件 SwitchyOmega([SwitchyOmega 配置](https://www.sundabao.com/ubuntu%E4%BD%BF%E7%94%A8shadowsocks/))，选择 `autoProxy`，规则列表网址：
+- 更改系统设置 -> 网络 -> 网络代理 -> Socks主机:  127.0.0.1 -> port: 1080
+- 给 chrome 下一个插件 SwitchyOmega([SwitchyOmega 配置](https://www.sundabao.com/ubuntu%E4%BD%BF%E7%94%A8shadowsocks/))，选择 `autoProxy`，规则列表网址: 
 ```html
 https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
 ```

@@ -60,7 +60,7 @@ git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell
 
 我用 ssh 的时候，一直失败。。然后 `ssh -Tvvv git@gitserver` 命令调试的时候也没有找到有用的信息。。
 
-后来找到了这个 log：
+后来找到了这个 log: 
 
 ```log
 debug3: receive packet: type 51

@@ -39,10 +39,10 @@ java.util.Map [I]
     +--java.util.LinkedHashMap [C]
     +--java.util.WeakHashMap [C]
 
-[I]：接口
-[C]：类
+[I]: 接口
+[C]: 类
 ```
-Java 集合框架的基本接口/类层次结构大概就是这样的。看一下[Java数据结构概览](https://segmentfault.com/a/1190000009797159)，C++ 有一个 STL 源码剖析，但是 Java 好像没有 JCF(Java Collections Framework) 的书籍。Github 上有一个讲解 JCF 的仓库[Java Collections Framework Internals](https://github.com/CarpenterLee/JCFInternals)，是结合 JDK1.7 讲的，JDK1.8 有一些变化（如 HashMap 从数组+链表变成了数组+链表+红黑树），JDK1.8 比 JDK1.7 源码要复杂一些，先看 JDK1.7 然后在看 1.8 和 1.7 有什么进步就可以了。
+Java 集合框架的基本接口/类层次结构大概就是这样的。看一下[Java数据结构概览](https://segmentfault.com/a/1190000009797159)，C++ 有一个 STL 源码剖析，但是 Java 好像没有 JCF(Java Collections Framework) 的书籍。Github 上有一个讲解 JCF 的仓库[Java Collections Framework Internals](https://github.com/CarpenterLee/JCFInternals)，是结合 JDK1.7 讲的，JDK1.8 有一些变化 (如 HashMap 从数组+链表变成了数组+链表+红黑树) ，JDK1.8 比 JDK1.7 源码要复杂一些，先看 JDK1.7 然后在看 1.8 和 1.7 有什么进步就可以了。
 
 ## 浅谈 JDK1.8 中的 HashMap
 [Java 8系列之重新认识HashMap](https://zhuanlan.zhihu.com/p/21673805)

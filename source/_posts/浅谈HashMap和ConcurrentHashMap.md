@@ -11,8 +11,8 @@ tags:
 
 ## HashMap
 
-- HashMap 在 jdk1.7 里是数组 + 链表，哈希冲突用拉链（头插法）解决。
-- HashMap 在 jdk1.8 里是数组 + 链表/红黑树，哈希冲突用拉链（头插法）解决（链表太长就用红黑树）。
+- HashMap 在 jdk1.7 里是数组 + 链表，哈希冲突用拉链 (头插法) 解决。
+- HashMap 在 jdk1.8 里是数组 + 链表/红黑树，哈希冲突用拉链 (头插法) 解决 (链表太长就用红黑树) 。
 
 
 ### 成员变量
@@ -114,7 +114,7 @@ tags:
 - DEFAULT_LOAD_FACTOR，默认的负载因子的大小
 - TREEIFY_THRESHOLD，将链表升级成红黑树的 threshold
 - UNTREEIFY_THRESHOLD，当 HashMap 删除元素后，红黑树退化成链表的 threshold
-- MIN_TREEIFY_CAPACITY，升级成红黑树的最小容量，表示 HashMap 达到这个容量之后，一定会升级成红黑树或者 resize。（但是我没在别人的博客里看到过这个。。我只是按照注释理解了一下。。这个东西下面没用到）
+- MIN_TREEIFY_CAPACITY，升级成红黑树的最小容量，表示 HashMap 达到这个容量之后，一定会升级成红黑树或者 resize。 (但是我没在别人的博客里看到过这个。。我只是按照注释理解了一下。。这个东西下面没用到) 
 - table[]，存放数据的数组，每个元素是一个内部类 Node
     ```java
     static class Node<K,V> implements Map.Entry<K,V> {
@@ -160,10 +160,10 @@ tags:
     - hash 就是 hash 值
     - key 是存放的 key 值
     - value 是存放的 value 值
-    - next 是指向下一个 Node 的引用，生成链表时用的，**如果升级成红黑树，会用 TreeNode（也是一个内部类） 代替 Node**
+    - next 是指向下一个 Node 的引用，生成链表时用的，**如果升级成红黑树，会用 TreeNode (也是一个内部类)  代替 Node**
 - size，HashMap 的 size
-- modCount，表示 HashMap 的 structural modified 次数（比如，添加删除元素，或者 resize 都算，但是如果仅仅是值的改变不算）。当迭代操作或者序列化操作时，操作前后需要比较 modCount 是否相等，不相等就 Fail-Fast，抛出 ConcurrentModificationException。
-- threshold，resize 的大小，等于 （capacity * load factor），达到 threshold 的时候就会扩容（会 rehash，复制数据等操作，比较消耗性能）
+- modCount，表示 HashMap 的 structural modified 次数 (比如，添加删除元素，或者 resize 都算，但是如果仅仅是值的改变不算) 。当迭代操作或者序列化操作时，操作前后需要比较 modCount 是否相等，不相等就 Fail-Fast，抛出 ConcurrentModificationException。
+- threshold，resize 的大小，等于  (capacity * load factor) ，达到 threshold 的时候就会扩容 (会 rehash，复制数据等操作，比较消耗性能) 
 - loadFactor，负载因子
 
 ### put()
@@ -215,10 +215,10 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 - 判断当前 table 是否未初始化，未初始化就初始化一波
 - 根据 hash 值定位到具体的 bin，如果这个 bin 为空，直接新建一个 bin 放入这个 Node，**然后返回**
-- 判断 key 是否和当前结点的 key 相等，相等就直接替换 Node（或者 key 都为 null 的时候，HashMap 允许 key 为 null，顺便再插一句，HashMap 中 null 无法计算其 hash 值，默认都是放到下标为 0 的  上）
-- 如果当前结点是 TreeNode 红黑树结点，就按红黑树的方法插入（具体就不展开了）
-- 如果是链表，就遍历链表，找到相同的 key 的 Node 就可以直接替换 Node，如果没找到就 newNode()（这个方法会在对应的 bin 中插入 Node）
-- 统一替换 Node（即 e 不为空）
+- 判断 key 是否和当前结点的 key 相等，相等就直接替换 Node (或者 key 都为 null 的时候，HashMap 允许 key 为 null，顺便再插一句，HashMap 中 null 无法计算其 hash 值，默认都是放到下标为 0 的  上) 
+- 如果当前结点是 TreeNode 红黑树结点，就按红黑树的方法插入 (具体就不展开了) 
+- 如果是链表，就遍历链表，找到相同的 key 的 Node 就可以直接替换 Node，如果没找到就 newNode() (这个方法会在对应的 bin 中插入 Node) 
+- 统一替换 Node (即 e 不为空) 
 - modCount 自增
 - 判断是否需要 resize
 
@@ -276,55 +276,55 @@ final Node<K,V> getNode(int hash, Object key) {
 ```
 
 - 判断 table 是否未初始化，未初始化或者定位到的 bin 为空的话，直接**返回 null**
-- 判断第一个 Node/TreeNode 的值是否为查询的 key，是的话直接返回（always check first node），若不匹配就下一步
+- 判断第一个 Node/TreeNode 的值是否为查询的 key，是的话直接返回 (always check first node) ，若不匹配就下一步
 - 判断为 TreeNode，查找红黑树
 - 判断链表，遍历链表查找
 
 ### 并发下会形成环形链表
 
-一个例子：
+一个例子: 
 
 1. 刚开始，设 length 为 4，threshold 为 3，现在要扩容了
-    - 0：
-    - 1：5 -> 9 -> 17
-    - 2：
-    - 3：
-2. thread1 执行扩容中，此时执行到 9 这个 Node：
-    - 0：
-    - 1：**9** -> 17
+    - 0: 
+    - 1: 5 -> 9 -> 17
+    - 2: 
+    - 3: 
+2. thread1 执行扩容中，此时执行到 9 这个 Node: 
+    - 0: 
+    - 1: **9** -> 17
     - 2:
     - 3:
     - 4:
     - 5: 5
-    - 6：
-    - 7：
-3. thread2 执行完成：
-    - 0：
-    - 1：17 -> 9 
+    - 6: 
+    - 7: 
+3. thread2 执行完成: 
+    - 0: 
+    - 1: 17 -> 9 
     - 2:
     - 3:
     - 4:
     - 5: 5
-    - 6：
-    - 7：
+    - 6: 
+    - 7: 
 4. thread1 继续执行，把 rehash 后的 9 插到 1 的 bin 上，头插插入
-    - 0：
-    - 1：9 <=> 17
+    - 0: 
+    - 1: 9 <=> 17
     - 2:
     - 3:
     - 4:
     - 5: 5
-    - 6：
-    - 7：
+    - 6: 
+    - 7: 
 
 这样 9 和 17 成为了对方的 next，形成了环。
 
 
 ## ConcurrentHashMap
 
-其中的核心数据，如 value，以及链表都是 volatile 修饰的，保证了获取时的可见性。（可以防止出现环，get 时也不用加锁）
+其中的核心数据，如 value，以及链表都是 volatile 修饰的，保证了获取时的可见性。 (可以防止出现环，get 时也不用加锁) 
 
-- ConcurrentHashMap 在 jdk1.7 中是由 Segment 数组（Segment 里存放 HashEntry 数组）构成的，Segment 继承自 ReentrantLock。
+- ConcurrentHashMap 在 jdk1.7 中是由 Segment 数组 (Segment 里存放 HashEntry 数组) 构成的，Segment 继承自 ReentrantLock。
     - put() 
         - 尝试获取锁，失败说明和其他线程存在竞争，用 `canAndLockForPut()` 自旋获取锁
             - 尝试自旋获取锁
@@ -407,7 +407,7 @@ final V putVal(K key, V value, boolean onlyIfAbsent) {
 - 计算出 hashCode
 - 判断是否需要初始化
 - 如果当前 key 定位的 Node 为空，尝试利用 CAS 写入，失败则自旋保证成功
-- 如果 hashcode == MOVED，表示已经这个 Node 已经被移动过了（表示其他线程在进行扩容操作），helpTransfer() 是一个辅助方法
+- 如果 hashcode == MOVED，表示已经这个 Node 已经被移动过了 (表示其他线程在进行扩容操作) ，helpTransfer() 是一个辅助方法
 - 如果都不满足，即当前 key 存在，并且找到了，用 synchronized 锁写入数据
 - 如果数量大于 TREEIFY_THRESHOLD，升级成红黑树
 

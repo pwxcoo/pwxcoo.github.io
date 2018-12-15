@@ -19,7 +19,7 @@ tags:
     - Blocked
     - Running
     - Terminated
-- Java中的线程状态（Java 中的线程是对操作系统线程的再次封装）
+- Java中的线程状态 (Java 中的线程是对操作系统线程的再次封装) 
     - New 
     - Runnable (Thread.start())
     - Blocked (synchronized, Lock)
@@ -72,7 +72,7 @@ public interface Future<V> {
 }
 ```
 
-Future 是一个接口，Future 提供了三种功能：
+Future 是一个接口，Future 提供了三种功能: 
 
 - 判断任务是否完成；
 - 能够中断任务；
@@ -98,19 +98,19 @@ FutureTask实现了两个接口，Runnable和Future，所以它既可以作为Ru
 
 - 进程同步
     - 信号量
-    - 管程（monitor）
+    - 管程 (monitor) 
     - 消息传递
 - 线程同步
-    - 临界区（Critical Section）
-    - 互斥量（Mutex）
-    - 信号量（Semaphore）
-    - 事件（Event）
+    - 临界区 (Critical Section) 
+    - 互斥量 (Mutex) 
+    - 信号量 (Semaphore) 
+    - 事件 (Event) 
 
 ### Java中线程同步问题
 
 - synchronized
-    - Java中每个对象都有一个内置锁（修饰静态方法的时候，会锁住整个类）
-- 重入锁（java.util.concurrent），ReentrantLock
+    - Java中每个对象都有一个内置锁 (修饰静态方法的时候，会锁住整个类) 
+- 重入锁 (java.util.concurrent) ，ReentrantLock
     - 实现是一个自旋锁，循环调用 CAS 操作来实现加锁
 - ThreadLocal
     - 如果使用 ThreadLocal 管理变量，则每一个使用该变量的线程都获得该变量的副本
@@ -195,7 +195,7 @@ FutureTask实现了两个接口，Runnable和Future，所以它既可以作为Ru
             for (int i = 0; i < 20; i++) {
                 Goods goods = new Goods(i);
                 ss.push(goods);
-                System.out.println("生产了：" + goods);
+                System.out.println("生产了: " + goods);
 
                 try {
                     Thread.sleep((int) (Math.random() * 200));
@@ -232,7 +232,7 @@ FutureTask实现了两个接口，Runnable和Future，所以它既可以作为Ru
 ### ReenTrantLock 和 synchronized 的区别?
 
 - ReenTrantLock 可以指定是公平锁还是非公平锁。而 synchronized 只能是非公平锁。
-- ReenTrantLock 提供了一个 Condition（条件）类，用来实现分组唤醒需要唤醒的线程们，而不是像 synchronized 要么随机唤醒一个线程要么唤醒全部线程。
+- ReenTrantLock 提供了一个 Condition (条件) 类，用来实现分组唤醒需要唤醒的线程们，而不是像 synchronized 要么随机唤醒一个线程要么唤醒全部线程。
 - ReenTrantLock 提供了一种能够中断等待锁的线程的机制，通过 lock.lockInterruptibly() 来实现这个机制。
 
 
@@ -243,8 +243,8 @@ FutureTask实现了两个接口，Runnable和Future，所以它既可以作为Ru
 - [Java并发之Runnable、Callable、Future、FutureTask](https://www.jianshu.com/p/cf12d4244171)
 - [进程同步的几种方式](https://www.cnblogs.com/Allen-rg/p/7172958.html)
 - [线程同步的几种方式](https://www.cnblogs.com/Allen-rg/p/7172970.html)
-- [ReenTrantLock可重入锁（和synchronized的区别）总结](https://blog.csdn.net/qq838642798/article/details/65441415)
+- [ReenTrantLock可重入锁 (和synchronized的区别) 总结](https://blog.csdn.net/qq838642798/article/details/65441415)
 - [CS-Notes/notes/Java 并发.md](https://github.com/CyC2018/CS-Notes/blob/a015b110387eb4a183fac7dc9526de6cd9e316b3/notes/Java%20%E5%B9%B6%E5%8F%91.md)
 - [java对象结构](https://blog.csdn.net/zqz_zqz/article/details/70246212)
-- [锁原理：偏向锁、轻量锁、重量锁](https://www.cnblogs.com/wewill/p/8058292.html)
+- [锁原理: 偏向锁、轻量锁、重量锁](https://www.cnblogs.com/wewill/p/8058292.html)
 - [java 中的锁 -- 偏向锁、轻量级锁、自旋锁、重量级锁](https://blog.csdn.net/zqz_zqz/article/details/70233767)

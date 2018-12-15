@@ -20,7 +20,7 @@ tags:
 
 我找到一个很傻瓜的解决方案。用的话肯定是 LET'S ENCRYPT，然后我的服务器这边是 nginx + ubuntu16.04。用的是 [Certbot](https://github.com/certbot/certbot) ，github 上 letsencrypt star 最多的一个 repository。
 
-Certbot 真的很舒服，不用去 Let ’ s Encrypt 注册账号（它会自动帮你注册），不用手动修改配置服务器配置，一行命令搞定。
+Certbot 真的很舒服，不用去 Let ’ s Encrypt 注册账号 (它会自动帮你注册) ，不用手动修改配置服务器配置，一行命令搞定。
 
 ```
 $ sudo apt update
@@ -54,7 +54,7 @@ $ sudo certbot renew --dry-run
 
 Certbot 会帮你启动一个定时任务，在证书过期时自动更新。
 
-PS：云服务器上的安全组规则里记得把 443 端口开了。
+PS: 云服务器上的安全组规则里记得把 443 端口开了。
 
 ## 图床
 因为网站之前用了七牛云的图床，然后因为七牛云免费图床是 HTTP 的，所以在 Chrome 里虽然是 HTTPS，但是没有那个绿色的小锁。

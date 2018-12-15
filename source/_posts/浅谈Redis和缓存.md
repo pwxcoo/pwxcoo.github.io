@@ -38,14 +38,14 @@ CDN(Content distribution network)。利用更靠近用户的服务器从而更�
 
 数据没 load 到缓存中，或者缓存在同一个时间大面积失效，或者缓存服务器宕机，导致大量请求都到达数据库。
 
-- 观察用户行为，合理设置缓存时间（或者给每个缓存加上一个随机值，避免集体失效）
+- 观察用户行为，合理设置缓存时间 (或者给每个缓存加上一个随机值，避免集体失效) 
 - 分布式缓存，每个节点只缓存部分的数据，某个节点宕机的时候保证其他节点仍然可用
 - 缓存预热，防止系统刚启动时还未将大量数据进行缓存而导致的雪崩  
 
 ## 缓存一致性
 
 - 数据更新，立刻更新缓存
-- 读取的时候判断是否是最新，不是再更新（惰性）
+- 读取的时候判断是否是最新，不是再更新 (惰性) 
 
 保证缓存一致性需要付出很大的代价，缓存数据适合那些一致性要求不高的数据，允许缓存数据存在一些脏数据。
 
@@ -99,8 +99,8 @@ Key-Value 类型的数据库，纯内存操作。
 # maxmemory-policy volatile-lru
 ```
 
-- noeviction：throw error
-- allkeys-lru：LRU for all keys
+- noeviction: throw error
+- allkeys-lru: LRU for all keys
 - allkeys-random: random for all keys
 - volatile-lru: LRU for expired keys
 - volatile-random: random for expired keys

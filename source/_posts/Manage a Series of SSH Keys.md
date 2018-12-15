@@ -9,7 +9,7 @@ tags:
 
 因为 `ssh` 用起来太爽了，很多的时候生成了一堆 `ssh` 私钥，如何在一台设备上管理多个 `ssh` 私钥。
 
-起因是想在公司电脑上管理两个 git account。一个公司的，一个自己的，然后配置了半天。。。主要还是因为 CSDN 那几篇博客有点坑（说 config 里 Host 是可以随便设置，却没提到 Host 是 ssh 开连接找路由的入口。。）。。每次都 authentication 失败。。不过后来在 Stackoverflow 上找到原因了。。感觉 zz。
+起因是想在公司电脑上管理两个 git account。一个公司的，一个自己的，然后配置了半天。。。主要还是因为 CSDN 那几篇博客有点坑 (说 config 里 Host 是可以随便设置，却没提到 Host 是 ssh 开连接找路由的入口。。) 。。每次都 authentication 失败。。不过后来在 Stackoverflow 上找到原因了。。感觉 zz。
 
 ## Preparation
 删除 global config 设置:(不过好像不删也没什么关系？因为讲道理 local config 是可以覆盖 global config 的)
@@ -39,7 +39,7 @@ $ ssh-keygen -t rsa -C "example@email.com"
 
 很多博客没提到 Host 是路由，而是说 HostName 要写上目标网站，于是我一开始就以为 ssh 是通过 HostName 找 server 的。。其实 Host 是 ssh 找连接的路由，两个都是 ssh 连接时要用到的。
 
-我的配置文件：
+我的配置文件: 
 ```config
 Host github.com
 HostName github.com

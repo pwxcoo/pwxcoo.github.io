@@ -10,7 +10,7 @@ tags:
 
 ## makefile
 
-makefile 的大概规则模板：
+makefile 的大概规则模板: 
 
 ```makefile
 target ... : prerequisites ...
@@ -40,7 +40,7 @@ target ... : prerequisites ...
         -rm edit $(objects)
     ```
 
-一个最简单的 makefile 例子：
+一个最简单的 makefile 例子: 
 
 ```makefile
 CXX = g++

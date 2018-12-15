@@ -13,7 +13,7 @@ tags:
 
 [Spring Boot Security Application](https://bartcode.co.uk/2014/12/spring-boot-security-application) 这个博主这篇14年文章给了我很多帮助。网上有翻译。但是那个是机器翻的。我还以为是屎呢。
 
-用 Spring Security 可以比较方便地开发应用中的几个问题：
+用 Spring Security 可以比较方便地开发应用中的几个问题: 
 
 - 用户角色有用户，管理员。两者权限不一致
 - 非管理员用户可以查看自己的信息，但不能窥视其他用户
@@ -24,7 +24,7 @@ tags:
 - 从[start.spring.io](https://start.spring.io/)官网下载初始化应用。我下的是 gradle 的 spring boot 1.5.9 版本
 - [Securing a Web Application](https://spring.io/guides/gs/securing-web/) 看一下官网上的入门 guide
 - 数据库用的是 mysql
-- gradle配置：
+- gradle配置: 
 ```gradle
 group 'com.pwxc'
 version '1.0-SNAPSHOT'
@@ -232,7 +232,7 @@ public class LoginAndRegisterController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String handleUserCreateForm(Model model, @Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
-        LOGGER.debug("用户提交的表单：{}, 验证结果：{}", form, bindingResult);
+        LOGGER.debug("用户提交的表单: {}, 验证结果: {}", form, bindingResult);
         if(bindingResult.hasErrors()) {
             model.addAttribute("error", "出错啦");
             return "register";
@@ -301,7 +301,7 @@ public class UserCreateFormValidator implements Validator {
 ```
 
 ## 认证配置
-使用Sercurity Boot 里必须要配置的，不然的话，每次打开网页他就会一直叫你验证，可以说是，超级不友好了。SecurityConfig类：
+使用Sercurity Boot 里必须要配置的，不然的话，每次打开网页他就会一直叫你验证，可以说是，超级不友好了。SecurityConfig类: 
 ```java
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -378,7 +378,7 @@ public class CurrentUserDetailsService implements UserDetailsService {
 }
 ```
 
-UserDetails 是 Spring 用来记录当前用户，就是用户登录完之后，系统里保存就是当前这个用户的 UserDetails，所以可以在不同的用户端显示不同的内容。这个 UserDetails 对每个应用是不一样的，因为每个应用有不同的业务逻辑，所以继承一波UserDetails，写一个属于自己的 UserDetails。就是 CurrentUser：
+UserDetails 是 Spring 用来记录当前用户，就是用户登录完之后，系统里保存就是当前这个用户的 UserDetails，所以可以在不同的用户端显示不同的内容。这个 UserDetails 对每个应用是不一样的，因为每个应用有不同的业务逻辑，所以继承一波UserDetails，写一个属于自己的 UserDetails。就是 CurrentUser: 
 ```java
 public class CurrentUser extends org.springframework.security.core.userdetails.User {
 
