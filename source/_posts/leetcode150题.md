@@ -354,4 +354,4 @@ class LRUCache {
 这几道是真的很秀。我这几天的代码全在[这里](https://github.com/pwxcoo/ac-game)了。
 
 放一张图片。
-![leetcode](https://i.loli.net/2018/12/05/5c0749ebbfe73.png)
+![leetcode150](https://i.loli.net/2018/12/05/5c0749ebbfe73.png)

@@ -90,7 +90,7 @@ CREATE TABLE `message` (
 
 ### B-Tree
 
-![/post-images/b-tree.png](https://i.loli.net/2018/08/27/5b841d2d5f199.png)
+![b-tree](https://i.loli.net/2018/08/27/5b841d2d5f199.png)
 
 m 阶 B-Tree 满足一下条件: 
 
@@ -107,7 +107,7 @@ B-Tree 的查找:
 
 ### B+Tree
 
-![/post-images/b+tree.png](https://i.loli.net/2018/08/27/5b841d7988e20.png)
+![b+tree](https://i.loli.net/2018/08/27/5b841d7988e20.png)
 
 m 阶 B-Tree 满足一下条件: 
 
