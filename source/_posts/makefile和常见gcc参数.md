@@ -39,6 +39,7 @@ target ... : prerequisites ...
     clean :
         -rm edit $(objects)
     ```
+- `$@` 表示目标文件，`$^` 表示全部依赖，`$<` 表示第一个依赖。
 
 一个最简单的 makefile 例子: 
 
