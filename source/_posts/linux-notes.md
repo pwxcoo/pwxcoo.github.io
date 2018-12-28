@@ -7,14 +7,49 @@ tags:
 - linux
 ---
 
-记录常用的 linux 操作。
+a collection of frequently-used linux operations.
 
-## server 配置 ssh service
+## server configure ssh service
 
-- `useradd -m [username]`, `-m` 表示自动建立用户的登陆目录
-- `passwd [username]`, 配置密码
-- `usermod -s /bin/bash [username]`, 更改默认的 login shell
-    - `cat /etc/passwd` 查看所有用户
-    - `cat /etc/shells` 查看所有 shell
-- 回到 client，`scp id_rsa.pub [username]@[server address]:/home/[username]` 传输公钥到 server
-- 登陆回 server，`mv id_rsa.pub .ssh/authorized_keys` 就好了
+- `useradd -m [username]`, `-m` will automatically create new user folder in `/home`
+- `passwd [username]`, configure password
+- `usermod -s /bin/bash [username]`, change default login shell
+    - `cat /etc/passwd` list all users
+    - `cat /etc/shells` list all available shells
+- `usermod -aG sudo pwxcoo`，grant `sudo` privileges
+    - `groups` check group of current user
+- in client，`scp id_rsa.pub [username]@[server address]:/home/[username]` transfer public key to server
+- back to server，`mv id_rsa.pub .ssh/authorized_keys`  will be ok
+
+## nginx
+
+- `sudo apt update`
+- `sudo apt install nginx`
+- `cd /etc/nginx/conf.d` (NGINX site-specific configuration files are kept in `/etc/nginx/conf.d`)
+- simple template. `example.com.conf`
+    ```conf
+    server {
+        listen       80;
+        server_name  example.com;
+
+        #charset koi8-r;
+        #access_log  /var/log/nginx/host.access.log  main;
+
+        location / {
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+        }
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }
+    ```
+- test nginx configration is ok
+    - `sudo nginx -t`
+    - `sudo nginx -s reload`
