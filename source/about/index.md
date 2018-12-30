@@ -20,7 +20,7 @@ function                    | services
 
 
 # Friends
-- [李超众的根据地](https://www.licz.site/)
+- [李超众的根据地](http://blog.licz.site/)
 - [Ocrosoft](https://www.ocrosoft.com/)
 - [Fighting Heart](http://www.cnblogs.com/zufezzt/)
 
