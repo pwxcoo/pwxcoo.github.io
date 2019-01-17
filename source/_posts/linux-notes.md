@@ -53,3 +53,17 @@ a collection of frequently-used linux operations.
 - test nginx configration is ok
     - `sudo nginx -t`
     - `sudo nginx -s reload`
+
+## set environment variables
+
+linux will execute `/etc/profile` while booting up, this script will execute all script in `/etc/profile.d`, so add some scripts in `/etc/profile.d` will be easily maintained and convenient.
+
+like `jdk.sh`, it will set environment variables for Java.
+
+```sh
+export J2SDKDIR=/usr/lib/jvm/java-8-oracle
+export J2REDIR=/usr/lib/jvm/java-8-oracle/jre
+export PATH=$PATH:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+export DERBY_HOME=/usr/lib/jvm/java-8-oracle/db
+```
