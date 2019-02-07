@@ -71,8 +71,8 @@ tags:
 - 集合初始化时,指定集合初始值大小。
 - 使用 entrySet 遍历 Map 类集合 KV ,而不是 keySet 方式进行遍历。
 - Map 类对 null 值的处理。
-
-    | 集合类            | Key | Value | Super       | 说明                |
+   
+>    | 集合类            | Key | Value | Super       | 说明                |
     |-------------------|-----|-------|-------------|---------------------|
     | Hashtable         | no  | no    | Dictionary  | thread safe         |
     | ConcurrentHashMap | no  | no    | AbstractMap | 锁分段（JDK8: CAS） |
