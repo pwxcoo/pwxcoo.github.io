@@ -13,7 +13,7 @@ date: 2018-01-30 11:52:51
 
 function                    | services
 ---                         | ---
-**Theme**                   | [hexo-theme-cactus](https://github.com/probberechts/hexo-theme-cactus)
+**Theme**                   | [hexo-theme-cactus](https://github.com/pwxcoo/hexo-theme-cactus)
 **Image Storage Service**   | [SM.MS](https://sm.ms/)
 **Comment**                 | [DISQUS](https://disqus.com/) (with FQ)
 **Rss**                     | [RSS subscription](https://blog.pwxcoo.com/atom)
