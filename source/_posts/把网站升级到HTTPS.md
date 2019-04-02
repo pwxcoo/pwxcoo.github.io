@@ -27,7 +27,7 @@ $ sudo apt update
 $ sudo apt install software-properties-common
 $ sudo add-apt-repository ppa:certbot/certbot
 $ sudo apt update
-$ sudo apt install python-certbot-nginx 
+$ sudo apt install python-certbot-nginx
 ```
 
 安装好之后
@@ -44,7 +44,7 @@ $ sudo certbot --nginx
 
 升级完成~
 
-![https](https://i.loli.net/2018/05/03/5aeb0c44e371a.png)
+![https](https://ws1.sinaimg.cn/large/8a79c363gy1g1ooo7q6r9j20hl03tjrt.jpg)
 
 要注意看接下来他问你的几个问题，比如说要不要把原来的 HTTP 重定向到 HTTPS 阿什么的，不看也没关系，到时候重新改一下 nginx 的配置文件就好了。证书是 90 天的，运行
 
@@ -63,7 +63,7 @@ PS: 云服务器上的安全组规则里记得把 443 端口开了。
 
 于是换了一个图床 [SM.MS](https://sm.ms/)。因为网站不大，几张图片，人肉迁徙过去了，然后开了日志文件用来记录迁徙记录，要是以后这个图床倒闭，到时候有这个日志文件起码不会太混乱。。
 
-![migrate](https://i.loli.net/2018/05/07/5af057358135a.png)
+![migrate](https://ws1.sinaimg.cn/large/8a79c363gy1g1oooitfbaj20e70cp3zj.jpg)
 
 ## 通配符匹配域名
 上面这样是匹配单独域名，如果想要 `*.pwxcoo.com` 这样通配符匹配域名的话，需要另外一种设置。

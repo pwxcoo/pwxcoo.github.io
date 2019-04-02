@@ -22,18 +22,18 @@ tags:
 
 双方要事先约定一个除数 P，P 可以用多项式表示，P(X) 叫做 **生成多项式**。
 
-几种常见的生成多项式: 
+几种常见的生成多项式:
 
 
 CRC P       | 	Checksum Width  |  Generator Polynomial
 ---         | ---               | ---
 CRC-CCITT   |   16 bits         | 	10001000000100001
-CRC-16      | 	16 bits         |   11000000000000101 
+CRC-16      | 	16 bits         |   11000000000000101
 CRC-32      |   32 bits         |   100000100110000010001110110110111
 
 -----
 
-CRC 的过程大概是这样的: 
+CRC 的过程大概是这样的:
 
 - P 的长度为 n，frame 就左移 (n - 1) 的长度，相当于在后面加上 (n - 1) 个零，此时 frameM = $frame * 2 ^ {n}$
 - 然后就是 frameM 作为被除数，P 作为除数，做二进制的模 2 运算 (相当于做二进制加法，但是不进位，**其实跟异或一样**) 。
@@ -42,13 +42,13 @@ CRC 的过程大概是这样的:
 
 这个图中的原始的 frame 是 10110011，P 是 11001，P 的长度是 n 为 5，所以给原始的 frame 填上 4 个零 (填上 n - 1 个零) ，然后求出余数为 FCS 为 0100，加在原始的 frame 后面，变成 101100110100 传给接收端，接收端收到 101100110100 后，跟 P 做模 2 运算，余数为 0 则表示差错，然后接受这个帧。
 
-![crc.png](https://i.loli.net/2018/09/08/5b938180e1c25.png)
+![crc.png](https://ws1.sinaimg.cn/large/8a79c363gy1g1oom9l156j20je0a1gnm.jpg)
 
 最后可以实现的是，**在接收端数据链路层接受的帧均无差错**。
 
 ## CRC 代码实现
 
-- check() 函数就是模 2 运算，算出余数 (FCS) 
+- check() 函数就是模 2 运算，算出余数 (FCS)
 - crc() 就给 frame 填上零然后做模 2 运算，返回运算的余数。
 - 别的就是我随机生成一个二进制的 frame 和几个常见生成多项式做的测试代码
 
@@ -59,7 +59,7 @@ def check(frame, p):
   for i in range(n, len(frame)):
     fcs += frame[i]
     fcs = bin(int(fcs, 2))[2:]
-    if (len(fcs) < len(p)): 
+    if (len(fcs) < len(p)):
       continue
     fcs = bin(int(fcs, 2) ^ int(p, 2))[2:]
   while len(fcs) < n:

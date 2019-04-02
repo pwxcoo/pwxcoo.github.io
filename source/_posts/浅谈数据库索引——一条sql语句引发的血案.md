@@ -13,7 +13,7 @@ tags:
 
 就是[这条](https://github.com/pwxcoo/news-boom/blob/master/src/main/java/com/pwxcoo/newsboom/dao/MessageDAO.java#L21)
 
-整理一下就是这这样子: 
+整理一下就是这这样子:
 
 ```sql
 SELECT
@@ -28,16 +28,16 @@ FROM
             from_id=1 OR to_id=1
         ORDER BY
             id DESC
-    ) tt 
+    ) tt
     GROUP BY
         conversation_id
     ORDER BY
         id DESC
-    LIMIT 
+    LIMIT
         10, 10
 ```
 
-message 的 schema 是这样的: 
+message 的 schema 是这样的:
 
 ```sql
 CREATE TABLE `message` (
@@ -62,9 +62,9 @@ CREATE TABLE `message` (
 [Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'information_schema.PROFILING.SEQ' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 ```
 
-然后就找到了官网的说法: 
+然后就找到了官网的说法:
 
-> SQL92 and earlier does not permit queries for which the select list, HAVING condition, or ORDER BY list refer to nonaggregated columns that are not named in the GROUP BY clause. 
+> SQL92 and earlier does not permit queries for which the select list, HAVING condition, or ORDER BY list refer to nonaggregated columns that are not named in the GROUP BY clause.
 
 我当时就蒙圈了，`nonaggregated` 又是什么。。
 
@@ -90,16 +90,16 @@ CREATE TABLE `message` (
 
 ### B-Tree
 
-![b-tree](https://i.loli.net/2018/08/27/5b841d2d5f199.png)
+![b-tree](https://ws1.sinaimg.cn/large/8a79c363gy1g1ooq03ryfj20cq037mx4.jpg )
 
-m 阶 B-Tree 满足一下条件: 
+m 阶 B-Tree 满足一下条件:
 
 1. 每个结点最多拥有 m 个子树，m-1 个 key
 2. 根结点上至少有 2 个子树
-3. 分支结点至少拥有 m/2 颗子树 (除根结点和叶子结点外都是分支结点) 
+3. 分支结点至少拥有 m/2 颗子树 (除根结点和叶子结点外都是分支结点)
 4. 所有叶子结点都在同一层，每个结点可以有最多可以有 m-1 个 key，并且以升序排序
 
-B-Tree 的查找: 
+B-Tree 的查找:
 
 **从根结点二分查找，找到返回对应的 data，否则继续在相应区间的指针指向的几点递归进行查找**
 
@@ -107,9 +107,9 @@ B-Tree 的查找:
 
 ### B+Tree
 
-![b+tree](https://i.loli.net/2018/08/27/5b841d7988e20.png)
+![b+tree](https://ws1.sinaimg.cn/large/8a79c363gy1g1ooq8zfdqj20f305b74c.jpg)
 
-m 阶 B-Tree 满足一下条件: 
+m 阶 B-Tree 满足一下条件:
 
 1. 每个结点最多拥有 m 个子树，m 个 key
 2. 根结点和分支结点中不保存数据，只用于索引，所有数据都保存在叶子结点中
@@ -121,7 +121,7 @@ m 阶 B-Tree 满足一下条件:
 ### 为什么用B/B+树？
 
 - 局部性原理 (当一个数据被用到时，其附近的数据通常会被马上使用) 。预读的长度通常为页的整数倍，许多操作系统中页的大小通常为 4 K。
-- 每次新建结点，直接申请一个页的空间。m 的大小通常取决于 key 和 point 和 data 的大小。 (由于 B+Tree 里内结点去掉了 data，可以拥有更大的出度) 
+- 每次新建结点，直接申请一个页的空间。m 的大小通常取决于 key 和 point 和 data 的大小。 (由于 B+Tree 里内结点去掉了 data，可以拥有更大的出度)
 
     $$d_{max} = floor(\frac{pagesize}{keysize + datasize + pointsize})$$
 
@@ -158,7 +158,7 @@ InnoDB 中的辅助索引最后用的是主键作为 data 域，所以辅助索�
 
 > SQL99 and later permits such nonaggregates per optional feature T301 if they are functionally dependent on GROUP BY columns: If such a relationship exists between name and custid, the query is legal. This would be the case, for example, were custid a primary key of customers.
 
-文档里有个例子: 
+文档里有个例子:
 
 > This query might be invalid with ONLY_FULL_GROUP_BY enabled because the nonaggregated address column in the select list is not named in the GROUP BY clause:
 

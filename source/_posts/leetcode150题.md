@@ -23,19 +23,19 @@ class Solution {
         int len = s.length();
         int[] dp = new int[len];
         int res = 0;
-        
+
         for(int i = 0; i < len; i++)
         {
             if(i - 1 >= 0 && s.charAt(i) == ')')
             {
-                if(s.charAt(i - 1) == '(') 
+                if(s.charAt(i - 1) == '(')
                 {
                     if(i >= 2) dp[i] = dp[i - 2] + 2;
                     else dp[i] = 2;
                 }
                 else if(s.charAt(i - 1) == ')')
                 {
-                    if(i - 1 - dp[i - 1] >= 0 && s.charAt(i - 1 - dp[i - 1]) == '(') 
+                    if(i - 1 - dp[i - 1] >= 0 && s.charAt(i - 1 - dp[i - 1]) == '(')
                     {
                         dp[i] = dp[i - 1] + 2;
                         if(i - 2 - dp[i - 1] >= 0) dp[i] += dp[i - 2 - dp[i - 1]];
@@ -44,7 +44,7 @@ class Solution {
                 res = Math.max(res, dp[i]);
             }
         }
-        
+
         return res;
     }
 }
@@ -58,7 +58,7 @@ class Solution {
         if(height.length <= 2) return 0;
         int left = 0, right = height.length - 1;
         int res = 0, level = Math.min(height[left], height[right]);
-        
+
         while(left < right)
         {
             if(height[left] <= height[right])
@@ -68,25 +68,25 @@ class Solution {
                 {
                     level = Math.min(height[left], height[right]);
                 }
-                else 
+                else
                 {
                     res += level - height[left];
                 }
             }
-            else 
+            else
             {
                 right--;
                 if(height[right] > level)
                 {
                     level = Math.min(height[left], height[right]);
                 }
-                else 
+                else
                 {
                     res += level - height[right];
                 }
             }
         }
-        return res;      
+        return res;
     }
 }
 ```
@@ -95,7 +95,7 @@ class Solution {
 题目贴的 tag 是 binary search，想考查的是二分查找，用二分查找可以。但是一般标准库里用的是 sqrt() 用的是牛顿迭代法。
 ```Java
 /**
- *  1. 二分查找 
+ *  1. 二分查找
  */
 class Solution {
     public int mySqrt(int x) {
@@ -142,7 +142,7 @@ class Solution {
             {
                 st.push(heights[i]);
             }
-            else 
+            else
             {
                 cnt = 0;
                 while(!st.empty() && heights[i] < st.peek())
@@ -170,7 +170,7 @@ class Solution {
         boolean[][] isPalindrome = new boolean[s.length()][s.length()];
         int[] dp = new int[s.length() + 1];
         for(int i = 0; i <= s.length(); i++) dp[i] = s.length() - i - 1;
-        
+
         for(int i = s.length() - 1; i >= 0; i --)
         {
             isPalindrome[i][i] = true;
@@ -195,10 +195,10 @@ class Solution {
     public int minCut(String s) {
         int[] dp = new int[s.length() + 1];
         for(int i = 0; i <= s.length(); i++) dp[i] = i - 1;
-        
+
         for(int i = 0; i < s.length(); i++)
         {
-            for(int j = 0; i - j >= 0 && i + j < s.length() && s.charAt(i - j) == s.charAt(i + j); j++) // odd 
+            for(int j = 0; i - j >= 0 && i + j < s.length() && s.charAt(i - j) == s.charAt(i + j); j++) // odd
                 dp[i + j + 1] = Math.min(dp[i + j + 1], dp[i - j] + 1);
             for(int j = 0; i - j - 1 >= 0 && i + j < s.length() && s.charAt(i - j - 1) == s.charAt(i + j); j++) // even
                 dp[i + j + 1] = Math.min(dp[i + j + 1], dp[i - j - 1] + 1);
@@ -266,7 +266,7 @@ class LRUCache {
         this.addNode(node);
     }
 
-    // pop the current tail. 
+    // pop the current tail.
     private DLinkedNode popTail(){
         DLinkedNode res = tail.pre;
         this.removeNode(res);
@@ -281,7 +281,7 @@ class LRUCache {
     public LRUCache(int capacity) {
         this.count = 0;
         this.capacity = capacity;
-        
+
         head = new DLinkedNode();
         head.pre = null;
 
@@ -354,4 +354,4 @@ class LRUCache {
 这几道是真的很秀。我这几天的代码全在[这里](https://github.com/pwxcoo/ac-game)了。
 
 放一张图片。
-![leetcode150](https://i.loli.net/2018/12/05/5c0749ebbfe73.png)
+![leetcode150](https://ws1.sinaimg.cn/large/8a79c363gy1g1oomjxc22j20oo46rgsg.jpg)

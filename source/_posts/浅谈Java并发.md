@@ -9,7 +9,7 @@ tags:
 
 ## Java线程状态
 
-![concurrent](https://i.loli.net/2018/09/07/5b920cd0dd44e.png)
+![concurrent](https://ws1.sinaimg.cn/large/8a79c363gy1g1ooox6kz5j20ot0do0ta.jpg)
 
 **Java 中的线程概念是操作系统线程概念的一个 wrapper。**
 
@@ -19,8 +19,8 @@ tags:
     - Blocked
     - Running
     - Terminated
-- Java中的线程状态 (Java 中的线程是对操作系统线程的再次封装) 
-    - New 
+- Java中的线程状态 (Java 中的线程是对操作系统线程的再次封装)
+    - New
     - Runnable (Thread.start())
     - Blocked (synchronized, Lock)
     - Time Waiting (Thread.sleep())
@@ -72,7 +72,7 @@ public interface Future<V> {
 }
 ```
 
-Future 是一个接口，Future 提供了三种功能: 
+Future 是一个接口，Future 提供了三种功能:
 
 - 判断任务是否完成；
 - 能够中断任务；
@@ -81,11 +81,11 @@ Future 是一个接口，Future 提供了三种功能:
 同时还有一个 FutureTask 的类，FutureTask 的父类是 RunnableFuture，而 RunnableFuture 继承了 Runnbale 和 Futrue 这两个接口。
 
 ```java
-public class FutureTask<V> implements RunnableFuture<V> 
+public class FutureTask<V> implements RunnableFuture<V>
 ```
 
 ```java
-public interface RunnableFuture<V> extends Runnable, Future<V> 
+public interface RunnableFuture<V> extends Runnable, Future<V>
 ```
 
 FutureTask实现了两个接口，Runnable和Future，所以它既可以作为Runnable被线程执行，又可以作为Future得到Callable的返回值。
@@ -98,18 +98,18 @@ FutureTask实现了两个接口，Runnable和Future，所以它既可以作为Ru
 
 - 进程同步
     - 信号量
-    - 管程 (monitor) 
+    - 管程 (monitor)
     - 消息传递
 - 线程同步
-    - 临界区 (Critical Section) 
-    - 互斥量 (Mutex) 
-    - 信号量 (Semaphore) 
-    - 事件 (Event) 
+    - 临界区 (Critical Section)
+    - 互斥量 (Mutex)
+    - 信号量 (Semaphore)
+    - 事件 (Event)
 
 ### Java中线程同步问题
 
 - synchronized
-    - Java中每个对象都有一个内置锁 (修饰静态方法的时候，会锁住整个类) 
+    - Java中每个对象都有一个内置锁 (修饰静态方法的时候，会锁住整个类)
 - 重入锁 (java.util.concurrent) ，ReentrantLock
     - 实现是一个自旋锁，循环调用 CAS 操作来实现加锁
 - ThreadLocal
@@ -228,7 +228,7 @@ FutureTask实现了两个接口，Runnable和Future，所以它既可以作为Ru
     }
     ```
     - Condition 是在 java 1.5 中才出现的，它用来替代传统的 Object 的 wait()、notify() 实现线程间的协作，相比使用 Object 的 wait()、notify()，使用 Condition 的await()、signal() 这种方式实现线程间协作更加安全和高效。
-    
+
 ### ReenTrantLock 和 synchronized 的区别?
 
 - ReenTrantLock 可以指定是公平锁还是非公平锁。而 synchronized 只能是非公平锁。

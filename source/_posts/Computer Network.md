@@ -13,9 +13,9 @@ ISP (Internet Service provider)
 ## 协议
 - 应用层: 为特定应用程序提供数据传输服务，例如 HTTP，DNS (port 53) 。数据单位为报文 (message) 。
 - 表示层: 数据压缩，加密以及数据描述。使得应用程序不必担心中各个主机中表示/存储内部格式的不同。
-- 会话层: 建立和管理会话。 (PS: 在 TCP/IP 中只有应用层，这些功能都是留给应用程序开发者处理的。) 
-- 运输层: 提供的是进程间通用数据传输服务。TCP (报文段segment) , UDP (用户数据报 datagram) 。 (PS: segment 是因为 TCP 会切分，每个 segment 是属于某个整体的，每个 segment 的在整体中的位置是确定的，A，B，C 三个 segment 最后解析后一定是 ABC 顺序的，这是 TCP 协议所保证的，而 datagram 是 independent，每个数据报是独立的，不属于某个整体。) 
-- 网络层: 为主机间提供数据传输服务。把运输层传来的封装成分组 (packet) 
+- 会话层: 建立和管理会话。 (PS: 在 TCP/IP 中只有应用层，这些功能都是留给应用程序开发者处理的。)
+- 运输层: 提供的是进程间通用数据传输服务。TCP (报文段segment) , UDP (用户数据报 datagram) 。 (PS: segment 是因为 TCP 会切分，每个 segment 是属于某个整体的，每个 segment 的在整体中的位置是确定的，A，B，C 三个 segment 最后解析后一定是 ABC 顺序的，这是 TCP 协议所保证的，而 datagram 是 independent，每个数据报是独立的，不属于某个整体。)
+- 网络层: 为主机间提供数据传输服务。把运输层传来的封装成分组 (packet)
 - 数据链路层: 主机间可以有很多链路，链路层协议就是为同一链路的节点提供服务。把网络层传来传来的分组封装成帧 (frame) 。
 - 物理层: 考虑的是怎样中传输媒体上传输数据比特流 (bit) ，而不是具体传输媒介。尽可能屏蔽传输媒体和通信手段的差异，使数据链路层感受不到这些差异。
 
@@ -38,14 +38,14 @@ ISP (Internet Service provider)
 
 主要有两种控制方法进行协调，一个是使用信道复用技术，一是使用 CSMA/CD 协议。
 
-CSMA/CD (Carrier Sense Multiple Access with Collision Detection) ，载波监听多点接入/碰撞检测。原理: 
+CSMA/CD (Carrier Sense Multiple Access with Collision Detection) ，载波监听多点接入/碰撞检测。原理:
 - 先听后发，边发边听，冲突停发，随机延迟后重发
 
 ### 点对点信道
 一对一通信，用 PPP 协议，信息部分字节不超过 1500
 
 ### 信道复用技术
-- 频分复用 (占用不同的频率带宽) 
+- 频分复用 (占用不同的频率带宽)
 - 时分复用，每个主机发个时间片
 - 统计时分复用，把数据集中起来组成统计时分复用帧发送
 - 波分复用，光的波长
@@ -57,12 +57,12 @@ CSMA/CD (Carrier Sense Multiple Access with Collision Detection) ，载波监听
 # 网络层
 ## 概述
 - IP (Internet Protocol)
-- 地址解析协议 ARP (Address Resolution Protocol) 
-- 网际控制报文协议 ICMP (Internet Control Message Protocol) 
-- 网际组管理协议 IGMP (Internet Group Management Protocol) 
+- 地址解析协议 ARP (Address Resolution Protocol)
+- 网际控制报文协议 ICMP (Internet Control Message Protocol)
+- 网际组管理协议 IGMP (Internet Group Management Protocol)
 
 ## IP数据报格式
-![ip-format](https://i.loli.net/2018/06/24/5b2fbf6d552e9.png)
+![ip-format](https://ws1.sinaimg.cn/large/8a79c363gy1g1oojpetnfj20rl0fu0vh.jpg)
 
 - 版本 (4位) : 4, 6 两个值。
 - 首部长度 (4位) : 最大值 15，单位是 4 字节 (32位) ，首部固定长度 20 字节，所以最小值 5 。如果可选字段的长度不是 4 字节的整数倍，就用尾部的填充部分来填充。
@@ -72,10 +72,10 @@ CSMA/CD (Carrier Sense Multiple Access with Collision Detection) ，载波监听
 - 片偏移 (16位)  : 和标志 (3位) 一起，用于标志分片的情况。标志中目前只有前两位有意义。标志字段的最低位是MF (More Fragment)。MF = 1 表示后面“还有分片”。MF = 0 表示最后一个分片。标志字段中间的一位是 DF (Don't Fragment)。只有当 DF = 0时才允许分片。片偏移的单位为 8 字节。
 - 生存时间 (8位) : TTL，防止无法交付的数据报在互联网中兜圈子。以路由器跳数为单位，TTL 为 0 时就丢弃数据报。
 - 协议 (8位) 指出携带的数据应该交给那个协议来处理，例如 TCP，UDP 等。
-- 首部校验和 (16位) 
-- 源地址 (32位) 
-- 目标地址 (32位) 
-- 可选字段 + 填充 (32位) 
+- 首部校验和 (16位)
+- 源地址 (32位)
+- 目标地址 (32位)
+- 可选字段 + 填充 (32位)
 
 ## 地址解析协议ARP
 ARP 实现由 IP 地址得到 MAC 地址。每个主机都有一个 ARP 高速缓存，里面有本局域网上各主机和路由器 IP 地址到硬件地址的映射表。
@@ -93,7 +93,7 @@ ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。�
 - 自治系统内部的路由选择协议: RIP 和 OSPF
 - 自治系统间的路由选择: BGP
 
-### RIP (Routing Information Protocol) 
+### RIP (Routing Information Protocol)
 基于向量的路由选择协议，实现简单，开销小。但是最大使用距离为 15，限制了网络的规模。
 
 ### OSPF (Open Shortest Path First)
@@ -110,13 +110,13 @@ ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。�
 - 传输控制协议 TCP (Transmission Control Protocol) 是面向连接的，提供可靠交付，有流量控制，拥塞控制，提供全双工通信，面向字节流的，每个 TCP 连接只能是点对点 (一对一的) 。
 
 ## UDP
-![udp-header](https://i.loli.net/2018/06/25/5b2fc000f3111.jpg)
+![udp-header](https://ws1.sinaimg.cn/large/8a79c363gy1g1ookbq9r9j20vl0iq0x7.jpg)
 
 首部字段只有 8 个字节，包括源端口，目的端口，长度，检验和。12 字节的伪首部是为了计算检验和临时添加的。
 
 ## TCP
 ### TCP首部
-![tcp-header](https://i.loli.net/2018/06/24/5b2fbfdc6c291.png)
+![tcp-header](https://ws1.sinaimg.cn/large/8a79c363gy1g1ooln2by4j210b0sv102.jpg)
 
 - 序号 (32位) :  用于对字节流进行编号，例如序号为 301，表示第一个字节的编号为 301，如果携带的数据长度为 100 字节，那么下一个报文段的序号应为 401。
 - 确认号 (32位) : 期望收到的下一个报文段的序号。例如 B 正确收到 A 发送来的一个报文段，序号为 501，携带的数据长度为 200 字节，因此 B 期望下一个报文段的序号为 701，B 发送给 A 的确认报文段中确认号就为 701。
@@ -127,7 +127,7 @@ ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。�
 - 窗口 (16位) : 窗口值作为接收方让发送方设置其发送窗口的依据。之所以要有这个限制，是因为接收方的数据缓存空间是有限的。表示传送的数据字节数。
 
 ### TCP握手
-![tcp-handshake](https://i.loli.net/2018/06/24/5b2fbfb713b9d.png)
+![tcp-handshake](https://ws1.sinaimg.cn/large/8a79c363gy1g1oolwika4j20z60ml0yh.jpg)
 - 首先 B 处于 LISTEN (监听) 状态，等待客户的连接请求。
 - A 向 B 发送连接请求报文段，SYN=1，ACK=0，选择一个初始的序号 x。
 - B 收到连接请求报文段，如果同意建立连接，则向 A 发送连接确认报文段，SYN=1，ACK=1，确认号为 x+1，同时也选择一个初始的序号 y。
@@ -137,14 +137,14 @@ ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。�
 **PS: 如果第三次 ACK 一直没收到，server 端会重传第二次握手，一定次数后会关闭连接。但此时 client 以为连接以及建立，发送请求后，server 端会在回复报文中将 RST 置为 1，client 就知道了连接未建立，重置 TCP 连接**
 
 ### TCP挥手
-![tcp-wave](https://i.loli.net/2018/06/24/5b2fbfeb89f6d.jpg)
+![tcp-wave](https://ws1.sinaimg.cn/large/8a79c363gy1g1ookkuedhj20py0hy0vr.jpg)
 - A 发送连接释放报文段，FIN=1。
 - B 收到之后发出确认，此时 TCP 属于半关闭状态，B 能向 A 发送数据但是 A 不能向 B 发送数据。
 - 当 B 不再需要连接时，发送连接释放请求报文段，FIN=1。
 - A 收到后发出确认，进入 TIME-WAIT 状态，等待 2 MSL 时间后释放连接。
 - B 收到 A 的确认后释放连接。
 
-客户端接收到服务器端的 FIN 报文后进入此状态，此时并不是直接进入 CLOSED 状态，还需要等待一个时间计时器设置的时间 2MSL。这么做有两个理由: 
+客户端接收到服务器端的 FIN 报文后进入此状态，此时并不是直接进入 CLOSED 状态，还需要等待一个时间计时器设置的时间 2MSL。这么做有两个理由:
 
 - 确保最后一个确认报文段能够到达。如果 B 没收到 A 发送来的确认报文段，那么就会重新发送连接释放请求报文段，A 等待一段时间就是为了处理这种情况的发生。
 - 等待一段时间是为了让本连接持续时间内所产生的所有报文段都从网络中消失，使得下一个新的连接不会出现旧的连接请求报文段。
@@ -177,17 +177,17 @@ TCP 主要通过四种算法来进行拥塞控制: 慢开始、拥塞避免、�
 2. 快重传与快恢复: 在接收方，要求每次接收到报文段都应该发送对已收到有序报文段的确认，例如已经接收到 M1 和 M2，此时收到 M4，应当发送对 M2 的确认。在发送方，如果收到三个重复确认，那么可以确认下一个报文段丢失，例如收到三个 M2 ，则 M3 丢失。此时执行快重传，立即重传下一个报文段。在这种情况下，只是丢失个别报文段，而不是网络拥塞，因此执行快恢复，令 ssthresh = cwnd/2 ，cwnd = ssthresh，注意到此时直接进入拥塞避免。慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh。
 
 # 应用层
-## DNS (Domain Name System)  (port 53) 
-大多数情况下 DNS 使用 UDP 进行传输，这就要求域名解析器和域名服务器都必须自己处理超时和重传来保证可靠性。在两种情况下会使用 TCP 进行传输: 
+## DNS (Domain Name System)  (port 53)
+大多数情况下 DNS 使用 UDP 进行传输，这就要求域名解析器和域名服务器都必须自己处理超时和重传来保证可靠性。在两种情况下会使用 TCP 进行传输:
 - 数据太大，用 TCP 进行传输。
 - 区域传送是主域名服务器向辅助域名服务器传送变化的那部分数据，区域传送需要使用 TCP 进行传输。
 
 ## FTP (File Transfer Protocol) (port 21/20)
-FTP 使用 TCP 进行连接，它需要两个连接来传送一个文件: 
+FTP 使用 TCP 进行连接，它需要两个连接来传送一个文件:
 - 控制连接: 服务器以打开端口号 21 等待客户端的连接，客户端主动建立连接后，使用这个连接将客户端的命令传送给服务器，并传回服务器的应答。
 - 数据连接: 用来传送一个文件。
 
-FTP 有主动和被动两种模式: 
+FTP 有主动和被动两种模式:
 - 主动模式: 服务器端主动建立数据连接，其中服务器端的端口号为 20，客户端的端口号随机，但是必须大于 1024，因为 0~1023 是熟知端口号。
 - 被动模式: 客户端主动建立数据连接，其中客户端的端口号由客户端自己指定，服务器端的端口号随机。
 
@@ -206,7 +206,7 @@ FTP 有主动和被动两种模式:
 ## DHCP (Dynamic Host Configuration Protocol)
 DHCP (Dynamic Host Configuration Protocol) 提供了即插即用的连网方式，用户不再需要去手动配置 IP 地址等信息。
 
-DHCP 工作过程如下: 
+DHCP 工作过程如下:
 - 客户端发送 Discover 报文，该报文的目的地址为 255.255.255.255:67，源地址为 0.0.0.0:68，被放入 UDP 中，该报文被广播到同一个子网的所有主机上。
 - DHCP 服务器收到 Discover 报文之后，发送 Offer 报文给客户端，该报文包含了客户端所需要的信息。因为客户端可能收到多个DHCP 服务器提供的信息，因此客户端需要进行选择。
 - 如果客户端选择了某个 DHCP 服务器提供的信息，那么就发送 Request 报文给该 DHCP 服务器。

@@ -2,7 +2,7 @@
 title: 七牛上传图片js脚本
 date: 2017-12-29 18:22:00
 categories: memo
-tags: 
+tags:
 - javascript
 ---
 
@@ -67,7 +67,7 @@ function upload(key){
     var config = new qiniu.conf.Config();
     // 空间对应的机房
     config.zone = qiniu.zone.Zone_z0;
-    var localFile = process.argv[2].trim(); 
+    var localFile = process.argv[2].trim();
     var key = path.basename(localFile);
     if(typeof(localFile) == "undefined"){
         console.log('please select file!')
@@ -75,14 +75,14 @@ function upload(key){
     }
     var formUploader = new qiniu.form_up.FormUploader(config);
     var putExtra = new qiniu.form_up.PutExtra();
-    
+
     // 文件上传
     formUploader.putFile(getToken(key), key, localFile, putExtra, function(respErr,
       respBody, respInfo) {
       if (respErr) {
         throw respErr;
       }
-    
+
       if (respInfo.statusCode == 200) {
         //console.log(respBody);
         console.log(qiniuConfig.returnLink + key);
@@ -99,7 +99,7 @@ upload();
 
 用了 path 的依赖是为了让这个脚本在 linux 和 window 下都能通用，如果用的不是华东区，对应的机房也要更改。
 
-![七牛脚本测试](https://i.loli.net/2018/12/05/5c0749ca53d4e.png)
+![七牛脚本测试](https://ws1.sinaimg.cn/large/8a79c363gy1g1oomvh772j20jl03emx2.jpg)
 
 调用脚本，图片只要拉到 shell 窗口里就好了。然后可以直接返回图片的外链，复制粘贴就能用了。为了方便，生成的外链是根据图片的名字定的，所以要注意图片文件的命名规范了。
 
