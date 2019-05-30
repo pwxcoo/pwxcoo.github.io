@@ -1,5 +1,5 @@
 ---
-title: 浅谈消息队列
+title: 【Advanced Java】消息队列
 date: 2019-03-20 10:26:16
 categories: base
 tags:
