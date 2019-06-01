@@ -60,6 +60,8 @@ ES shard 来实现分布式。
 
 ![es-write-detail](https://ws1.sinaimg.cn/large/8a79c363ly1g3jslsbymwj20ol0gddgb.jpg)
 
+因此是 1s 的准实时，5s 的数据丢失。
+
 ### es删除/更新数据底层原理
 
 如果是删除操作，commit 的时候会生成一个 .del 文件，里面将某个 doc 标识为 deleted 状态，那么搜索的时候根据 .del 文件就知道这个 doc 是否被删除了。
