@@ -1,5 +1,7 @@
 
-Vultr:
+# Vultr
+
+## shadowsocks
 
 ```
 $ wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
@@ -442,3 +444,9 @@ case "$action" in
     ;;
 esac
 ```
+
+## MTProto
+
+MTProto is a proxy for telegram.
+
+- [配置MTProxy来访问Telegram](https://www.rogoso.info/mtproxy-for-telegram/)
