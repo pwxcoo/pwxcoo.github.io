@@ -1,3 +1,17 @@
+
+Vultr:
+
+```
+$ wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
+$ chmod +x shadowsocks.sh
+$ ./shadowsocks.sh 2>&1 | tee shadowsocks.log
+```
+
+- [Vultr VPS主机快速安装Shadowsocks（ss）SSR BBR完整教程](http://zhuangold.com/vultr-vps%E4%B8%BB%E6%9C%BA%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85shadowsocks%EF%BC%88ss%EF%BC%89%E6%95%99%E7%A8%8B-2-2/)
+
+
+shadowsocks.sh:
+
 ```sh
 #!/usr/bin/env bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
