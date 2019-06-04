@@ -1,5 +1,5 @@
 
-# Vultr
+# Vps
 
 ## shadowsocks
 
@@ -11,6 +11,30 @@ $ ./shadowsocks.sh 2>&1 | tee shadowsocks.log
 
 - [Vultr VPS主机快速安装Shadowsocks（ss）SSR BBR完整教程](http://zhuangold.com/vultr-vps%E4%B8%BB%E6%9C%BA%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85shadowsocks%EF%BC%88ss%EF%BC%89%E6%95%99%E7%A8%8B-2-2/)
 
+
+## 使用 chacha20-ietf-poly1305 加密
+
+安装libsodium:
+
+```
+$ sudo apt install libsodium-dev
+```
+
+安装shadowsocks:
+
+```
+$ pip install https://github.com/shadowsocks/shadowsocks/archive/master.zip -U
+```
+
+- [Linux method chacha20-ietf-poly1305 not supported](https://github.com/shadowsocks/shadowsocks/issues/1046)
+
+## MTProto
+
+MTProto is a proxy for telegram.
+
+- [配置MTProxy来访问Telegram](https://www.rogoso.info/mtproxy-for-telegram/)
+
+## 附录
 
 shadowsocks.sh:
 
@@ -445,8 +469,3 @@ case "$action" in
 esac
 ```
 
-## MTProto
-
-MTProto is a proxy for telegram.
-
-- [配置MTProxy来访问Telegram](https://www.rogoso.info/mtproxy-for-telegram/)
