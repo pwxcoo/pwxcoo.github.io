@@ -27,6 +27,7 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
   - README.md
+  - googledaa91a0bb47edc88.html
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -43,7 +44,7 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-  
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -52,7 +53,16 @@ index_generator:
   path: ''
   per_page: 0
   order_by: -date
-  
+index: >
+  # TOC
+
+  See [Table of Content](/toc/).
+
+  # Algorithm
+
+  The algorithm problems' solutions are in [pwxcoo/accept](https://github.com/pwxcoo/accept). You can browse it in online [gitbook](https://pwxcoo.gitbook.io/algorithm/).
+
+
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -89,5 +99,5 @@ feed:
   limit: 20
   hub:
   content: true
-  content_limit: 
+  content_limit:
   content_limit_delim: ' '
