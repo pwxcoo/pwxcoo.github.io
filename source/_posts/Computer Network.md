@@ -6,32 +6,107 @@ tags:
 - computer network
 ---
 
-# 概述
-## ISP
-ISP (Internet Service provider)
+## 概述
 
-## 协议
-- 应用层: 为特定应用程序提供数据传输服务，例如 HTTP，DNS (port 53) 。数据单位为报文 (message) 。
-- 表示层: 数据压缩，加密以及数据描述。使得应用程序不必担心中各个主机中表示/存储内部格式的不同。
-- 会话层: 建立和管理会话。 (PS: 在 TCP/IP 中只有应用层，这些功能都是留给应用程序开发者处理的。)
-- 运输层: 提供的是进程间通用数据传输服务。TCP (报文段segment) , UDP (用户数据报 datagram) 。 (PS: segment 是因为 TCP 会切分，每个 segment 是属于某个整体的，每个 segment 的在整体中的位置是确定的，A，B，C 三个 segment 最后解析后一定是 ABC 顺序的，这是 TCP 协议所保证的，而 datagram 是 independent，每个数据报是独立的，不属于某个整体。)
-- 网络层: 为主机间提供数据传输服务。把运输层传来的封装成分组 (packet)
-- 数据链路层: 主机间可以有很多链路，链路层协议就是为同一链路的节点提供服务。把网络层传来传来的分组封装成帧 (frame) 。
-- 物理层: 考虑的是怎样中传输媒体上传输数据比特流 (bit) ，而不是具体传输媒介。尽可能屏蔽传输媒体和通信手段的差异，使数据链路层感受不到这些差异。
+### TCP/IP
+- 数据链路层: ARP，RARP
+- 网络层: IP，ICMP，IGMP
+- 传输层: TCP，UDP，UGP
+- 应用层: Telnet，FTP，SMTP，SNMP
+
+### OSI
+- 物理层: EIA/TIA-232, EIA/TIA-499, V.35, V.24, RJ45, Ethernet, 802.3, 802.5, FDDI, NRZI, NRZ, B8ZS
+- 数据链路层: Frame Relay, HDLC, PPP, IEEE 802.3/802.2, FDDI, ATM,  IEEE 802.5/802.2
+- 网络层: IP，IPX，AppleTalk DDP
+- 传输层: TCP，UDP，SPX
+- 会话层: RPC,SQL,NFS,NetBIOS,names,AppleTalk,ASP,DECnet,SCP
+- 表示层:TIFF,GIF,JPEG,PICT,ASCII,EBCDIC,encryption,MPEG,MIDI,HTML
+- 应用层: FTP,WWW,Telnet,NFS,SMTP,Gateway,SNMP
+
+#### 应用层
+
+应用层: 为特定应用程序提供数据传输服务，例如 HTTP，DNS (port 53) 。数据单位为报文 (message) 。
+
+1. 主要功能 : 用户接口、应用程序
+application
+2. 典型设备: 网关
+3. 典型协议、标准和应用: TELNET, FTP, HTTP
+
+#### 表示层
+
+表示层: 数据压缩，加密以及数据描述。使得应用程序不必担心中各个主机中表示/存储内部格式的不同。
+
+1. 主要功能 : 数据的表示、压缩和加密
+presentation
+2. 典型设备: 网关
+3. 典型协议、标准和应用: ASCLL、PICT、TIFF、JPEG、 MIDI、MPEG
+
+#### 会话层
+
+会话层: 建立和管理会话。 (PS: 在 TCP/IP 中只有应用层，这些功能都是留给应用程序开发者处理的。)
+
+1. 主要功能 : 会话的建立和结束
+session
+2. 典型设备: 网关
+3. 典型协议、标准和应用: RPC、SQL、NFS 、X WINDOWS、ASP
+
+#### 传输层
+
+运输层: 提供的是进程间通用数据传输服务。TCP (报文段segment) , UDP (用户数据报 datagram) 。 (PS: segment 是因为 TCP 会切分，每个 segment 是属于某个整体的，每个 segment 的在整体中的位置是确定的，A，B，C 三个 segment 最后解析后一定是 ABC 顺序的，这是 TCP 协议所保证的，而 datagram 是 independent，每个数据报是独立的，不属于某个整体。)
+
+1. 主要功能 : 端到端控制
+transport
+2. 典型设备: 网关
+3. 典型协议、标准和应用: TCP、UDP、SPX
+
+#### 网络层
+
+网络层: 为主机间提供数据传输服务。把运输层传来的封装成分组 (packet)
+
+1. 主要功能 : 路由，寻址
+network
+2. 典型设备: 路由器
+3. 典型协议、标准和应用: IP、IPX、APPLETALK、ICMP
+
+#### 数据链路层
+
+数据链路层: 主机间可以有很多链路，链路层协议就是为同一链路的节点提供服务。把网络层传来传来的分组封装成帧 (frame) 。
+
+1. 主要功能 : 保证误差错的数据链路
+data link
+2. 典型设备: 交换机、网桥、网卡
+3. 典型协议、标准和应用: 802.2、802.3ATM、HDLC、FRAME RELAY
+
+#### 物理层
+
+物理层: 考虑的是怎样中传输媒体上传输数据比特流 (bit) ，而不是具体传输媒介。尽可能屏蔽传输媒体和通信手段的差异，使数据链路层感受不到这些差异。
+
+1. 主要功能 : 传输比特流
+physical
+2. 典型设备: 集线器、中继器
+3. 典型协议、标准和应用: V.35、EIA/TIA-232
+
+-----
+
 
 整个传输过程中就是应用层的数据往下传，加首部，加首部，加首部 (在链路层可能要加尾部 —— CRC 校验加了 FCS) 直到解析成比特流 (1001010...) 。然后到了目标地点，去首部尾部这样，解析成最后的数据。
 
-# 物理层
+## 物理层
+
 - 单工通信
 - 半双工通信
 - 全双工通信
 
-# 数据链路层
-## 差错检测
+## 数据链路层
+
+### 差错检测
+
 循环冗余校验 CRC (Cyclic Redundancy Check)
 
-## 信道
-### 广播信道
+### 信道
+
+#### 广播信道
+
 一对多通信，一个节点发送的数据能够被广播信道上所有的节点接收到。
 
 所有的节点都在同一个广播信道上发送数据，因此需要有专门的控制方法进行协调，避免发生冲突 (冲突也叫碰撞) 。
@@ -41,27 +116,33 @@ ISP (Internet Service provider)
 CSMA/CD (Carrier Sense Multiple Access with Collision Detection) ，载波监听多点接入/碰撞检测。原理:
 - 先听后发，边发边听，冲突停发，随机延迟后重发
 
-### 点对点信道
+#### 点对点信道
+
 一对一通信，用 PPP 协议，信息部分字节不超过 1500
 
-### 信道复用技术
+#### 信道复用技术
+
 - 频分复用 (占用不同的频率带宽)
 - 时分复用，每个主机发个时间片
 - 统计时分复用，把数据集中起来组成统计时分复用帧发送
 - 波分复用，光的波长
 - 码分复用
 
-## MAC地址
+### MAC地址
+
 长度 6 字节 (48位) 。
 
-# 网络层
-## 概述
+## 网络层
+
+### 概述
+
 - IP (Internet Protocol)
 - 地址解析协议 ARP (Address Resolution Protocol)
 - 网际控制报文协议 ICMP (Internet Control Message Protocol)
 - 网际组管理协议 IGMP (Internet Group Management Protocol)
 
-## IP数据报格式
+### IP数据报格式
+
 ![ip-format](https://ws1.sinaimg.cn/large/8a79c363gy1g1oojpetnfj20rl0fu0vh.jpg)
 
 - 版本 (4位) : 4, 6 两个值。
@@ -77,45 +158,57 @@ CSMA/CD (Carrier Sense Multiple Access with Collision Detection) ，载波监听
 - 目标地址 (32位)
 - 可选字段 + 填充 (32位)
 
-## 地址解析协议ARP
+### 地址解析协议ARP
+
 ARP 实现由 IP 地址得到 MAC 地址。每个主机都有一个 ARP 高速缓存，里面有本局域网上各主机和路由器 IP 地址到硬件地址的映射表。
 
-## 网际控制报文协议ICMP
+### 网际控制报文协议ICMP
+
 ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。分为差错报告报文，询问报文。
 
 1. Ping，ICMP 的一个重要应用，发送的 IP 数据报是无法交付的 UDP 用户数据报。
 2. Tracroute，跟踪一个分组从源点到终点的路径。
 
-## 网络地址转换NAT
+### 网络地址转换NAT
+
 将本地 IP 转换成全球 IP。
 
-## 路由选择协议
+### 路由选择协议
+
 - 自治系统内部的路由选择协议: RIP 和 OSPF
 - 自治系统间的路由选择: BGP
 
-### RIP (Routing Information Protocol)
+#### RIP (Routing Information Protocol)
+
 基于向量的路由选择协议，实现简单，开销小。但是最大使用距离为 15，限制了网络的规模。
 
-### OSPF (Open Shortest Path First)
+#### OSPF (Open Shortest Path First)
+
 开放最短路径优先 OSPF。相比与 RIP，OSPF 更新收敛地更快。
 
-### BGP (Border Gateway Protocol)
+#### BGP (Border Gateway Protocol)
+
 在每个 AS (Autonomous System) 都必须配置 BGP 发言人，通过在两个相邻 BGP 发言人之间建立 TCP 连接来交换路由信息。
 
-# 运输层
+## 运输层
+
 提供进程间的通信。
 
-## TCP和UDP
+### TCP和UDP
+
 - 用户数据报协议 UDP (User Datagram Protocol) 是无连接的，尽最大努力交付，没有拥塞控制，面向报文，支持一对一，一对多，多对一，多对多的交互通信。
 - 传输控制协议 TCP (Transmission Control Protocol) 是面向连接的，提供可靠交付，有流量控制，拥塞控制，提供全双工通信，面向字节流的，每个 TCP 连接只能是点对点 (一对一的) 。
 
-## UDP
+### UDP
+
 ![udp-header](https://ws1.sinaimg.cn/large/8a79c363gy1g1ookbq9r9j20vl0iq0x7.jpg)
 
 首部字段只有 8 个字节，包括源端口，目的端口，长度，检验和。12 字节的伪首部是为了计算检验和临时添加的。
 
-## TCP
-### TCP首部
+### TCP
+
+#### TCP首部
+
 ![tcp-header](https://ws1.sinaimg.cn/large/8a79c363gy1g1ooln2by4j210b0sv102.jpg)
 
 - 序号 (32位) :  用于对字节流进行编号，例如序号为 301，表示第一个字节的编号为 301，如果携带的数据长度为 100 字节，那么下一个报文段的序号应为 401。
@@ -126,7 +219,8 @@ ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。�
 - 终止 FIN  (1位) : 用来释放一个连接，当 FIN=1 时，表示此报文段的发送方的数据已发送完毕，并要求释放连接。
 - 窗口 (16位) : 窗口值作为接收方让发送方设置其发送窗口的依据。之所以要有这个限制，是因为接收方的数据缓存空间是有限的。表示传送的数据字节数。
 
-### TCP握手
+#### TCP握手
+
 ![tcp-handshake](https://ws1.sinaimg.cn/large/8a79c363gy1g1oolwika4j20z60ml0yh.jpg)
 - 首先 B 处于 LISTEN (监听) 状态，等待客户的连接请求。
 - A 向 B 发送连接请求报文段，SYN=1，ACK=0，选择一个初始的序号 x。
@@ -136,8 +230,10 @@ ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。�
 
 **PS: 如果第三次 ACK 一直没收到，server 端会重传第二次握手，一定次数后会关闭连接。但此时 client 以为连接以及建立，发送请求后，server 端会在回复报文中将 RST 置为 1，client 就知道了连接未建立，重置 TCP 连接**
 
-### TCP挥手
+#### TCP挥手
+
 ![tcp-wave](https://ws1.sinaimg.cn/large/8a79c363gy1g1ookkuedhj20py0hy0vr.jpg)
+
 - A 发送连接释放报文段，FIN=1。
 - B 收到之后发出确认，此时 TCP 属于半关闭状态，B 能向 A 发送数据但是 A 不能向 B 发送数据。
 - 当 B 不再需要连接时，发送连接释放请求报文段，FIN=1。
@@ -149,7 +245,7 @@ ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。�
 - 确保最后一个确认报文段能够到达。如果 B 没收到 A 发送来的确认报文段，那么就会重新发送连接释放请求报文段，A 等待一段时间就是为了处理这种情况的发生。
 - 等待一段时间是为了让本连接持续时间内所产生的所有报文段都从网络中消失，使得下一个新的连接不会出现旧的连接请求报文段。
 
-## TCP可靠性
+### TCP可靠性
 
 - 检验和
 - 序列号
@@ -159,13 +255,16 @@ ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。�
 - 流量控制
 - 拥塞控制
 
-### TCP滑动窗口
+#### TCP滑动窗口
+
 窗口是缓存的一部分，用来暂时存放字节流。接收窗口只会对窗口内最后一个按序到达的字节进行确认。
 
-### TCP流量控制
+#### TCP流量控制
+
 流量控制是为了控制发送方发送速率，保证接收方来得及接收。
 
-### TCP拥塞控制
+#### TCP拥塞控制
+
 出现拥塞时，应当控制发送方的速率。
 
 TCP 主要通过四种算法来进行拥塞控制: 慢开始、拥塞避免、快重传、快恢复。
@@ -176,13 +275,16 @@ TCP 主要通过四种算法来进行拥塞控制: 慢开始、拥塞避免、�
 
 2. 快重传与快恢复: 在接收方，要求每次接收到报文段都应该发送对已收到有序报文段的确认，例如已经接收到 M1 和 M2，此时收到 M4，应当发送对 M2 的确认。在发送方，如果收到三个重复确认，那么可以确认下一个报文段丢失，例如收到三个 M2 ，则 M3 丢失。此时执行快重传，立即重传下一个报文段。在这种情况下，只是丢失个别报文段，而不是网络拥塞，因此执行快恢复，令 ssthresh = cwnd/2 ，cwnd = ssthresh，注意到此时直接进入拥塞避免。慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh。
 
-# 应用层
-## DNS (Domain Name System)  (port 53)
+## 应用层
+
+### DNS (Domain Name System)  (port 53)
+
 大多数情况下 DNS 使用 UDP 进行传输，这就要求域名解析器和域名服务器都必须自己处理超时和重传来保证可靠性。在两种情况下会使用 TCP 进行传输:
 - 数据太大，用 TCP 进行传输。
 - 区域传送是主域名服务器向辅助域名服务器传送变化的那部分数据，区域传送需要使用 TCP 进行传输。
 
-## FTP (File Transfer Protocol) (port 21/20)
+### FTP (File Transfer Protocol) (port 21/20)
+
 FTP 使用 TCP 进行连接，它需要两个连接来传送一个文件:
 - 控制连接: 服务器以打开端口号 21 等待客户端的连接，客户端主动建立连接后，使用这个连接将客户端的命令传送给服务器，并传回服务器的应答。
 - 数据连接: 用来传送一个文件。
@@ -193,17 +295,20 @@ FTP 有主动和被动两种模式:
 
 主动模式要求客户端开放端口号给服务器端，需要去配置客户端的防火墙。被动模式只需要服务器端开放端口号即可，无需客户端配置防火墙。但是被动模式会导致服务器端的安全性减弱，因为开放了过多的端口号。
 
-## Telnet(port 23)
+### Telnet(port 23)
+
 远程登录协议
 
-## 电子邮件协议
+### 电子邮件协议
+
 发送协议常用 SMTP (Simple Mail Transfer Protocol) ，读取协议常用 POP3 (Post Office Protocol - Version 3)  和 IMAP (Internet Mail Access Protocol) 。
 
 - POP3 (port 110) : POP3 的特点是只要用户从服务器上读取了邮件，就把该邮件删除。
 - IMAP (port 143) : IMAP 协议中客户端和服务器上的邮件保持同步，如果不去手动删除邮件，那么服务器上的邮件也不会被删除。IMAP 这种做法可以让用户随时随地去访问服务器上的邮件。
 - SMTP (port 25) : SMTP 只能发送 ASCII 码，而互联网邮件扩充 MIME 可以发送二进制文件。MIME 并没有改动或者取代 SMTP，而是增加邮件主体的结构，定义了非 ASCII 码的编码规则。
 
-## DHCP (Dynamic Host Configuration Protocol)
+### DHCP (Dynamic Host Configuration Protocol)
+
 DHCP (Dynamic Host Configuration Protocol) 提供了即插即用的连网方式，用户不再需要去手动配置 IP 地址等信息。
 
 DHCP 工作过程如下:
@@ -214,5 +319,6 @@ DHCP 工作过程如下:
 
 如果客户端和 DHCP 服务器不在同一个子网，就需要使用中继代理。
 
-# References
+## References
+
 - [Interview-Notebook/notes/计算机网络.md](https://github.com/CyC2018/Interview-Notebook/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md#udp-%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F)

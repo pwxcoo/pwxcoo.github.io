@@ -1,5 +1,5 @@
 ---
-title: a collection of common operations in vim
+title: vim notes
 date: 2018-12-14 16:44:25
 categories: memo
 tags:
@@ -40,7 +40,7 @@ tags:
 - `/{which}` 开始查找
 - `cw {what} [ESC]` 删除并替换
 - `n` 下一个单词
-- `.` 重复上一个操作 (删除并替换) 
+- `.` 重复上一个操作 (删除并替换)
 
 ## operate multiple rows
 
@@ -50,7 +50,7 @@ tags:
 - `C-d` 向下移动
 - 操作
     - `shift + i` 插入
-    - `J` 连结所有行 (Join) 
+    - `J` 连结所有行 (Join)
     - `>` / `<` 左右缩进
     - `=` 自动缩进
 - `[ESC]` 生效

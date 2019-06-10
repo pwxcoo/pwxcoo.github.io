@@ -2,19 +2,13 @@
 title: ubuntu配置日志
 date: 2018-01-04 18:22:00
 categories: memo
-tags: 
+tags:
 - linux
 - memo
 ---
 
 
-## 安装
-
-~~用u盘重新一遍 ubuntu 。安装了 ubuntu16.04 版本的。~~
-
-20181128: 安装了 ubuntu18.04 版本。
-
-## 
+## firefox
 
 - `sudo apt update`
 - `sudo apt install firefox`
@@ -32,7 +26,7 @@ tags:
 - `sudo apt install vim`
 - `sudo vim /etc/vim/vimrc`
 - 取消`syntax on`的注释
-- 最后一行配置: 
+- 最后一行配置:
 
 ```
 set nu          //在左侧显示行号码
@@ -74,7 +68,7 @@ set autoindent  //自动缩进
 
 **PS: ubuntu 下的推荐字体 `font-family="'Ubuntu Mono', monospace"**
 
-## anaconda(python)
+## anaconda
 
 - 官网下载
 - `sudo bash Anaconda3-5.0.1-Linux-x86_64.sh` 然后选yes
@@ -82,7 +76,7 @@ set autoindent  //自动缩进
 - `sudo chmod 777 -R anaconda3/` 给权限
 - jupyter的皮肤配置: jupyterthemes配置 `jt -t gruvboxd -f ubuntu -fs 12 -tfs 12 -ofs 11`, 我发现ubuntu的字体已经比window好太多，所以就没配置。
 
-## java(服务器端下载jdk8)
+## java
 
 一件很奇怪的事情，就是不知道为什么我用apt的ppa源下载，一直连不上oracle官网。。一直404失败。所以就徒手配置了。
 - `apt -u dist-upgrade`强制升级一下版本
@@ -115,7 +109,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 - `sudo apt install codeblocks` 下载安装
 
 
-## coursera 添加 hosts 解析
+## coursera
 
 - `ping coursera.org` 得到ip
 - 浏览器里看network，未正常响应的都添加到hosts里。
@@ -123,11 +117,11 @@ export PATH=$JAVA_HOME/bin:$PATH
 - `sudo /etc/init.d/networking restart`重启网络服务
 
 
-## 截图软件 / shutter
+## shutter
 
-- `apt install shutter` 
+- `apt install shutter`
 
-## 电脑主题
+## system theme
 
 - `sudo  apt  install unity-tweak-tool` 下载 unity-tweak-tool
 - `sudo add-apt-repository ppa:noobslab/themes` 添加源
@@ -141,7 +135,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 - [Gnome-LOOK](https://www.gnome-look.org/)
 
-## zsh终端
+## zsh
 
 - `sudo apt install zsh` 下载
 - `chsh -s $(which zsh)` 设置
@@ -156,21 +150,21 @@ export PATH=$JAVA_HOME/bin:$PATH
 - `sudo pip install shadowsocks` 下载 shadowsocks
 - `sudo vim  /etc/shadowsocks.json` 修改配置文件
 ```json
-{  
-    "server":"ip地址",  
-    "server_port":服务器端口,  
-    "local_address": "127.0.0.1",  
-    "local_port":1080, 
+{
+    "server":"ip地址",
+    "server_port":服务器端口,
+    "local_address": "127.0.0.1",
+    "local_port":1080,
     "password":"密码",
     "timeout":300,
     "method":"使用的方法",
     "fast_open": false,
     "workers": 1
-}  
+}
 ```
 - `sudo sslocal -c /etc/shadowsocks.json` 开中断启动 ss
 - 更改系统设置 -> 网络 -> 网络代理 -> Socks主机:  127.0.0.1 -> port: 1080
-- 给 chrome 下一个插件 SwitchyOmega([SwitchyOmega 配置](https://www.sundabao.com/ubuntu%E4%BD%BF%E7%94%A8shadowsocks/))，选择 `autoProxy`，规则列表网址: 
+- 给 chrome 下一个插件 SwitchyOmega([SwitchyOmega 配置](https://www.sundabao.com/ubuntu%E4%BD%BF%E7%94%A8shadowsocks/))，选择 `autoProxy`，规则列表网址:
 ```html
 https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
 ```

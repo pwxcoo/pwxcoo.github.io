@@ -9,7 +9,7 @@ tags:
 
 a collection of frequently-used linux operations.
 
-## server configure ssh service
+## ssh service
 
 - `useradd -m [username]`, `-m` will automatically create new user folder in `/home`
 - `passwd [username]`, configure password
@@ -54,7 +54,7 @@ a collection of frequently-used linux operations.
     - `sudo nginx -t`
     - `sudo nginx -s reload`
 
-## set environment variables
+## environment variables
 
 linux will execute `/etc/profile` while booting up, this script will execute all script in `/etc/profile.d`, so add some scripts in `/etc/profile.d` will be easily maintained and convenient.
 

@@ -15,8 +15,12 @@ tags:
 
 因为有几道题目很帅，所以特地记录一下，有空可以在做一遍这几道。
 
-## leetcode32. Longest Valid Parentheses
+## leetcode32
+
+leetcode32. Longest Valid Parentheses
+
 可以用 DP ，也可以用栈来做。我用了 DP 。官方 Solution 很详细了。
+
 ```Java
 class Solution {
     public int longestValidParentheses(String s) {
@@ -50,8 +54,12 @@ class Solution {
 }
 ```
 
-## leetcode42. Trapping Rain Water
+## leetcode42
+
+leetcode42. Trapping Rain Water
+
 用两个指针向中间收敛来维护一个变量。官方的 Solution 也很详细。也可以用 DP 或者栈来做。
+
 ```Java
 class Solution {
     public int trap(int[] height) {
@@ -91,8 +99,12 @@ class Solution {
 }
 ```
 
-## leetcode69. Sqrt(x)
+## leetcode69
+
+leetcode69. Sqrt(x)
+
 题目贴的 tag 是 binary search，想考查的是二分查找，用二分查找可以。但是一般标准库里用的是 sqrt() 用的是牛顿迭代法。
+
 ```Java
 /**
  *  1. 二分查找
@@ -129,8 +141,12 @@ class Solution {
 }
 ```
 
-## leetcode84. Largest Rectangle in Histogram
+## leetcode84
+
+leetcode84. Largest Rectangle in Histogram
+
 可以转化成最大01矩阵问题，但是会超时。当然用栈来模拟。
+
 ```Java
 class Solution {
     public int largestRectangleArea(int[] heights) {
@@ -162,8 +178,12 @@ class Solution {
 }
 ```
 
-## leetcode132. Palindrome Partitioning II
+## leetcode132
+
+leetcode132. Palindrome Partitioning II
+
 两种DP。
+
 ```Java
 class Solution {
     public int minCut(String s) {
@@ -208,8 +228,12 @@ class Solution {
 }
 ```
 
-## leetcode137. Single Number II
+## leetcode137
+
+leetcode137. Single Number II
+
 感受到布尔代数的魅力了。一波位运算毁天灭地。
+
 ```Java
 class Solution {
     public int singleNumber(int[] nums) {
@@ -224,8 +248,12 @@ class Solution {
 }
 ```
 
-## leetcode146. LRU Cache
+## leetcode146
+
+leetcode146. LRU Cache
+
 实现一个 LRU(Least Recently Used) 的 cache 类。突然感受了一下学操作系统学到的东西，这个看起来很简单的东西，实现起来还是有点秀的。用双向链表和哈希表来实现，让查询和插入都为O(1)。
+
 ```Java
 class LRUCache {
 
@@ -343,15 +371,23 @@ class LRUCache {
  */
 ```
 
-## leetcode166. Fraction to Recurring Decimal
+## leetcode166
+
+leetcode166. Fraction to Recurring Decimal
+
 写一个除法生成分数。比较难的用无线循环小数的时候，用哈希表存储余数，key存储余数，value存储起始的位置。如果重复就在起始位置插入'('。
 
-## leetcode187. Repeated DNA Sequences
+## leetcode187
+
+leetcode187. Repeated DNA Sequences
+
 用三位就可以表示 A，C，G，T。10个的话用 30 位表示一个序列保存到哈希表中。
 
 
 ## 总结
+
 这几道是真的很秀。我这几天的代码全在[这里](https://github.com/pwxcoo/ac-game)了。
 
 放一张图片。
+
 ![leetcode150](https://ws1.sinaimg.cn/large/8a79c363gy1g1oomjxc22j20oo46rgsg.jpg)
