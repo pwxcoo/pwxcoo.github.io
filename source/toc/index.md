@@ -3,11 +3,6 @@ title: Toc
 date: 2018-09-04 13:52:00
 ---
 
+## UNP
 
-# TOC
-
-See [Table of Content](/toc/).
-
-# Algorithm
-
-The algorithm problems' solutions are in [pwxcoo/accept](https://github.com/pwxcoo/accept). You can browse it in online [gitbook](https://pwxcoo.gitbook.io/algorithm/).
+- [Chapter6. IO Multiplexing: The select and poll Function](/2019/06/10/IO-Multiplexing-The-select-and-poll-Function/)
