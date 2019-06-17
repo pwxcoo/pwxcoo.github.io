@@ -84,7 +84,9 @@ buffer 每 refresh 一次，就会产生一个 segment file，所以默认情况
 
 
 
+## Reference
 
+- [Java 进阶扫盲](https://doocs.github.io/advanced-java/#/)
 
 
 
