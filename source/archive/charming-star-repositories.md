@@ -37,7 +37,7 @@ tags:
 - [jaywcjlove/mysql-tutorial](https://github.com/jaywcjlove/mysql-tutorial): MySQL 入门教程
 - [CarpenterLee/JCFInternals](https://github.com/CarpenterLee/JCFInternals): 深入理解 Java 集合框架
 - [sindresorhus/awesome-nodejs](https://github.com/sindresorhus/awesome-nodejs): awesome node.js
-- [vuejs/awesome-vue](https://github.com/vuejs/awesome-vue): awesome vue 
+- [vuejs/awesome-vue](https://github.com/vuejs/awesome-vue): awesome vue
 - [vinta/awesome-python](https://github.com/vinta/awesome-python): awesome python
 - [seaswalker/Spring](https://github.com/seaswalker/Spring): Spring 源码阅读
 - [sindresorhus/awesome](https://github.com/sindresorhus/awesome): awesome 项目
@@ -83,7 +83,7 @@ tags:
 
 ## JavaScript
 
-- [nhnent/tui.calendar](https://github.com/nhnent/tui.calendar): A JavaScript calendar 
+- [nhnent/tui.calendar](https://github.com/nhnent/tui.calendar): A JavaScript calendar
 - [xx45/dayjs](https://github.com/xx45/dayjs):  JavaScript library of date
 - [vuejs/vuepress](https://github.com/vuejs/vuepress): 轻量的 vue 静态站点生成器
 - [Popmotion/popmotion](https://github.com/Popmotion/popmotion): 很酷的动画库
@@ -102,7 +102,7 @@ tags:
 - [botui/botui](https://github.com/botui/botui): A JavaScript framework to create conversational UIs, [https://botui.org
 ](https://botui.org)
 - [imbrn/v8n](https://github.com/imbrn/v8n): JavaScript fluent validation library
-- [hack-chat/main](https://github.com/hack-chat/main): a minimal, distraction-free chat application 
+- [hack-chat/main](https://github.com/hack-chat/main): a minimal, distraction-free chat application
 - [hotoo/pinyin](https://github.com/hotoo/pinyin):  汉字拼音 ➜ hàn zì pīn yīn
 - [stephentian/33-js-concepts](https://github.com/stephentian/33-js-concepts): 每个 JavaScript 工程师都应懂的33个概念
 
@@ -116,12 +116,12 @@ tags:
 - [Microsoft/TypeScriptSamples](https://github.com/Microsoft/TypeScriptSamples): Samples for TypeScript
 - [Microsoft/tsdoc](https://github.com/Microsoft/tsdoc): A doc comment standard for the TypeScript language
 - [electron/fiddle](https://github.com/electron/fiddle):  The easiest way to get started with Electron
-- [basarat/typescript-book](https://github.com/basarat/typescript-book): The definitive guide to TypeScript and possibly the best TypeScript book 
+- [basarat/typescript-book](https://github.com/basarat/typescript-book): The definitive guide to TypeScript and possibly the best TypeScript book
 
 ## Julia
 
-- [JuliaLang/julia](https://github.com/JuliaLang/julia):The Julia Language: A fresh approach to technical computing. 
-- [JuliaPlots/Plots.jl](https://github.com/JuliaPlots/Plots.jl): Powerful convenience for Julia visualizations and data analysis 
+- [JuliaLang/julia](https://github.com/JuliaLang/julia):The Julia Language: A fresh approach to technical computing.
+- [JuliaPlots/Plots.jl](https://github.com/JuliaPlots/Plots.jl): Powerful convenience for Julia visualizations and data analysis
 
 ## Java
 
@@ -154,14 +154,14 @@ tags:
 - [dingdang-robot/dingdang-robot](https://github.com/dingdang-robot/dingdang-robot): 中文语音对话机器人/智能音箱项目
 - [kennethreitz/requests-html](https://github.com/kennethreitz/requests-html): requests 作者写的终极升级版 HTML-parsing 库
 - [offu/WeRoBot](https://github.com/offu/WeRoBot): 微信公众号开发框架
-- [soimort/you-get](https://github.com/soimort/you-get): python 的下载库 
+- [soimort/you-get](https://github.com/soimort/you-get): python 的下载库
 - [pyenv/pyenv](https://github.com/pyenv/pyenv): 一个简单的 python 版本管理器
 - [home-assistant/home-assistant](https://github.com/home-assistant/home-assistant): Open-source home automation platform running on Python 3 [https://home-assistant.io](ttps://home-assistant.io)。开源的 loT 平台
 - [networkx/networkx](https://github.com/networkx/networkx): Software for complex networks with Python.
 - [lisniuse/numpy-cn](https://github.com/lisniuse/numpy-cn): The Chinese version of numpy's official document.中文版 numpy 文档。
 - [GoogleCloudPlatform/python-docs-samples](https://github.com/GoogleCloudPlatform/python-docs-samples): Code samples used on cloud.google.com
 - [dbader/schedule](https://github.com/dbader/schedule): Python job scheduling for humans.
-- [huge-success/sanic](https://github.com/huge-success/sanic): Async Python 3.5+ web server that's written to go fast 
+- [huge-success/sanic](https://github.com/huge-success/sanic): Async Python 3.5+ web server that's written to go fast
 - [jaystone776/python-data-science-cheatsheet](https://github.com/jaystone776/python-data-science-cheatsheet): Python数据科学速查表
 
 ## blockchain
@@ -209,10 +209,10 @@ tags:
 - [Microsoft/vscode-docs](https://github.com/Microsoft/vscode-docs): vscode 文档
 - [octref/polacode](https://github.com/octref/polacode): 迅速截取代码片段的 vscode 插件
 - [impress/impress.js](https://github.com/impress/impress.js): presentation framework
-- [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi): 网易云音乐 Node.js API service 
+- [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi): 网易云音乐 Node.js API service
 - [dunovank/jupyter-themes](https://github.com/dunovank/jupyter-themes): Jupyter Notebook Themes
 - [d3/d3](https://github.com/d3/d3): d3.js 可视化库
-- [github/gitignore](https://github.com/github/gitignore): 项目 gitignore 文件  
+- [github/gitignore](https://github.com/github/gitignore): 项目 gitignore 文件
 - [naptha/tesseract.js](https://github.com/naptha/tesseract.js): tesseract.js OCR 识别库
 - [ClassicOldSong/typinyin.js](https://github.com/ClassicOldSong/typinyin.js): 用拼音自动输入中文特效的前端js插件
 - [dzhongyi/crack-geetest](https://github.com/dzhongyi/crack-geetest): 滑动验证码破解
@@ -221,7 +221,7 @@ tags:
 - [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub): 使用 RSS 连接全世界 [https://rsshub.js.org](https://rsshub.js.org)
 - [maxchehab/CSS-Keylogging](https://github.com/maxchehab/CSS-Keylogging): Chrome extension and Express server that exploits keylogging abilities of CSS.
 - [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf): 给变量起名的事情上，为你生命省 3s
-- [grpc/grpc](https://github.com/grpc/grpc): The C based gRPC (C++, Python, Ruby, Objective-C, PHP, C#) 
+- [grpc/grpc](https://github.com/grpc/grpc): The C based gRPC (C++, Python, Ruby, Objective-C, PHP, C#)
 - [google/protobuf](https://github.com/google/protobuf): Google 开源的一种数据交换格式
 - [grpc-ecosystem/grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway): generates a reverse-proxy server which translates a RESTful JSON API into gRPC
 - [Microsoft/VoTT](https://github.com/Microsoft/VoTT): Visual Object Tagging Tool
@@ -232,11 +232,11 @@ Graphs for Everyone [http://neo4j.com](http://neo4j.com)
 - [zenozeng/fonts.css](https://github.com/zenozeng/fonts.css): 跨平台 CSS 中文字体解决方案
 - [kitze/sizzy](https://github.com/kitze/sizzy): A tool for testing responsive websites crazy-fast [https://sizzy.co/](https://sizzy.co/)
 - [wintercn/dog-fucked-zhihu](https://github.com/wintercn/dog-fucked-zhihu): 退出知乎好帮手——狗日的知乎，备份自己的答案，取消所有点赞，批量替换所有答案
-- [hiroppy/fusuma](https://github.com/hiroppy/fusuma): Easily make slides with markdown. 
-- [vimagick/dockerfiles](https://github.com/vimagick/dockerfiles): A collection of delicious docker recipes 
+- [hiroppy/fusuma](https://github.com/hiroppy/fusuma): Easily make slides with markdown.
+- [vimagick/dockerfiles](https://github.com/vimagick/dockerfiles): A collection of delicious docker recipes
 - [Natoto/WeChatPlugin](https://github.com/Natoto/WeChatPlugin): Plugin For Mac WeChat. 浏览朋友圈，消息防撤回，微信多开，自动回复
 - [EZLippi/WebBench](https://github.com/EZLippi/WebBench): linux下使用的非常简单的网站压测工具
-- [cameronhunter/local-ssl-proxy](https://github.com/cameronhunter/local-ssl-proxy): 
+- [cameronhunter/local-ssl-proxy](https://github.com/cameronhunter/local-ssl-proxy):
 Simple SSL HTTP proxy using a self-signed certificate. Intended for local development only.本地的 SSL，localhost 的 https。
 - [longXboy/lunnel](https://github.com/longXboy/lunnel): lunnel 是一款简单易用的内网NAT穿越、反向代理软件，支持 HTTP, HTTPS, UDP, TCP、Unix socket 协议。
 - [amix/vimrc](https://github.com/amix/vimrc): The ultimate Vim configuration: vimrc。vimrc 配置。
@@ -244,27 +244,27 @@ Simple SSL HTTP proxy using a self-signed certificate. Intended for local develo
 - [toddmotto/public-apis](https://github.com/toddmotto/public-apis): A collective list of public JSON APIs for use in web development. [https://toddmotto.com](https://toddmotto.com)
 - [lionsoul2014/ip2region](https://github.com/lionsoul2014/ip2region): 准确率99.9%的ip地址定位库，0.0x毫秒级查询，数据库文件大小只有1.5M，提供了java,php,c,python,nodejs,golang,c#查询绑定和Binary,B树,内存三种查询算法，妈妈再也不用担心我的ip地址定位！ [http://gitee.com/lionsoul/ip2region](http://gitee.com/lionsoul/ip2region)
 - [google/data-transfer-project](https://github.com/google/data-transfer-project): Data Transfer. [http://datatransferproject.dev](http://datatransferproject.dev)
-- [nonoroazoro/vscode-syncing](https://github.com/nonoroazoro/vscode-syncing): VSCode Extension - Sync all of your VSCode settings across multiple devices. 
+- [nonoroazoro/vscode-syncing](https://github.com/nonoroazoro/vscode-syncing): VSCode Extension - Sync all of your VSCode settings across multiple devices.
 - [nhnent/tui.image-editor](https://github.com/nhnent/tui.image-editor):  image editor using HTML5 Canvas. 可以在线编辑图像。
 - [harc/moonchild](https://github.com/harc/moonchild): A toolkit for experimenting with new kinds of programming interfaces.
 - [yeasy/docker_practice](https://github.com/yeasy/docker_practice): Learn and understand Docker technologies, with real DevOps practice!
-- [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets): My cheatsheets 
-- [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet): A list of cool features of Git and GitHub. 
+- [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets): My cheatsheets
+- [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet): A list of cool features of Git and GitHub.
 - [wsargent/docker-cheat-sheet](https://github.com/wsargent/docker-cheat-sheet): Docker Cheat Sheet
 - [Maximus5/ConEmu](https://github.com/Maximus5/ConEmu): Customizable Windows terminal with tabs, splits, quake-style, hotkeys and more
-- [git/git](https://github.com/git/git): Git Source Code Mirror 
-- [unshiftio/url-parse](https://github.com/unshiftio/url-parse): Small footprint URL parser that works seamlessly across Node.js and browser environments. 
+- [git/git](https://github.com/git/git): Git Source Code Mirror
+- [unshiftio/url-parse](https://github.com/unshiftio/url-parse): Small footprint URL parser that works seamlessly across Node.js and browser environments.
 - [521xueweihan/git-tips](https://github.com/521xueweihan/git-tips): Git的奇技淫巧
 - [syncsynchalt/illustrated-tls](https://github.com/syncsynchalt/illustrated-tls): The Illustrated TLS Connection: Every byte explained
-- [wcoder/highlightjs-line-numbers.js](https://github.com/wcoder/highlightjs-line-numbers.js): Line numbering plugin for Highlight.js 
+- [wcoder/highlightjs-line-numbers.js](https://github.com/wcoder/highlightjs-line-numbers.js): Line numbering plugin for Highlight.js
 - [gabrie-allaigre/avatar-generator](https://github.com/gabrie-allaigre/avatar-generator): Avatar generator in Java
 - [googleapis/googleapis](https://github.com/googleapis/googleapis): Public interface definitions of Google APIs.
 - [centic9/jgit-cookbook](https://github.com/centic9/jgit-cookbook): Provides examples and code snippets for the JGit Java Git implementation
-- [res0nat0r/gitosis](https://github.com/res0nat0r/gitosis): Manage git repositories, provide access to them over SSH, with tight access control and not needing shell accounts. 
-- [so-fancy/diff-so-fancy](https://github.com/so-fancy/diff-so-fancy): Good-lookin' diffs. Actually… nah… The best-lookin' diffs. 
-- [apache/incubator-dubbo](https://github.com/apache/incubator-dubbo): Apache Dubbo (incubating) is a high-performance, java based, open source RPC framework. 
-- [sallar/github-contributions-chart](https://github.com/sallar/github-contributions-chart): Generate an image of all your Github contributions 
-- [antirez/redis](https://github.com/antirez/redis): Redis is an in-memory database that persists on disk. 
+- [res0nat0r/gitosis](https://github.com/res0nat0r/gitosis): Manage git repositories, provide access to them over SSH, with tight access control and not needing shell accounts.
+- [so-fancy/diff-so-fancy](https://github.com/so-fancy/diff-so-fancy): Good-lookin' diffs. Actually… nah… The best-lookin' diffs.
+- [apache/incubator-dubbo](https://github.com/apache/incubator-dubbo): Apache Dubbo (incubating) is a high-performance, java based, open source RPC framework.
+- [sallar/github-contributions-chart](https://github.com/sallar/github-contributions-chart): Generate an image of all your Github contributions
+- [antirez/redis](https://github.com/antirez/redis): Redis is an in-memory database that persists on disk.
 - [neilpa/cmd-colors-solarized](https://github.com/neilpa/cmd-colors-solarized): Solarized color settings for Windows command prompt
 - [TheNetAdmin/Makefile-Templates](https://github.com/TheNetAdmin/Makefile-Templates): Some makefile templates for different size of projects
 - [honza/vim-snippets](https://github.com/honza/vim-snippets): vim-snipmate default snippets
@@ -277,12 +277,12 @@ Simple SSL HTTP proxy using a self-signed certificate. Intended for local develo
 
 ## Algorithm
 
-- [24OI/OI-wiki](https://github.com/24OI/OI-wiki): Wiki for OI / ACM-ICPC.  (某大型游戏线上攻略，内含炫酷算术魔法) 
+- [24OI/OI-wiki](https://github.com/24OI/OI-wiki): Wiki for OI / ACM-ICPC.  (某大型游戏线上攻略，内含炫酷算术魔法)
 - [fuliucansheng/hihocoder](https://github.com/fuliucansheng/hihocoder): hihocoder AC code
 
 ## Database
 
-- [tikv/tikv](https://github.com/tikv/tikv): Distributed transactional key-value database, originally created to complement TiDB 
+- [tikv/tikv](https://github.com/tikv/tikv): Distributed transactional key-value database, originally created to complement TiDB
 - [pingcap/tidb](https://github.com/pingcap/tidb): TiDB is a distributed HTAP database compatible with the MySQL protocol
 
 ## computer-graphics
@@ -294,7 +294,7 @@ Simple SSL HTTP proxy using a self-signed certificate. Intended for local develo
 - [candlewill/Dialog_Corpus](https://github.com/candlewill/Dialog_Corpus): 用于训练中英文对话系统的语料库 Datasets for Training Chatbot System
 - [vipstone/faceai](https://github.com/vipstone/faceai): 一款入门级的人脸、视频、文字检测以及识别的项目.
 - [MorvanZhou/tutorials](https://github.com/MorvanZhou/tutorials): 机器学习相关教程
-- [kailashahirwar/cheatsheets-ai](https://github.com/kailashahirwar/cheatsheets-ai): Essential Cheat Sheets for deep learning and machine learning researchers 
+- [kailashahirwar/cheatsheets-ai](https://github.com/kailashahirwar/cheatsheets-ai): Essential Cheat Sheets for deep learning and machine learning researchers
 - [scutan90/DeepLearning-500-questions](https://github.com/scutan90/DeepLearning-500-questions): 深度学习500问
 - *[junyanz/CycleGAN](https://github.com/junyanz/CycleGAN): Software that can generate photos from paintings, turn horses into zebras, perform style transfer, and more.
 

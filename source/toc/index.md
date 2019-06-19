@@ -33,5 +33,4 @@ date: 2018-09-04 13:52:00
 
 ## memo
 
-- [Github Repositories stared](/2018/05/01/charming-star-repositories/)
 - [leetcode150题](/2018/02/25/leetcode150题/)
