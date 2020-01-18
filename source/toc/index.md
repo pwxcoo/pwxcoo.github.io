@@ -9,11 +9,12 @@ date: 2018-09-04 13:52:00
 
 ## Java
 
-- [Delay Queue](/2019/11/18/Source-Code-DelayQueue/)
 - [《阿里巴巴Java开发手册》笔记](/2019/01/23/《阿里巴巴Java开发手册》注意点/)
 - [消息队列](/2019/03/20/【Advanced%20Java】消息队列/)
 - [搜索引擎](/2019/05/30/【Advanced-Java】搜索引擎/)
 - [缓存](/2019/06/03/【Advanced-Java】缓存/)
+- [Delay Queue](/2019/11/18/Source-Code-DelayQueue/)
+- [volatile](/2020/01/18/volatile/)
 
 ## 笔记
 
