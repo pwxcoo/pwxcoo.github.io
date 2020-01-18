@@ -36,6 +36,10 @@ You can use volatile variables instead of locks only under a restricted set of c
 `Memory Barrier`. More details see [The JSR-133 Cookbook for Compiler Writers](http://gee.cs.oswego.edu/dl/jmm/cookbook.html).
 
 
+### Change in JSR-133
+
+Forbid reordering between volatile variable and normal variable.
+
 ## References
 
 - [Managing volatility](https://www.ibm.com/developerworks/library/j-jtp06197/index.html)
