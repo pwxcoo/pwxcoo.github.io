@@ -22,6 +22,7 @@ date: 2018-09-04 13:52:00
 - [linux](/2018/12/28/linux-notes/)
 - [vim](/2018/12/14/vim%20notes/)
 - [ubuntu](/2018/01/04/ubuntu配置日志/)
+- [mathematic vocabulary](/2020/02/23/mathematical-vocabulary/)
 
 ## 汇编语言
 
