@@ -43,7 +43,7 @@ HA, HighAvailability
 
 ### Kafka
 
-![kafka-arch](/image/kafka-arch.png)
+![kafka-arch.png](/image/kafka-arch.png)
 
 **写数据**的时候，生产者就写 leader，然后 leader 将数据落地写本地磁盘，接着其他 follower 自己主动从 leader 来 pull 数据。一旦所有 follower 同步好数据了，就会发送 ack 给 leader，leader 收到所有 follower 的 ack 之后，就会返回写成功的消息给生产者。（当然，这只是其中一种模式，还可以适当调整这个行为）
 
