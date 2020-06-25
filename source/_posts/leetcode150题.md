@@ -390,4 +390,4 @@ leetcode187. Repeated DNA Sequences
 
 放一张图片。
 
-![leetcode150](https://ws1.sinaimg.cn/large/8a79c363gy1g1oomjxc22j20oo46rgsg.jpg)
+![leetcode150.png](/image/leetcode150.png)

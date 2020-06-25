@@ -36,7 +36,7 @@ There are normally two distinct phases for an input operations:
 
 The most prevalent model for IO is the blocking IO model. By default, all socket are blocking. The scenario is shown in the figure below:
 
-![blocking IO.gif](https://ws1.sinaimg.cn/large/8a79c363ly1g439nq3yodg20dw07qt8t.gif)
+![blocking IO.gif](/image/blocking IO.gif)
 
 We use UDP for this example instead of TCP because with UDP, the concept of data being "ready" to read is simple: either an entire datagram has been received or it has not. With TCP it gets more complicated, as additional variables such as the socket's low-water mark come into play.
 
@@ -48,7 +48,7 @@ In the figure above, the process calls `recvfrom` and the system call does not r
 
 When a socket is set to be nonblocking, we are telling the kernel "When an IO operation that I request cannot be completed without putting the process to sleep, do not put the process to sleep, but return an error instead". The figure is below:
 
-![nonblocking-io.gif](https://ws4.sinaimg.cn/large/8a79c363ly1g43bp0b7gng20dw07q74m.gif)
+![nonblocking-io.gif](/image/nonblocking-io.gif)
 
 - For the first three `recvfrom`, there is no data to return and the kernel immediately returns an error of `EWOULDBLOCK`.
 - For the forth time we call `recvfrom`, a datagram is ready, it is copied into our application buffer, and `recvfrom` returns successfully. We then process the data.
@@ -59,7 +59,7 @@ When an application sits in a loop calling `recvfrom` on a nonblocking descripto
 
 With **IO multiplexing**, we call `select` or `poll` and block in one of these two system calls, instead of blocking in the actual IO system call. The figure is a summary of the IO multiplexing model:
 
-![io-multiplexing.gif](https://wx2.sinaimg.cn/large/8a79c363ly1g43c3o4uizg20dw07kmxf.gif)
+![io-multiplexing.gif](/image/io-multiplexing.gif)
 
 We block in a call to `select`, waiting for the datagram socket to be readable. When `select` returns that the socket is readable, we then call `recvfrom` to copy the datagram into our application buffer.
 
@@ -74,7 +74,7 @@ Another closely related IO model is to use multithreading with blocking IO. That
 
 The **signal-driven IO model** uses signals, telling the kernel to notify us with the `SIGIO` signal when descriptor is ready. The figure is below:
 
-![signal-driven-io.gif](https://ws3.sinaimg.cn/large/8a79c363ly1g43cg44s7lg20dw07mmxd.gif)
+![signal-driven-io.gif](/image/signal-driven-io.gif)
 
 - We first enable the socket for signal-driven IO and install a signal handler using the `sigaction` system call. The return from this system is immediate and our process continues; it is not blocked.
 - When the datagram is ready to be read, the `SIGIO` signal is generated for our process. We can either:
@@ -89,7 +89,7 @@ The advantage to this model is that we are not blocked while waiting for the dat
 
 These functions work by telling the kernel to start the operation and to notify us when then entire operation (including the copy of the data from the kernel to our buffer) is complete. **The main difference between this model and the signal-driven IO model is that with signal-driven IO, the kernel tells us when IO operation can be initiated, but asynchronous IO, the kernel tells us when an IO operation is complete.** See the figure below for example:
 
-![asynchronous-io.gif](https://ws2.sinaimg.cn/large/8a79c363ly1g43d32olhtg20dw07s0su.gif)
+![asynchronous-io.gif](/image/asynchronous-io.gif)
 
 - We call `aio_read` (the POSIX asynchronous IO function begin with `aio_` or `lio_`, **This system call returns immediately and our process is not blocked while waiting for the IO to complete**) and pass the kernel the following:
     - descriptor, buffer pointer, buffer size (the same three arguments for `read`)
@@ -102,7 +102,7 @@ These functions work by telling the kernel to start the operation and to notify 
 
 The figure below is a comparison of the five different IO models:
 
-![comparison-io.gif](https://ws1.sinaimg.cn/large/8a79c363ly1g43dpda7cvg20dw07mt95.gif)
+![comparison-io.gif](/image/comparison-io.gif)
 
 The main difference between the first four models is the first phase, as the second phase in the first four models is the same: the process is blocked in a call to `recvfrom` while the data is copied from the kernel to the caller's buffer. Asynchronous IO, however, handles both phases and is different from the first four.
 

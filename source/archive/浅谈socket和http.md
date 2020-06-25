@@ -103,11 +103,11 @@ WebSocket 跟 HTTP 一样，是应用层的协议，可以实现浏览器与服�
 ### TCP/UDP
 因为是 Socket 是对 TCP 和 UDP 的封装，所以看一下 TCP 和 UDP 的报文格式。
 
-![tcpandudp](https://ws1.sinaimg.cn/large/8a79c363gy1g1oop98hctj20e30a53yt.jpg)
+![tcpandudp.png](/image/tcpandudp.png)
 
 通讯过程:
 
-![tcpProcess](https://ws1.sinaimg.cn/large/8a79c363gy1g1oopkd9x4j20n60owtbx.jpg)
+![tcpProcess.png](/image/tcpProcess.png)
 
 
 ### Socket 的通讯过程

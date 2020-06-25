@@ -9,7 +9,7 @@ tags:
 
 ## Java线程状态
 
-![concurrent](https://ws1.sinaimg.cn/large/8a79c363gy1g1ooox6kz5j20ot0do0ta.jpg)
+![concurrent.png](/image/concurrent.png)
 
 **Java 中的线程概念是操作系统线程概念的一个 wrapper。**
 

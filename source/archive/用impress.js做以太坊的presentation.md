@@ -38,4 +38,4 @@ impress.js 是一个 css3 + js 驱动的在网页上展示东西的工具，因�
 - [区块链技术相关的资料整理](https://github.com/chaozh/awesome-blockchain-cn)
 - [我的 presentation](http://pwxcoo.com/impress)
 
-![我的presentation](https://ws1.sinaimg.cn/large/8a79c363gy1g1oorw3uttj21hc0t4qjj.jpg)
+![我的presentation.png](/image/我的presentation.png)

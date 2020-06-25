@@ -58,7 +58,7 @@ ES shard 来实现分布式。
 
 ### es写数据底层原理
 
-![es-write-detail](https://ws1.sinaimg.cn/large/8a79c363ly1g3jslsbymwj20ol0gddgb.jpg)
+![es-write-detail.png](/image/es-write-detail.png)
 
 因此是 1s 的准实时，5s 的数据丢失。
 
@@ -84,9 +84,6 @@ buffer 每 refresh 一次，就会产生一个 segment file，所以默认情况
 
 
 
-## Reference
-
-- [Java 进阶扫盲](https://doocs.github.io/advanced-java/#/)
 
 
 
