@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="为什么要用消息队列优点：  解耦，producer 无需关心 consumer 异步，consumer 异步写库 削峰，高峰期  缺点：  可用性降低 复杂度提高。重复消费，消息丢失，消息顺序性 一致性     特性 ActiveMQ RabbitMQ RocketMQ Kafka     单机吞吐量 万级，比 RocketMQ、Kafka 低一个数量级 同 ActiveMQ 10 万级，支撑高吞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Advanced Java】消息队列">
+<meta property="og:url" content="https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="为什么要用消息队列优点：  解耦，producer 无需关心 consumer 异步，consumer 异步写库 削峰，高峰期  缺点：  可用性降低 复杂度提高。重复消费，消息丢失，消息顺序性 一致性     特性 ActiveMQ RabbitMQ RocketMQ Kafka     单机吞吐量 万级，比 RocketMQ、Kafka 低一个数量级 同 ActiveMQ 10 万级，支撑高吞">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/kafka-arch.png">
+<meta property="article:published_time" content="2019-03-20T02:26:16.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.874Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="mq">
+<meta property="article:tag" content="advanced-java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.pwxcoo.com/image/kafka-arch.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>【Advanced Java】消息队列</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/02/18/%E3%80%90%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0%E3%80%910/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&text=【Advanced Java】消息队列"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&title=【Advanced Java】消息队列"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&is_video=false&description=【Advanced Java】消息队列"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【Advanced Java】消息队列&body=Check out this article: https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&title=【Advanced Java】消息队列"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&title=【Advanced Java】消息队列"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&title=【Advanced Java】消息队列"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&title=【Advanced Java】消息队列"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&name=【Advanced Java】消息队列&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-number">1.</span> <span class="toc-text">为什么要用消息队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">高可用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RabbitMQ"><span class="toc-number">2.1.</span> <span class="toc-text">RabbitMQ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kafka"><span class="toc-number">2.2.</span> <span class="toc-text">Kafka</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9"><span class="toc-number">3.</span> <span class="toc-text">重复消费</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%B6%88%E6%81%AF"><span class="toc-number">4.</span> <span class="toc-text">可靠消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E7%A7%AF%E5%8E%8B"><span class="toc-number">5.</span> <span class="toc-text">消费积压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA-MQ"><span class="toc-number">6.</span> <span class="toc-text">设计一个 MQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">7.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        【Advanced Java】消息队列
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PWXCOO</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-03-20T02:26:16.000Z" itemprop="datePublished">2019-03-20</time>
+    </div>
+
+
+      
+    <!-- <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/base/">base</a>
+    </div> -->
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/advanced-java/" rel="tag">advanced-java</a>, <a class="tag-link-link" href="/tags/mq/" rel="tag">mq</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="为什么要用消息队列"><a href="#为什么要用消息队列" class="headerlink" title="为什么要用消息队列"></a>为什么要用消息队列</h2><p>优点：</p>
+<ul>
+<li>解耦，producer 无需关心 consumer</li>
+<li>异步，consumer 异步写库</li>
+<li>削峰，高峰期</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>可用性降低</li>
+<li>复杂度提高。重复消费，消息丢失，消息顺序性</li>
+<li>一致性</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>特性</strong></th>
+<th style="text-align:center"><strong>ActiveMQ</strong></th>
+<th style="text-align:center"><strong>RabbitMQ</strong></th>
+<th style="text-align:center"><strong>RocketMQ</strong></th>
+<th style="text-align:center"><strong>Kafka</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">单机吞吐量</td>
+<td style="text-align:center">万级，比 RocketMQ、Kafka 低一个数量级</td>
+<td style="text-align:center">同 ActiveMQ</td>
+<td style="text-align:center">10 万级，支撑高吞吐</td>
+<td style="text-align:center">10 万级，高吞吐，一般配合大数据类的系统来进行实时数据计算、日志采集等场景</td>
+</tr>
+<tr>
+<td style="text-align:center">topic 数量对吞吐量的影响</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">topic 可以达到几百/几千的级别，吞吐量会有较小幅度的下降，这是 RocketMQ 的一大优势，在同等机器下，可以支撑大量的 topic</td>
+<td style="text-align:center">topic 从几十到几百个时候，吞吐量会大幅度下降，在同等机器下，Kafka 尽量保证 topic 数量不要过多，如果要支撑大规模的 topic，需要增加更多的机器资源</td>
+</tr>
+<tr>
+<td style="text-align:center">时效性</td>
+<td style="text-align:center">ms 级</td>
+<td style="text-align:center">微秒级，这是 RabbitMQ 的一大特点，延迟最低</td>
+<td style="text-align:center">ms 级</td>
+<td style="text-align:center">延迟在 ms 级以内</td>
+</tr>
+<tr>
+<td style="text-align:center">可用性</td>
+<td style="text-align:center">高，基于主从架构实现高可用</td>
+<td style="text-align:center">同 ActiveMQ</td>
+<td style="text-align:center">非常高，分布式架构</td>
+<td style="text-align:center">非常高，分布式，一个数据多个副本，少数机器宕机，不会丢失数据，不会导致不可用</td>
+</tr>
+<tr>
+<td style="text-align:center">消息可靠性</td>
+<td style="text-align:center">有较低的概率丢失数据</td>
+<td style="text-align:center">基本不丢</td>
+<td style="text-align:center">经过参数优化配置，可以做到 0 丢失</td>
+<td style="text-align:center">同 RocketMQ</td>
+</tr>
+<tr>
+<td style="text-align:center">功能支持</td>
+<td style="text-align:center">MQ 领域的功能极其完备</td>
+<td style="text-align:center">基于 erlang 开发，并发能力很强，性能极好，延时很低</td>
+<td style="text-align:center">MQ 功能较为完善，还是分布式的，扩展性好</td>
+<td style="text-align:center">功能较为简单，主要支持简单的 MQ 功能，在大数据领域的实时计算以及日志采集被大规模使用</td>
+</tr>
+</tbody>
+</table>
+<h2 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h2><p>HA, HighAvailability</p>
+<h3 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><ul>
+<li>单机模式</li>
+<li>普通集群模式(无高可用)。数据在一台实例上，其他的同步 queue 元信息(用元信息找到存放数据的实例)</li>
+<li>镜像集群模式</li>
+</ul>
+<h3 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h3><p><img src="/image/kafka-arch.png" alt="kafka-arch.png"></p>
+<p><strong>写数据</strong>的时候，生产者就写 leader，然后 leader 将数据落地写本地磁盘，接着其他 follower 自己主动从 leader 来 pull 数据。一旦所有 follower 同步好数据了，就会发送 ack 给 leader，leader 收到所有 follower 的 ack 之后，就会返回写成功的消息给生产者。（当然，这只是其中一种模式，还可以适当调整这个行为）</p>
+<p><strong>消费</strong>的时候，只会从 leader 去读，但是只有当一个消息已经被所有 follower 都同步成功返回 ack 的时候，这个消息才会被消费者读到。</p>
+<h2 id="重复消费"><a href="#重复消费" class="headerlink" title="重复消费"></a>重复消费</h2><p>通常由下游保证。</p>
+<h2 id="可靠消息"><a href="#可靠消息" class="headerlink" title="可靠消息"></a>可靠消息</h2><ul>
+<li>生产者丢了 =&gt; MQ ack</li>
+<li>MQ 丢了 =&gt; MQ ack until persistence completion</li>
+<li>consumer 丢了 =&gt; consumer ack</li>
+</ul>
+<h2 id="消费积压"><a href="#消费积压" class="headerlink" title="消费积压"></a>消费积压</h2><ul>
+<li>紧急扩容，加速消费</li>
+<li>大量积压快过期了，可以先批量重导</li>
+</ul>
+<h2 id="设计一个-MQ"><a href="#设计一个-MQ" class="headerlink" title="设计一个 MQ"></a>设计一个 MQ</h2><ul>
+<li>可伸缩性，broker-&gt;topic-&gt;partition</li>
+<li>可靠性，持久化到磁盘，顺序写</li>
+<li>可用性，leader-&gt;follower</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://doocs.github.io/advanced-java/#/">Java 进阶扫盲</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/linkenpark/p/5393666.html">RabbitMQ 中 exchange、route、queue 的关系</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-number">1.</span> <span class="toc-text">为什么要用消息队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">高可用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RabbitMQ"><span class="toc-number">2.1.</span> <span class="toc-text">RabbitMQ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kafka"><span class="toc-number">2.2.</span> <span class="toc-text">Kafka</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9"><span class="toc-number">3.</span> <span class="toc-text">重复消费</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%B6%88%E6%81%AF"><span class="toc-number">4.</span> <span class="toc-text">可靠消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E7%A7%AF%E5%8E%8B"><span class="toc-number">5.</span> <span class="toc-text">消费积压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA-MQ"><span class="toc-number">6.</span> <span class="toc-text">设计一个 MQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">7.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&text=【Advanced Java】消息队列"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&title=【Advanced Java】消息队列"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&is_video=false&description=【Advanced Java】消息队列"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【Advanced Java】消息队列&body=Check out this article: https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&title=【Advanced Java】消息队列"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&title=【Advanced Java】消息队列"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&title=【Advanced Java】消息队列"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&title=【Advanced Java】消息队列"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.pwxcoo.com/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/&name=【Advanced Java】消息队列&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

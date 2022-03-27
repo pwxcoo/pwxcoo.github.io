@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="概述TCP&#x2F;IP 数据链路层: ARP，RARP 网络层: IP，ICMP，IGMP 传输层: TCP，UDP，UGP 应用层: Telnet，FTP，SMTP，SNMP  OSI 物理层: EIA&#x2F;TIA-232, EIA&#x2F;TIA-499, V.35, V.24, RJ45, Ethernet, 802.3, 802.5, FDDI, NRZI, NRZ, B8ZS 数据链路层: Frame R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络笔记">
+<meta property="og:url" content="https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="概述TCP&#x2F;IP 数据链路层: ARP，RARP 网络层: IP，ICMP，IGMP 传输层: TCP，UDP，UGP 应用层: Telnet，FTP，SMTP，SNMP  OSI 物理层: EIA&#x2F;TIA-232, EIA&#x2F;TIA-499, V.35, V.24, RJ45, Ethernet, 802.3, 802.5, FDDI, NRZI, NRZ, B8ZS 数据链路层: Frame R">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/ip-format.png">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/udp-header.png">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/tcp-header.png">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/tcp-handshake.png">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/tcp-wave.png">
+<meta property="article:published_time" content="2018-06-24T15:54:55.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.875Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="computer network">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.pwxcoo.com/image/ip-format.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>计算机网络笔记</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/09/17/%E4%B8%80%E6%AC%A1http%E8%AF%B7%E6%B1%82%E5%85%A8%E8%BF%87%E7%A8%8B/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/02/25/leetcode150%E9%A2%98/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&text=计算机网络笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&title=计算机网络笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&is_video=false&description=计算机网络笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=计算机网络笔记&body=Check out this article: https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&title=计算机网络笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&title=计算机网络笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&title=计算机网络笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&title=计算机网络笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&name=计算机网络笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-IP"><span class="toc-number">1.1.</span> <span class="toc-text">TCP&#x2F;IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSI"><span class="toc-number">1.2.</span> <span class="toc-text">OSI</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">1.2.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E7%A4%BA%E5%B1%82"><span class="toc-number">1.2.2.</span> <span class="toc-text">表示层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E5%B1%82"><span class="toc-number">1.2.3.</span> <span class="toc-text">会话层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">1.2.4.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">1.2.5.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-number">1.2.6.</span> <span class="toc-text">数据链路层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%B1%82"><span class="toc-number">1.2.7.</span> <span class="toc-text">物理层</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%B1%82-1"><span class="toc-number">2.</span> <span class="toc-text">物理层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82-1"><span class="toc-number">3.</span> <span class="toc-text">数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B"><span class="toc-number">3.1.</span> <span class="toc-text">差错检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E9%81%93"><span class="toc-number">3.2.</span> <span class="toc-text">信道</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD%E4%BF%A1%E9%81%93"><span class="toc-number">3.2.1.</span> <span class="toc-text">广播信道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%82%B9%E5%AF%B9%E7%82%B9%E4%BF%A1%E9%81%93"><span class="toc-number">3.2.2.</span> <span class="toc-text">点对点信道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%A1%E9%81%93%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AF"><span class="toc-number">3.2.3.</span> <span class="toc-text">信道复用技术</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MAC%E5%9C%B0%E5%9D%80"><span class="toc-number">3.3.</span> <span class="toc-text">MAC地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82-1"><span class="toc-number">4.</span> <span class="toc-text">网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="toc-number">4.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">IP数据报格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E8%A7%A3%E6%9E%90%E5%8D%8F%E8%AE%AEARP"><span class="toc-number">4.3.</span> <span class="toc-text">地址解析协议ARP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E9%99%85%E6%8E%A7%E5%88%B6%E6%8A%A5%E6%96%87%E5%8D%8F%E8%AE%AEICMP"><span class="toc-number">4.4.</span> <span class="toc-text">网际控制报文协议ICMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2NAT"><span class="toc-number">4.5.</span> <span class="toc-text">网络地址转换NAT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.6.</span> <span class="toc-text">路由选择协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RIP-Routing-Information-Protocol"><span class="toc-number">4.6.1.</span> <span class="toc-text">RIP (Routing Information Protocol)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OSPF-Open-Shortest-Path-First"><span class="toc-number">4.6.2.</span> <span class="toc-text">OSPF (Open Shortest Path First)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BGP-Border-Gateway-Protocol"><span class="toc-number">4.6.3.</span> <span class="toc-text">BGP (Border Gateway Protocol)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%BE%93%E5%B1%82"><span class="toc-number">5.</span> <span class="toc-text">运输层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E5%92%8CUDP"><span class="toc-number">5.1.</span> <span class="toc-text">TCP和UDP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP"><span class="toc-number">5.2.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP"><span class="toc-number">5.3.</span> <span class="toc-text">TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E9%A6%96%E9%83%A8"><span class="toc-number">5.3.1.</span> <span class="toc-text">TCP首部</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%8F%A1%E6%89%8B"><span class="toc-number">5.3.2.</span> <span class="toc-text">TCP握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%8C%A5%E6%89%8B"><span class="toc-number">5.3.3.</span> <span class="toc-text">TCP挥手</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="toc-number">5.4.</span> <span class="toc-text">TCP可靠性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="toc-number">5.4.1.</span> <span class="toc-text">TCP滑动窗口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">5.4.2.</span> <span class="toc-text">TCP流量控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">5.4.3.</span> <span class="toc-text">TCP拥塞控制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82-1"><span class="toc-number">6.</span> <span class="toc-text">应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS-Domain-Name-System-port-53"><span class="toc-number">6.1.</span> <span class="toc-text">DNS (Domain Name System)  (port 53)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FTP-File-Transfer-Protocol-port-21-20"><span class="toc-number">6.2.</span> <span class="toc-text">FTP (File Transfer Protocol) (port 21&#x2F;20)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Telnet-port-23"><span class="toc-number">6.3.</span> <span class="toc-text">Telnet(port 23)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%8D%8F%E8%AE%AE"><span class="toc-number">6.4.</span> <span class="toc-text">电子邮件协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP-Dynamic-Host-Configuration-Protocol"><span class="toc-number">6.5.</span> <span class="toc-text">DHCP (Dynamic Host Configuration Protocol)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">7.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        计算机网络笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PWXCOO</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-06-24T15:54:55.000Z" itemprop="datePublished">2018-06-24</time>
+    </div>
+
+
+      
+    <!-- <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/base/">base</a>
+    </div> -->
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/computer-network/" rel="tag">computer network</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="TCP-IP"><a href="#TCP-IP" class="headerlink" title="TCP/IP"></a>TCP/IP</h3><ul>
+<li>数据链路层: ARP，RARP</li>
+<li>网络层: IP，ICMP，IGMP</li>
+<li>传输层: TCP，UDP，UGP</li>
+<li>应用层: Telnet，FTP，SMTP，SNMP</li>
+</ul>
+<h3 id="OSI"><a href="#OSI" class="headerlink" title="OSI"></a>OSI</h3><ul>
+<li>物理层: EIA/TIA-232, EIA/TIA-499, V.35, V.24, RJ45, Ethernet, 802.3, 802.5, FDDI, NRZI, NRZ, B8ZS</li>
+<li>数据链路层: Frame Relay, HDLC, PPP, IEEE 802.3/802.2, FDDI, ATM,  IEEE 802.5/802.2</li>
+<li>网络层: IP，IPX，AppleTalk DDP</li>
+<li>传输层: TCP，UDP，SPX</li>
+<li>会话层: RPC,SQL,NFS,NetBIOS,names,AppleTalk,ASP,DECnet,SCP</li>
+<li>表示层:TIFF,GIF,JPEG,PICT,ASCII,EBCDIC,encryption,MPEG,MIDI,HTML</li>
+<li>应用层: FTP,WWW,Telnet,NFS,SMTP,Gateway,SNMP</li>
+</ul>
+<h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><p>应用层: 为特定应用程序提供数据传输服务，例如 HTTP，DNS (port 53) 。数据单位为报文 (message) 。</p>
+<ol>
+<li>主要功能 : 用户接口、应用程序<br>application</li>
+<li>典型设备: 网关</li>
+<li>典型协议、标准和应用: TELNET, FTP, HTTP</li>
+</ol>
+<h4 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h4><p>表示层: 数据压缩，加密以及数据描述。使得应用程序不必担心中各个主机中表示/存储内部格式的不同。</p>
+<ol>
+<li>主要功能 : 数据的表示、压缩和加密<br>presentation</li>
+<li>典型设备: 网关</li>
+<li>典型协议、标准和应用: ASCLL、PICT、TIFF、JPEG、 MIDI、MPEG</li>
+</ol>
+<h4 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h4><p>会话层: 建立和管理会话。 (PS: 在 TCP/IP 中只有应用层，这些功能都是留给应用程序开发者处理的。)</p>
+<ol>
+<li>主要功能 : 会话的建立和结束<br>session</li>
+<li>典型设备: 网关</li>
+<li>典型协议、标准和应用: RPC、SQL、NFS 、X WINDOWS、ASP</li>
+</ol>
+<h4 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h4><p>运输层: 提供的是进程间通用数据传输服务。TCP (报文段segment) , UDP (用户数据报 datagram) 。 (PS: segment 是因为 TCP 会切分，每个 segment 是属于某个整体的，每个 segment 的在整体中的位置是确定的，A，B，C 三个 segment 最后解析后一定是 ABC 顺序的，这是 TCP 协议所保证的，而 datagram 是 independent，每个数据报是独立的，不属于某个整体。)</p>
+<ol>
+<li>主要功能 : 端到端控制<br>transport</li>
+<li>典型设备: 网关</li>
+<li>典型协议、标准和应用: TCP、UDP、SPX</li>
+</ol>
+<h4 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h4><p>网络层: 为主机间提供数据传输服务。把运输层传来的封装成分组 (packet)</p>
+<ol>
+<li>主要功能 : 路由，寻址<br>network</li>
+<li>典型设备: 路由器</li>
+<li>典型协议、标准和应用: IP、IPX、APPLETALK、ICMP</li>
+</ol>
+<h4 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h4><p>数据链路层: 主机间可以有很多链路，链路层协议就是为同一链路的节点提供服务。把网络层传来传来的分组封装成帧 (frame) 。</p>
+<ol>
+<li>主要功能 : 保证误差错的数据链路<br>data link</li>
+<li>典型设备: 交换机、网桥、网卡</li>
+<li>典型协议、标准和应用: 802.2、802.3ATM、HDLC、FRAME RELAY</li>
+</ol>
+<h4 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h4><p>物理层: 考虑的是怎样中传输媒体上传输数据比特流 (bit) ，而不是具体传输媒介。尽可能屏蔽传输媒体和通信手段的差异，使数据链路层感受不到这些差异。</p>
+<ol>
+<li>主要功能 : 传输比特流<br>physical</li>
+<li>典型设备: 集线器、中继器</li>
+<li>典型协议、标准和应用: V.35、EIA/TIA-232</li>
+</ol>
+<hr>
+<p>整个传输过程中就是应用层的数据往下传，加首部，加首部，加首部 (在链路层可能要加尾部 —— CRC 校验加了 FCS) 直到解析成比特流 (1001010…) 。然后到了目标地点，去首部尾部这样，解析成最后的数据。</p>
+<h2 id="物理层-1"><a href="#物理层-1" class="headerlink" title="物理层"></a>物理层</h2><ul>
+<li>单工通信</li>
+<li>半双工通信</li>
+<li>全双工通信</li>
+</ul>
+<h2 id="数据链路层-1"><a href="#数据链路层-1" class="headerlink" title="数据链路层"></a>数据链路层</h2><h3 id="差错检测"><a href="#差错检测" class="headerlink" title="差错检测"></a>差错检测</h3><p>循环冗余校验 CRC (Cyclic Redundancy Check)</p>
+<h3 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h3><h4 id="广播信道"><a href="#广播信道" class="headerlink" title="广播信道"></a>广播信道</h4><p>一对多通信，一个节点发送的数据能够被广播信道上所有的节点接收到。</p>
+<p>所有的节点都在同一个广播信道上发送数据，因此需要有专门的控制方法进行协调，避免发生冲突 (冲突也叫碰撞) 。</p>
+<p>主要有两种控制方法进行协调，一个是使用信道复用技术，一是使用 CSMA/CD 协议。</p>
+<p>CSMA/CD (Carrier Sense Multiple Access with Collision Detection) ，载波监听多点接入/碰撞检测。原理:</p>
+<ul>
+<li>先听后发，边发边听，冲突停发，随机延迟后重发</li>
+</ul>
+<h4 id="点对点信道"><a href="#点对点信道" class="headerlink" title="点对点信道"></a>点对点信道</h4><p>一对一通信，用 PPP 协议，信息部分字节不超过 1500</p>
+<h4 id="信道复用技术"><a href="#信道复用技术" class="headerlink" title="信道复用技术"></a>信道复用技术</h4><ul>
+<li>频分复用 (占用不同的频率带宽)</li>
+<li>时分复用，每个主机发个时间片</li>
+<li>统计时分复用，把数据集中起来组成统计时分复用帧发送</li>
+<li>波分复用，光的波长</li>
+<li>码分复用</li>
+</ul>
+<h3 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h3><p>长度 6 字节 (48位) 。</p>
+<h2 id="网络层-1"><a href="#网络层-1" class="headerlink" title="网络层"></a>网络层</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><ul>
+<li>IP (Internet Protocol)</li>
+<li>地址解析协议 ARP (Address Resolution Protocol)</li>
+<li>网际控制报文协议 ICMP (Internet Control Message Protocol)</li>
+<li>网际组管理协议 IGMP (Internet Group Management Protocol)</li>
+</ul>
+<h3 id="IP数据报格式"><a href="#IP数据报格式" class="headerlink" title="IP数据报格式"></a>IP数据报格式</h3><p><img src="/image/ip-format.png" alt="ip-format.png"></p>
+<ul>
+<li>版本 (4位) : 4, 6 两个值。</li>
+<li>首部长度 (4位) : 最大值 15，单位是 4 字节 (32位) ，首部固定长度 20 字节，所以最小值 5 。如果可选字段的长度不是 4 字节的整数倍，就用尾部的填充部分来填充。</li>
+<li>区分服务 (8位) : 来获得更好的服务，一般情况下不使用。</li>
+<li>总长度 (16位) : 包括首部长度和数据部分长度。</li>
+<li>标识 (16位) : 在数据报长度过长从而发生分片的情况下，相同数据报的不同分片具有相同的标识符。</li>
+<li>片偏移 (16位)  : 和标志 (3位) 一起，用于标志分片的情况。标志中目前只有前两位有意义。标志字段的最低位是MF (More Fragment)。MF = 1 表示后面“还有分片”。MF = 0 表示最后一个分片。标志字段中间的一位是 DF (Don’t Fragment)。只有当 DF = 0时才允许分片。片偏移的单位为 8 字节。</li>
+<li>生存时间 (8位) : TTL，防止无法交付的数据报在互联网中兜圈子。以路由器跳数为单位，TTL 为 0 时就丢弃数据报。</li>
+<li>协议 (8位) 指出携带的数据应该交给那个协议来处理，例如 TCP，UDP 等。</li>
+<li>首部校验和 (16位)</li>
+<li>源地址 (32位)</li>
+<li>目标地址 (32位)</li>
+<li>可选字段 + 填充 (32位)</li>
+</ul>
+<h3 id="地址解析协议ARP"><a href="#地址解析协议ARP" class="headerlink" title="地址解析协议ARP"></a>地址解析协议ARP</h3><p>ARP 实现由 IP 地址得到 MAC 地址。每个主机都有一个 ARP 高速缓存，里面有本局域网上各主机和路由器 IP 地址到硬件地址的映射表。</p>
+<h3 id="网际控制报文协议ICMP"><a href="#网际控制报文协议ICMP" class="headerlink" title="网际控制报文协议ICMP"></a>网际控制报文协议ICMP</h3><p>ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。分为差错报告报文，询问报文。</p>
+<ol>
+<li>Ping，ICMP 的一个重要应用，发送的 IP 数据报是无法交付的 UDP 用户数据报。</li>
+<li>Tracroute，跟踪一个分组从源点到终点的路径。</li>
+</ol>
+<h3 id="网络地址转换NAT"><a href="#网络地址转换NAT" class="headerlink" title="网络地址转换NAT"></a>网络地址转换NAT</h3><p>将本地 IP 转换成全球 IP。</p>
+<h3 id="路由选择协议"><a href="#路由选择协议" class="headerlink" title="路由选择协议"></a>路由选择协议</h3><ul>
+<li>自治系统内部的路由选择协议: RIP 和 OSPF</li>
+<li>自治系统间的路由选择: BGP</li>
+</ul>
+<h4 id="RIP-Routing-Information-Protocol"><a href="#RIP-Routing-Information-Protocol" class="headerlink" title="RIP (Routing Information Protocol)"></a>RIP (Routing Information Protocol)</h4><p>基于向量的路由选择协议，实现简单，开销小。但是最大使用距离为 15，限制了网络的规模。</p>
+<h4 id="OSPF-Open-Shortest-Path-First"><a href="#OSPF-Open-Shortest-Path-First" class="headerlink" title="OSPF (Open Shortest Path First)"></a>OSPF (Open Shortest Path First)</h4><p>开放最短路径优先 OSPF。相比与 RIP，OSPF 更新收敛地更快。</p>
+<h4 id="BGP-Border-Gateway-Protocol"><a href="#BGP-Border-Gateway-Protocol" class="headerlink" title="BGP (Border Gateway Protocol)"></a>BGP (Border Gateway Protocol)</h4><p>在每个 AS (Autonomous System) 都必须配置 BGP 发言人，通过在两个相邻 BGP 发言人之间建立 TCP 连接来交换路由信息。</p>
+<h2 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h2><p>提供进程间的通信。</p>
+<h3 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h3><ul>
+<li>用户数据报协议 UDP (User Datagram Protocol) 是无连接的，尽最大努力交付，没有拥塞控制，面向报文，支持一对一，一对多，多对一，多对多的交互通信。</li>
+<li>传输控制协议 TCP (Transmission Control Protocol) 是面向连接的，提供可靠交付，有流量控制，拥塞控制，提供全双工通信，面向字节流的，每个 TCP 连接只能是点对点 (一对一的) 。</li>
+</ul>
+<h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><p><img src="/image/udp-header.png" alt="udp-header.png"></p>
+<p>首部字段只有 8 个字节，包括源端口，目的端口，长度，检验和。12 字节的伪首部是为了计算检验和临时添加的。</p>
+<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><h4 id="TCP首部"><a href="#TCP首部" class="headerlink" title="TCP首部"></a>TCP首部</h4><p><img src="/image/tcp-header.png" alt="tcp-header.png"></p>
+<ul>
+<li>序号 (32位) :  用于对字节流进行编号，例如序号为 301，表示第一个字节的编号为 301，如果携带的数据长度为 100 字节，那么下一个报文段的序号应为 401。</li>
+<li>确认号 (32位) : 期望收到的下一个报文段的序号。例如 B 正确收到 A 发送来的一个报文段，序号为 501，携带的数据长度为 200 字节，因此 B 期望下一个报文段的序号为 701，B 发送给 A 的确认报文段中确认号就为 701。</li>
+<li>数据偏移 (4位) : 指的是数据部分距离报文段起始处的偏移量，实际上指的是首部的长度。</li>
+<li>确认 ACK (1位) : 当 ACK=1 时确认号字段有效，否则无效。TCP 规定，在连接建立后所有传送的报文段都必须把 ACK 置 1。</li>
+<li>同步 SYN  (1位) : 在连接建立时用来同步序号。当 SYN=1，ACK=0 时表示这是一个连接请求报文段。若对方同意建立连接，则响应报文中 SYN=1，ACK=1。</li>
+<li>终止 FIN  (1位) : 用来释放一个连接，当 FIN=1 时，表示此报文段的发送方的数据已发送完毕，并要求释放连接。</li>
+<li>窗口 (16位) : 窗口值作为接收方让发送方设置其发送窗口的依据。之所以要有这个限制，是因为接收方的数据缓存空间是有限的。表示传送的数据字节数。</li>
+</ul>
+<h4 id="TCP握手"><a href="#TCP握手" class="headerlink" title="TCP握手"></a>TCP握手</h4><p><img src="/image/tcp-handshake.png" alt="tcp-handshake.png"></p>
+<ul>
+<li>首先 B 处于 LISTEN (监听) 状态，等待客户的连接请求。</li>
+<li>A 向 B 发送连接请求报文段，SYN=1，ACK=0，选择一个初始的序号 x。</li>
+<li>B 收到连接请求报文段，如果同意建立连接，则向 A 发送连接确认报文段，SYN=1，ACK=1，确认号为 x+1，同时也选择一个初始的序号 y。</li>
+<li>A 收到 B 的连接确认报文段后，还要向 B 发出确认，确认号为 y+1，序号为 x+1。</li>
+<li>B 收到 A 的确认后，连接建立。</li>
+</ul>
+<p><strong>PS: 如果第三次 ACK 一直没收到，server 端会重传第二次握手，一定次数后会关闭连接。但此时 client 以为连接以及建立，发送请求后，server 端会在回复报文中将 RST 置为 1，client 就知道了连接未建立，重置 TCP 连接</strong></p>
+<h4 id="TCP挥手"><a href="#TCP挥手" class="headerlink" title="TCP挥手"></a>TCP挥手</h4><p><img src="/image/tcp-wave.png" alt="tcp-wave.png"></p>
+<ul>
+<li>A 发送连接释放报文段，FIN=1。</li>
+<li>B 收到之后发出确认，此时 TCP 属于半关闭状态，B 能向 A 发送数据但是 A 不能向 B 发送数据。</li>
+<li>当 B 不再需要连接时，发送连接释放请求报文段，FIN=1。</li>
+<li>A 收到后发出确认，进入 TIME-WAIT 状态，等待 2 MSL 时间后释放连接。</li>
+<li>B 收到 A 的确认后释放连接。</li>
+</ul>
+<p>客户端接收到服务器端的 FIN 报文后进入此状态，此时并不是直接进入 CLOSED 状态，还需要等待一个时间计时器设置的时间 2MSL。这么做有两个理由:</p>
+<ul>
+<li>确保最后一个确认报文段能够到达。如果 B 没收到 A 发送来的确认报文段，那么就会重新发送连接释放请求报文段，A 等待一段时间就是为了处理这种情况的发生。</li>
+<li>等待一段时间是为了让本连接持续时间内所产生的所有报文段都从网络中消失，使得下一个新的连接不会出现旧的连接请求报文段。</li>
+</ul>
+<h3 id="TCP可靠性"><a href="#TCP可靠性" class="headerlink" title="TCP可靠性"></a>TCP可靠性</h3><ul>
+<li>检验和</li>
+<li>序列号</li>
+<li>ACK</li>
+<li>超时重传</li>
+<li>连接管理</li>
+<li>流量控制</li>
+<li>拥塞控制</li>
+</ul>
+<h4 id="TCP滑动窗口"><a href="#TCP滑动窗口" class="headerlink" title="TCP滑动窗口"></a>TCP滑动窗口</h4><p>窗口是缓存的一部分，用来暂时存放字节流。接收窗口只会对窗口内最后一个按序到达的字节进行确认。</p>
+<h4 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h4><p>流量控制是为了控制发送方发送速率，保证接收方来得及接收。</p>
+<h4 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h4><p>出现拥塞时，应当控制发送方的速率。</p>
+<p>TCP 主要通过四种算法来进行拥塞控制: 慢开始、拥塞避免、快重传、快恢复。</p>
+<p>发送方需要维护一个叫做拥塞窗口 (cwnd) 的状态变量，注意拥塞窗口与发送方窗口的区别: 拥塞窗口只是一个状态变量，实际决定发送方能发送多少数据的是发送方窗口。</p>
+<ol>
+<li><p>慢开始与拥塞避免: 发送的最初执行慢开始，令 cwnd=1，发送方只能发送 1 个报文段；当收到确认后，将 cwnd 加倍，因此之后发送方能够发送的报文段数量为: 2、4、8 … 注意到慢开始每个轮次都将 cwnd 加倍，这样会让 cwnd 增长速度非常快，从而使得发送方发送的速度增长速度过快，网络拥塞的可能也就更高。设置一个慢开始门限 ssthresh，当 cwnd &gt;= ssthresh 时，进入拥塞避免，每个轮次只将 cwnd 加 1。如果出现了超时，则令 ssthresh = cwnd/2，然后重新执行慢开始。</p>
+</li>
+<li><p>快重传与快恢复: 在接收方，要求每次接收到报文段都应该发送对已收到有序报文段的确认，例如已经接收到 M1 和 M2，此时收到 M4，应当发送对 M2 的确认。在发送方，如果收到三个重复确认，那么可以确认下一个报文段丢失，例如收到三个 M2 ，则 M3 丢失。此时执行快重传，立即重传下一个报文段。在这种情况下，只是丢失个别报文段，而不是网络拥塞，因此执行快恢复，令 ssthresh = cwnd/2 ，cwnd = ssthresh，注意到此时直接进入拥塞避免。慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh。</p>
+</li>
+</ol>
+<h2 id="应用层-1"><a href="#应用层-1" class="headerlink" title="应用层"></a>应用层</h2><h3 id="DNS-Domain-Name-System-port-53"><a href="#DNS-Domain-Name-System-port-53" class="headerlink" title="DNS (Domain Name System)  (port 53)"></a>DNS (Domain Name System)  (port 53)</h3><p>大多数情况下 DNS 使用 UDP 进行传输，这就要求域名解析器和域名服务器都必须自己处理超时和重传来保证可靠性。在两种情况下会使用 TCP 进行传输:</p>
+<ul>
+<li>数据太大，用 TCP 进行传输。</li>
+<li>区域传送是主域名服务器向辅助域名服务器传送变化的那部分数据，区域传送需要使用 TCP 进行传输。</li>
+</ul>
+<h3 id="FTP-File-Transfer-Protocol-port-21-20"><a href="#FTP-File-Transfer-Protocol-port-21-20" class="headerlink" title="FTP (File Transfer Protocol) (port 21/20)"></a>FTP (File Transfer Protocol) (port 21/20)</h3><p>FTP 使用 TCP 进行连接，它需要两个连接来传送一个文件:</p>
+<ul>
+<li>控制连接: 服务器以打开端口号 21 等待客户端的连接，客户端主动建立连接后，使用这个连接将客户端的命令传送给服务器，并传回服务器的应答。</li>
+<li>数据连接: 用来传送一个文件。</li>
+</ul>
+<p>FTP 有主动和被动两种模式:</p>
+<ul>
+<li>主动模式: 服务器端主动建立数据连接，其中服务器端的端口号为 20，客户端的端口号随机，但是必须大于 1024，因为 0~1023 是熟知端口号。</li>
+<li>被动模式: 客户端主动建立数据连接，其中客户端的端口号由客户端自己指定，服务器端的端口号随机。</li>
+</ul>
+<p>主动模式要求客户端开放端口号给服务器端，需要去配置客户端的防火墙。被动模式只需要服务器端开放端口号即可，无需客户端配置防火墙。但是被动模式会导致服务器端的安全性减弱，因为开放了过多的端口号。</p>
+<h3 id="Telnet-port-23"><a href="#Telnet-port-23" class="headerlink" title="Telnet(port 23)"></a>Telnet(port 23)</h3><p>远程登录协议</p>
+<h3 id="电子邮件协议"><a href="#电子邮件协议" class="headerlink" title="电子邮件协议"></a>电子邮件协议</h3><p>发送协议常用 SMTP (Simple Mail Transfer Protocol) ，读取协议常用 POP3 (Post Office Protocol - Version 3)  和 IMAP (Internet Mail Access Protocol) 。</p>
+<ul>
+<li>POP3 (port 110) : POP3 的特点是只要用户从服务器上读取了邮件，就把该邮件删除。</li>
+<li>IMAP (port 143) : IMAP 协议中客户端和服务器上的邮件保持同步，如果不去手动删除邮件，那么服务器上的邮件也不会被删除。IMAP 这种做法可以让用户随时随地去访问服务器上的邮件。</li>
+<li>SMTP (port 25) : SMTP 只能发送 ASCII 码，而互联网邮件扩充 MIME 可以发送二进制文件。MIME 并没有改动或者取代 SMTP，而是增加邮件主体的结构，定义了非 ASCII 码的编码规则。</li>
+</ul>
+<h3 id="DHCP-Dynamic-Host-Configuration-Protocol"><a href="#DHCP-Dynamic-Host-Configuration-Protocol" class="headerlink" title="DHCP (Dynamic Host Configuration Protocol)"></a>DHCP (Dynamic Host Configuration Protocol)</h3><p>DHCP (Dynamic Host Configuration Protocol) 提供了即插即用的连网方式，用户不再需要去手动配置 IP 地址等信息。</p>
+<p>DHCP 工作过程如下:</p>
+<ul>
+<li>客户端发送 Discover 报文，该报文的目的地址为 255.255.255.255:67，源地址为 0.0.0.0:68，被放入 UDP 中，该报文被广播到同一个子网的所有主机上。</li>
+<li>DHCP 服务器收到 Discover 报文之后，发送 Offer 报文给客户端，该报文包含了客户端所需要的信息。因为客户端可能收到多个DHCP 服务器提供的信息，因此客户端需要进行选择。</li>
+<li>如果客户端选择了某个 DHCP 服务器提供的信息，那么就发送 Request 报文给该 DHCP 服务器。</li>
+<li>DHCP 服务器发送 Ack 报文，表示客户端此时可以使用提供给它的信息。</li>
+</ul>
+<p>如果客户端和 DHCP 服务器不在同一个子网，就需要使用中继代理。</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/CyC2018/Interview-Notebook/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md#udp-%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F">Interview-Notebook/notes/计算机网络.md</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-IP"><span class="toc-number">1.1.</span> <span class="toc-text">TCP&#x2F;IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSI"><span class="toc-number">1.2.</span> <span class="toc-text">OSI</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">1.2.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E7%A4%BA%E5%B1%82"><span class="toc-number">1.2.2.</span> <span class="toc-text">表示层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E5%B1%82"><span class="toc-number">1.2.3.</span> <span class="toc-text">会话层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">1.2.4.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">1.2.5.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-number">1.2.6.</span> <span class="toc-text">数据链路层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%B1%82"><span class="toc-number">1.2.7.</span> <span class="toc-text">物理层</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%B1%82-1"><span class="toc-number">2.</span> <span class="toc-text">物理层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82-1"><span class="toc-number">3.</span> <span class="toc-text">数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B"><span class="toc-number">3.1.</span> <span class="toc-text">差错检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E9%81%93"><span class="toc-number">3.2.</span> <span class="toc-text">信道</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD%E4%BF%A1%E9%81%93"><span class="toc-number">3.2.1.</span> <span class="toc-text">广播信道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%82%B9%E5%AF%B9%E7%82%B9%E4%BF%A1%E9%81%93"><span class="toc-number">3.2.2.</span> <span class="toc-text">点对点信道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%A1%E9%81%93%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AF"><span class="toc-number">3.2.3.</span> <span class="toc-text">信道复用技术</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MAC%E5%9C%B0%E5%9D%80"><span class="toc-number">3.3.</span> <span class="toc-text">MAC地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82-1"><span class="toc-number">4.</span> <span class="toc-text">网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="toc-number">4.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">IP数据报格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E8%A7%A3%E6%9E%90%E5%8D%8F%E8%AE%AEARP"><span class="toc-number">4.3.</span> <span class="toc-text">地址解析协议ARP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E9%99%85%E6%8E%A7%E5%88%B6%E6%8A%A5%E6%96%87%E5%8D%8F%E8%AE%AEICMP"><span class="toc-number">4.4.</span> <span class="toc-text">网际控制报文协议ICMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2NAT"><span class="toc-number">4.5.</span> <span class="toc-text">网络地址转换NAT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.6.</span> <span class="toc-text">路由选择协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RIP-Routing-Information-Protocol"><span class="toc-number">4.6.1.</span> <span class="toc-text">RIP (Routing Information Protocol)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OSPF-Open-Shortest-Path-First"><span class="toc-number">4.6.2.</span> <span class="toc-text">OSPF (Open Shortest Path First)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BGP-Border-Gateway-Protocol"><span class="toc-number">4.6.3.</span> <span class="toc-text">BGP (Border Gateway Protocol)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%BE%93%E5%B1%82"><span class="toc-number">5.</span> <span class="toc-text">运输层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E5%92%8CUDP"><span class="toc-number">5.1.</span> <span class="toc-text">TCP和UDP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP"><span class="toc-number">5.2.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP"><span class="toc-number">5.3.</span> <span class="toc-text">TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E9%A6%96%E9%83%A8"><span class="toc-number">5.3.1.</span> <span class="toc-text">TCP首部</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%8F%A1%E6%89%8B"><span class="toc-number">5.3.2.</span> <span class="toc-text">TCP握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%8C%A5%E6%89%8B"><span class="toc-number">5.3.3.</span> <span class="toc-text">TCP挥手</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="toc-number">5.4.</span> <span class="toc-text">TCP可靠性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="toc-number">5.4.1.</span> <span class="toc-text">TCP滑动窗口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">5.4.2.</span> <span class="toc-text">TCP流量控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">5.4.3.</span> <span class="toc-text">TCP拥塞控制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82-1"><span class="toc-number">6.</span> <span class="toc-text">应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS-Domain-Name-System-port-53"><span class="toc-number">6.1.</span> <span class="toc-text">DNS (Domain Name System)  (port 53)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FTP-File-Transfer-Protocol-port-21-20"><span class="toc-number">6.2.</span> <span class="toc-text">FTP (File Transfer Protocol) (port 21&#x2F;20)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Telnet-port-23"><span class="toc-number">6.3.</span> <span class="toc-text">Telnet(port 23)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%8D%8F%E8%AE%AE"><span class="toc-number">6.4.</span> <span class="toc-text">电子邮件协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP-Dynamic-Host-Configuration-Protocol"><span class="toc-number">6.5.</span> <span class="toc-text">DHCP (Dynamic Host Configuration Protocol)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">7.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&text=计算机网络笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&title=计算机网络笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&is_video=false&description=计算机网络笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=计算机网络笔记&body=Check out this article: https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&title=计算机网络笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&title=计算机网络笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&title=计算机网络笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&title=计算机网络笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.pwxcoo.com/2018/06/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/&name=计算机网络笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

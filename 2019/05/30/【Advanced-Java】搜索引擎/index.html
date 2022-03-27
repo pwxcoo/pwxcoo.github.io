@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="ES简介elasticsearch 是基于 lucene &#x2F;luːsɪŋ&#x2F; 的搜索库，分布式的文档存储，搜索，分析，支持 PB 级数据。 下面是 ES 里的一些概念  Near Real Time，近实时 写入数据到数据可以被搜索有一个小延迟（大概是 1s） 基于 es 执行搜索和分析可以达到秒级   Cluster 集群 Node 节点 Document &amp; field document">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Advanced Java】搜索引擎">
+<meta property="og:url" content="https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/index.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="ES简介elasticsearch 是基于 lucene &#x2F;luːsɪŋ&#x2F; 的搜索库，分布式的文档存储，搜索，分析，支持 PB 级数据。 下面是 ES 里的一些概念  Near Real Time，近实时 写入数据到数据可以被搜索有一个小延迟（大概是 1s） 基于 es 执行搜索和分析可以达到秒级   Cluster 集群 Node 节点 Document &amp; field document">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/es-write-detail.png">
+<meta property="article:published_time" content="2019-05-30T06:55:39.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.874Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="advanced-java">
+<meta property="article:tag" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.pwxcoo.com/image/es-write-detail.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>【Advanced Java】搜索引擎</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/06/03/%E3%80%90Advanced-Java%E3%80%91%E7%BC%93%E5%AD%98/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/03/20/%E3%80%90Advanced%20Java%E3%80%91%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&text=【Advanced Java】搜索引擎"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&title=【Advanced Java】搜索引擎"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&is_video=false&description=【Advanced Java】搜索引擎"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【Advanced Java】搜索引擎&body=Check out this article: https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&title=【Advanced Java】搜索引擎"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&title=【Advanced Java】搜索引擎"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&title=【Advanced Java】搜索引擎"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&title=【Advanced Java】搜索引擎"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&name=【Advanced Java】搜索引擎&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ES%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">ES简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">ES 如何实现分布式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES-%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">ES 工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E6%95%B0%E6%8D%AE"><span class="toc-number">3.1.</span> <span class="toc-text">写数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E6%95%B0%E6%8D%AE"><span class="toc-number">3.2.</span> <span class="toc-text">读数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es%E6%90%9C%E7%B4%A2"><span class="toc-number">3.3.</span> <span class="toc-text">es搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es%E5%86%99%E6%95%B0%E6%8D%AE%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="toc-number">3.4.</span> <span class="toc-text">es写数据底层原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es%E5%88%A0%E9%99%A4-%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="toc-number">3.5.</span> <span class="toc-text">es删除&#x2F;更新数据底层原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES-%E4%BC%98%E5%8C%96"><span class="toc-number">3.6.</span> <span class="toc-text">ES 优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">4.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        【Advanced Java】搜索引擎
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PWXCOO</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-05-30T06:55:39.000Z" itemprop="datePublished">2019-05-30</time>
+    </div>
+
+
+      
+    <!-- <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/base/">base</a>
+    </div> -->
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/advanced-java/" rel="tag">advanced-java</a>, <a class="tag-link-link" href="/tags/es/" rel="tag">es</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="ES简介"><a href="#ES简介" class="headerlink" title="ES简介"></a>ES简介</h2><p>elasticsearch 是基于 lucene /luːsɪŋ/ 的搜索库，<strong>分布式</strong>的<strong>文档存储</strong>，<strong>搜索</strong>，<strong>分析</strong>，支持 PB 级数据。</p>
+<p>下面是 ES 里的一些概念</p>
+<ul>
+<li>Near Real Time，近实时<ul>
+<li>写入数据到数据可以被搜索有一个小延迟（大概是 1s）</li>
+<li>基于 es 执行搜索和分析可以达到秒级</li>
+</ul>
+</li>
+<li>Cluster 集群</li>
+<li>Node 节点</li>
+<li>Document &amp; field<ul>
+<li>document 是一条 record</li>
+<li>field</li>
+</ul>
+</li>
+<li>Index 索引，一个索引包含很多 document</li>
+<li>Type，一个索引里有一个或者多个 type</li>
+<li>shard，把一个索引中的数据切分成多个 shard</li>
+<li>replica，shard 分为 primary shard 和 replica shard</li>
+</ul>
+<h2 id="ES-如何实现分布式"><a href="#ES-如何实现分布式" class="headerlink" title="ES 如何实现分布式"></a>ES 如何实现分布式</h2><p>ES shard 来实现分布式。</p>
+<ul>
+<li>支持横向扩展</li>
+<li>提高性能</li>
+</ul>
+<h2 id="ES-工作原理"><a href="#ES-工作原理" class="headerlink" title="ES 工作原理"></a>ES 工作原理</h2><h3 id="写数据"><a href="#写数据" class="headerlink" title="写数据"></a>写数据</h3><ul>
+<li>client 发送请求到 coordinating node</li>
+<li>coordinating node 对 document 路由，转发给对应的 primary shard</li>
+<li>primary 同步到 replica node，完成后响应结果</li>
+</ul>
+<h3 id="读数据"><a href="#读数据" class="headerlink" title="读数据"></a>读数据</h3><ul>
+<li>client 发送请求到 coordinating node</li>
+<li>client 路由，负载均衡到相应的 node（随机轮询算法）</li>
+<li>node 返回到 coordinating node，完成后响应结果</li>
+</ul>
+<h3 id="es搜索"><a href="#es搜索" class="headerlink" title="es搜索"></a>es搜索</h3><ul>
+<li>client 发送到 coordinating node</li>
+<li>coordinating node 转发到<strong>所有</strong>的 shard（primary 或 replica）</li>
+<li>query phase：shard 返回 doc id 给 coordinating node，coordinating node 对结果合并，排序，分页等操作，产出最终结果</li>
+<li>fetch phase：由 coordinating node 根据 doc id 来拉取实际的 document 数据</li>
+</ul>
+<h3 id="es写数据底层原理"><a href="#es写数据底层原理" class="headerlink" title="es写数据底层原理"></a>es写数据底层原理</h3><p><img src="/image/es-write-detail.png" alt="es-write-detail.png"></p>
+<p>因此是 1s 的准实时，5s 的数据丢失。</p>
+<h3 id="es删除-更新数据底层原理"><a href="#es删除-更新数据底层原理" class="headerlink" title="es删除/更新数据底层原理"></a>es删除/更新数据底层原理</h3><p>如果是删除操作，commit 的时候会生成一个 .del 文件，里面将某个 doc 标识为 deleted 状态，那么搜索的时候根据 .del 文件就知道这个 doc 是否被删除了。</p>
+<p>如果是更新操作，就是将原来的 doc 标识为 deleted 状态，然后新写入一条数据。</p>
+<p>buffer 每 refresh 一次，就会产生一个 segment file，所以默认情况下是 1 秒钟一个 segment file，这样下来 segment file 会越来越多，此时会定期执行 merge。每次 merge 的时候，会将多个 segment file 合并成一个，同时这里会将标识为 deleted 的 doc 给物理删除掉，然后将新的 segment file 写入磁盘，这里会写一个 commit point，标识所有新的 segment file，然后打开 segment file 供搜索使用，同时删除旧的 segment file。</p>
+<h3 id="ES-优化"><a href="#ES-优化" class="headerlink" title="ES 优化"></a>ES 优化</h3><ol>
+<li>filesystem cache<ul>
+<li>加内存</li>
+<li>document 太大，可以 es + hbase</li>
+</ul>
+</li>
+<li>数据预热</li>
+<li>冷热分离，不要让冷数据冲刷掉热数据</li>
+<li>不用分页，向微博一样用 scroll</li>
+</ol>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://doocs.github.io/advanced-java/#/">Java 进阶扫盲</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ES%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">ES简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">ES 如何实现分布式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES-%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">ES 工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E6%95%B0%E6%8D%AE"><span class="toc-number">3.1.</span> <span class="toc-text">写数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E6%95%B0%E6%8D%AE"><span class="toc-number">3.2.</span> <span class="toc-text">读数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es%E6%90%9C%E7%B4%A2"><span class="toc-number">3.3.</span> <span class="toc-text">es搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es%E5%86%99%E6%95%B0%E6%8D%AE%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="toc-number">3.4.</span> <span class="toc-text">es写数据底层原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es%E5%88%A0%E9%99%A4-%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="toc-number">3.5.</span> <span class="toc-text">es删除&#x2F;更新数据底层原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES-%E4%BC%98%E5%8C%96"><span class="toc-number">3.6.</span> <span class="toc-text">ES 优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">4.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&text=【Advanced Java】搜索引擎"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&title=【Advanced Java】搜索引擎"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&is_video=false&description=【Advanced Java】搜索引擎"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【Advanced Java】搜索引擎&body=Check out this article: https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&title=【Advanced Java】搜索引擎"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&title=【Advanced Java】搜索引擎"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&title=【Advanced Java】搜索引擎"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&title=【Advanced Java】搜索引擎"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.pwxcoo.com/2019/05/30/%E3%80%90Advanced-Java%E3%80%91%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/&name=【Advanced Java】搜索引擎&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

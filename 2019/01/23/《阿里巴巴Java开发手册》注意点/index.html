@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="大概把这本书里之前没注意到的整理了一下。 prerequisites POJO: plain ordinary java object PO: persistent object BO: business object VO: value&#x2F;view object DTO: data Transfer object  DAO: data access object    编程规约（一）命名风格 抽象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《阿里巴巴Java开发手册》注意点">
+<meta property="og:url" content="https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/index.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="大概把这本书里之前没注意到的整理了一下。 prerequisites POJO: plain ordinary java object PO: persistent object BO: business object VO: value&#x2F;view object DTO: data Transfer object  DAO: data access object    编程规约（一）命名风格 抽象">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-23T08:21:10.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.873Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>《阿里巴巴Java开发手册》注意点</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/02/18/%E3%80%90%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0%E3%80%910/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/12/28/linux-notes/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&text=《阿里巴巴Java开发手册》注意点"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&title=《阿里巴巴Java开发手册》注意点"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&is_video=false&description=《阿里巴巴Java开发手册》注意点"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=《阿里巴巴Java开发手册》注意点&body=Check out this article: https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&title=《阿里巴巴Java开发手册》注意点"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&title=《阿里巴巴Java开发手册》注意点"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&title=《阿里巴巴Java开发手册》注意点"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&title=《阿里巴巴Java开发手册》注意点"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&name=《阿里巴巴Java开发手册》注意点&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#prerequisites"><span class="toc-number">1.</span> <span class="toc-text">prerequisites</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E8%A7%84%E7%BA%A6"><span class="toc-number">2.</span> <span class="toc-text">编程规约</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E5%91%BD%E5%90%8D%E9%A3%8E%E6%A0%BC"><span class="toc-number">2.1.</span> <span class="toc-text">（一）命名风格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E5%B8%B8%E9%87%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">2.2.</span> <span class="toc-text">（二）常量定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text">（三）代码格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%9B%9B%EF%BC%89OOP-%E8%A7%84%E7%BA%A6"><span class="toc-number">2.4.</span> <span class="toc-text">（四）OOP 规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%94%EF%BC%89%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86"><span class="toc-number">2.5.</span> <span class="toc-text">（五）集合处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%85%AD%EF%BC%89-%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86"><span class="toc-number">2.6.</span> <span class="toc-text">（六） 并发处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%83%EF%BC%89%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.7.</span> <span class="toc-text">（七）控制语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%85%AB%EF%BC%89-%E6%B3%A8%E9%87%8A%E8%A7%84%E7%BA%A6"><span class="toc-number">2.8.</span> <span class="toc-text">（八） 注释规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B9%9D%EF%BC%89%E5%85%B6%E5%AE%83"><span class="toc-number">2.9.</span> <span class="toc-text">（九）其它</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97"><span class="toc-number">3.</span> <span class="toc-text">异常日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">(一) 异常处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E6%97%A5%E5%BF%97%E8%A7%84%E7%BA%A6"><span class="toc-number">3.2.</span> <span class="toc-text">(二) 日志规约</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">单元测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E8%A7%84%E7%BA%A6"><span class="toc-number">5.</span> <span class="toc-text">安全规约</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">6.</span> <span class="toc-text">MySQL 数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E5%BB%BA%E8%A1%A8%E8%A7%84%E7%BA%A6"><span class="toc-number">6.1.</span> <span class="toc-text">(一) 建表规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E7%B4%A2%E5%BC%95%E8%A7%84%E7%BA%A6"><span class="toc-number">6.2.</span> <span class="toc-text">(二) 索引规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-SQL-%E8%AF%AD%E5%8F%A5"><span class="toc-number">6.3.</span> <span class="toc-text">(三) SQL 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B-ORM-%E6%98%A0%E5%B0%84"><span class="toc-number">6.4.</span> <span class="toc-text">(四) ORM 映射</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84"><span class="toc-number">7.</span> <span class="toc-text">工程结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E5%BA%94%E7%94%A8%E5%88%86%E5%B1%82"><span class="toc-number">7.1.</span> <span class="toc-text">(一) 应用分层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E4%BA%8C%E6%96%B9%E5%BA%93%E4%BE%9D%E8%B5%96"><span class="toc-number">7.2.</span> <span class="toc-text">(二) 二方库依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">7.3.</span> <span class="toc-text">(三) 服务器</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        《阿里巴巴Java开发手册》注意点
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PWXCOO</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-01-23T08:21:10.000Z" itemprop="datePublished">2019-01-23</time>
+    </div>
+
+
+      
+    <!-- <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/memo/">memo</a>
+    </div> -->
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/java/" rel="tag">java</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>大概把这本书里之前没注意到的整理了一下。</p>
+<h2 id="prerequisites"><a href="#prerequisites" class="headerlink" title="prerequisites"></a>prerequisites</h2><ul>
+<li>POJO: plain ordinary java object<ul>
+<li>PO: persistent object</li>
+<li>BO: business object</li>
+<li>VO: value/view object</li>
+<li>DTO: data Transfer object </li>
+<li>DAO: data access object</li>
+</ul>
+</li>
+</ul>
+<h2 id="编程规约"><a href="#编程规约" class="headerlink" title="编程规约"></a>编程规约</h2><h3 id="（一）命名风格"><a href="#（一）命名风格" class="headerlink" title="（一）命名风格"></a>（一）命名风格</h3><ul>
+<li>抽象类命名使用 Abstract 或 Base 开头 ;</li>
+<li>POJO 类中布尔类型的变量，都不要加 is 前缀 ，否则部分框架解析会引起序列化错误。</li>
+<li>枚举类名建议带上 Enum 后缀</li>
+</ul>
+<h3 id="（二）常量定义"><a href="#（二）常量定义" class="headerlink" title="（二）常量定义"></a>（二）常量定义</h3><ul>
+<li>在 long 或者 Long 赋值时，数值后使用大写的 L ，不能是小写的 l ，小写容易跟数字 1 混淆，造成误解。</li>
+</ul>
+<h3 id="（三）代码格式"><a href="#（三）代码格式" class="headerlink" title="（三）代码格式"></a>（三）代码格式</h3><ul>
+<li>采用 4 个空格缩进，禁止使用 tab 字符。</li>
+</ul>
+<h3 id="（四）OOP-规约"><a href="#（四）OOP-规约" class="headerlink" title="（四）OOP 规约"></a>（四）OOP 规约</h3><ul>
+<li>Object 的 equals 方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals 。推荐使用 java . util . Objects # equals(JDK 7 引入的工具类 )</li>
+<li>关于基本数据类型与包装数据类型的使用标准如下: <ol>
+<li>【强制】所有的 POJO 类属性必须使用包装数据类型。</li>
+<li>【强制】 RPC 方法的返回值和参数必须使用包装数据类型。</li>
+<li>【推荐】所有的局部变量使用基本数据类型。</li>
+</ol>
+</li>
+<li>禁止在 POJO 类中，同时存在对应属性 xxx 的 isXxx() 和 getXxx() 方法。框架在调用属性 xxx 的提取方法时，并不能确定哪个方法一定是被优先调用到。</li>
+<li>使用索引访问用 String 的 split 方法得到的数组时，需做最后一个分隔符后有无内容的检查，否则会有抛 IndexOutOfBoundsException 的风险。（源码的实现会舍去末尾的空字符）  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Construct result</span></span><br><span class="line"><span class="type">int</span> <span class="variable">resultSize</span> <span class="operator">=</span> list.size();</span><br><span class="line"><span class="keyword">if</span> (limit == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">while</span> (resultSize &gt; <span class="number">0</span> &amp;&amp; list.get(resultSize - <span class="number">1</span>).length() == <span class="number">0</span>) &#123;</span><br><span class="line">        resultSize--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">String[] result = <span class="keyword">new</span> <span class="title class_">String</span>[resultSize];</span><br><span class="line"><span class="keyword">return</span> list.subList(<span class="number">0</span>， resultSize).toArray(result);</span><br></pre></td></tr></table></figure></li>
+<li>循环体内，字符串的连接方式，使用 StringBuilder 的 append 方法进行扩展。</li>
+</ul>
+<h3 id="（五）集合处理"><a href="#（五）集合处理" class="headerlink" title="（五）集合处理"></a>（五）集合处理</h3><ul>
+<li>ArrayList 的 subList 结果不可强转成 ArrayList 。subList 返回的是 ArrayList 的内部类 SubList ，并不是 ArrayList 而是 ArrayList<br>的一个视图，对于 SubList 子列表的所有操作最终会反映到原列表上。</li>
+<li>使用集合转数组的方法，必须使用集合的 toArray(T[] array) ，传入的是类型完全一样的数组，大小就是 <code>list.size()</code> 。直接使用 toArray 无参方法存在问题，此方法返回值只能是 Object[] 类，若强转其它类型数组将出现 ClassCastException 错误。</li>
+<li>使用工具类 Arrays . asList() 把数组转换成集合时，不能使用其修改集合相关的方法。sList 的返回对象是一个 Arrays 内部类，并没有实现集合的修改方法。 Arrays . asList 体现的是适配器模式，只是转换接口，后台的数据仍是数组。</li>
+<li>泛型通配符&lt;? extends T &gt;来接收返回的数据，此写法的泛型集合不能使用 add 方法，而 &lt;? super T&gt; 不能使用 get 方法，作为接口调用赋值时易出错。扩展说一下 PECS(Producer Extends Consumer Super) 原则:第一、频繁往外读取内容的，适合用&lt;? extends T &gt;。第二、经常往里插入的，适合用 &lt;? super T&gt; 。</li>
+<li>集合初始化时,指定集合初始值大小。</li>
+<li>使用 entrySet 遍历 Map 类集合 KV ,而不是 keySet 方式进行遍历。</li>
+<li>Map 类对 null 值的处理。</li>
+</ul>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>集合类</th>
+<th>Key</th>
+<th>Value</th>
+<th>Super</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hashtable</td>
+<td>no</td>
+<td>no</td>
+<td>Dictionary</td>
+<td>thread safe</td>
+</tr>
+<tr>
+<td>ConcurrentHashMap</td>
+<td>no</td>
+<td>no</td>
+<td>AbstractMap</td>
+<td>锁分段（JDK8: CAS）</td>
+</tr>
+<tr>
+<td>TreeMap</td>
+<td>no</td>
+<td>yes</td>
+<td>AbstractMap</td>
+<td>thread unsafe</td>
+</tr>
+<tr>
+<td>HashMap</td>
+<td>yes</td>
+<td>yes</td>
+<td>AbstractMap</td>
+<td>thread unsafe</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h3 id="（六）-并发处理"><a href="#（六）-并发处理" class="headerlink" title="（六） 并发处理"></a>（六） 并发处理</h3><ul>
+<li>【强制】创建线程或线程池时请指定有意义的线程名称,方便出错时回溯。</li>
+<li>【强制】线程池不允许使用 Executors 去创建,而是通过 ThreadPoolExecutor 的方式,这样的处理方式让写的同学更加明确线程池的运行规则,规避资源耗尽的风险。<ol>
+<li>FixedThreadPool 和 SingleThreadPool :<br>允许的请求队列长度为 Integer.MAX_VALUE ,可能会堆积大量的请求,从而导致 OOM 。</li>
+<li>CachedThreadPool 和 ScheduledThreadPool :<br>允许的创建线程数量为 Integer.MAX_VALUE ,可能会创建大量的线程,从而导致 OOM 。</li>
+</ol>
+</li>
+<li>并发修改同一记录时,避免更新丢失,需要加锁。要么在应用层加锁,要么在缓存加锁,要么在数据库层使用乐观锁,使用 version 作为更新依据。如果每次访问冲突概率小于 20%,推荐使用乐观锁,否则使用悲观锁。乐观锁的重试次数不得小于 3 次。</li>
+<li>多线程并行处理定时任务时, Timer 运行多个 TimeTask 时,只要其中之一没有捕获抛出的异常,其它任务便会自动终止运行,使用 ScheduledExecutorService 则没有这个问题。</li>
+<li>使用 CountDownLatch 进行异步转同步操作,每个线程退出前必须调用 countDown 方法,线程执行代码注意 catch 异常,确保 countDown 方法被执行到,避免主线程无法执行至 await 方法,直到超时才返回结果。</li>
+<li>HashMap 在容量不够进行 resize 时由于高并发可能出现死链,导致 CPU 飙升, 在开发过程中可以使用其它数据结构或加锁来规避此风险。</li>
+<li>ThreadLocal 无法解决共享对象的更新问题, ThreadLocal 对象建议使用 static修饰。这个变量是针对一个线程内所有操作共享的,所以设置为静态变量,所有此类实例共享此静态变量 ,也就是说在类第一次被使用时装载,只分配一块存储空间,所有此类的对象 ( 只要是这个线程内定义的 ) 都可以操控这个变量。</li>
+</ul>
+<h3 id="（七）控制语句"><a href="#（七）控制语句" class="headerlink" title="（七）控制语句"></a>（七）控制语句</h3><ul>
+<li>【参考】下列情形,需要进行参数校验:<ol>
+<li>调用频次低的方法。</li>
+<li>执行时间开销很大的方法。此情形中,参数校验时间几乎可以忽略不计,但如果因为参<br>数错误导致中间执行回退,或者错误,那得不偿失。</li>
+<li>需要极高稳定性和可用性的方法。</li>
+<li>对外提供的开放接口,不管是 RPC / API / HTTP 接口。</li>
+<li>敏感权限入口。</li>
+</ol>
+</li>
+<li>【参考】下列情形,不需要进行参数校验:<ol>
+<li>极有可能被循环调用的方法。但在方法说明里必须注明外部参数检查要求。</li>
+<li>底层调用频度比较高的方法。毕竟是像纯净水过滤的最后一道,参数错误不太可能到底<br>层才会暴露问题。一般 DAO 层与 Service 层都在同一个应用中,部署在同一台服务器中,所<br>以 DAO 的参数校验,可以省略。</li>
+<li>被声明成 private 只会被自己代码所调用的方法,如果能够确定调用方法的代码传入参<br>数已经做过检查或者肯定不会有问题,此时可以不校验参数。</li>
+</ol>
+</li>
+</ul>
+<h3 id="（八）-注释规约"><a href="#（八）-注释规约" class="headerlink" title="（八） 注释规约"></a>（八） 注释规约</h3><h3 id="（九）其它"><a href="#（九）其它" class="headerlink" title="（九）其它"></a>（九）其它</h3><ul>
+<li>【强制】后台输送给页面的变量必须加 $!{var} ——中间的感叹号。</li>
+<li>在 JDK 8 中, 针对统计时间等场景,推荐使用 Instant 类。</li>
+</ul>
+<h2 id="异常日志"><a href="#异常日志" class="headerlink" title="异常日志"></a>异常日志</h2><h3 id="一-异常处理"><a href="#一-异常处理" class="headerlink" title="(一) 异常处理"></a>(一) 异常处理</h3><ul>
+<li>【推荐】防止 NPE ,是程序员的基本修养,注意 NPE 产生的场景:<ol>
+<li>返回类型为基本数据类型, return 包装数据类型的对象时,自动拆箱有可能产生 NPE 。</li>
+<li>数据库的查询结果可能为 null 。</li>
+<li>集合里的元素即使 isNotEmpty ,取出的数据元素也可能为 null 。</li>
+<li>远程调用返回对象时,一律要求进行空指针判断,防止 NPE 。</li>
+<li>对于 Session 中获取的数据,建议 NPE 检查,避免空指针。</li>
+<li>级联调用 <code>obj.getA().getB().getC()</code>; 一连串调用,易产生 NPE 。</li>
+</ol>
+</li>
+</ul>
+<h3 id="二-日志规约"><a href="#二-日志规约" class="headerlink" title="(二) 日志规约"></a>(二) 日志规约</h3><ul>
+<li>应用中不可直接使用日志系统 (Log 4 j 、 Logback) 中的 API ,而应依赖使用日志框架 SLF4J（Simple Logging Facade for Java）中的 API ,使用门面模式的日志框架,有利于维护和各个类的日志处理方式统一。</li>
+</ul>
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><h2 id="安全规约"><a href="#安全规约" class="headerlink" title="安全规约"></a>安全规约</h2><ul>
+<li>【强制】表单、 AJAX 提交必须执行 CSRF 安全验证。</li>
+</ul>
+<h2 id="MySQL-数据库"><a href="#MySQL-数据库" class="headerlink" title="MySQL 数据库"></a>MySQL 数据库</h2><h3 id="一-建表规约"><a href="#一-建表规约" class="headerlink" title="(一) 建表规约"></a>(一) 建表规约</h3><ul>
+<li>【强制】表达是与否概念的字段,必须使用 is_xxx 的方式命名,数据类型是 unsigned tinyint(1 表示是,0 表示否)。</li>
+<li>【强制】主键索引名为 pk_ 字段名;唯一索引名为 uk _字段名 ; 普通索引名则为 idx _字段名。</li>
+<li>【强制】小数类型为 decimal ,禁止使用 float 和 double 。</li>
+<li>【强制】如果存储的字符串长度几乎相等,使用 char 定长字符串类型。</li>
+<li>【强制】表必备三字段: id , gmt _ create , gmt _ modified 。</li>
+<li>【推荐】字段允许适当冗余,以提高查询性能,但必须考虑数据一致。冗余字段应遵循:<ol>
+<li>不是频繁修改的字段。</li>
+<li>不是 varchar 超长字段,更不能是 text 字段。</li>
+</ol>
+</li>
+<li>【推荐】单表行数超过 500 万行或者单表容量超过 2 GB ,才推荐进行分库分表。</li>
+</ul>
+<h3 id="二-索引规约"><a href="#二-索引规约" class="headerlink" title="(二) 索引规约"></a>(二) 索引规约</h3><ul>
+<li>【强制】业务上具有唯一特性的字段,即使是多个字段的组合,也必须建成唯一索引。</li>
+<li>【强制】在 varchar 字段上建立索引时,必须指定索引长度,没必要对全字段建立索引,根据实际文本区分度决定索引长度即可。索引的长度与区分度是一对矛盾体,一般对字符串类型数据,长度为 20 的索引,区分度会高达 90% 以上,可以使用 count(distinct left( 列名, 索引长度 )) / count( * ) 的区分度来确定。</li>
+<li>【强制】页面搜索严禁左模糊或者全模糊</li>
+<li>【推荐】如果有 order by 的场景,请注意利用索引的有序性。</li>
+<li>【推荐】利用覆盖索引来进行查询操作,避免回表。</li>
+<li>【推荐】利用延迟关联或者子查询优化超多分页场景。</li>
+<li>【推荐】建组合索引的时候,区分度最高的在最左边。</li>
+</ul>
+<h3 id="三-SQL-语句"><a href="#三-SQL-语句" class="headerlink" title="(三) SQL 语句"></a>(三) SQL 语句</h3><ul>
+<li>【强制】不要使用 count( 列名 ) 或 count( 常量 ) 来替代 count( <em> ) , count( </em> ) 是 SQL 92 定义的标准统计行数的语法,跟数据库无关,跟 NULL 和非 NULL 无关。count( * ) 会统计值为 NULL 的行,而 count( 列名 ) 不会统计此列为 NULL 值的行。</li>
+<li>【强制】 count(distinct col) 计算该列除 NULL 之外的不重复行数,注意 count(distinct col 1, col 2 ) 如果其中一列全为 NULL ,那么即使另一列有不同的值,也返回为 0。</li>
+<li>【强制】当某一列的值全是 NULL 时, count(col) 的返回结果为 0,但 sum(col) 的返回结果为 NULL ,因此使用 sum() 时需注意 NPE 问题。</li>
+<li>【强制】使用 ISNULL() 来判断是否为 NULL 值。NULL 与任何值的直接比较都为 NULL。</li>
+<li>【强制】不得使用外键与级联,一切外键概念必须在应用层解决。</li>
+</ul>
+<h3 id="四-ORM-映射"><a href="#四-ORM-映射" class="headerlink" title="(四) ORM 映射"></a>(四) ORM 映射</h3><ul>
+<li>【强制】 POJO 类的布尔属性不能加 is ,而数据库字段必须加 is _,要求在 resultMap 中进行字段与属性之间的映射。</li>
+<li>【强制】不要用 resultClass 当返回参数,即使所有类属性名与数据库字段一一对应,也需要定义 ; 反过来,每一个表也必然有一个 POJO 类与之对应。</li>
+<li>【强制】 sql. xml 配置参数使用: #{}, # param # 不要使用${} 此种方式容易出现 SQL 注入。</li>
+<li>【参考】&lt; isEqual &gt;中的 compareValue 是与属性值对比的常量,一般是数字,表示相等时带上此条件 ; &lt; isNotEmpty &gt;表示不为空且不为 null 时执行 ; &lt; isNotNull &gt;表示不为 null 值时执行。</li>
+</ul>
+<h2 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h2><h3 id="一-应用分层"><a href="#一-应用分层" class="headerlink" title="(一) 应用分层"></a>(一) 应用分层</h3><h3 id="二-二方库依赖"><a href="#二-二方库依赖" class="headerlink" title="(二) 二方库依赖"></a>(二) 二方库依赖</h3><ul>
+<li>【强制】二方库里可以定义枚举类型,参数可以使用枚举类型,但是接口返回值不允许使用枚举类型或者包含枚举类型的 POJO 对象。</li>
+</ul>
+<h3 id="三-服务器"><a href="#三-服务器" class="headerlink" title="(三) 服务器"></a>(三) 服务器</h3><ul>
+<li>【推荐】高并发服务器建议调小 TCP 协议的 time _ wait 超时时间。操作系统默认 240 秒。在 linux 服务器上请通过变更/ etc / sysctl . conf 文件去修改该缺省值 ( 秒 ) :  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_fin_timeout = 30</span><br></pre></td></tr></table></figure></li>
+<li>【推荐】调大服务器所支持的最大文件句柄数 (File Descriptor ,简写为 fd) 。</li>
+<li>【推荐】给 JVM 环境参数设置- XX :+ HeapDumpOnOutOfMemoryError 参数,让 JVM 碰到 OOM 场景时输出 dump 信息。</li>
+<li>【推荐】在线上生产环境, JVM 的 Xms（JVM初始分配的堆内存 ） 和 Xmx（JVM最大允许分配的堆内存，按需分配 ） 设置一样大小的内存容量,避免在 GC 后调整堆大小带来的压力。</li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#prerequisites"><span class="toc-number">1.</span> <span class="toc-text">prerequisites</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E8%A7%84%E7%BA%A6"><span class="toc-number">2.</span> <span class="toc-text">编程规约</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E5%91%BD%E5%90%8D%E9%A3%8E%E6%A0%BC"><span class="toc-number">2.1.</span> <span class="toc-text">（一）命名风格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E5%B8%B8%E9%87%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">2.2.</span> <span class="toc-text">（二）常量定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text">（三）代码格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%9B%9B%EF%BC%89OOP-%E8%A7%84%E7%BA%A6"><span class="toc-number">2.4.</span> <span class="toc-text">（四）OOP 规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%94%EF%BC%89%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86"><span class="toc-number">2.5.</span> <span class="toc-text">（五）集合处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%85%AD%EF%BC%89-%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86"><span class="toc-number">2.6.</span> <span class="toc-text">（六） 并发处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%83%EF%BC%89%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.7.</span> <span class="toc-text">（七）控制语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%85%AB%EF%BC%89-%E6%B3%A8%E9%87%8A%E8%A7%84%E7%BA%A6"><span class="toc-number">2.8.</span> <span class="toc-text">（八） 注释规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B9%9D%EF%BC%89%E5%85%B6%E5%AE%83"><span class="toc-number">2.9.</span> <span class="toc-text">（九）其它</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97"><span class="toc-number">3.</span> <span class="toc-text">异常日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">(一) 异常处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E6%97%A5%E5%BF%97%E8%A7%84%E7%BA%A6"><span class="toc-number">3.2.</span> <span class="toc-text">(二) 日志规约</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">单元测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E8%A7%84%E7%BA%A6"><span class="toc-number">5.</span> <span class="toc-text">安全规约</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">6.</span> <span class="toc-text">MySQL 数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E5%BB%BA%E8%A1%A8%E8%A7%84%E7%BA%A6"><span class="toc-number">6.1.</span> <span class="toc-text">(一) 建表规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E7%B4%A2%E5%BC%95%E8%A7%84%E7%BA%A6"><span class="toc-number">6.2.</span> <span class="toc-text">(二) 索引规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-SQL-%E8%AF%AD%E5%8F%A5"><span class="toc-number">6.3.</span> <span class="toc-text">(三) SQL 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B-ORM-%E6%98%A0%E5%B0%84"><span class="toc-number">6.4.</span> <span class="toc-text">(四) ORM 映射</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84"><span class="toc-number">7.</span> <span class="toc-text">工程结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E5%BA%94%E7%94%A8%E5%88%86%E5%B1%82"><span class="toc-number">7.1.</span> <span class="toc-text">(一) 应用分层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E4%BA%8C%E6%96%B9%E5%BA%93%E4%BE%9D%E8%B5%96"><span class="toc-number">7.2.</span> <span class="toc-text">(二) 二方库依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">7.3.</span> <span class="toc-text">(三) 服务器</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&text=《阿里巴巴Java开发手册》注意点"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&title=《阿里巴巴Java开发手册》注意点"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&is_video=false&description=《阿里巴巴Java开发手册》注意点"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=《阿里巴巴Java开发手册》注意点&body=Check out this article: https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&title=《阿里巴巴Java开发手册》注意点"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&title=《阿里巴巴Java开发手册》注意点"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&title=《阿里巴巴Java开发手册》注意点"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&title=《阿里巴巴Java开发手册》注意点"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.pwxcoo.com/2019/01/23/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E3%80%8B%E6%B3%A8%E6%84%8F%E7%82%B9/&name=《阿里巴巴Java开发手册》注意点&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

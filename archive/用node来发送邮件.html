@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="之前想做给 pwxcoo.com 做一个管理员的界面，看看网站日常是什么样的。初步是要做一个账号，然后管理员能看，然后巴拉巴拉，感觉有点麻烦，就一直搁置了。 然后看到一个 nodemailer&#x2F;nodemailer 这个，用 node 来发邮件，感觉还行，就干脆直接用这个来把日志文件发给自己好了。 用 nodemailer 来发送邮件直接用官网的 demo 就好了。大概就是这样。 12345678">
+<meta property="og:type" content="website">
+<meta property="og:title" content="用node来发送邮件">
+<meta property="og:url" content="https://blog.pwxcoo.com/archive/%E7%94%A8node%E6%9D%A5%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="之前想做给 pwxcoo.com 做一个管理员的界面，看看网站日常是什么样的。初步是要做一个账号，然后管理员能看，然后巴拉巴拉，感觉有点麻烦，就一直搁置了。 然后看到一个 nodemailer&#x2F;nodemailer 这个，用 node 来发邮件，感觉还行，就干脆直接用这个来把日志文件发给自己好了。 用 nodemailer 来发送邮件直接用官网的 demo 就好了。大概就是这样。 12345678">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-05-12T13:08:41.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.890Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="node">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>用node来发送邮件</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>PWXCOO</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Archives</a></li>
+       
+        <li><a href="/toc/">Toc</a></li>
+       
+        <li><a href="/about/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <div class="content" itemprop="articleBody">
+      
+          <p>之前想做给 <a target="_blank" rel="noopener" href="https://github.com/pwxcoo/BlackMagic">pwxcoo.com</a> 做一个管理员的界面，看看网站日常是什么样的。初步是要做一个账号，然后管理员能看，然后巴拉巴拉，感觉有点麻烦，就一直搁置了。</p>
+<p>然后看到一个 <a target="_blank" rel="noopener" href="https://github.com/nodemailer/nodemailer">nodemailer/nodemailer</a> 这个，用 node 来发邮件，感觉还行，就干脆直接用这个来把日志文件发给自己好了。</p>
+<h2 id="用-nodemailer-来发送邮件"><a href="#用-nodemailer-来发送邮件" class="headerlink" title="用 nodemailer 来发送邮件"></a>用 nodemailer 来发送邮件</h2><p>直接用官网的 <a target="_blank" rel="noopener" href="https://nodemailer.com/about/">demo</a> 就好了。大概就是这样。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> nodemailer = <span class="built_in">require</span>(<span class="string">&#x27;nodemailer&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> transporter = nodemailer.<span class="title function_">createTransport</span>(&#123;</span><br><span class="line">    <span class="comment">// host: &#x27;smtp.ethereal.email&#x27;,</span></span><br><span class="line">    <span class="attr">service</span>: <span class="string">&#x27;qq&#x27;</span>, <span class="comment">// 使用了内置传输发送邮件 查看支持列表: https://nodemailer.com/smtp/well-known/</span></span><br><span class="line">    <span class="attr">port</span>: <span class="number">465</span>, <span class="comment">// SMTP 端口</span></span><br><span class="line">    <span class="attr">secureConnection</span>: <span class="literal">true</span>, <span class="comment">// 使用了 SSL</span></span><br><span class="line">    <span class="attr">auth</span>: &#123;</span><br><span class="line">        <span class="attr">user</span>: <span class="string">&#x27;sender@qq.com&#x27;</span>,</span><br><span class="line">        <span class="comment">// 这里密码不是qq密码，是你设置的smtp授权码</span></span><br><span class="line">        <span class="attr">pass</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mailOptions = &#123;</span><br><span class="line">    <span class="attr">from</span>: <span class="string">&#x27;&quot;sender&quot; &lt;sender@qq.com&gt;&#x27;</span>, <span class="comment">// sender address</span></span><br><span class="line">    <span class="attr">to</span>: <span class="string">&#x27;admin@qq.com&#x27;</span>, <span class="comment">// list of receivers</span></span><br><span class="line">    <span class="attr">subject</span>: <span class="string">&#x27;Hello&#x27;</span>, <span class="comment">// Subject line</span></span><br><span class="line">    <span class="comment">// 发送text或者html格式</span></span><br><span class="line">    <span class="comment">// text: &#x27;Hello world?&#x27;, // plain text body</span></span><br><span class="line">    <span class="attr">html</span>: <span class="string">&#x27;&lt;b&gt;Hello world?&lt;/b&gt;&#x27;</span>, <span class="comment">// html body</span></span><br><span class="line">    <span class="attr">attachments</span>: [&#123;     <span class="comment">// 附件</span></span><br><span class="line">        <span class="comment">// utf-8 string as an attachment</span></span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;text1.txt&#x27;</span>,</span><br><span class="line">        <span class="attr">content</span>: <span class="string">&#x27;hello world!&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;   <span class="comment">// file on disk as an attachment</span></span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;text2.txt&#x27;</span>,</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;/path/to/file.txt&#x27;</span> <span class="comment">// stream this file</span></span><br><span class="line"></span><br><span class="line">    &#125;]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// send mail with defined transport object</span></span><br><span class="line">transporter.<span class="title function_">sendMail</span>(mailOptions, <span class="function">(<span class="params">error, info</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(error);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Message sent: %s&#x27;</span>, info.<span class="property">messageId</span>);</span><br><span class="line">    <span class="comment">// Message sent: &lt;04ec7731-cc68-1ef6-303c-61b0f796b78f@qq.com&gt;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>nodemailer 还是很强大的，可以用这个来给人发 html 邮件，很多公司的订阅都是这样实现的。</p>
+<h2 id="用-node-schedule-来定时发送"><a href="#用-node-schedule-来定时发送" class="headerlink" title="用 node-schedule 来定时发送"></a>用 node-schedule 来定时发送</h2><p>然后用一个 <a target="_blank" rel="noopener" href="https://github.com/node-schedule/node-schedule">node-schedule</a> 来做一个定时任务，定时发送邮件到管理者账号里来方便管理。</p>
+<p>这个库的使用跟 linux 里的 cron 的语法是差不多的可以直接设置，demo 差不多是这样</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> schedule = <span class="built_in">require</span>(<span class="string">&#x27;node-schedule&#x27;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> j = schedule.<span class="title function_">scheduleJob</span>(<span class="string">&#x27;26 * * * *&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;I am running&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;cron task is start!&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>cron 的设置是否正确，可以用 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/cron-parser">cron-parser</a> 这个库来验证。下面这段代码将自动打印出下十次任务的执行时间，对照一下，就知道自己的 cron 设置是否正确了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> parser = <span class="built_in">require</span>(<span class="string">&#x27;cron-parser&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> interval = parser.<span class="title function_">parseExpression</span>(<span class="string">&#x27;0 59 23 * * *&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//打印后面10次的执行时间</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(interval.<span class="title function_">next</span>().<span class="title function_">toString</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="格式化时间"><a href="#格式化时间" class="headerlink" title="格式化时间"></a>格式化时间</h2><p>因为我想每天发一封，我的 log4js 里的设置就是每天写一个 log 文件的，文件的名字就是 <code>yyyy-mm-dd</code> 的设置，因为 log4js 把这个时间的模式匹配封装好了，所以我想用这个 pattern 来匹配日志文件然后发送，需要自己写一个格式化方法来解析。。</p>
+<p>下面这个函数将返回 <code>yyyy-mm-dd</code> 格式的表示时间的字符串。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getNowFormatDate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">    <span class="keyword">var</span> seperator1 = <span class="string">&quot;-&quot;</span>;</span><br><span class="line">    <span class="keyword">var</span> year = date.<span class="title function_">getFullYear</span>();</span><br><span class="line">    <span class="keyword">var</span> month = date.<span class="title function_">getMonth</span>() + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> strDate = date.<span class="title function_">getDate</span>();</span><br><span class="line">    <span class="keyword">if</span> (month &gt;= <span class="number">1</span> &amp;&amp; month &lt;= <span class="number">9</span>) &#123;</span><br><span class="line">        month = <span class="string">&quot;0&quot;</span> + month;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (strDate &gt;= <span class="number">0</span> &amp;&amp; strDate &lt;= <span class="number">9</span>) &#123;</span><br><span class="line">        strDate = <span class="string">&quot;0&quot;</span> + strDate;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> currentdate = year + seperator1 + month + seperator1 + strDate;</span><br><span class="line">    <span class="keyword">return</span> currentdate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/pwxcoo/BlackMagic/commit/171fcd4049aea05ca64d8db8b55665aaa637cbc2">将这个功能添加到我的node应用的具体实现</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/node-schedule/node-schedule">node-schedule/node-schedule</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/nodemailer/nodemailer">nodemailer/nodemailer</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000012251328">Node.js使用Nodemailer发送邮件</a></li>
+</ul>
+
+        
+  </div>
+</article>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

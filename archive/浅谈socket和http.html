@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="今天试了 socket 和网络编程相关的东西。计算机网络是上个学期的课，忘了好多的说。。太久不用果然是学一点新的东西，旧的都忘了。。还有一部分原因也是自己当初学得仅仅停留在老师的期末考范围里，考纲以外的东西基本没做太多了解。。网络的知识点太多了。。 正好趁这次机会好好看了一下 socket 和网络编程相关的一些东西，跟之前比起来有了很多新的体会和认识。 计算机网络协议分层物，数，网，传，会，表，应">
+<meta property="og:type" content="website">
+<meta property="og:title" content="浅谈socket和http">
+<meta property="og:url" content="https://blog.pwxcoo.com/archive/%E6%B5%85%E8%B0%88socket%E5%92%8Chttp.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="今天试了 socket 和网络编程相关的东西。计算机网络是上个学期的课，忘了好多的说。。太久不用果然是学一点新的东西，旧的都忘了。。还有一部分原因也是自己当初学得仅仅停留在老师的期末考范围里，考纲以外的东西基本没做太多了解。。网络的知识点太多了。。 正好趁这次机会好好看了一下 socket 和网络编程相关的一些东西，跟之前比起来有了很多新的体会和认识。 计算机网络协议分层物，数，网，传，会，表，应">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/tcpandudp.png">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/tcpProcess.png">
+<meta property="article:published_time" content="2018-06-05T14:24:24.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.888Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="socket">
+<meta property="article:tag" content="network programming">
+<meta property="article:tag" content="computer network">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.pwxcoo.com/image/tcpandudp.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>浅谈socket和http</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>PWXCOO</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Archives</a></li>
+       
+        <li><a href="/toc/">Toc</a></li>
+       
+        <li><a href="/about/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <div class="content" itemprop="articleBody">
+      
+          <p>今天试了 socket 和网络编程相关的东西。计算机网络是上个学期的课，忘了好多的说。。太久不用果然是学一点新的东西，旧的都忘了。。还有一部分原因也是自己当初学得仅仅停留在老师的期末考范围里，考纲以外的东西基本没做太多了解。。网络的知识点太多了。。</p>
+<p>正好趁这次机会好好看了一下 socket 和网络编程相关的一些东西，跟之前比起来有了很多新的体会和认识。</p>
+<h2 id="计算机网络协议分层"><a href="#计算机网络协议分层" class="headerlink" title="计算机网络协议分层"></a>计算机网络协议分层</h2><p>物，数，网，传，会，表，应！</p>
+<h3 id="TCP-IP"><a href="#TCP-IP" class="headerlink" title="TCP/IP"></a>TCP/IP</h3><ul>
+<li>数据链路层: ARP，RARP</li>
+<li>网络层: IP，ICMP，IGMP</li>
+<li>传输层: TCP，UDP，UGP</li>
+<li>应用层: Telnet，FTP，SMTP，SNMP</li>
+</ul>
+<h3 id="OSI"><a href="#OSI" class="headerlink" title="OSI"></a>OSI</h3><ul>
+<li>物理层: EIA/TIA-232, EIA/TIA-499, V.35, V.24, RJ45, Ethernet, 802.3, 802.5, FDDI, NRZI, NRZ, B8ZS</li>
+<li>数据链路层: Frame Relay, HDLC, PPP, IEEE 802.3/802.2, FDDI, ATM,  IEEE 802.5/802.2</li>
+<li>网络层: IP，IPX，AppleTalk DDP</li>
+<li>传输层: TCP，UDP，SPX</li>
+<li>会话层: RPC,SQL,NFS,NetBIOS,names,AppleTalk,ASP,DECnet,SCP</li>
+<li>表示层:TIFF,GIF,JPEG,PICT,ASCII,EBCDIC,encryption,MPEG,MIDI,HTML</li>
+<li>应用层: FTP,WWW,Telnet,NFS,SMTP,Gateway,SNMP</li>
+</ul>
+<h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><ol>
+<li>主要功能 : 用户接口、应用程序<br>application</li>
+<li>典型设备: 网关</li>
+<li>典型协议、标准和应用: TELNET, FTP, HTTP</li>
+</ol>
+<h4 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h4><ol>
+<li>主要功能 : 数据的表示、压缩和加密<br>presentation</li>
+<li>典型设备: 网关</li>
+<li>典型协议、标准和应用: ASCLL、PICT、TIFF、JPEG、 MIDI、MPEG</li>
+</ol>
+<h4 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h4><ol>
+<li>主要功能 : 会话的建立和结束<br>session</li>
+<li>典型设备: 网关</li>
+<li>典型协议、标准和应用: RPC、SQL、NFS 、X WINDOWS、ASP</li>
+</ol>
+<h4 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h4><ol>
+<li>主要功能 : 端到端控制<br>transport</li>
+<li>典型设备: 网关</li>
+<li>典型协议、标准和应用: TCP、UDP、SPX</li>
+</ol>
+<h4 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h4><ol>
+<li>主要功能 : 路由，寻址<br>network</li>
+<li>典型设备: 路由器</li>
+<li>典型协议、标准和应用: IP、IPX、APPLETALK、ICMP</li>
+</ol>
+<h4 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h4><ol>
+<li>主要功能 : 保证误差错的数据链路<br>data link</li>
+<li>典型设备: 交换机、网桥、网卡</li>
+<li>典型协议、标准和应用: 802.2、802.3ATM、HDLC、FRAME RELAY</li>
+</ol>
+<h4 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h4><ol>
+<li>主要功能 : 传输比特流<br>physical</li>
+<li>典型设备: 集线器、中继器</li>
+<li>典型协议、标准和应用: V.35、EIA/TIA-232</li>
+</ol>
+<h2 id="Socket-HTTP和WebSocket区别"><a href="#Socket-HTTP和WebSocket区别" class="headerlink" title="Socket, HTTP和WebSocket区别"></a>Socket, HTTP和WebSocket区别</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>HTTP 是短连接，无状态的。是应用层的协议，用的 80 端口。跟 Socket 相比较:</p>
+<ul>
+<li>传输速度慢，数据包大 (更上层的协议当然需要更多首部和一些杂七杂八的信息)</li>
+<li>安全性差<br>适用于<strong>对传输速度，安全性要求不是很高，且需要快速开发的应用</strong>。</li>
+</ul>
+<p>当然好处也明显，直观，标准，方便<strong>异构系统的交互</strong>。</p>
+<h3 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h3><p>Socket 的意思是指端到端的通信。操作系统中也有 Socket 的概念，指的是文件系统间的通信。网络协议中的 Socket 的指的是端到端的进程之间的通信。</p>
+<p>Socket 其实是对 TCP 和 UDP 的封装一层抽象接口，而非协议，所以是在传输层，也就是 HTTP (应用层) 的下面一层，是比 HTTP 更底层的协议。</p>
+<p>Socket 有两种类型:</p>
+<ul>
+<li>如果封装的是 TCP，就是流式 Socket，面向连接的 TCP 服务应用，安全，效率低</li>
+<li>如果封装的是 UDP，就是数据报式 Socket，应用于无连接的 UDP 服务应用，不安全，但效率高 (PS: UDP 貌似都是应用于实时通信这些地方，貌似 QQ 的文件传输用的也是 UDP，怪不得有时候总是出错。。)</li>
+</ul>
+<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><p>如果要问 WebSocket 和 Socket 有什么关系的，就像卡巴斯基和巴基斯坦的关系 —— 有基巴关系。。貌似当初命名者跟那个 JavaScript 蹭 Java 热点一点，蹭了一波 Socket 的热点。。</p>
+<p>说是没什么关系，但是其实还是有一点联系，可以理解为 WebSocket 是 Socket 的上层实现，WebSocket 是有当初设计 Socket 的通信理念在里头的，Socket 是传输层的 API，而 WebSocket 是应用层的协议。</p>
+<p>WebSocket 跟 HTTP 一样，是应用层的协议，可以实现浏览器与服务器的全双工通信，我之前做过一个网页的社交聊天的应用，用的就是 WebSocket 技术，具体在这里就不展开讨论了。很多语言已经已经对 WebSocket 做了封装，提供了很好的 library，可以直接拿来用。</p>
+<h2 id="详谈Socket"><a href="#详谈Socket" class="headerlink" title="详谈Socket"></a>详谈Socket</h2><h3 id="TCP-UDP"><a href="#TCP-UDP" class="headerlink" title="TCP/UDP"></a>TCP/UDP</h3><p>因为是 Socket 是对 TCP 和 UDP 的封装，所以看一下 TCP 和 UDP 的报文格式。</p>
+<p><img src="/image/tcpandudp.png" alt="tcpandudp.png"></p>
+<p>通讯过程:</p>
+<p><img src="/image/tcpProcess.png" alt="tcpProcess.png"></p>
+<h3 id="Socket-的通讯过程"><a href="#Socket-的通讯过程" class="headerlink" title="Socket 的通讯过程"></a>Socket 的通讯过程</h3><p>服务器端:</p>
+<ol>
+<li>申请一个socket</li>
+<li>绑定到一个IP地址和一个端口上</li>
+<li><p>开启侦听，等待接收连接</p>
+<p>客户端:</p>
+</li>
+<li><p>申请一个socket</p>
+</li>
+<li>连接服务器(指明IP地址和端口号)</li>
+</ol>
+<p>服务器端接收到连接请求后，产生一个新的socket(端口大于1024)与客户端建立连接并进行通信，原监听socket继续监听。</p>
+<h2 id="关于HTTP的番外篇"><a href="#关于HTTP的番外篇" class="headerlink" title="关于HTTP的番外篇"></a>关于HTTP的番外篇</h2><p>HTTP 的 Header 里有一个 Connection 的 key，里面的参数通常为 keep-alive，这个值并不是表示为长连接的 HTTP，只是表示这个 TCP 多保存一会，让多个 HTTP 连接复用同一个 TCP，以减少握手挥手所造成的损失。</p>
+<p>还有一些 HTTP 头部信息的文档可以看 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Connection">HTTP —— MDN</a>。</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://thinking80s.iteye.com/blog/566438">TCP/IP每层及OSI七层对应协议</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/111testing/p/6581062.html">http webservice socket的区别 —— 陈建忠</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/weilengdeyu/archive/2013/03/08/2949101.html">C# Socket网络编程精华篇 —— 微冷的雨(cnblog)</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Pk_zsq/article/details/6087367">TCP/IP、Http、Socket的区别 —— pk_zsq(CSDN)</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zfrong/article/details/6070608">HTTP协议头部与Keep-Alive模式详解 —— zfrong (CSND)</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Connection">HTTP —— MDN</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.colasoft.com.cn/download/network-protocol-map-2017.pdf">网络协议图</a> : 一个很大很全的关于网络协议的 PDF</li>
+</ul>
+
+        
+  </div>
+</article>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

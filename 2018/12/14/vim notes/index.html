@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="自己使用 Vim 中的一些常见问题。 我的 vimrc: pwxcoo&#x2F;vimrc Update vim on ubuntuHow can I get a newer version of Vim on Ubuntu  sudo add-apt-repository ppa:jonathonf&#x2F;vim sudo apt update sudo apt install vim  Use System">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim notes">
+<meta property="og:url" content="https://blog.pwxcoo.com/2018/12/14/vim%20notes/index.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="自己使用 Vim 中的一些常见问题。 我的 vimrc: pwxcoo&#x2F;vimrc Update vim on ubuntuHow can I get a newer version of Vim on Ubuntu  sudo add-apt-repository ppa:jonathonf&#x2F;vim sudo apt update sudo apt install vim  Use System">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-12-14T08:44:25.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.871Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="memo">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="vim">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>vim notes</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/12/28/linux-notes/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/09/17/%E4%B8%80%E6%AC%A1http%E8%AF%B7%E6%B1%82%E5%85%A8%E8%BF%87%E7%A8%8B/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.pwxcoo.com/2018/12/14/vim%20notes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&text=vim notes"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&title=vim notes"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&is_video=false&description=vim notes"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=vim notes&body=Check out this article: https://blog.pwxcoo.com/2018/12/14/vim%20notes/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&title=vim notes"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&title=vim notes"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&title=vim notes"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&title=vim notes"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&name=vim notes&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Update-vim-on-ubuntu"><span class="toc-number">1.</span> <span class="toc-text">Update vim on ubuntu</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Use-System-Clipboard"><span class="toc-number">2.</span> <span class="toc-text">Use System Clipboard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#replace-one-by-one"><span class="toc-number">3.</span> <span class="toc-text">replace one by one</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#operate-multiple-rows"><span class="toc-number">4.</span> <span class="toc-text">operate multiple rows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plugins-keyboard-shortcut"><span class="toc-number">5.</span> <span class="toc-text">Plugins keyboard shortcut</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NERDTree"><span class="toc-number">5.1.</span> <span class="toc-text">NERDTree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tabbar"><span class="toc-number">5.2.</span> <span class="toc-text">Tabbar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NERDCommenter"><span class="toc-number">5.3.</span> <span class="toc-text">NERDCommenter</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        vim notes
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PWXCOO</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-12-14T08:44:25.000Z" itemprop="datePublished">2018-12-14</time>
+    </div>
+
+
+      
+    <!-- <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/memo/">memo</a>
+    </div> -->
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link-link" href="/tags/memo/" rel="tag">memo</a>, <a class="tag-link-link" href="/tags/vim/" rel="tag">vim</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>自己使用 Vim 中的一些常见问题。</p>
+<p>我的 vimrc: <a target="_blank" rel="noopener" href="https://github.com/pwxcoo/vimrc">pwxcoo/vimrc</a></p>
+<h2 id="Update-vim-on-ubuntu"><a href="#Update-vim-on-ubuntu" class="headerlink" title="Update vim on ubuntu"></a>Update vim on ubuntu</h2><p><a target="_blank" rel="noopener" href="https://vi.stackexchange.com/questions/10817/how-can-i-get-a-newer-version-of-vim-on-ubuntu">How can I get a newer version of Vim on Ubuntu</a></p>
+<ul>
+<li><code>sudo add-apt-repository ppa:jonathonf/vim</code></li>
+<li><code>sudo apt update</code></li>
+<li><code>sudo apt install vim</code></li>
+</ul>
+<h2 id="Use-System-Clipboard"><a href="#Use-System-Clipboard" class="headerlink" title="Use System Clipboard"></a>Use System Clipboard</h2><ul>
+<li><code>sudo apt install vim-gnome</code></li>
+<li><code>vim --version | grep &quot;clipboard&quot;</code> 查看 clipboard 前面是否是 <code>+</code></li>
+</ul>
+<p>然后</p>
+<ul>
+<li><code>&quot;+y</code> 复制到系统剪切板</li>
+<li><code>&quot;+p</code> 粘贴</li>
+</ul>
+<h2 id="replace-one-by-one"><a href="#replace-one-by-one" class="headerlink" title="replace one by one"></a>replace one by one</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/feelang/article/details/38408875">Vim -&gt; 边确认边查找替换</a></p>
+<ul>
+<li><code>/&#123;which&#125;</code> 开始查找</li>
+<li><code>cw &#123;what&#125; [ESC]</code> 删除并替换</li>
+<li><code>n</code> 下一个单词</li>
+<li><code>.</code> 重复上一个操作 (删除并替换)</li>
+</ul>
+<h2 id="operate-multiple-rows"><a href="#operate-multiple-rows" class="headerlink" title="operate multiple rows"></a>operate multiple rows</h2><p>块操作</p>
+<ul>
+<li><code>C-v</code> 开始块操作</li>
+<li><code>C-d</code> 向下移动</li>
+<li>操作<ul>
+<li><code>shift + i</code> 插入</li>
+<li><code>J</code> 连结所有行 (Join)</li>
+<li><code>&gt;</code> / <code>&lt;</code> 左右缩进</li>
+<li><code>=</code> 自动缩进</li>
+</ul>
+</li>
+<li><code>[ESC]</code> 生效</li>
+</ul>
+<h2 id="Plugins-keyboard-shortcut"><a href="#Plugins-keyboard-shortcut" class="headerlink" title="Plugins keyboard shortcut"></a>Plugins keyboard shortcut</h2><h3 id="NERDTree"><a href="#NERDTree" class="headerlink" title="NERDTree"></a>NERDTree</h3><ul>
+<li><code>shift + i</code> 显示隐藏文件</li>
+<li><code>m</code> 一系列操作<ul>
+<li><code>a</code> 创造新文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="Tabbar"><a href="#Tabbar" class="headerlink" title="Tabbar"></a>Tabbar</h3><ul>
+<li><code>:bd</code> 关闭 buffer  (<strong>Recommend</strong>)</li>
+<li><code>:bw</code> 关闭并不保存</li>
+</ul>
+<h3 id="NERDCommenter"><a href="#NERDCommenter" class="headerlink" title="NERDCommenter"></a>NERDCommenter</h3><ul>
+<li><code>&lt;leader&gt; + c + &lt;space&gt;</code> 快速注释</li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Update-vim-on-ubuntu"><span class="toc-number">1.</span> <span class="toc-text">Update vim on ubuntu</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Use-System-Clipboard"><span class="toc-number">2.</span> <span class="toc-text">Use System Clipboard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#replace-one-by-one"><span class="toc-number">3.</span> <span class="toc-text">replace one by one</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#operate-multiple-rows"><span class="toc-number">4.</span> <span class="toc-text">operate multiple rows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plugins-keyboard-shortcut"><span class="toc-number">5.</span> <span class="toc-text">Plugins keyboard shortcut</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NERDTree"><span class="toc-number">5.1.</span> <span class="toc-text">NERDTree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tabbar"><span class="toc-number">5.2.</span> <span class="toc-text">Tabbar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NERDCommenter"><span class="toc-number">5.3.</span> <span class="toc-text">NERDCommenter</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.pwxcoo.com/2018/12/14/vim%20notes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&text=vim notes"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&title=vim notes"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&is_video=false&description=vim notes"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=vim notes&body=Check out this article: https://blog.pwxcoo.com/2018/12/14/vim%20notes/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&title=vim notes"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&title=vim notes"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&title=vim notes"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&title=vim notes"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.pwxcoo.com/2018/12/14/vim%20notes/&name=vim notes&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

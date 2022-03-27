@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前段日子看到一个很火的 python 库。叫 requests-html ，作者就是 requests 库的作者，所以这是一个看作者名字就可以 star 的项目。话说作者太秀了，一个摄影师，写了一个大名鼎鼎的 requests 库，长得还帅。。赢家了。 之前写 web 请求和 html 解析用的都是 requests + BeautifulSoup 。requests 库完胜 urllib，然后">
+<meta property="og:type" content="website">
+<meta property="og:title" content="python库requests-html笔记">
+<meta property="og:url" content="https://blog.pwxcoo.com/archive/python%E5%BA%93requests-html%E7%AC%94%E8%AE%B0.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="前段日子看到一个很火的 python 库。叫 requests-html ，作者就是 requests 库的作者，所以这是一个看作者名字就可以 star 的项目。话说作者太秀了，一个摄影师，写了一个大名鼎鼎的 requests 库，长得还帅。。赢家了。 之前写 web 请求和 html 解析用的都是 requests + BeautifulSoup 。requests 库完胜 urllib，然后">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-03-13T02:08:43.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.883Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>python库requests-html笔记</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>PWXCOO</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Archives</a></li>
+       
+        <li><a href="/toc/">Toc</a></li>
+       
+        <li><a href="/about/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <div class="content" itemprop="articleBody">
+      
+          <p>前段日子看到一个很火的 python 库。叫 requests-html ，作者就是 requests 库的作者，所以这是一个看作者名字就可以 star 的项目。话说作者太秀了，一个摄影师，写了一个大名鼎鼎的 requests 库，长得还帅。。赢家了。</p>
+<p>之前写 web 请求和 html 解析用的都是 requests + BeautifulSoup 。requests 库完胜 urllib，然后 BeautifulSoup 说实话实在繁琐和有一些反人类。requests-html 在 requests 基础上直接做了 html 的解析，还加了一些 feature。</p>
+<h2 id="feature"><a href="#feature" class="headerlink" title="feature"></a>feature</h2><ul>
+<li>完全支持 JavaScript。这个很关键，以前抓取通过 JavaScript 异步加载的数据我是通过抓包来做的，现在可以 render() 直接渲染了。</li>
+<li>CSS 选择器。类 JQuery 语法，可以说是非常人性化和强大了。</li>
+<li>XPath 选择器。</li>
+<li>伪造的请求头。 (就像真的一样。。) </li>
+<li>自动的重定向。</li>
+<li>连接池和 cookie 的持久化。</li>
+<li>requests 的各种魔法般的语法都被保留。</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>只支持 python3.6 。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install requests-html</span><br></pre></td></tr></table></figure></p>
+<h2 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h2><p>使用方法和 requests 一样。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> requests_html <span class="keyword">import</span> HTMLSession</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>session = HTMLSession()</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = session.get(<span class="string">&#x27;https://python.org/&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r</span><br><span class="line">&lt;Response [<span class="number">200</span>]&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="HTML-解析"><a href="#HTML-解析" class="headerlink" title="HTML 解析"></a>HTML 解析</h2><p>获取所有链接<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r.html.links</span><br><span class="line">&#123;<span class="string">&#x27;/&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;//docs.python.org/3/tutorial/&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;//docs.python.org/3/tutorial/controlflow.html&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;//docs.python.org/3/tutorial/controlflow.html#defining-functions&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;//docs.python.org/3/tutorial/introduction.html#lists&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;//jobs.python.org&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;/about/&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;/about/apps&#x27;</span>,</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>获取网页代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r.html.html</span><br><span class="line"><span class="string">&#x27;&lt;!doctype html&gt;\n&lt;!--[if lt IE 7]&gt;   &lt;html class=&quot;no-js ie6 lt-ie7 lt-ie8 lt-ie9&quot;&gt;   &lt;![endif]--&gt;\n&lt;!--[if IE 7]&gt;      &lt;html class=&quot;no-js ie7 lt-ie8 lt-ie9&quot;&gt;          &lt;![endif]--&gt;\n&lt;!--[if IE 8]&gt;      &lt;html class=&quot;no-js ie8 lt-ie9&quot;&gt;                 &lt;![endif]--&gt;\n&lt;!--[if gt IE 8]&gt;&lt;!--&gt;&lt;html class=&quot;no-js&quot; lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;  &lt;!--&lt;![endif]--&gt;\n\n&lt;head&gt;\n    &lt;meta charset=&quot;utf-8&quot;&gt;\n    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;\n\n    &lt;link rel=&quot;prefetch&quot; href=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js&quot;&gt;\n\n    &lt;meta name=&quot;application-name&quot; content=&quot;Python.org&quot;&gt;\n    &lt;meta name=&quot;msapplication-tooltip&quot; content=&quot;The official home of the Python Programming Language&quot;&gt;\n    &lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;Python.org&quot;&gt;\n    &lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;&gt;\n    &lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot;&gt;\n\n    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;\n    &lt;meta name=&quot;HandheldFriendly&quot; content=&quot;True&quot;&gt;\n    &lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;&gt;\n ...&#x27;</span></span><br></pre></td></tr></table></figure></p>
+<p>JQuery 语法选中元素<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>about = r.html.find(<span class="string">&#x27;#about&#x27;</span>, first=<span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>about</span><br><span class="line">&lt;Element <span class="string">&#x27;li&#x27;</span> <span class="built_in">id</span>=<span class="string">&#x27;about&#x27;</span> <span class="keyword">class</span>=(<span class="string">&#x27;tier-1&#x27;</span>, <span class="string">&#x27;element-1&#x27;</span>) aria-haspopup=<span class="string">&#x27;true&#x27;</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>获取元素的文本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(about.text)</span><br><span class="line">About</span><br><span class="line">Applications</span><br><span class="line">Quotes</span><br><span class="line">Getting Started</span><br><span class="line">Help</span><br><span class="line">Python Brochure</span><br></pre></td></tr></table></figure></p>
+<p>获取元素的属性<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>about.attrs</span><br><span class="line">&#123;<span class="string">&#x27;aria-haspopup&#x27;</span>: <span class="string">&#x27;true&#x27;</span>, <span class="string">&#x27;class&#x27;</span>: (<span class="string">&#x27;tier-1&#x27;</span>, <span class="string">&#x27;element-1&#x27;</span>), <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;about&#x27;</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>封装了常用正则，这个语法太直观了。。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r.html.search(<span class="string">&#x27;Python is &#123;&#125; language&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="string">&#x27;a programming&#x27;</span></span><br></pre></td></tr></table></figure></p>
+<p>还有一个特别直观的元素层级选择器。。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = session.get(<span class="string">&#x27;https://github.com/&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sel = <span class="string">&#x27;body &gt; div&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(r.html.find(sel, first=<span class="literal">True</span>).text)</span><br><span class="line">Skip to content</span><br><span class="line">Features</span><br><span class="line">Business</span><br><span class="line">Explore</span><br><span class="line">Marketplace</span><br><span class="line">Pricing</span><br><span class="line">/dashboard</span><br><span class="line">Sign <span class="keyword">in</span> <span class="keyword">or</span> Sign up</span><br></pre></td></tr></table></figure></p>
+<p>find() 还有一个特别实用的语法糖——containing 参数。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = session.get(<span class="string">&#x27;http://python-requests.org/&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r.html.find(<span class="string">&#x27;a&#x27;</span>, containing=<span class="string">&#x27;kenneth&#x27;</span>)</span><br><span class="line">[&lt;Element <span class="string">&#x27;a&#x27;</span> href=<span class="string">&#x27;http://kennethreitz.com/pages/open-projects.html&#x27;</span>&gt;,</span><br><span class="line"> &lt;Element <span class="string">&#x27;a&#x27;</span> href=<span class="string">&#x27;http://kennethreitz.org/&#x27;</span>&gt;,</span><br><span class="line"> &lt;Element <span class="string">&#x27;a&#x27;</span> href=<span class="string">&#x27;https://twitter.com/kennethreitz&#x27;</span> <span class="keyword">class</span>=(<span class="string">&#x27;twitter-follow-button&#x27;</span>,) data-show-count=<span class="string">&#x27;false&#x27;</span>&gt;,</span><br><span class="line"> &lt;Element <span class="string">&#x27;a&#x27;</span> <span class="keyword">class</span>=(<span class="string">&#x27;reference&#x27;</span>, <span class="string">&#x27;internal&#x27;</span>) href=<span class="string">&#x27;dev/contributing/#kenneth-reitz-s-code-style&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure></p>
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><p>文档里说 <code>There’s also intelligent pagination support (always improving)</code>， 有一个长期改进的智能分页功能。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = session.get(<span class="string">&#x27;https://reddit.com&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> html <span class="keyword">in</span> r.html:</span><br><span class="line"><span class="meta">... </span>    <span class="built_in">print</span>(html)</span><br><span class="line">&lt;HTML url=<span class="string">&#x27;https://www.reddit.com/&#x27;</span>&gt;</span><br><span class="line">&lt;HTML url=<span class="string">&#x27;https://www.reddit.com/?count=25&amp;after=t3_83x8iq&#x27;</span>&gt;</span><br><span class="line">&lt;HTML url=<span class="string">&#x27;https://www.reddit.com/?count=50&amp;after=t3_83w1oo&#x27;</span>&gt;</span><br><span class="line">&lt;HTML url=<span class="string">&#x27;https://www.reddit.com/?count=75&amp;after=t3_83vkt2&#x27;</span>&gt;</span><br><span class="line">&lt;HTML url=<span class="string">&#x27;https://www.reddit.com/?count=100&amp;after=t3_83wm8g&#x27;</span>&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>当然也可以用 next()，一个类似迭代器的用法。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = session.get(<span class="string">&#x27;https://reddit.com&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r.html.<span class="built_in">next</span>()</span><br><span class="line"><span class="string">&#x27;https://www.reddit.com/?count=25&amp;after=t3_81pm82&#x27;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="JavaScript-支持"><a href="#JavaScript-支持" class="headerlink" title="JavaScript 支持"></a>JavaScript 支持</h2><p>这个部分在今天，也就是 2018 年 3 月 13 日感觉还没有完全完善。因为我在 window10 用 render() 报了很诡异的错误，然后我在 issue 里看到好像在 window10 平台确实有点问题。然后我在 ubuntu 跑了一下就可以了。。</p>
+<p>作者仍在更新和优化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> requests_html <span class="keyword">import</span> HTML</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc = <span class="string">&quot;&quot;&quot;&lt;a href=&#x27;https://httpbin.org&#x27;&gt;&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>html = HTML(html=doc)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>script = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        () =&gt; &#123;</span></span><br><span class="line"><span class="string">            return &#123;</span></span><br><span class="line"><span class="string">                width: document.documentElement.clientWidth,</span></span><br><span class="line"><span class="string">                height: document.documentElement.clientHeight,</span></span><br><span class="line"><span class="string">                deviceScaleFactor: window.devicePixelRatio,</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>val = html.render(script=script, reload=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(val)</span><br><span class="line">&#123;<span class="string">&#x27;width&#x27;</span>: <span class="number">800</span>, <span class="string">&#x27;height&#x27;</span>: <span class="number">600</span>, <span class="string">&#x27;deviceScaleFactor&#x27;</span>: <span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/kennethreitz/requests-html">GITHUB</a></li>
+<li><a target="_blank" rel="noopener" href="http://html.python-requests.org/">文档</a></li>
+</ul>
+<p>这个库感觉要一统江湖的节奏。。</p>
+
+        
+  </div>
+</article>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="很久没写算法题了。。 遇到一个”求图中存在环的问题“的时候，磕磕绊绊了好久。。 邻接表和邻接矩阵就是两个两种用来存储图数据结构的方法。  邻接表。一个数组，每个 index 是一个链表，每个链表就是连接着的 node 邻接矩阵。用一个矩阵来存储 edge，在图比较稀疏的时候比较浪费空间  求图的时候存在环因为在这个问题里，有向图和无向图没什么卵区别，所以也不做区分了。 DFS直接上 dfs，遇到遍">
+<meta property="og:type" content="website">
+<meta property="og:title" content="图的拓扑排序问题">
+<meta property="og:url" content="https://blog.pwxcoo.com/archive/%E5%9B%BE%E7%9A%84%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E9%97%AE%E9%A2%98.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="很久没写算法题了。。 遇到一个”求图中存在环的问题“的时候，磕磕绊绊了好久。。 邻接表和邻接矩阵就是两个两种用来存储图数据结构的方法。  邻接表。一个数组，每个 index 是一个链表，每个链表就是连接着的 node 邻接矩阵。用一个矩阵来存储 edge，在图比较稀疏的时候比较浪费空间  求图的时候存在环因为在这个问题里，有向图和无向图没什么卵区别，所以也不做区分了。 DFS直接上 dfs，遇到遍">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/graph-cycle-dfs.png">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/graph-cycle-bfs.png">
+<meta property="article:published_time" content="2018-07-24T15:51:34.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.884Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.pwxcoo.com/image/graph-cycle-dfs.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>图的拓扑排序问题</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>PWXCOO</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Archives</a></li>
+       
+        <li><a href="/toc/">Toc</a></li>
+       
+        <li><a href="/about/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <div class="content" itemprop="articleBody">
+      
+          <p>很久没写算法题了。。</p>
+<p>遇到一个”求图中存在环的问题“的时候，磕磕绊绊了好久。。</p>
+<h2 id="邻接表和邻接矩阵"><a href="#邻接表和邻接矩阵" class="headerlink" title="邻接表和邻接矩阵"></a>邻接表和邻接矩阵</h2><p>就是两个两种用来存储图数据结构的方法。</p>
+<ul>
+<li>邻接表。一个数组，每个 index 是一个链表，每个链表就是连接着的 node</li>
+<li>邻接矩阵。用一个矩阵来存储 edge，在图比较稀疏的时候比较浪费空间</li>
+</ul>
+<h2 id="求图的时候存在环"><a href="#求图的时候存在环" class="headerlink" title="求图的时候存在环"></a>求图的时候存在环</h2><p>因为在这个问题里，有向图和无向图没什么卵区别，所以也不做区分了。</p>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p>直接上 dfs，遇到遍历过的，直接判定存在环。</p>
+<p>因为担心<strong>环的重复计算</strong>。</p>
+<p><img src="/image/graph-cycle-dfs.png" alt="graph-cycle-dfs.png"></p>
+<p>就像这样，如果 1-&gt;2-&gt;3 遍历了，发现 3-&gt;1，于是判定了一波环，继续 1-&gt;3，又发现了一波环，重复计算了一波 (但是我感觉对判断是否存在环这个问题里没有问题的，拓展开来可能存在一些问题) 。</p>
+<p>所以不仅设置一个 <code>visited[]</code>，还要设置一个 <code>onpath[]</code> 来标记，已经遍历完这个 node，还是正在遍历中。一个很形象的比喻就是，初始化白色结点，遍历中灰色，遍历完了黑色。</p>
+<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p>把入度为 0 的点 (无向图就是入度为 1) 加入队列，然后取出，把该点删去，同时删去以该点为起始点的边，如此写一个 BFS。</p>
+<p>缺点是不能输出环。因为并不是剩余的所有点都是环的顶点。</p>
+<p><img src="/image/graph-cycle-bfs.png" alt="graph-cycle-bfs.png"></p>
+<p>图中 4 就不是环的顶点。</p>
+<hr>
+<p>输入环，想拓扑排序一波，就用 DFS。加一个 <code>pre[]</code> 就可以了。</p>
+<h2 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a>最短路</h2><p>因为最短路是顺便写到的。所以随便记一下。</p>
+<p>最简单朴素的最短路。</p>
+<p>思路反正就是起始点入队列，然后不断更新 <code>dis[]</code>。</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/TenosDoIt/p/3644225.html">判断一个图是否有环 - JustDoIT</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pwxcoo/ac-game/blob/master/2018-07/2018-07-24/kickstart-2018-C-A.cpp">kickstart-2018-RoundC-A</a></li>
+</ul>
+
+        
+  </div>
+</article>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

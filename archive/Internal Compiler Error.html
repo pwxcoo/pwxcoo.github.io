@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="There is nothing to say here.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Internal Compiler Error">
+<meta property="og:url" content="https://blog.pwxcoo.com/archive/Internal%20Compiler%20Error.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="There is nothing to say here.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-07-10T14:11:04.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.880Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="essay">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Internal Compiler Error</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>PWXCOO</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Archives</a></li>
+       
+        <li><a href="/toc/">Toc</a></li>
+       
+        <li><a href="/about/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <div class="content" itemprop="articleBody">
+      
+          <p>There is nothing to say here.</p>
+<!-- ## 汇编和寒假
+
+转眼之间，在微软 3 个月实习已经过了一半了，今年上半年可以说是很纠结的一年了，寒假的时候了解了一下汇编和编译原理 (因为没选到这门课) ，看了 Stanford 的那节 CS143 Compiler 那节课，最后的 assignment 是做一个 Cool 语言的编译器。Cool 是 Stanford 的老师为了这门课自己设计的一个面向对象的程序语言。
+
+后来折腾了很久，因为 MIPS 汇编语言的资料不是很充足，加上自己的基础并不好和寒假时间也不多，最后没能完成这个 assignment，算是比较遗憾的一件事吧。希望如果以后有空，能重新捡起这个来。
+
+好处是学了汇编和编译原理的一些知识后，对编程语言有了全新的理解，看到一个 syntax，总想把它 parse 成汇编代码，让我对高级语言最后怎么解析成汇编语言有了更 detail 的认知。同时对寄存器，内存分配，程序的一些概念有了更为深刻的一些理解。
+
+不过我学校把这个设为选修课，并且还不是我专业的专选课。。。 (虽然就算是专选课也是水得不行，感觉还可能坑的一匹。。不如不是好了。。) 
+
+----
+
+## 春招和考研
+
+开学前给阿里投了简历，投的是 Java 开发实习生。我也是惊了，面了才知道自己这么菜，其实自己对于 Java，真的只是会 syntax 而已。。果然面了两轮就挂了。。太菜了，不挂我挂谁。。
+
+还给网易游戏投了一份，石沉大海，然后在我入职微软几天后给我发了感谢信。。
+
+春找没投几家，阿里最早面的，也是最早挂的。挂了之后感觉自己实在太菜，根本没机会。。BAT 也就投了一家杭州的 A 。剩下的也不敢投了。。
+
+阿里挂了之后开始准备考研，在考研教室学习了一个多月，后来收到微软的 offer，放弃了考研。。备考了一个多月的考研之后对研究生还是很向往的，因为学生有很多自己的 free time 可以支配，同时我也更向往一个高级学府。
+
+微软的面试体验还是很棒的。
+
+我还记得我是今年 3 月 31 号做的微软笔试题，去年微软有个预苗计划，当时也是 3 月 31 号，我参加了，可是去年太菜了，去年我还记得那天去武汉玩，到了之后用老二电脑电脑做的笔试题，直接爆零。。gg思密达。。
+
+今年过了笔试之后，因为我邮箱填错了，没收到 onsite 的面试邮件。。后来 hr 打电话来找到我让我去 onsite 面试，可以说是很感动了。
+
+微软的面试题目没什么印象了，就是一直做题，还做了一道智力题，比较有意思，所以印象深刻。
+
+其实我感觉我 onsite 面试表现还是不错的，感觉比自己电话面试的时候发挥好一些。。然后微软就是做算法题，感觉自己比较 fit 这个面试模式吧。
+
+在微软实习也遇到很多研究生和留学生，大部分都是研究生和留学生吧。也是很羡慕别人 3 年研究生生活或者留学生生活的。
+
+## 杂
+还记得面试的时候，面试官问我对什么感兴趣，我说我对什么都挺感兴趣的。
+
+其实我真的对什么都很感兴趣。无论是前端，后端还是算法。 -->
+        
+  </div>
+</article>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

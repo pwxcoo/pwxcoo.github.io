@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="起因今天搞 news-boom 的时候，一条很奇怪的 sql 语句一直报错。 就是这条 整理一下就是这这样子: 12345678910111213141516171819SELECT    from_id, to_id, content, has_read, conversation_id, created_date, count(id) as idFROM    (        SELECT">
+<meta property="og:type" content="website">
+<meta property="og:title" content="浅谈数据库索引——一条sql语句引发的血案">
+<meta property="og:url" content="https://blog.pwxcoo.com/archive/%E6%B5%85%E8%B0%88%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E2%80%94%E2%80%94%E4%B8%80%E6%9D%A1sql%E8%AF%AD%E5%8F%A5%E5%BC%95%E5%8F%91%E7%9A%84%E8%A1%80%E6%A1%88.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="起因今天搞 news-boom 的时候，一条很奇怪的 sql 语句一直报错。 就是这条 整理一下就是这这样子: 12345678910111213141516171819SELECT    from_id, to_id, content, has_read, conversation_id, created_date, count(id) as idFROM    (        SELECT">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/b-tree.png">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/b+tree.png">
+<meta property="article:published_time" content="2018-08-27T14:17:03.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.888Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="database">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.pwxcoo.com/image/b-tree.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>浅谈数据库索引——一条sql语句引发的血案</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>PWXCOO</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Archives</a></li>
+       
+        <li><a href="/toc/">Toc</a></li>
+       
+        <li><a href="/about/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <div class="content" itemprop="articleBody">
+      
+          <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>今天搞 <a target="_blank" rel="noopener" href="https://github.com/pwxcoo/news-boom">news-boom</a> 的时候，一条很奇怪的 sql 语句一直报错。</p>
+<p>就是<a target="_blank" rel="noopener" href="https://github.com/pwxcoo/news-boom/blob/master/src/main/java/com/pwxcoo/newsboom/dao/MessageDAO.java#L21">这条</a></p>
+<p>整理一下就是这这样子:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    from_id, to_id, content, has_read, conversation_id, created_date, <span class="built_in">count</span>(id) <span class="keyword">as</span> id</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    (</span><br><span class="line">        <span class="keyword">SELECT</span></span><br><span class="line">            <span class="operator">*</span></span><br><span class="line">        <span class="keyword">FROM</span></span><br><span class="line">            message</span><br><span class="line">        <span class="keyword">WHERE</span></span><br><span class="line">            from_id<span class="operator">=</span><span class="number">1</span> <span class="keyword">OR</span> to_id<span class="operator">=</span><span class="number">1</span></span><br><span class="line">        <span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line">            id <span class="keyword">DESC</span></span><br><span class="line">    ) tt</span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span></span><br><span class="line">        conversation_id</span><br><span class="line">    <span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line">        id <span class="keyword">DESC</span></span><br><span class="line">    LIMIT</span><br><span class="line">        <span class="number">10</span>, <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>message 的 schema 是这样的:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `message` (</span><br><span class="line">  `id` <span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `from_id` <span class="type">INT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `to_id` <span class="type">INT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `content` TEXT <span class="keyword">NULL</span>,</span><br><span class="line">  `created_date` DATETIME <span class="keyword">NULL</span>,</span><br><span class="line">  `has_read` <span class="type">INT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `conversation_id` <span class="type">VARCHAR</span>(<span class="number">45</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY(`id`),</span><br><span class="line">  INDEX `conversation_index` (`conversation_id` <span class="keyword">ASC</span>),</span><br><span class="line">  INDEX `created_date` (`created_date` <span class="keyword">ASC</span>)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span><span class="operator">=</span>utf8mb4;</span><br></pre></td></tr></table></figure>
+<p>这条 sql 的目的是按 conversation 分类，然后把所有关于某个用户的每条 message 找出来。</p>
+<p>然后这条 sql 就报错了。。报错信息大概就是这样子。。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column &#x27;information_schema.PROFILING.SEQ&#x27; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by</span><br></pre></td></tr></table></figure>
+<p>然后就找到了官网的说法:</p>
+<blockquote>
+<p>SQL92 and earlier does not permit queries for which the select list, HAVING condition, or ORDER BY list refer to nonaggregated columns that are not named in the GROUP BY clause.</p>
+</blockquote>
+<p>我当时就蒙圈了，<code>nonaggregated</code> 又是什么。。</p>
+<p>然后这样追本溯源。。居然补了很多数据库的知识。。然后就顺便记下来了。</p>
+<h2 id="MySQL索引"><a href="#MySQL索引" class="headerlink" title="MySQL索引"></a>MySQL索引</h2><p>索引 (Index) 是用来高效获取数据的数据结构。大多的关系型数据库都是用的 B+ 树。复杂度是 $O=(n)$</p>
+<h3 id="为什么不用哈希表？"><a href="#为什么不用哈希表？" class="headerlink" title="为什么不用哈希表？"></a>为什么不用哈希表？</h3><ul>
+<li>范围查询中毫无用处</li>
+<li>没法排序</li>
+<li>不支持多表联合查询和最做匹配</li>
+<li>在大量重复键值的情况，因为哈希碰撞，效率也是很低</li>
+</ul>
+<h3 id="为什么不用红黑树？"><a href="#为什么不用红黑树？" class="headerlink" title="为什么不用红黑树？"></a>为什么不用红黑树？</h3><p>数据库是存储在磁盘上的，最耗时间的是磁盘 I/O，要尽量减少磁盘的 I/O。</p>
+<ul>
+<li>红黑树中树的高度明显比 B/B+ 树要大</li>
+<li>逻辑上很近的节点，物理上可能很远，磁盘寻道的时间消耗大。</li>
+</ul>
+<h3 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B-Tree"></a>B-Tree</h3><p><img src="/image/b-tree.png" alt="b-tree.png"></p>
+<p>m 阶 B-Tree 满足一下条件:</p>
+<ol>
+<li>每个结点最多拥有 m 个子树，m-1 个 key</li>
+<li>根结点上至少有 2 个子树</li>
+<li>分支结点至少拥有 m/2 颗子树 (除根结点和叶子结点外都是分支结点)</li>
+<li>所有叶子结点都在同一层，每个结点可以有最多可以有 m-1 个 key，并且以升序排序</li>
+</ol>
+<p>B-Tree 的查找:</p>
+<p><strong>从根结点二分查找，找到返回对应的 data，否则继续在相应区间的指针指向的几点递归进行查找</strong></p>
+<p>对于 N 个数据，一个 m 阶的 B-Tree，查找的时间复杂度为 $O(log_{m}{N})$。</p>
+<h3 id="B-Tree-1"><a href="#B-Tree-1" class="headerlink" title="B+Tree"></a>B+Tree</h3><p><img src="/image/b+tree.png" alt="b+tree"></p>
+<p>m 阶 B-Tree 满足一下条件:</p>
+<ol>
+<li>每个结点最多拥有 m 个子树，m 个 key</li>
+<li>根结点和分支结点中不保存数据，只用于索引，所有数据都保存在叶子结点中</li>
+<li>所有分支节点和根节点都同时存在于子节点中，在子节点元素中是最大或者最小的元素</li>
+<li>叶子节点会包含所有的关键字，以及指向数据记录的指针，并且叶子节点本身是根据关键字的大小从小到大顺序链接</li>
+</ol>
+<p><strong>一般在数据库系统或文件系统中使用的B+Tree结构都在经典B+Tree的基础上进行了优化，增加了顺序访问指针。</strong>提高了区间访问的性能。</p>
+<h3 id="为什么用B-B-树？"><a href="#为什么用B-B-树？" class="headerlink" title="为什么用B/B+树？"></a>为什么用B/B+树？</h3><ul>
+<li>局部性原理 (当一个数据被用到时，其附近的数据通常会被马上使用) 。预读的长度通常为页的整数倍，许多操作系统中页的大小通常为 4 K。</li>
+<li><p>每次新建结点，直接申请一个页的空间。m 的大小通常取决于 key 和 point 和 data 的大小。 (由于 B+Tree 里内结点去掉了 data，可以拥有更大的出度)</p>
+<p>  $$d_{max} = floor(\frac{pagesize}{keysize + datasize + pointsize})$$</p>
+</li>
+</ul>
+<h2 id="MySQL索引实现"><a href="#MySQL索引实现" class="headerlink" title="MySQL索引实现"></a>MySQL索引实现</h2><h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><p>使用的是 B+Tree 作为索引结构。</p>
+<p>MyISAM 仅仅保存数据记录的地址，就是<strong>非聚族索引</strong>，就是最后查出来的结果，仍然是一个指针，并不是连续的。</p>
+<p>MyISAM 主索引和辅助索引没有任何区别，只是主索引要求 key 是唯一的，辅助索引可以重复。</p>
+<h3 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h3><p>也是 B+Tree 作为索引结构的。</p>
+<p>InnoDB 的数据文件本身就是索引文件。叶结点中包含了完整的数据记录，这个叫<strong>聚族索引</strong>。</p>
+<p>InnoDB 本身要按主键聚集，所以要求表必须有主键，如果没有显示指定，MySQL 会自动选择第一个可以唯一标识数据 (Not NULL) 作为主键，如果没有这种列，就会自动生成一个隐含字段作为主键，字段长度 6 个字节，类型为长整型。</p>
+<p>InnoDB 中的辅助索引最后用的是主键作为 data 域，所以辅助索引需要检索两次: 先找到主键索引，再用主键到主索引中获得记录。</p>
+<p>所以不建议用过长的字段作为主键，这样会让辅助索引变得很大，而且非单调的主键在插入时，会导致 B+Tree 频繁地分裂。用自增主键其实是一个非常合适的选择。</p>
+<h2 id="MySQL-Handling-of-GROUP-BY"><a href="#MySQL-Handling-of-GROUP-BY" class="headerlink" title="MySQL Handling of GROUP BY"></a>MySQL Handling of GROUP BY</h2><p>上面扯远了。。跟最后的 Solution 没有关系。。只是 <code>aggregate</code> 这个单词重复出现了，我以为是同一个 <code>aggregate</code> 。。</p>
+<p>最后文档里的意思是说在用了 <code>GROUP BY</code> 之后，是不能 select 非 <code>aggregate</code> 的 column 的，什么是 <code>aggregate</code> 呢，看一下 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/group-by-handling.html">Aggregate (GROUP BY) Function Descriptions</a> 就知道了。</p>
+<p>另外在文档中提到，如果是 <code>functionally dependent on GROUP BY columns</code> 的 column，也是可以的。</p>
+<blockquote>
+<p>SQL99 and later permits such nonaggregates per optional feature T301 if they are functionally dependent on GROUP BY columns: If such a relationship exists between name and custid, the query is legal. This would be the case, for example, were custid a primary key of customers.</p>
+</blockquote>
+<p>文档里有个例子:</p>
+<blockquote>
+<p>This query might be invalid with ONLY_FULL_GROUP_BY enabled because the nonaggregated address column in the select list is not named in the GROUP BY clause:</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, address, <span class="built_in">MAX</span>(age) <span class="keyword">FROM</span> t <span class="keyword">GROUP</span> <span class="keyword">BY</span> name;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>The query is valid if name is a primary key of t or is a unique NOT NULL column. In such cases, MySQL recognizes that the selected column is functionally dependent on a grouping column. For example, if name is a primary key, its value determines the value of address because each group has only one value of the primary key and thus only one row. As a result, there is no randomness in the choice of address value in a group and no need to reject the query.</p>
+</blockquote>
+<p>总之就是 GROUP BY 没表达清楚意思，就不能用了，以前还能随便给你返回一个结果，现在 MySQL 改版了，遵守 <code>SQL92</code> 和更高版本的规范了，不能这么乱写了。</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>如果就是想这样支持之前版本的话，可以修改 MySQL 配置。</p>
+<ul>
+<li><code>select @@global.sql_mode</code></li>
+<li>去掉ONLY_FULL_GROUP_BY，重新设置值。<code>set @@global.sql_mode =&#39;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&#39;;</code></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最近家里天气很鸡掰。。一会太阳，一会下雨。。简直有毛病。。</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/group-by-handling.html">12.19.3 MySQL Handling of GROUP BY</a></li>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/group-by-functions.html">12.19.1 Aggregate (GROUP BY) Function Descriptions</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wyy123/p/6269875.html">MySQL的聚集索引和非聚集索引 - 仲夏的落叶</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/duzhentong/p/8639223.html">MySQL聚集索引和非聚集索引 - In_new</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhi-leaf/p/5998820.html">MYSQL5.7版本sql_mode=only_full_group_by问题</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html">MySQL索引背后的数据结构及算法原理</a></li>
+</ul>
+
+        
+  </div>
+</article>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

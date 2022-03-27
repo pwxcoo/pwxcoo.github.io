@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Problem有 N 件物品和一个容量为 V 的背包。第i件物品的费用是 c[i]，价值是 w[i]。求解将哪些物品装入背包可使价值总和最大。 Analysis每次问题仅有一件，可以选择放或者不放。 然后变成一个 DP 问题，用一个 f[i][v] 表示前 i 件物品放入容量为 v 的背包获得的价值，状态转移方程:  $$f[i][v] &#x3D; max(f[i-1][v], f[i-1][v - c[">
+<meta property="og:type" content="website">
+<meta property="og:title" content="01背包问题">
+<meta property="og:url" content="https://blog.pwxcoo.com/archive/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="Problem有 N 件物品和一个容量为 V 的背包。第i件物品的费用是 c[i]，价值是 w[i]。求解将哪些物品装入背包可使价值总和最大。 Analysis每次问题仅有一件，可以选择放或者不放。 然后变成一个 DP 问题，用一个 f[i][v] 表示前 i 件物品放入容量为 v 的背包获得的价值，状态转移方程:  $$f[i][v] &#x3D; max(f[i-1][v], f[i-1][v - c[">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-09-03T15:13:11.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.876Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="dp">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>01背包问题</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>PWXCOO</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Archives</a></li>
+       
+        <li><a href="/toc/">Toc</a></li>
+       
+        <li><a href="/about/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <div class="content" itemprop="articleBody">
+      
+          <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>有 N 件物品和一个容量为 V 的背包。第i件物品的费用是 c[i]，价值是 w[i]。求解将哪些物品装入背包可使价值总和最大。</p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>每次问题仅有一件，可以选择放或者不放。</p>
+<p>然后变成一个 DP 问题，用一个 f[i][v] 表示前 i 件物品放入容量为 v 的背包获得的价值，状态转移方程: </p>
+<p>$$f[i][v] = max(f[i-1][v], f[i-1][v - c[i]] + w[i])$$</p>
+<p>时间复杂度 $O(NV)$，空间复杂度 $O(NV)$。</p>
+<h3 id="空间优化"><a href="#空间优化" class="headerlink" title="空间优化"></a>空间优化</h3><p>空间可以优化成 $O(V)$。</p>
+<p>因为计算完了 f[i] 时，只用到了 f[i-1]，f[i-2] 已经没用了，所以优化成一维数组 (滚动数组) ，</p>
+<p>$$f[v] = max(f[v], f[v-c[i]] + w[i])$$</p>
+<h3 id="初始化的细节问题"><a href="#初始化的细节问题" class="headerlink" title="初始化的细节问题"></a>初始化的细节问题</h3><ul>
+<li>不要求恰好装满，f[i] 全部初始化为 0。</li>
+<li>要求恰好装好装满，除 f[0] 为 0，其余全部初始化为 $-\infty$。</li>
+</ul>
+<h3 id="一个常数优化"><a href="#一个常数优化" class="headerlink" title="一个常数优化"></a>一个常数优化</h3><p>此时的伪代码: </p>
+<pre><code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1.</span>..n</span><br><span class="line">    <span class="keyword">for</span> v=V...c[i]</span><br><span class="line">        f[v]=max&#123;f[v],f[v-c[i]]+w[i]&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li>每一层在 v &lt; c[i] 时，就不需要往下继续算了，因为肯定不放第 i 个物品了。</li>
+<li>可以发现，在最后的一层遍历中中，只用求出 f[V] 就好了，不需要在遍历到前面了，倒数第一层只需要知道 f[V-c[n]] 的值就好了，也就是说倒数第二层只需要算到 f[V-c[n]]，就可以给倒数第一层用了，那继续推，倒数第三层只要算到 f[V-c[n]-c[n-1]] 就可以满足倒数第二层的需求了。</li>
+</ul>
+<p>优化后: </p>
+<pre><code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i=<span class="number">1.</span>..n</span><br><span class="line">    bound=max&#123;c[i], V-sum(c[i+<span class="number">1.</span>..n])&#125;</span><br><span class="line">    <span class="keyword">for</span> v=V...bound</span><br><span class="line">        f[v]=max&#123;f[v],f[v-c[i]]+w[i]&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>此优化在 V 非常大时比较有用。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>求出那些物品被放了，那些物品没被放？<ul>
+<li>这种就要用二维数组来记录 dp 了，从右下角 f[N][V] 开始遍历，如果 f[i][v] == f[i-1][v] 说明没放，反之放了，然后一直遍历到左上角 f[0][0] 为止</li>
+</ul>
+</li>
+<li>求出第 K 优的解？<ul>
+<li>为 f[] 数组加一维，用来存放前 K 优解，每次更新的时候，按放入 i 个物品的前 K 优解和未放入 i 个物品的前 K 优解重新排序一波，然后将 K 优解放入 f[i]</li>
+<li>相当于找出两个班的前 K 名，需要把两个班的前 K 名都拿出来</li>
+</ul>
+</li>
+</ul>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>上次笔试题做到一个类似 01 背包的问题，然后没 A 掉。。我还记得我大二的时候还做过关于动态规划的 ppt，01 背包还是我当时的案例。。现在。。我恨。。</p>
+<p>学一次，忘一次。。这次要记下来。</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.kancloud.cn/kancloud/pack/70125">第一讲 01背包问题 - 背包九讲</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pwxcoo/ac-game/blob/master/2018-09/2018-09-04/hdu2546.cpp">hdu2546</a> / 01背包</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pwxcoo/ac-game/blob/master/2018-09/2018-09-04/hdu1171.cpp">hdu1171</a> / 01背包</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pwxcoo/ac-game/blob/master/2018-09/2018-09-05/hdu2602.cpp">hdu2602</a> / 01背包</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pwxcoo/ac-game/blob/master/2018-09/2018-09-05/hdu2639.cpp">hdu2639</a> / 01背包变形 (求第 K 优解) </li>
+</ul>
+
+        
+  </div>
+</article>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

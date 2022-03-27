@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="因为前几天笔试题的时候，让我手算 CRC 校验。。然后今天随手写了一个 CRC 校验的脚本。 当然了，现实中的 CRC 校验是在数据链路层实现的，都是硬件完成的，我只是模拟一下 CRC 校验的过程。 CRC简介现实中通信线路都不会是理想的，比特在传输过程中会出现差错的，比如 0 变成 1，1 变成 0，这个就叫做 比特差错。传输错误的比特占比特总数的比率叫做 误码率 BER (Bit Error">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CRC校验">
+<meta property="og:url" content="https://blog.pwxcoo.com/archive/CRC%E6%A0%A1%E9%AA%8C.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="因为前几天笔试题的时候，让我手算 CRC 校验。。然后今天随手写了一个 CRC 校验的脚本。 当然了，现实中的 CRC 校验是在数据链路层实现的，都是硬件完成的，我只是模拟一下 CRC 校验的过程。 CRC简介现实中通信线路都不会是理想的，比特在传输过程中会出现差错的，比如 0 变成 1，1 变成 0，这个就叫做 比特差错。传输错误的比特占比特总数的比率叫做 误码率 BER (Bit Error">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/crc.png">
+<meta property="article:published_time" content="2018-09-08T07:36:19.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.877Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="computer network">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.pwxcoo.com/image/crc.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>CRC校验</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>PWXCOO</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Archives</a></li>
+       
+        <li><a href="/toc/">Toc</a></li>
+       
+        <li><a href="/about/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <div class="content" itemprop="articleBody">
+      
+          <p>因为前几天笔试题的时候，让我手算 CRC 校验。。然后今天随手写了一个 CRC 校验的脚本。</p>
+<p>当然了，现实中的 CRC 校验是在数据链路层实现的，都是硬件完成的，我只是模拟一下 CRC 校验的过程。</p>
+<h2 id="CRC简介"><a href="#CRC简介" class="headerlink" title="CRC简介"></a>CRC简介</h2><p>现实中通信线路都不会是理想的，比特在传输过程中会出现差错的，比如 0 变成 1，1 变成 0，这个就叫做 <strong>比特差错</strong>。传输错误的比特占比特总数的比率叫做 <strong>误码率 BER (Bit Error Rate) </strong>。</p>
+<p>为了保证数据传输的可靠性，必须采用各种差错检测措施，目前在数据链路层广泛采用了 CRC (Cyclic Redundancy Check) 的检测技术。</p>
+<h2 id="CRC-过程"><a href="#CRC-过程" class="headerlink" title="CRC 过程"></a>CRC 过程</h2><p>数据链路层的数据单位是帧 (frame) 。</p>
+<p>双方要事先约定一个除数 P，P 可以用多项式表示，P(X) 叫做 <strong>生成多项式</strong>。</p>
+<p>几种常见的生成多项式:</p>
+<table>
+<thead>
+<tr>
+<th>CRC P</th>
+<th>Checksum Width</th>
+<th>Generator Polynomial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CRC-CCITT</td>
+<td>16 bits</td>
+<td>10001000000100001</td>
+</tr>
+<tr>
+<td>CRC-16</td>
+<td>16 bits</td>
+<td>11000000000000101</td>
+</tr>
+<tr>
+<td>CRC-32</td>
+<td>32 bits</td>
+<td>100000100110000010001110110110111</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>CRC 的过程大概是这样的:</p>
+<ul>
+<li>P 的长度为 n，frame 就左移 (n - 1) 的长度，相当于在后面加上 (n - 1) 个零，此时 frameM = $frame * 2 ^ {n}$</li>
+<li>然后就是 frameM 作为被除数，P 作为除数，做二进制的模 2 运算 (相当于做二进制加法，但是不进位，<strong>其实跟异或一样</strong>) 。</li>
+<li>求出余数，就是 FCS (Frame Check Sequence) ，加在 frame 后面</li>
+<li>接收端收到 frame 后，同样跟 P 做模 2 运算，如果正确的话，<strong>余数一定是 0</strong>，表示没有差错，就接受，如果出错的话，无法判断哪个出错，就丢弃</li>
+</ul>
+<p>这个图中的原始的 frame 是 10110011，P 是 11001，P 的长度是 n 为 5，所以给原始的 frame 填上 4 个零 (填上 n - 1 个零) ，然后求出余数为 FCS 为 0100，加在原始的 frame 后面，变成 101100110100 传给接收端，接收端收到 101100110100 后，跟 P 做模 2 运算，余数为 0 则表示差错，然后接受这个帧。</p>
+<p><img src="/image/crc.png" alt="crc.png"></p>
+<p>最后可以实现的是，<strong>在接收端数据链路层接受的帧均无差错</strong>。</p>
+<h2 id="CRC-代码实现"><a href="#CRC-代码实现" class="headerlink" title="CRC 代码实现"></a>CRC 代码实现</h2><ul>
+<li>check() 函数就是模 2 运算，算出余数 (FCS)</li>
+<li>crc() 就给 frame 填上零然后做模 2 运算，返回运算的余数。</li>
+<li>别的就是我随机生成一个二进制的 frame 和几个常见生成多项式做的测试代码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">frame, p</span>):</span><br><span class="line">  n = <span class="built_in">len</span>(p) - <span class="number">1</span></span><br><span class="line">  fcs = frame[<span class="number">0</span>: n]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n, <span class="built_in">len</span>(frame)):</span><br><span class="line">    fcs += frame[i]</span><br><span class="line">    fcs = <span class="built_in">bin</span>(<span class="built_in">int</span>(fcs, <span class="number">2</span>))[<span class="number">2</span>:]</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">len</span>(fcs) &lt; <span class="built_in">len</span>(p)):</span><br><span class="line">      <span class="keyword">continue</span></span><br><span class="line">    fcs = <span class="built_in">bin</span>(<span class="built_in">int</span>(fcs, <span class="number">2</span>) ^ <span class="built_in">int</span>(p, <span class="number">2</span>))[<span class="number">2</span>:]</span><br><span class="line">  <span class="keyword">while</span> <span class="built_in">len</span>(fcs) &lt; n:</span><br><span class="line">    fcs = <span class="string">&quot;0&quot;</span> + fcs</span><br><span class="line">  <span class="keyword">return</span> fcs</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">crc</span>(<span class="params">frame, p</span>):</span><br><span class="line">  n = <span class="built_in">len</span>(p) - <span class="number">1</span></span><br><span class="line">  frameM = frame +  n * <span class="string">&quot;0&quot;</span></span><br><span class="line">  <span class="keyword">return</span> check(frameM, p)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">p</span>):</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">50</span>):</span><br><span class="line">    frame = random.choice(<span class="string">&quot;01&quot;</span>) * random.randint(<span class="number">50</span>, <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">assert</span> check(frame + crc(frame, p), p) == (<span class="built_in">len</span>(p) - <span class="number">1</span>) * <span class="string">&quot;0&quot;</span>, <span class="string">f&quot;encountered error when tested <span class="subst">&#123;p&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CRC_16 = <span class="string">&quot;11000000000000101&quot;</span>                    <span class="comment"># 16 bits</span></span><br><span class="line">CRC_CCITT = <span class="string">&quot;10001000000100001&quot;</span>                 <span class="comment"># 16 bits</span></span><br><span class="line">CRC_32 = <span class="string">&quot;100000100110000010001110110110111&quot;</span>    <span class="comment"># 32 bits</span></span><br><span class="line"></span><br><span class="line">test(CRC_16)</span><br><span class="line">test(CRC_CCITT)</span><br><span class="line">test(CRC_32)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Accept&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://gist.github.com/pwxcoo/a664bf4b05f845e2891ed7fccd9dcffe">CRC.py - GIST</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check#Designing_polynomials">Cyclic redundancy check</a></li>
+<li><a target="_blank" rel="noopener" href="https://barrgroup.com/Embedded-Systems/How-To/CRC-Math-Theory">CRC Mathematics and Theory</a></li>
+<li>谢希仁的《计算机网络》第六版</li>
+</ul>
+
+        
+  </div>
+</article>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

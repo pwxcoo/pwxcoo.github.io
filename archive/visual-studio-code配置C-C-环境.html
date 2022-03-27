@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="目的是构建了简单 C&#x2F;C++ 环境，用于小项目 (比如算法题) 。 为什么用 visual studio code 写 C&#x2F;C++因为我是 visual studio code 的粉丝。这是我用过最快乐的编辑器了。 因为平时写 C&#x2F;C++ 代码都是为了写算法题而写的，之前在 Windows 上用的 vs，感觉用了牛刀。。不过 vs 的调试功能给以前弱智的我有很大的帮助。。 后来在 Ubuntu 上">
+<meta property="og:type" content="website">
+<meta property="og:title" content="visual studio code配置C&#x2F;C++环境">
+<meta property="og:url" content="https://blog.pwxcoo.com/archive/visual-studio-code%E9%85%8D%E7%BD%AEC-C-%E7%8E%AF%E5%A2%83.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="目的是构建了简单 C&#x2F;C++ 环境，用于小项目 (比如算法题) 。 为什么用 visual studio code 写 C&#x2F;C++因为我是 visual studio code 的粉丝。这是我用过最快乐的编辑器了。 因为平时写 C&#x2F;C++ 代码都是为了写算法题而写的，之前在 Windows 上用的 vs，感觉用了牛刀。。不过 vs 的调试功能给以前弱智的我有很大的帮助。。 后来在 Ubuntu 上">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-08-28T14:51:56.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.883Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="visual studio code">
+<meta property="article:tag" content="c++">
+<meta property="article:tag" content="c">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>visual studio code配置C/C++环境</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>PWXCOO</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Archives</a></li>
+       
+        <li><a href="/toc/">Toc</a></li>
+       
+        <li><a href="/about/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <div class="content" itemprop="articleBody">
+      
+          <p>目的是构建了简单 C/C++ 环境，用于小项目 (比如算法题) 。</p>
+<h2 id="为什么用-visual-studio-code-写-C-C"><a href="#为什么用-visual-studio-code-写-C-C" class="headerlink" title="为什么用 visual studio code 写 C/C++"></a>为什么用 visual studio code 写 C/C++</h2><p>因为我是 visual studio code 的粉丝。这是我用过最快乐的编辑器了。</p>
+<p>因为平时写 C/C++ 代码都是为了写算法题而写的，之前在 Windows 上用的 vs，感觉用了牛刀。。不过 vs 的调试功能给以前弱智的我有很大的帮助。。</p>
+<p>后来在 Ubuntu 上都是用的 codeblocks 或者直接用 vim 开撸。。不知道为什么我真的对 vim 爱不起来，尝试放弃尝试放弃无数次，感觉只能是大概知道 vim 怎么用，但是作为日常编辑器感觉还是喜欢 vscode。。</p>
+<p>第一次用 vscode 的时候，尝试过用 vscode 写 C/C++，但是那时候感觉体验有点糟糕。。后来貌似微软团队对 C/C++ 对了改进的，现在感觉还行，实在不行，就继续之前码完就 <code>g++ -Wall -std=c++11 main.cpp</code>。。。</p>
+<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p>下 C/C++ 这个扩展，Microsoft 官方出品的这个。</p>
+<h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><p>下面所有的 vscode 命令用 <code>Ctrl + Alt + P</code> 打开 vscode 的工具窗口输入。</p>
+<ul>
+<li><code>C/CPP: Edit Configuration</code> =&gt; 生成一个 <code>c_cpp_properities.json</code> 。</li>
+<li><p><code>Task: Configure Task Runner</code> =&gt; 选择 Other  (当然如果要用 MSBuild 也可以，不过我自己用的是 g++，所以选了 Other =&gt; 生成 <code>task.json</code>。</p>
+<p>  这里的 <code>task.json</code> 需要自己配置一下，我直接用的 vscode 的 snippet 功能的，贴一下我的 snippet (我的 json.json) : </p>
+  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// Place your snippets for JSON here. Each snippet is defined under a snippet name and has a prefix, body and </span></span><br><span class="line">    <span class="comment">// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:</span></span><br><span class="line">    <span class="comment">// $1, $2 for tab stops, $0 for the final cursor position, and $&#123;1:label&#125;, $&#123;2:another&#125; for placeholders. Placeholders with the </span></span><br><span class="line">    <span class="comment">// same ids are connected.</span></span><br><span class="line">    <span class="comment">// Example:</span></span><br><span class="line">    <span class="attr">&quot;cpp tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;prefix&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cpptask&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;&#123;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;   \&quot;label\&quot;: \&quot;build\&quot;,&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;   \&quot;command\&quot;: \&quot;g++\&quot;,&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;   \&quot;args\&quot;: [&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;       \&quot;-std=c++11\&quot;,&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;      \&quot;$1\&quot;,&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;      \&quot;-o a.out\&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;   ],&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;   \&quot;type\&quot;: \&quot;shell\&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;&#125;,&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;&#123;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;   \&quot;label\&quot;: \&quot;build-debug\&quot;,&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;   \&quot;command\&quot;: \&quot;g++\&quot;,&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;   \&quot;args\&quot;: [&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;      \&quot;-g\&quot;,&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;      \&quot;-std=c++11\&quot;,&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;      \&quot;$2\&quot;,&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;      \&quot;-o a.out\&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;   ],&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;   \&quot;type\&quot;: \&quot;shell\&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;&#125;&quot;</span></span><br><span class="line">        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Log output to console&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>  用的 snippet 就减少重复的工作量了，直接输入 <code>cpptask</code> 就能生成一个 customize 的 snippet。然后自己写一下需要编译的 cpp 文件名就可以了，最后生成的 task.json 大概是这样的: </p>
+  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// See https://go.microsoft.com/fwlink/?LinkId=733558</span></span><br><span class="line">    <span class="comment">// for the documentation about the tasks.json format</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;echo&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;shell&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;echo Hello&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;g++&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">&quot;-std=c++11&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">&quot;./LRU/lru.cpp&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">&quot;-o a.out&quot;</span></span><br><span class="line">        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;shell&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build-debug&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;g++&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="string">&quot;-g&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">&quot;-std=c++11&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">&quot;./LRU/lru.cpp&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="string">&quot;-o a.out&quot;</span></span><br><span class="line">        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;shell&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li>然后就可以编译了，输入 <code>Tasks: Run Tasks</code> =&gt; <code>build</code> 然后编译完成，看到目标文件，执行就好了。</li>
+<li>调试的功能 (因为可视化的调试比终端里调试舒服多了，这也是我不想用 vim 的理由。。) <ul>
+<li><code>Ctrl + Shift + D</code> 然后点那个齿轮，就自动生成了一个 <code>launch.json</code> 文件 </li>
+<li>修改 <code>program</code> 里文件名</li>
+<li>加上一个 <code>preLaunchTask</code> 的字段，值为 <code>build-debug</code>，表示调试前先编译。</li>
+<li>最后的 <code>launch.json</code> 文件大概是这样的: <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.2.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;(gdb) Launch&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppdbg&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;request&quot;</span><span class="punctuation">:</span> <span class="string">&quot;launch&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;program&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;/a.out&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;stopAtEntry&quot;</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;environment&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;externalConsole&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;MIMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gdb&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;setupCommands&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="punctuation">&#123;</span></span><br><span class="line">                    <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Enable pretty-printing for gdb&quot;</span><span class="punctuation">,</span></span><br><span class="line">                    <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="string">&quot;-enable-pretty-printing&quot;</span><span class="punctuation">,</span></span><br><span class="line">                    <span class="attr">&quot;ignoreFailures&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span></span><br><span class="line">                <span class="punctuation">&#125;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;preLaunchTask&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build-debug&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li>然后打断点，调试，就完事了。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>具体可以看 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/languages/cpp">C/C++ for VS Code (Preview)</a>，官方的文档更详细。</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/languages/cpp">C/C++ for VS Code (Preview)</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wzxlovesy/article/details/76708151">VS Code 配置 C/C++ 环境</a></li>
+</ul>
+
+        
+  </div>
+</article>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

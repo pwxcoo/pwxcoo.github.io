@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="一个 LRU Cache，为了方便，直接用 C++ 写的。 LRU (Least Recently Used) 缓存分配算法是指，在缓存空间不足时，淘汰最近最少使用的 Cache。 为了让查询和插入删除的时间复杂度都是 $O(1)$，用的是哈希表 + 链表实现，链表保证删除插入为 $O(1)$，哈希表保证查询为 $O(1)$。 每个缓存用 key-value 类型表示，哈希表中存放 key 和到链">
+<meta property="og:type" content="website">
+<meta property="og:title" content="LRU cache">
+<meta property="og:url" content="https://blog.pwxcoo.com/archive/LRU-cache.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="一个 LRU Cache，为了方便，直接用 C++ 写的。 LRU (Least Recently Used) 缓存分配算法是指，在缓存空间不足时，淘汰最近最少使用的 Cache。 为了让查询和插入删除的时间复杂度都是 $O(1)$，用的是哈希表 + 链表实现，链表保证删除插入为 $O(1)$，哈希表保证查询为 $O(1)$。 每个缓存用 key-value 类型表示，哈希表中存放 key 和到链">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-09-11T06:43:28.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.880Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="operate system">
+<meta property="article:tag" content="cache">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>LRU cache</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>PWXCOO</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Archives</a></li>
+       
+        <li><a href="/toc/">Toc</a></li>
+       
+        <li><a href="/about/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <div class="content" itemprop="articleBody">
+      
+          <p>一个 LRU Cache，为了方便，直接用 C++ 写的。</p>
+<p>LRU (Least Recently Used) 缓存分配算法是指，<strong>在缓存空间不足时，淘汰最近最少使用的 Cache</strong>。</p>
+<p>为了让查询和插入删除的时间复杂度都是 $O(1)$，用的是哈希表 + 链表实现，链表保证删除插入为 $O(1)$，哈希表保证查询为 $O(1)$。</p>
+<p>每个缓存用 key-value 类型表示，哈希表中存放 key 和到链表中该 key 节点的指针，链表中存放 key-value。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">unordered&lt;key, list::iterator&gt; m;</span><br><span class="line"></span><br><span class="line">list&lt;pair&lt;key,value&gt;&gt; l;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>put()<ul>
+<li>map 中是否存在<ul>
+<li>存在找到其在 list 中的位置，放到 list 的 front，更新 map 的映射</li>
+<li>不存在，放到 list 的 front，map 中添加映射</li>
+</ul>
+</li>
+<li>判断缓存是否超出 maxsize，超出淘汰 list 的 last，并在 map 删除 key</li>
+</ul>
+</li>
+<li>get()<ul>
+<li>map 是否存在<ul>
+<li>存在，移动到 list 的 front，更新 map 的映射</li>
+<li>不存在，说明缓存未击中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @author pwxcoo</span></span><br><span class="line"><span class="comment"> * @email pwxcoo@gmail.com</span></span><br><span class="line"><span class="comment"> * @create date 2018-09-11 10:30:47</span></span><br><span class="line"><span class="comment"> * @modify date 2018-09-11 13:28:41</span></span><br><span class="line"><span class="comment"> * @desc LRU cache implemented by c++</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> _LRUCACHE_INCLUDED_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _LRUCACHE_INCLUDED_</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstddef&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdexcept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> cache</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> <span class="type">key_t</span>, <span class="keyword">typename</span> <span class="type">value_t</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">lru_cache</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> std::pair&lt;<span class="type">key_t</span>, <span class="type">value_t</span>&gt; <span class="type">key_value_pair_t</span>;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> std::list&lt;<span class="type">key_value_pair_t</span>&gt;::iterator list_iterator_it;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">lru_cache</span>(<span class="type">size_t</span> max_size) : _max_size(max_size) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">put</span><span class="params">(<span class="type">const</span> <span class="type">key_t</span> &amp;key, <span class="type">const</span> <span class="type">value_t</span> &amp;value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> it = _cache_items_map.<span class="built_in">find</span>(key);</span><br><span class="line">        <span class="keyword">if</span> (it != _cache_items_map.<span class="built_in">end</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            _cache_items_list.<span class="built_in">erase</span>(it-&gt;second);</span><br><span class="line">        &#125;</span><br><span class="line">        _cache_items_list.<span class="built_in">push_front</span>(<span class="built_in">key_value_pair_t</span>(key, value));</span><br><span class="line">        _cache_items_map[key] = _cache_items_list.<span class="built_in">begin</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (_cache_items_map.<span class="built_in">size</span>() &gt; _max_size)</span><br><span class="line">        &#123;</span><br><span class="line">            _cache_items_map.<span class="built_in">erase</span>(_cache_items_list.<span class="built_in">rbegin</span>()-&gt;first);</span><br><span class="line">            _cache_items_list.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">const</span> <span class="type">value_t</span> &amp;<span class="title">get</span><span class="params">(<span class="type">const</span> <span class="type">key_t</span> &amp;key)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> it = _cache_items_map.<span class="built_in">find</span>(key);</span><br><span class="line">        <span class="keyword">if</span> (it == _cache_items_map.<span class="built_in">end</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">throw</span> std::<span class="built_in">range_error</span>(<span class="string">&quot;There is no such key in cache!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">auto</span> hit = it-&gt;second;</span><br><span class="line">            _cache_items_list.<span class="built_in">erase</span>(hit);</span><br><span class="line">            _cache_items_list.<span class="built_in">push_front</span>(*hit);</span><br><span class="line">            _cache_items_map[key] = _cache_items_list.<span class="built_in">begin</span>();</span><br><span class="line">            <span class="keyword">return</span> hit-&gt;second;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">exists</span><span class="params">(<span class="type">const</span> <span class="type">key_t</span> &amp;key)</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _cache_items_map.<span class="built_in">find</span>(key) == _cache_items_list.<span class="built_in">end</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">size_t</span> <span class="title">size</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _cache_items_map.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">debug</span><span class="params">(std::string s)</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; s &lt;&lt; <span class="string">&quot; cache size:&quot;</span> &lt;&lt; <span class="built_in">size</span>() &lt;&lt; <span class="string">&quot; | &quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> item : _cache_items_list)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot; &#123;&quot;</span> &lt;&lt; item.first &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; item.second &lt;&lt; <span class="string">&quot;&#125;&quot;</span></span><br><span class="line">                      &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    std::list&lt;<span class="type">key_value_pair_t</span>&gt; _cache_items_list;</span><br><span class="line">    std::unordered_map&lt;<span class="type">key_t</span>, list_iterator_it&gt; _cache_items_map;</span><br><span class="line">    <span class="type">size_t</span> _max_size;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// namespace cache</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* _LRUCACHE_HPP_INCLUDED_ */</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//////////////////////////////////// TEST MODULE BEGIN ////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;-------------------[TEST] LRU cache begin-------------------------\n\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function">cache::lru_cache&lt;<span class="type">int</span>, <span class="type">int</span>&gt; <span class="title">cache_lru</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cache_lru.<span class="built_in">debug</span>(<span class="string">&quot;before:&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;put() &#123;key:%d, value:%d&#125; to cache\n&quot;</span>, i, i * i);</span><br><span class="line"></span><br><span class="line">        cache_lru.<span class="built_in">put</span>(i, i * i);</span><br><span class="line">        <span class="built_in">assert</span>(cache_lru.<span class="built_in">get</span>(i) == i * i);</span><br><span class="line"></span><br><span class="line">        cache_lru.<span class="built_in">debug</span>(<span class="string">&quot;after :&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cache_lru.<span class="built_in">debug</span>(<span class="string">&quot;before:&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;get() &#123;key:%d&#125; from cache: %d\n&quot;</span>, i, cache_lru.<span class="built_in">get</span>(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;encountered exception when get &#123;key:%d&#125;: %s\n&quot;</span>, i, e.<span class="built_in">what</span>());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cache_lru.<span class="built_in">debug</span>(<span class="string">&quot;after :&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;-------------------[TEST] LRU cache end----------------------------\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//////////////////////////////////// TEST MODULE END   /////////////////////////////////////////</span></span><br></pre></td></tr></table></figure>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://gist.github.com/pwxcoo/fe9bf9310c03c4ed2d21976d210975fd">lru.cpp - Gist</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/lamerman/cpp-lru-cache">lamerman/cpp-lru-cache</a></li>
+</ul>
+
+        
+  </div>
+</article>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="计算机是二进制的，只有 0 和 1。负数可以用一个符号位表示，然后用补数计算。但是小数的表示就有点特别。这让我感觉有点搞。所以特地记一下。 定点数既然说到浮点数就顺便提一下定点数。 定点数就是小数点的个数是固定的，使用定点数必须要知道小数点的个数。比如如果知道数据的范围是 -9,999,999.99 ~ 99,999,999.99 那么可以得到小数点后需要精确两位，根据数据范围可以直到需要用 5">
+<meta property="og:type" content="website">
+<meta property="og:title" content="浅谈计算机浮点数">
+<meta property="og:url" content="https://blog.pwxcoo.com/archive/%E6%B5%85%E8%B0%88%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%B5%AE%E7%82%B9%E6%95%B0.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="计算机是二进制的，只有 0 和 1。负数可以用一个符号位表示，然后用补数计算。但是小数的表示就有点特别。这让我感觉有点搞。所以特地记一下。 定点数既然说到浮点数就顺便提一下定点数。 定点数就是小数点的个数是固定的，使用定点数必须要知道小数点的个数。比如如果知道数据的范围是 -9,999,999.99 ~ 99,999,999.99 那么可以得到小数点后需要精确两位，根据数据范围可以直到需要用 5">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/float.png">
+<meta property="article:published_time" content="2018-02-11T05:33:10.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.888Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="base">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.pwxcoo.com/image/float.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>浅谈计算机浮点数</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>PWXCOO</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Archives</a></li>
+       
+        <li><a href="/toc/">Toc</a></li>
+       
+        <li><a href="/about/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <div class="content" itemprop="articleBody">
+      
+          <p>计算机是二进制的，只有 0 和 1。负数可以用一个符号位表示，然后用补数计算。但是小数的表示就有点特别。这让我感觉有点搞。所以特地记一下。</p>
+<h2 id="定点数"><a href="#定点数" class="headerlink" title="定点数"></a>定点数</h2><p>既然说到浮点数就顺便提一下定点数。</p>
+<p>定点数就是小数点的个数是固定的，使用定点数必须要知道小数点的个数。比如如果知道数据的范围是 <code>-9,999,999.99</code> ~ <code>99,999,999.99</code> 那么可以得到小数点后需要精确两位，根据数据范围可以直到需要用 5 个字节存储。因此 <code>-4,325,120.25</code> 可以表示为:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00010100    00110010    01010001    00100000    00100101</span><br></pre></td></tr></table></figure></p>
+<p>转化成 16 进制就是:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">14h 32h 51h 20h 25h</span><br></pre></td></tr></table></figure></p>
+<p>注意最左边的半个字节构成的 1 表示符号位。这就是定点数，很直观，因为知道数据就是有两位小数，所以直接默认最后一个字节保存小数。定点数就是小数点固定的数。</p>
+<h2 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h2><p>浮点数就是小数点不固定的数，正好跟定点数相对。</p>
+<p>转化成二进制之后可以发现，用科学计数法表示，小数点左边一般都为1。所以存储的时候通常是忽略这个 1 的。因为默认存在，所以不去做存储。</p>
+<p>拿单精度举例。<br><img src="/image/float.png" alt="float.png"></p>
+<p>最前面一位为符号位，然后 8 位指数位，然后 23 位为有效数。可以用 s (符号位) ，e (指数) 以及 f (有效数) 来描述它:</p>
+<p>$$(-1)^s \times  1.f \times  2^{e-127}$$</p>
+<p>贴几个例子就会比较清楚，看懂 wiki 上这几个例子就明白浮点数在计算机是怎么存储的了:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3f80 0000 = 0 01111111 00000000000000000000000 = 1</span><br><span class="line">c000 0000 = 1 10000000 00000000000000000000000 = −2</span><br></pre></td></tr></table></figure><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">7f7f ffff = 0 11111110 11111111111111111111111 = (1 − 2−24) × 2128 ≈ 3.402823466 × 1038  (max finite positive value in single precision)</span><br><span class="line">0080 0000 = 0 00000001 00000000000000000000000 = 2−126 ≈ 1.175494351 × 10−38 (min normalized positive value in single precision)</span><br></pre></td></tr></table></figure><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0000 0000 = 0 00000000 00000000000000000000000 = 0</span><br><span class="line">8000 0000 = 1 00000000 00000000000000000000000 = −0</span><br></pre></td></tr></table></figure><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">7f80 0000 = 0 11111111 00000000000000000000000 = infinity</span><br><span class="line">ff80 0000 = 1 11111111 00000000000000000000000 = −infinity</span><br></pre></td></tr></table></figure><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4049 0fdb = 0 10000000 10010010000111111011011 = 3.1415927410 ≈ π ( pi )</span><br><span class="line">3eaa aaab = 0 01111101 01010101010101010101011 ≈ 1/3</span><br></pre></td></tr></table></figure></p>
+<p>另外有一个地方需要注意。如果当 e 为255，但是 f 不为 0 的时候，通常别解释为“不是一个数”，被缩写为 <code>NaN</code>，表示未知的数或非法操作的结果。运算中如 <code>NaN * 0 = NaN</code>。这个地方比较需要注意。要知道我们计算机中并不是任何东西乘 0 都为 0 的。</p>
+<p>双精度也是同理的。</p>
+<h2 id="比较定点数和浮点数"><a href="#比较定点数和浮点数" class="headerlink" title="比较定点数和浮点数"></a>比较定点数和浮点数</h2><p>定点数的精度是明确的，也就是说，定点数是均匀的。而浮点数不一样，但是整数部分很大的时候，精度是很差的。任何语言中浮点数的运算都是出现有误差的。通常浮点数 (0,1) 区间内很多，但是整数部分越大，也就越稀疏。比如 262144.00 和 262144.01 在单精度浮点数中存储的是同一个数。所以在商业软件中是不使用浮点数的。使用浮点数还是要谨慎。</p>
+<p>有一个地方比较特别。就是浮点数存在 <code>NaN</code> 这个东西，在很多地方是需要注意的。比如编译器的优化，<code>x = y * 0</code> 是不能优化成 <code>x = 0</code>，虽然对于整型来说，这个优化是正确的，可以减少一条汇编语句，但是对于浮点数的话是错误的，如<code>NaN * 0 = NaN</code>。</p>
+
+        
+  </div>
+</article>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <!-- fix Sina weibo image host temporarily -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Java线程状态 Java 中的线程概念是操作系统线程概念的一个 wrapper。  操作系统中线程状态 New Ready Blocked Running Terminated   Java中的线程状态 (Java 中的线程是对操作系统线程的再次封装) New Runnable (Thread.start()) Blocked (synchronized, Lock) Time Waiting">
+<meta property="og:type" content="website">
+<meta property="og:title" content="浅谈Java并发">
+<meta property="og:url" content="https://blog.pwxcoo.com/archive/%E6%B5%85%E8%B0%88Java%E5%B9%B6%E5%8F%91.html">
+<meta property="og:site_name" content="PWXCOO">
+<meta property="og:description" content="Java线程状态 Java 中的线程概念是操作系统线程概念的一个 wrapper。  操作系统中线程状态 New Ready Blocked Running Terminated   Java中的线程状态 (Java 中的线程是对操作系统线程的再次封装) New Runnable (Thread.start()) Blocked (synchronized, Lock) Time Waiting">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.pwxcoo.com/image/concurrent.png">
+<meta property="article:published_time" content="2018-09-07T05:18:47.000Z">
+<meta property="article:modified_time" content="2022-03-24T05:48:48.887Z">
+<meta property="article:author" content="pwxcoo">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="concurrent">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.pwxcoo.com/image/concurrent.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>浅谈Java并发</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="PWXCOO" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ">
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>PWXCOO</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/archives/">Archives</a></li>
+       
+        <li><a href="/toc/">Toc</a></li>
+       
+        <li><a href="/about/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <div class="content" itemprop="articleBody">
+      
+          <h2 id="Java线程状态"><a href="#Java线程状态" class="headerlink" title="Java线程状态"></a>Java线程状态</h2><p><img src="/image/concurrent.png" alt="concurrent.png"></p>
+<p><strong>Java 中的线程概念是操作系统线程概念的一个 wrapper。</strong></p>
+<ul>
+<li>操作系统中线程状态<ul>
+<li>New</li>
+<li>Ready</li>
+<li>Blocked</li>
+<li>Running</li>
+<li>Terminated</li>
+</ul>
+</li>
+<li>Java中的线程状态 (Java 中的线程是对操作系统线程的再次封装)<ul>
+<li>New</li>
+<li>Runnable (Thread.start())</li>
+<li>Blocked (synchronized, Lock)</li>
+<li>Time Waiting (Thread.sleep())</li>
+<li>Waiting (Object.wait(), Object.notify())</li>
+<li>Terminated (Exception)</li>
+</ul>
+</li>
+</ul>
+<h3 id="wait-和-sleep-和-yield"><a href="#wait-和-sleep-和-yield" class="headerlink" title="wait() 和 sleep() 和 yield() ?"></a>wait() 和 sleep() 和 yield() ?</h3><ul>
+<li>wait() 方法会释放 CPU 执行权和占有的锁。<strong>(三者中只有用 wait() 会释放锁)</strong></li>
+<li>sleep() 方法仅释放 CPU 使用权，锁仍然占用；线程被放入超时等待队列，与 yield() 相比，它会使线程较长时间得不到运行。</li>
+<li>yield() 方法仅释放 CPU 执行权，锁仍然占用，线程会被放入就绪队列，会在短时间内再次执行。</li>
+<li>wait() 和 notify() 必须配套使用，即必须使用同一把锁调用；</li>
+<li>wait() 和 notify() 必须放在一个同步块中调用</li>
+<li>wait() 和 notify() 的对象必须是他们所处同步块的锁对象。</li>
+</ul>
+<h2 id="使用线程"><a href="#使用线程" class="headerlink" title="使用线程"></a>使用线程</h2><ul>
+<li>Runnable  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Callable  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Callable</span>&lt;V&gt; &#123;</span><br><span class="line">    V <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Thread</li>
+</ul>
+<hr>
+<p>Callable 可以用 Future 来获得返回值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Future</span>&lt;V&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">cancel</span><span class="params">(<span class="type">boolean</span> mayInterruptIfRunning)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">isCancelled</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">isDone</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    V <span class="title function_">get</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException, ExecutionException;</span><br><span class="line"></span><br><span class="line">    V <span class="title function_">get</span><span class="params">(<span class="type">long</span> timeout, TimeUnit unit)</span></span><br><span class="line">        <span class="keyword">throws</span> InterruptedException, ExecutionException, TimeoutException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Future 是一个接口，Future 提供了三种功能:</p>
+<ul>
+<li>判断任务是否完成；</li>
+<li>能够中断任务；</li>
+<li>能够获取任务执行结果。</li>
+</ul>
+<p>同时还有一个 FutureTask 的类，FutureTask 的父类是 RunnableFuture，而 RunnableFuture 继承了 Runnbale 和 Futrue 这两个接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FutureTask</span>&lt;V&gt; <span class="keyword">implements</span> <span class="title class_">RunnableFuture</span>&lt;V&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">RunnableFuture</span>&lt;V&gt; <span class="keyword">extends</span> <span class="title class_">Runnable</span>, Future&lt;V&gt;</span><br></pre></td></tr></table></figure>
+<p>FutureTask实现了两个接口，Runnable和Future，所以它既可以作为Runnable被线程执行，又可以作为Future得到Callable的返回值。</p>
+<h2 id="同步问题"><a href="#同步问题" class="headerlink" title="同步问题"></a>同步问题</h2><p><strong>跟线程一样，Java 中的线程是对操作系统的线程概念的 wrapper，而 Java 中的同步问题也是操作系统的同步问题的 wrapper。</strong></p>
+<h3 id="操作系统中的同步问题"><a href="#操作系统中的同步问题" class="headerlink" title="操作系统中的同步问题"></a>操作系统中的同步问题</h3><ul>
+<li>进程同步<ul>
+<li>信号量</li>
+<li>管程 (monitor)</li>
+<li>消息传递</li>
+</ul>
+</li>
+<li>线程同步<ul>
+<li>临界区 (Critical Section)</li>
+<li>互斥量 (Mutex)</li>
+<li>信号量 (Semaphore)</li>
+<li>事件 (Event)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Java中线程同步问题"><a href="#Java中线程同步问题" class="headerlink" title="Java中线程同步问题"></a>Java中线程同步问题</h3><ul>
+<li>synchronized<ul>
+<li>Java中每个对象都有一个内置锁 (修饰静态方法的时候，会锁住整个类)</li>
+</ul>
+</li>
+<li>重入锁 (java.util.concurrent) ，ReentrantLock<ul>
+<li>实现是一个自旋锁，循环调用 CAS 操作来实现加锁</li>
+</ul>
+</li>
+<li>ThreadLocal<ul>
+<li>如果使用 ThreadLocal 管理变量，则每一个使用该变量的线程都获得该变量的副本</li>
+</ul>
+</li>
+<li>使用阻塞队列实现线程同步<ul>
+<li>java.util.concurrent 的 LinkedBlockingQueue<E></li>
+</ul>
+</li>
+<li>使用原子变量实现线程同步<ul>
+<li>java.util.concurrent.atomic，比如其中的 AtomicInteger</li>
+</ul>
+</li>
+<li>wait() 和 notify()<ul>
+<li>示例代码，<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">SyncStack</span> <span class="variable">ss</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SyncStack</span>();</span><br><span class="line"></span><br><span class="line">        <span class="type">Producer</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Producer</span>(ss);</span><br><span class="line">        <span class="type">Consumer</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Consumer</span>(ss);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        new Thread(p).start();</span></span><br><span class="line"><span class="comment">//        new Thread(p).start();</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(p).start();</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(c).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Goods</span> &#123;</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line"></span><br><span class="line">    Goods(<span class="type">int</span> id) &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Goods : &quot;</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SyncStack</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    Goods[] arrWT = <span class="keyword">new</span> <span class="title class_">Goods</span>[<span class="number">6</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">push</span><span class="params">(Goods wt)</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (index == arrWT.length) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;满了&quot;</span>);</span><br><span class="line">                <span class="built_in">this</span>.wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">this</span>.notifyAll();</span><br><span class="line">        arrWT[index] = wt;</span><br><span class="line">        index++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> Goods <span class="title function_">pop</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (index == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;不够&quot;</span>);</span><br><span class="line">                <span class="built_in">this</span>.wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">this</span>.notifyAll();</span><br><span class="line">        index--;</span><br><span class="line">        <span class="keyword">return</span> arrWT[index];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Producer</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">    <span class="type">SyncStack</span> <span class="variable">ss</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    Producer(SyncStack ss) &#123;</span><br><span class="line">        <span class="built_in">this</span>.ss = ss;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">            <span class="type">Goods</span> <span class="variable">goods</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Goods</span>(i);</span><br><span class="line">            ss.push(goods);</span><br><span class="line">            System.out.println(<span class="string">&quot;生产了: &quot;</span> + goods);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep((<span class="type">int</span>) (Math.random() * <span class="number">200</span>));</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Consumer</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">    <span class="type">SyncStack</span> <span class="variable">ss</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    Consumer(SyncStack ss) &#123;</span><br><span class="line">        <span class="built_in">this</span>.ss = ss;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">            <span class="type">Goods</span> <span class="variable">goods</span> <span class="operator">=</span> ss.pop();</span><br><span class="line">            System.out.println(<span class="string">&quot;消费了: &quot;</span> + goods);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep((<span class="type">int</span>) (Math.random() * <span class="number">1000</span>));</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Condition 是在 java 1.5 中才出现的，它用来替代传统的 Object 的 wait()、notify() 实现线程间的协作，相比使用 Object 的 wait()、notify()，使用 Condition 的await()、signal() 这种方式实现线程间协作更加安全和高效。</li>
+</ul>
+</li>
+</ul>
+<h3 id="ReenTrantLock-和-synchronized-的区别"><a href="#ReenTrantLock-和-synchronized-的区别" class="headerlink" title="ReenTrantLock 和 synchronized 的区别?"></a>ReenTrantLock 和 synchronized 的区别?</h3><ul>
+<li>ReenTrantLock 可以指定是公平锁还是非公平锁。而 synchronized 只能是非公平锁。</li>
+<li>ReenTrantLock 提供了一个 Condition (条件) 类，用来实现分组唤醒需要唤醒的线程们，而不是像 synchronized 要么随机唤醒一个线程要么唤醒全部线程。</li>
+<li>ReenTrantLock 提供了一种能够中断等待锁的线程的机制，通过 lock.lockInterruptibly() 来实现这个机制。</li>
+</ul>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/cf12d4244171">Java并发之Runnable、Callable、Future、FutureTask</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Allen-rg/p/7172958.html">进程同步的几种方式</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Allen-rg/p/7172970.html">线程同步的几种方式</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq838642798/article/details/65441415">ReenTrantLock可重入锁 (和synchronized的区别) 总结</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/a015b110387eb4a183fac7dc9526de6cd9e316b3/notes/Java%20%E5%B9%B6%E5%8F%91.md">CS-Notes/notes/Java 并发.md</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zqz_zqz/article/details/70246212">java对象结构</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wewill/p/8058292.html">锁原理: 偏向锁、轻量锁、重量锁</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zqz_zqz/article/details/70233767">java 中的锁 – 偏向锁、轻量级锁、自旋锁、重量级锁</a></li>
+</ul>
+
+        
+  </div>
+</article>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 pwxcoo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/toc/">Toc</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- mathjax -->
+<script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=default">
+  MathJax.Hub.Config({
+   tex2jax: {
+   inlineMath: [['$','$'],["\\(","\\)"]],
+   displayMath: [['\\[','\\]'], ['$$','$$']],
+   },
+});
+</script>
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-123052529-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'pwxcoo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
