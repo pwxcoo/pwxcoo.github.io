@@ -43,7 +43,7 @@ FullPeer 可能是 attacker，直接告知 SPV 存不存在是不可信任的。
 
 但这样做有个缺点就是验证的成本，hash list 方式验证的时候得获得所有 transaction 来验证，然后计算所有的 transaction 哈希后来验证。如果把 transaction 一个个分块，建成一个平衡树，来验证的话，只需要 $O(logn)$ 的时间/空间复杂度的 transaction 了。
 
-![merkle-tree](./merkle-tree.jpeg)
+![merkle-tree](./merkle-tree.png)
 
 ## 扩展
 
